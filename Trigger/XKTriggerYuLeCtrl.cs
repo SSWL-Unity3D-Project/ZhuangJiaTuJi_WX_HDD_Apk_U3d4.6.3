@@ -1,0 +1,54 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public enum TriggerEnum
+{
+	Null,
+	Open,
+	Close,
+}
+
+public class XKTriggerYuLeCtrl : MonoBehaviour
+{
+	public TriggerEnum TriggerSt = TriggerEnum.Null;
+	/**
+	 * 娱乐环节配置信息.
+	 */
+	[Range(1f, 100f)]public float YuLeSpeedVal = 60f;
+	[Range(1f, 500f)]public float YuLeSpeedYGVal = 60f;
+	[Range(0f, 500f)]public float HorizontalSpeedYGBL = 0.5f;
+	public static bool IsActiveYuLeTrigger;
+	public AiPathCtrl TestPlayerPath;
+	void OnDrawGizmosSelected()
+	{
+		if (!XkGameCtrl.IsDrawGizmosObj) {
+			return;
+		}
+		
+		if (!enabled) {
+			return;
+		}
+		
+		if (TestPlayerPath != null) {
+			TestPlayerPath.DrawPath();
+		}
+	}
+
+	void OnTriggerEnter(Collider other)
+	{	
+		if (other.GetComponent<XkPlayerCtrl>() == null) {
+			return;
+		}
+
+		switch (TriggerSt) {
+		case TriggerEnum.Open:
+			IsActiveYuLeTrigger = true;
+			XKPlayerMoveCtrl.SetPlayerYuLeInfo(this);
+			break;
+		default:
+			IsActiveYuLeTrigger = false;
+			XKPlayerMoveCtrl.SetPlayerJiSuMoveSpeed(PlayerEnum.Null);
+			break;
+		}
+	}
+}
