@@ -18,6 +18,13 @@ public enum PlayerAmmoType
 public class XKPlayerAutoFire : MonoBehaviour
 {
 	/**
+	 * PaoTaRealObj[0] -> 默认炮塔.
+	 * PaoTaRealObj[1] -> 主炮穿甲弹炮塔.
+	 * PaoTaRealObj[2] -> 主炮散弹炮塔.
+	 * PaoTaRealObj[3] -> 主炮迫击炮炮塔.
+	 */
+	public GameObject[] PaoTaRealObj;
+	/**
 	 * IsLockPaoTa == true -> 子弹向镜头正前方打,炮塔转向不跟随坦克机身的转向.
 	 * IsLockPaoTa == false -> 子弹向子弹产生点方向打,炮塔转向跟随坦克机身的转向.
 	 */
@@ -181,6 +188,7 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 			_InstanceFour = this; 
 			break;
 		}
+		ChangePlayerPaoTaObj(PlayerAmmoType.Null);
 	}
 
 	// Use this for initialization
@@ -563,6 +571,7 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 			return;
 		}
 		IsPaiJiPaoFire = isFire;
+		ChangePlayerPaoTaObj(isFire == true ? PlayerAmmoType.PaiJiPaoAmmo : PlayerAmmoType.Null);
 		PlayerAmmoType ammoTypeVal = isFire == true ? PlayerAmmoType.PaiJiPaoAmmo : PlayerAmmoType.DaoDanAmmo;
 		XKPlayerAutoFire.GetInstanceAutoFire(PlayerIndex).SetAmmoStateZhuPao(ammoTypeVal);
 		//Debug.Log("SetIsPaiJiPaoFire -> isFire "+isFire);
@@ -582,6 +591,7 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 			return;
 		}
 		IsSanDanZPFire = isFire;
+		ChangePlayerPaoTaObj(isFire == true ? PlayerAmmoType.SanDanAmmo : PlayerAmmoType.Null);
 		PlayerAmmoType ammoTypeVal = isFire == true ? PlayerAmmoType.SanDanAmmo : PlayerAmmoType.DaoDanAmmo;
 		XKPlayerAutoFire.GetInstanceAutoFire(PlayerIndex).SetAmmoStateZhuPao(ammoTypeVal);
 		//Debug.Log("SetIsSanDanZPFire -> isFire "+isFire);
@@ -1410,6 +1420,10 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 		if (ammoType == PlayerAmmoType.ChuanTouAmmo) {
 			IsSanDanZPFire = false;
 			IsPaiJiPaoFire = false;
+			ChangePlayerPaoTaObj(ammoType);
+		}
+		else {
+			ChangePlayerPaoTaObj(PlayerAmmoType.Null);
 		}
 	}
 
@@ -1438,5 +1452,31 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 		Vector3 locAngle = PaoTaTr.localEulerAngles;
 		locAngle.x = locAngle.z = 0f;
 		PaoTaTr.localEulerAngles = locAngle;
+	}
+
+	void ChangePlayerPaoTaObj(PlayerAmmoType ammoType)
+	{
+		int indexJH = 0;
+		switch (ammoType) {
+		case PlayerAmmoType.ChuanTouAmmo:
+			indexJH = 1;
+			break;
+		case PlayerAmmoType.SanDanAmmo:
+			indexJH = 2;
+			break;
+		case PlayerAmmoType.PaiJiPaoAmmo:
+			indexJH = 3;
+			break;
+		}
+
+		#if UNITY_EDITOR
+		Debug.Log("ChangePlayerPaoTaObj -> indexJH "+indexJH);
+		#endif
+		
+		for (int i = 0; i < 4; i++) {
+			if (PaoTaRealObj.Length >= 4 && PaoTaRealObj[i] != null) {
+				PaoTaRealObj[i].SetActive(indexJH == i);
+			}
+		}
 	}
 }

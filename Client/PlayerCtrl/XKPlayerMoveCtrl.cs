@@ -409,30 +409,37 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 		else {
 			euA = PlayerCore.transform.localEulerAngles;
 			euA.y = euA.y <= 180f ? euA.y : (euA.y - 360f);
-			float speedAngleVal = Time.deltaTime * XKPlayerGlobalDt.GetInstance().DirSpeedYG;
-			if (Mathf.Abs(euA.y) >= speedAngleVal && false) {
-				euA.x = euA.z = 0f;
-				float beiLv = euA.y > 0f ? -1f : 1f;
-				euA.y += beiLv * speedAngleVal;
+			//float speedAngleVal = Time.deltaTime * XKPlayerGlobalDt.GetInstance().DirSpeedYG;
+			if (PlayerRotStateYG != 0) {
+				euA.y = euA.y >= 0f ? 1f : 359f;
 				PlayerCore.transform.localEulerAngles = euA;
-				PlayerRotStateYG = 1;
-
-				if (Mathf.Abs(euA.y) < speedAngleVal) {
-					euA.y = euA.y >= 0f ? 1f : 359f;
-					PlayerCore.transform.localEulerAngles = euA;
-					/*Debug.Log("testAngleY "+PlayerCore.transform.localEulerAngles.y.ToString("f2")
-					          +", euA.y "+euA.y.ToString("f2"));*/
-				}
-			}
-			else {
-				if (PlayerRotStateYG != 0) {
-					euA.y = euA.y >= 0f ? 1f : 359f;
-					PlayerCore.transform.localEulerAngles = euA;
-					/*Debug.Log("testAngleY "+PlayerCore.transform.localEulerAngles.y.ToString("f2")
+				/*Debug.Log("testAngleY "+PlayerCore.transform.localEulerAngles.y.ToString("f2")
 				          +", euA.y "+euA.y.ToString("f2"));*/
-				}
-				PlayerRotStateYG = 0;
 			}
+			PlayerRotStateYG = 0;
+//			if (Mathf.Abs(euA.y) >= speedAngleVal && false) {
+//				euA.x = euA.z = 0f;
+//				float beiLv = euA.y > 0f ? -1f : 1f;
+//				euA.y += beiLv * speedAngleVal;
+//				PlayerCore.transform.localEulerAngles = euA;
+//				PlayerRotStateYG = 1;
+//
+//				if (Mathf.Abs(euA.y) < speedAngleVal) {
+//					euA.y = euA.y >= 0f ? 1f : 359f;
+//					PlayerCore.transform.localEulerAngles = euA;
+//					/*Debug.Log("testAngleY "+PlayerCore.transform.localEulerAngles.y.ToString("f2")
+//					          +", euA.y "+euA.y.ToString("f2"));*/
+//				}
+//			}
+//			else {
+//				if (PlayerRotStateYG != 0) {
+//					euA.y = euA.y >= 0f ? 1f : 359f;
+//					PlayerCore.transform.localEulerAngles = euA;
+//					/*Debug.Log("testAngleY "+PlayerCore.transform.localEulerAngles.y.ToString("f2")
+//				          +", euA.y "+euA.y.ToString("f2"));*/
+//				}
+//				PlayerRotStateYG = 0;
+//			}
 		}
 		#else
 		Vector3 veA = GameCameraTran.forward;
