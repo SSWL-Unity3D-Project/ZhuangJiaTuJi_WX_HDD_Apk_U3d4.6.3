@@ -10,6 +10,7 @@ public class GameMovieCtrl : MonoBehaviour {
 	public static bool IsActivePlayer;
 	float TimeVal;
 	public static bool IsTestXiaoScreen;
+	public static bool IsOpenFXZhenDong = true;
 	enum QualityLevelEnum
 	{
 		Fastest,
@@ -39,7 +40,9 @@ public class GameMovieCtrl : MonoBehaviour {
 		Time.timeScale = 1.0f;
 		AudioManager.Instance.SetParentTran(null);
 		GameOverCtrl.IsShowGameOver = false;
-		pcvr.OpenAllPlayerFangXiangPanPower();
+		if (IsOpenFXZhenDong) {
+			pcvr.OpenAllPlayerFangXiangPanPower();
+		}
 		pcvr.CloseAllQiNangArray(PlayerEnum.Null, 1);
 		//IsTestLJGame = true; //test
 		//IsTestXiaoScreen = true; //test
@@ -63,7 +66,10 @@ public class GameMovieCtrl : MonoBehaviour {
 		QualitySettings.SetQualityLevel((int)QualityLevelEnum.Fast);
 		AudioSourceObj = transform.GetComponent<AudioSource>();
 		Invoke("DelayResetIsLoadingLevel", 4f);
-		Invoke("CloseAllFangXiangPanPower", 10f);
+		if (IsOpenFXZhenDong) {
+			IsOpenFXZhenDong = false;
+			Invoke("CloseAllFangXiangPanPower", 10f);
+		}
 		PlayMovie();
 	}
 
