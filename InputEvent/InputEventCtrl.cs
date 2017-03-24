@@ -27,6 +27,19 @@ public class InputEventCtrl : MonoBehaviour {
 	/// 玩家油门信息.
 	/// </summary>
 	public static float[] PlayerYM = new float[4];
+	/**
+	 * PlayerYMTmp[0] == 1 -> 1P上按下.
+	 * PlayerYMTmp[0] == 0 -> 1P上弹起.
+	 * PlayerYMTmp[1] == 1 -> 1P下按下.
+	 * PlayerYMTmp[1] == 0 -> 1P下弹起.
+	 * ...
+	 * ...
+	 * PlayerYMTmp[6] == 1 -> 4P上按下.
+	 * PlayerYMTmp[6] == 0 -> 4P上弹起.
+	 * PlayerYMTmp[7] == 1 -> 4P下按下.
+	 * PlayerYMTmp[7] == 0 -> 4P下弹起.
+	 */
+	static float[] PlayerYMTmp = new float[8];
 	/// <summary>
 	/// 玩家刹车信息.
 	/// </summary>
@@ -363,10 +376,12 @@ public class InputEventCtrl : MonoBehaviour {
 	{
 		switch (val) {
 		case ButtonState.DOWN:
+			PlayerYMTmp[0] = 1f;
 			PlayerYM[0] = 1f;
 			break;
 		case ButtonState.UP:
-			PlayerYM[0] = 0f;
+			PlayerYMTmp[0] = 0f;
+			PlayerYM[0] = PlayerYMTmp[1] == 0f ? 0f : -1f;
 			break;
 		}
 	}
@@ -377,10 +392,12 @@ public class InputEventCtrl : MonoBehaviour {
 	{
 		switch (val) {
 		case ButtonState.DOWN:
+			PlayerYMTmp[1] = 1f;
 			PlayerYM[0] = -1f;
 			break;
 		case ButtonState.UP:
-			PlayerYM[0] = 0f;
+			PlayerYMTmp[1] = 0f;
+			PlayerYM[0] = PlayerYMTmp[0] == 0f ? 0f : 1f;
 			break;
 		}
 	}
@@ -423,10 +440,12 @@ public class InputEventCtrl : MonoBehaviour {
 	{
 		switch (val) {
 		case ButtonState.DOWN:
+			PlayerYMTmp[2] = 1f;
 			PlayerYM[1] = 1f;
 			break;
 		case ButtonState.UP:
-			PlayerYM[1] = 0f;
+			PlayerYMTmp[2] = 0f;
+			PlayerYM[1] = PlayerYMTmp[3] == 0f ? 0f : -1f;
 			break;
 		}
 	}
@@ -437,10 +456,12 @@ public class InputEventCtrl : MonoBehaviour {
 	{
 		switch (val) {
 		case ButtonState.DOWN:
+			PlayerYMTmp[3] = 1f;
 			PlayerYM[1] = -1f;
 			break;
 		case ButtonState.UP:
-			PlayerYM[1] = 0f;
+			PlayerYMTmp[3] = 0f;
+			PlayerYM[1] = PlayerYMTmp[2] == 0f ? 0f : 1f;
 			break;
 		}
 	}
@@ -483,10 +504,12 @@ public class InputEventCtrl : MonoBehaviour {
 	{
 		switch (val) {
 		case ButtonState.DOWN:
+			PlayerYMTmp[4] = 1f;
 			PlayerYM[2] = 1f;
 			break;
 		case ButtonState.UP:
-			PlayerYM[2] = 0f;
+			PlayerYMTmp[4] = 0f;
+			PlayerYM[2] = PlayerYMTmp[5] == 0f ? 0f : -1f;
 			break;
 		}
 	}
@@ -497,10 +520,12 @@ public class InputEventCtrl : MonoBehaviour {
 	{
 		switch (val) {
 		case ButtonState.DOWN:
+			PlayerYMTmp[5] = 1f;
 			PlayerYM[2] = -1f;
 			break;
 		case ButtonState.UP:
-			PlayerYM[2] = 0f;
+			PlayerYMTmp[5] = 0f;
+			PlayerYM[2] = PlayerYMTmp[4] == 0f ? 0f : 1f;
 			break;
 		}
 	}
@@ -543,10 +568,12 @@ public class InputEventCtrl : MonoBehaviour {
 	{
 		switch (val) {
 		case ButtonState.DOWN:
+			PlayerYMTmp[6] = 1f;
 			PlayerYM[3] = 1f;
 			break;
 		case ButtonState.UP:
-			PlayerYM[3] = 0f;
+			PlayerYMTmp[6] = 0f;
+			PlayerYM[3] = PlayerYMTmp[7] == 0f ? 0f : -1f;
 			break;
 		}
 	}
@@ -557,10 +584,12 @@ public class InputEventCtrl : MonoBehaviour {
 	{
 		switch (val) {
 		case ButtonState.DOWN:
+			PlayerYMTmp[7] = 1f;
 			PlayerYM[3] = -1f;
 			break;
 		case ButtonState.UP:
-			PlayerYM[3] = 0f;
+			PlayerYMTmp[7] = 0f;
+			PlayerYM[3] = PlayerYMTmp[6] == 0f ? 0f : 1f;
 			break;
 		}
 	}
