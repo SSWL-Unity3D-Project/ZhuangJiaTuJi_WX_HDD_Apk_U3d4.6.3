@@ -5,7 +5,14 @@ public class XueKuangCtrl : MonoBehaviour
 {
 	public PlayerEnum PlayerSt = PlayerEnum.Null;
 	public UITexture XueKuangNum;
+	/**
+	 * 四人版血框数字.
+	 */
 	public Texture[] XueKuangTexture;
+	/**
+	 * 双人版血框数字.
+	 */
+	public Texture[] XueKuangGmTexture;
 	public UISprite XueTiaoSprite;
 	public UITexture CoinDiKuang;
 	public Texture[] CoinDKTexture;
@@ -88,7 +95,14 @@ public class XueKuangCtrl : MonoBehaviour
 			break;
 		}
 		CoinDiKuang.mainTexture = CoinDKTexture[indexVal];
-		XueKuangNum.mainTexture = XueKuangTexture[indexVal];
+		if (XKGlobalData.GameVersionPlayer == 0) {
+			XueKuangNum.mainTexture = XueKuangTexture[indexVal];
+		}
+		else {
+			if (PlayerSt == PlayerEnum.PlayerThree || PlayerSt == PlayerEnum.PlayerFour) {
+				XueKuangNum.mainTexture = XueKuangGmTexture[indexVal];
+			}
+		}
 		bool isActiveInfo = indexVal == 1 ? true : false;
 		XueTiaoSprite.gameObject.SetActive(isActiveInfo);
 		XueTiaoSprite.fillAmount = 1f;

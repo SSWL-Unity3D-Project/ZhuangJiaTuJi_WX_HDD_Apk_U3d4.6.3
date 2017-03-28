@@ -165,6 +165,15 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 	void FixedUpdate()
 	{
 		if (!IsMoveToTiaoYueDian) {
+			switch (TKMoveSt) {
+			case TKMoveState.U_FangXiangPan:
+				CheckPlayerFangXiang();
+				CheckPlayerYouMen();
+				break;
+			case TKMoveState.YaoGanBan:
+				CheckPlayerYaoGanInput();
+				break;
+			}
 			return;
 		}
 		//PlayerTran.position = TiaoBanObjAy[1].transform.position;
@@ -263,6 +272,10 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 		int indexVal = (int)PlayerIndex - 1;
 		float fxVal = InputEventCtrl.PlayerFX[indexVal];
 		float ymVal = InputEventCtrl.PlayerYM[indexVal];
+		if (XKGlobalData.GameVersionPlayer != 0) {
+			fxVal = InputEventCtrl.PlayerFX[indexVal - 2];
+			ymVal = InputEventCtrl.PlayerYM[indexVal - 2];
+		}
 		if (fxVal == 0f && ymVal == 0f) {
 			if (LvDaiUVCom != null && LvDaiUVCom.enabled) {
 				LvDaiUVCom.enabled = false;
@@ -363,16 +376,16 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 			break;
 		}
 
-		if (!IsPlayerRotYG) {
-			ChangePlayerMoving(ymVal);
-		}
-		else {
-//			Vector3 euLE = PlayerCore.transform.localEulerAngles;
-//			euLE.y = euLE.y <= 180f ? euLE.y : (euLE.y - 360f);
-			if (PlayerRotStateYG == 0) {
-				ChangePlayerMoving(ymVal);
-			}
-		}
+//		if (!IsPlayerRotYG) {
+//			ChangePlayerMoving(ymVal);
+//		}
+//		else {
+////			Vector3 euLE = PlayerCore.transform.localEulerAngles;
+////			euLE.y = euLE.y <= 180f ? euLE.y : (euLE.y - 360f);
+//			if (PlayerRotStateYG == 0) {
+//				ChangePlayerMoving(ymVal);
+//			}
+//		}
 
 		#if USE_LINE_CHANGE_DIR
 		if (isChangeTKCore) {
@@ -404,9 +417,8 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 			PlayerCore.transform.localEulerAngles = euA;
 			PlayerCore.transform.localScale = Vector3.one;
 			
-			PlayerRotStateYG = 1;
-		}
-		else {
+			//PlayerRotStateYG = 1;
+
 			euA = PlayerCore.transform.localEulerAngles;
 			euA.y = euA.y <= 180f ? euA.y : (euA.y - 360f);
 			//float speedAngleVal = Time.deltaTime * XKPlayerGlobalDt.GetInstance().DirSpeedYG;
@@ -417,6 +429,34 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 				          +", euA.y "+euA.y.ToString("f2"));*/
 			}
 			PlayerRotStateYG = 0;
+		}
+
+		if (!IsPlayerRotYG) {
+			ChangePlayerMoving(ymVal);
+		}
+		else {
+//			Vector3 euLE = PlayerCore.transform.localEulerAngles;
+//			euLE.y = euLE.y <= 180f ? euLE.y : (euLE.y - 360f);
+//			if (PlayerRotStateYG == 0) {
+//				ChangePlayerMoving(ymVal);
+//			}
+			ChangePlayerMoving(ymVal);
+		}
+
+//		else {
+//			euA = PlayerCore.transform.localEulerAngles;
+//			euA.y = euA.y <= 180f ? euA.y : (euA.y - 360f);
+//			//float speedAngleVal = Time.deltaTime * XKPlayerGlobalDt.GetInstance().DirSpeedYG;
+//			if (PlayerRotStateYG != 0) {
+//				euA.y = euA.y >= 0f ? 1f : 359f;
+//				PlayerCore.transform.localEulerAngles = euA;
+//				/*Debug.Log("testAngleY "+PlayerCore.transform.localEulerAngles.y.ToString("f2")
+//				          +", euA.y "+euA.y.ToString("f2"));*/
+//			}
+//			PlayerRotStateYG = 0;
+
+
+
 //			if (Mathf.Abs(euA.y) >= speedAngleVal && false) {
 //				euA.x = euA.z = 0f;
 //				float beiLv = euA.y > 0f ? -1f : 1f;
@@ -440,7 +480,7 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 //				}
 //				PlayerRotStateYG = 0;
 //			}
-		}
+//		}
 		#else
 		Vector3 veA = GameCameraTran.forward;
 		Vector3 veB = Vector3.forward;
@@ -819,9 +859,10 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 		}
 
 		if (mvVal == 0f) {
-			if (!IsInvoking("StopMovePlayer")) {
-				Invoke("StopMovePlayer", 0.3f);
-			}
+			StopMovePlayer();
+//			if (!IsInvoking("StopMovePlayer")) {
+//				Invoke("StopMovePlayer", 0f);
+//			}
 			return;
 		}
 
@@ -963,9 +1004,9 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 	void MakePlayerToLand()
 	{
 		RaycastHit hitInfo;
-		Vector3 startPos = PlayerTran.position + Vector3.up * 5f;
+		Vector3 startPos = PlayerTran.position + Vector3.up * 50f;
 		Vector3 forwardVal = Vector3.down;
-		if (Physics.Raycast(startPos, forwardVal, out hitInfo, 35f, TerrainLayer.value)){
+		if (Physics.Raycast(startPos, forwardVal, out hitInfo, 85f, TerrainLayer.value)){
 			//if (Vector3.Distance(PlayerTran.position, hitInfo.point) > 1f) {
 				Vector3 posTmp = hitInfo.point + Vector3.up * HighOffset;
 				PlayerTran.position = Vector3.Lerp(PlayerTran.position, posTmp, 0.1f);

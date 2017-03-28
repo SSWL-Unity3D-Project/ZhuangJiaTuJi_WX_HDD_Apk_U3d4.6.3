@@ -119,6 +119,10 @@ public class CoinPlayerCtrl : MonoBehaviour {
 
 	void ClickStartBtOneEvent(ButtonState state)
 	{
+		if (XKGlobalData.GameVersionPlayer != 0) {
+			return;
+		}
+
 		if (XkGameCtrl.IsActivePlayerOne) {
 			return;
 		}
@@ -139,6 +143,10 @@ public class CoinPlayerCtrl : MonoBehaviour {
 
 	void ClickStartBtTwoEvent(ButtonState state)
 	{
+		if (XKGlobalData.GameVersionPlayer != 0) {
+			return;
+		}
+
 		if (XkGameCtrl.IsActivePlayerTwo) {
 			return;
 		}
@@ -175,6 +183,10 @@ public class CoinPlayerCtrl : MonoBehaviour {
 		StartBtObj.SetActive(false);
 		XkGameCtrl.SetActivePlayerThree(true);
 		ActiveZhanDouObj();
+
+		if (XKGlobalData.GameVersionPlayer != 0) {
+			XKGlobalData.CoinPlayerOne = XKGlobalData.CoinPlayerThree;
+		}
 	}
 	
 	void ClickStartBtFourEvent(ButtonState state)
@@ -195,6 +207,10 @@ public class CoinPlayerCtrl : MonoBehaviour {
 		StartBtObj.SetActive(false);
 		XkGameCtrl.SetActivePlayerFour(true);
 		ActiveZhanDouObj();
+		
+		if (XKGlobalData.GameVersionPlayer != 0) {
+			XKGlobalData.CoinPlayerTwo = XKGlobalData.CoinPlayerFour;
+		}
 	}
 
 	void SubCoinPlayerOne()
@@ -335,6 +351,12 @@ public class CoinPlayerCtrl : MonoBehaviour {
 
 	public void SetPlayerCoin(int coin)
 	{
+		XKGlobalData.GetInstance();
+		if (XKGlobalData.GameVersionPlayer != 0) {
+			if (PlayerSt == PlayerEnum.PlayerOne || PlayerSt == PlayerEnum.PlayerTwo) {
+				return;
+			}
+		}
 		SetPlayerCoinSprite(coin);
 	}
 

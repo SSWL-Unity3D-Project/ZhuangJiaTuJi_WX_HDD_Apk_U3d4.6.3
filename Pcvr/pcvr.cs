@@ -5,7 +5,7 @@ using System.Collections;
 using System;
 
 public class pcvr : MonoBehaviour {
-	public static bool bIsHardWare = false;
+	public static bool bIsHardWare = true;
 	public static bool IsTestInput = false;
 	public static bool IsTestHardWareError = false;
 	public static Vector3 CrossPositionOne;
@@ -1436,17 +1436,19 @@ QiNangArray[3]			QiNangArray[2]
 					IsSubPlayerCoin = false;
 					SubCoinNum_12 = 0;
 				}
-
-				if (coinP3 == 0 && IsSubCoinP3) {
-					IsSubCoinP3 = false;
-					IsSubPlayerCoin = false;
-					SubCoinNum_34 = 0;
-				}
-			
-				if (coinP4 == 0 && IsSubCoinP4) {
-					IsSubCoinP4 = false;
-					IsSubPlayerCoin = false;
-					SubCoinNum_34 = 0;
+				
+				if (XKGlobalData.GameVersionPlayer == 0) {
+					if (coinP3 == 0 && IsSubCoinP3) {
+						IsSubCoinP3 = false;
+						IsSubPlayerCoin = false;
+						SubCoinNum_34 = 0;
+					}
+				
+					if (coinP4 == 0 && IsSubCoinP4) {
+						IsSubCoinP4 = false;
+						IsSubPlayerCoin = false;
+						SubCoinNum_34 = 0;
+					}
 				}
 			}
 			else {
@@ -1464,19 +1466,21 @@ QiNangArray[3]			QiNangArray[2]
 					XKGlobalData.SetCoinPlayerTwo(CoinNumCurrentP2);
 					SubPcvrCoin(PlayerEnum.PlayerTwo, (int)(CoinCurPcvr12 & 0xf0));
 				}
-
-				if (coinP3 > 0 && coinP3 < 256) {
-					IsSubCoinP3 = true;
-					CoinNumCurrentP3 += (int)coinP3;
-					XKGlobalData.SetCoinPlayerThree(CoinNumCurrentP3);
-					SubPcvrCoin(PlayerEnum.PlayerThree, (int)(CoinCurPcvr34 & 0x0f));
-				}
-			
-				if (coinP4 > 0 && coinP4 < 256) {
-					IsSubCoinP4 = true;
-					CoinNumCurrentP4 += (int)coinP4;
-					XKGlobalData.SetCoinPlayerFour(CoinNumCurrentP4);
-					SubPcvrCoin(PlayerEnum.PlayerFour, (int)(CoinCurPcvr34 & 0xf0));
+				
+				if (XKGlobalData.GameVersionPlayer == 0) {
+					if (coinP3 > 0 && coinP3 < 256) {
+						IsSubCoinP3 = true;
+						CoinNumCurrentP3 += (int)coinP3;
+						XKGlobalData.SetCoinPlayerThree(CoinNumCurrentP3);
+						SubPcvrCoin(PlayerEnum.PlayerThree, (int)(CoinCurPcvr34 & 0x0f));
+					}
+				
+					if (coinP4 > 0 && coinP4 < 256) {
+						IsSubCoinP4 = true;
+						CoinNumCurrentP4 += (int)coinP4;
+						XKGlobalData.SetCoinPlayerFour(CoinNumCurrentP4);
+						SubPcvrCoin(PlayerEnum.PlayerFour, (int)(CoinCurPcvr34 & 0xf0));
+					}
 				}
 			}
 
@@ -2327,6 +2331,17 @@ QiNangArray[3]			QiNangArray[2]
 		IsPlayerActivePcvr = true;
 		TimeLastActivePcvr = Time.realtimeSinceStartup;
 	}
+
+//	void OnGUI()
+//	{
+//		float width = Screen.width;
+//		float hight = 30f;
+//		string infoA = "Coin1: "+XKGlobalData.CoinPlayerOne
+//				+", Coin2: "+XKGlobalData.CoinPlayerTwo
+//				+", Coin3: "+XKGlobalData.CoinPlayerThree
+//				+", Coin4: "+XKGlobalData.CoinPlayerFour;
+//		GUI.Box(new Rect(0f, hight * 4f, width, hight), infoA);
+//	}
 }
 
 public enum PcvrValState

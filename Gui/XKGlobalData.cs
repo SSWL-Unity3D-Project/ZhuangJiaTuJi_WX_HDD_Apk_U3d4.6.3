@@ -9,6 +9,11 @@ public class XKGlobalData {
 	public static int CoinPlayerThree = 0;
 	public static int CoinPlayerFour = 0;
 	public static int GameNeedCoin;
+	/**
+	 * GameVersionPlayer == 0 -> 四人版本游戏.
+	 * GameVersionPlayer == 1 -> 双人版本游戏.
+	 */
+	public static int GameVersionPlayer = 0;
 	public static bool IsFreeMode;
 	public static string GameDiff;
 	public static int GameAudioVolume;
@@ -84,6 +89,13 @@ public class XKGlobalData {
 				HandleJsonObj.WriteToFileXml(FileName, "GameAudioVolume", val);
 			}
 			GameAudioVolume = Convert.ToInt32(val);
+
+			val = HandleJsonObj.ReadFromFileXml(FileName, "GameVersionPlayer");
+			if (val == null || val == "") {
+				val = "0"; //四人版本.
+				HandleJsonObj.WriteToFileXml(FileName, "GameVersionPlayer", val);
+			}
+			GameVersionPlayer = Convert.ToInt32(val);
 		}
 		return Instance;
 	}
@@ -95,6 +107,12 @@ public class XKGlobalData {
 
 	public static void SetCoinPlayerOne(int coin)
 	{
+		if (XKGlobalData.GameVersionPlayer != 0) {
+			CoinPlayerOne = coin;
+			SetCoinPlayerThree(coin);
+			return;
+		}
+
 		if (coin > 0 && CoinPlayerOne != coin) {
 			PlayTouBiAudio();
 		}
@@ -110,6 +128,12 @@ public class XKGlobalData {
 
 	public static void SetCoinPlayerTwo(int coin)
 	{
+		if (XKGlobalData.GameVersionPlayer != 0) {
+			CoinPlayerTwo = coin;
+			SetCoinPlayerFour(coin);
+			return;
+		}
+
 		if (coin > 0 && CoinPlayerTwo != coin) {
 			PlayTouBiAudio();
 		}

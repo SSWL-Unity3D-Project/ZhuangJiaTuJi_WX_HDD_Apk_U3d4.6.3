@@ -28,7 +28,14 @@ public class PaiMingCtrl : MonoBehaviour
 
 	//public int[] PlayerIndexArray = {0, 1, 2, 3};
 	public UITexture[] PlayerNumUITexture;
+	/**
+	 * 四人版.
+	 */
 	public Texture[] PlayerTexture;
+	/**
+	 * 双人版.
+	 */
+	public Texture[] PlayerTextureShR;
 	public UISprite[] PlayerJF_1;
 	public UISprite[] PlayerJF_2;
 	public UISprite[] PlayerJF_3;
@@ -134,7 +141,13 @@ public class PaiMingCtrl : MonoBehaviour
 					}
 
 					countJF++;
-					PlayerNumUITexture[j].mainTexture = PlayerTexture[i];
+					if (XKGlobalData.GameVersionPlayer == 0) {
+						PlayerNumUITexture[j].mainTexture = PlayerTexture[i];
+					}
+					else {
+						PlayerNumUITexture[j].mainTexture = PlayerTextureShR[i];
+					}
+
 					switch (j) {
 					case 0:
 						isActivePlayerJF = true;

@@ -37,7 +37,7 @@ public class SetPanelUiRoot : MonoBehaviour {
 	string FileName = XKGlobalData.FileName;
 	HandleJson HandleJsonObj;
 
-	Vector3 [] SetPanelStarPos = new Vector3[37]{
+	Vector3 [] SetPanelStarPos = new Vector3[38]{
 		new Vector3(-620f, 275f, 0f),
 		new Vector3(-620f, 230f, 0f),
 		new Vector3(-620f, 180f, 0f),
@@ -58,6 +58,7 @@ public class SetPanelUiRoot : MonoBehaviour {
 		new Vector3(-620f, -103f, 0f),
 		new Vector3(-620f, -148f, 0f),
 		new Vector3(-336f, -148f, 0f),
+		new Vector3(-620f, -192f, 0f),
 		new Vector3(-110f, -145f, 0f),
 		new Vector3(112f, 250f, 0f),
 		new Vector3(280f, 250f, 0f),
@@ -99,6 +100,7 @@ public class SetPanelUiRoot : MonoBehaviour {
 		ResetFactory,
 		GameAudioSet,
 		GameAudioReset,
+		GameVersion,
 		Exit,
 		CheckQiNang1,
 		CheckQiNang2,
@@ -168,6 +170,7 @@ public class SetPanelUiRoot : MonoBehaviour {
 		InitGameModeDuiGou();
 		InitGameDianJiSpeed();
 		InitGameAudioValue();
+		InitGameVersionPlayer();
 
 		InputEventCtrl.GetInstance().ClickSetEnterBtEvent += ClickSetEnterBtEvent;
 		InputEventCtrl.GetInstance().ClickSetMoveBtEvent += ClickSetMoveBtEvent;
@@ -585,6 +588,10 @@ public class SetPanelUiRoot : MonoBehaviour {
 				XKGlobalData.GameAudioVolume = GameAudioVolume;
 				break;
 
+			case SelectSetPanelDate.GameVersion:
+				ChangeGameVersionInfo();
+				break;
+
 			case SelectSetPanelDate.Exit:
 				ExitSetPanle();
 				break;
@@ -786,6 +793,7 @@ public class SetPanelUiRoot : MonoBehaviour {
 
 	void ResetFactoryInfo()
 	{
+		ResetGameVersionPlayer();
 		ResetPlayerCoinCur();
 		XKGlobalData.GameNeedCoin = 1;
 		XKGlobalData.GameDiff = "1";
@@ -839,6 +847,18 @@ public class SetPanelUiRoot : MonoBehaviour {
 	{
 		SelectSetPanelDate ssDt = (SelectSetPanelDate)StarMoveCount;
 		switch (ssDt) {
+		case SelectSetPanelDate.AdjustDirP2:
+			if (XKGlobalData.GameVersionPlayer != 0) {
+				//双人版跳过3p和4p的校准.
+				StarMoveCount = (int)SelectSetPanelDate.AdjustDirP4;
+			}
+			break;
+		case SelectSetPanelDate.AdjustYouMenShaCheP2:
+			if (XKGlobalData.GameVersionPlayer != 0) {
+				//双人版跳过3p和4p的校准.
+				StarMoveCount = (int)SelectSetPanelDate.AdjustYouMenShaCheP4;
+			}
+			break;
 		case SelectSetPanelDate.CheckQiNang1:
 		case SelectSetPanelDate.CheckQiNang2:
 		case SelectSetPanelDate.CheckQiNang3:
@@ -855,6 +875,12 @@ public class SetPanelUiRoot : MonoBehaviour {
 		case SelectSetPanelDate.CheckQiNang14:
 		case SelectSetPanelDate.CheckQiNang15:
 		case SelectSetPanelDate.CheckQiNang16:
+			if (ssDt == SelectSetPanelDate.CheckQiNang8) {
+				if (XKGlobalData.GameVersionPlayer != 0) {
+					//双人版跳过3p和4p的校准.
+					StarMoveCount = (int)SelectSetPanelDate.CheckQiNang16;
+				}
+			}
 			QiNangCQObj.SetActive(false);
 			pcvr.CloseAllQiNangArray(PlayerEnum.Null, 1);
 			break;
@@ -1085,5 +1111,41 @@ public class SetPanelUiRoot : MonoBehaviour {
 		}
 		GameAudioVolume = Convert.ToInt32(val);
 		GameAudioVolumeLB.text = GameAudioVolume.ToString();
+	}
+
+	public UITexture GameVersionTexture;
+	/**
+	 * TextureGV[0] -> 四人版游戏.
+	 * TextureGV[1] -> 双人版游戏.
+	 */
+	public Texture[] TextureGV;
+	int GameVersionPlayer = 0;
+	void InitGameVersionPlayer()
+	{
+		string val = HandleJsonObj.ReadFromFileXml(FileName, "GameVersionPlayer");
+		if (val == null || val == "") {
+			val = "0"; //四人版本.
+			HandleJsonObj.WriteToFileXml(FileName, "GameVersionPlayer", val);
+		}
+		GameVersionPlayer = Convert.ToInt32(val);
+		GameVersionTexture.mainTexture = TextureGV[GameVersionPlayer];
+	}
+
+	void ChangeGameVersionInfo()
+	{
+		GameVersionPlayer = (GameVersionPlayer == 0 ? 1 : 0);
+		string val = GameVersionPlayer.ToString();
+		HandleJsonObj.WriteToFileXml(FileName, "GameVersionPlayer", val);
+		GameVersionTexture.mainTexture = TextureGV[GameVersionPlayer];
+		XKGlobalData.GameVersionPlayer = GameVersionPlayer;
+	}
+
+	void ResetGameVersionPlayer()
+	{
+		GameVersionPlayer = 0;
+		string val = GameVersionPlayer.ToString();
+		HandleJsonObj.WriteToFileXml(FileName, "GameVersionPlayer", val);
+		GameVersionTexture.mainTexture = TextureGV[GameVersionPlayer];
+		XKGlobalData.GameVersionPlayer = GameVersionPlayer;
 	}
 }

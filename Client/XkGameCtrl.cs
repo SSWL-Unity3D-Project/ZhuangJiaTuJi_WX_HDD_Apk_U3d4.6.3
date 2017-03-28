@@ -409,7 +409,12 @@ public class XkGameCtrl : MonoBehaviour {
 		Invoke("TestInitCameraRender", 0.5f);
 
 		if (!GameMovieCtrl.IsActivePlayer) {
-			SetActivePlayerOne(true);
+			if (XKGlobalData.GameVersionPlayer == 0) {
+				SetActivePlayerOne(true);
+			}
+			else {
+				SetActivePlayerThree(true);
+			}
 		}
 		IsPlayGamePOne = IsActivePlayerOne;
 		IsPlayGamePTwo = IsActivePlayerTwo;
@@ -445,7 +450,12 @@ public class XkGameCtrl : MonoBehaviour {
 			return;
 		}
 		XKPlayerMoveCtrl.GetInstancePOne().HiddenGamePlayer(1);
-		SetActivePlayerOne(true);
+		if (XKGlobalData.GameVersionPlayer == 0) {
+			SetActivePlayerOne(true);
+		}
+		else {
+			SetActivePlayerThree(true);
+		}
 	}
 
 	public void ChangeAudioListParent()
@@ -1997,13 +2007,23 @@ public class XkGameCtrl : MonoBehaviour {
 			break;
 			
 		case PlayerEnum.PlayerThree:
-			tranPoint = XKPlayerCamera.GetInstanceFeiJi().PlayerSpawnPoint[2];
+			if (XKGlobalData.GameVersionPlayer == 0) {
+				tranPoint = XKPlayerCamera.GetInstanceFeiJi().PlayerSpawnPoint[2];
+			}
+			else {
+				tranPoint = XKPlayerCamera.GetInstanceFeiJi().PlayerSpawnPoint[1];
+			}
 			pos = _Instance.GetActivePlayerPos(tranPoint, PlayerEnum.PlayerThree);
 			XKPlayerMoveCtrl.GetInstancePThree().ActivePlayerToPos(pos, tranPoint.up, isChangePos);
 			break;
 			
 		case PlayerEnum.PlayerFour:
-			tranPoint = XKPlayerCamera.GetInstanceFeiJi().PlayerSpawnPoint[3];
+			if (XKGlobalData.GameVersionPlayer == 0) {
+				tranPoint = XKPlayerCamera.GetInstanceFeiJi().PlayerSpawnPoint[3];
+			}
+			else {
+				tranPoint = XKPlayerCamera.GetInstanceFeiJi().PlayerSpawnPoint[2];
+			}
 			pos = _Instance.GetActivePlayerPos(tranPoint, PlayerEnum.PlayerFour);
 			XKPlayerMoveCtrl.GetInstancePFour().ActivePlayerToPos(pos, tranPoint.up, isChangePos);
 			break;
@@ -2672,5 +2692,10 @@ public class XkGameCtrl : MonoBehaviour {
 		+", PRZY4: "+pcvr.RunZuoYiState[3];
 		GUI.Box(new Rect(0f, hight * 3f, width, hight), infoA);
 
+		infoA = "Coin1: "+XKGlobalData.CoinPlayerOne
+				+", Coin2: "+XKGlobalData.CoinPlayerTwo
+				+", Coin3: "+XKGlobalData.CoinPlayerThree
+				+", Coin4: "+XKGlobalData.CoinPlayerFour;
+		GUI.Box(new Rect(0f, hight * 4f, width, hight), infoA);
 	}
 }

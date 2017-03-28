@@ -69,6 +69,10 @@ public class InputEventCtrl : MonoBehaviour {
 			//pcvr.StartLightStateP1 = LedState.Mie;
 		}
 		pcvr.SetIsPlayerActivePcvr();
+
+		if (XKGlobalData.GameVersionPlayer != 0) {
+			ClickStartBtThree(val);
+		}
 	}
 	
 	public event EventHandel ClickStartBtTwoEvent;
@@ -80,6 +84,10 @@ public class InputEventCtrl : MonoBehaviour {
 			//pcvr.StartLightStateP2 = LedState.Mie;
 		}
 		pcvr.SetIsPlayerActivePcvr();
+		
+		if (XKGlobalData.GameVersionPlayer != 0) {
+			ClickStartBtFour(val);
+		}
 	}
 	
 	public event EventHandel ClickStartBtThreeEvent;
@@ -141,33 +149,31 @@ public class InputEventCtrl : MonoBehaviour {
 	public event EventHandel ClickFireBtOneEvent;
 	public void ClickFireBtOne(ButtonState val)
 	{
-		if(ClickFireBtOneEvent != null)
-		{
-			ClickFireBtOneEvent( val );
+		if (XKGlobalData.GameVersionPlayer == 0) {
+			if(ClickFireBtOneEvent != null)
+			{
+				ClickFireBtOneEvent( val );
+			}
+			pcvr.SetIsPlayerActivePcvr();
 		}
-		pcvr.SetIsPlayerActivePcvr();
-
-		/*if (SetPanelUiRoot.GetInstance() == null
-		    && !HardwareCheckCtrl.IsTestHardWare
-		    && ClickStartBtOneEvent != null) {
-			ClickStartBtOneEvent( val );
-		}*/
+		else {
+			ClickFireBtThree( val );
+		}
 	}
 
 	public event EventHandel ClickFireBtTwoEvent;
 	public void ClickFireBtTwo(ButtonState val)
 	{
-		if(ClickFireBtTwoEvent != null)
-		{
-			ClickFireBtTwoEvent( val );
+		if (XKGlobalData.GameVersionPlayer == 0) {
+			if(ClickFireBtTwoEvent != null)
+			{
+				ClickFireBtTwoEvent( val );
+			}
+			pcvr.SetIsPlayerActivePcvr();
 		}
-		pcvr.SetIsPlayerActivePcvr();
-
-		/*if (SetPanelUiRoot.GetInstance() == null
-		    && !HardwareCheckCtrl.IsTestHardWare
-		    && ClickStartBtTwoEvent != null) {
-			ClickStartBtTwoEvent( val );
-		}*/
+		else {
+			ClickFireBtFour( val );
+		}
 	}
 
 	public event EventHandel ClickFireBtThreeEvent;
@@ -178,12 +184,6 @@ public class InputEventCtrl : MonoBehaviour {
 			ClickFireBtThreeEvent( val );
 		}
 		pcvr.SetIsPlayerActivePcvr();
-		
-		/*if (SetPanelUiRoot.GetInstance() == null
-		    && !HardwareCheckCtrl.IsTestHardWare
-		    && ClickStartBtThreeEvent != null) {
-			ClickStartBtThreeEvent( val );
-		}*/
 	}
 
 	public event EventHandel ClickFireBtFourEvent;
@@ -194,51 +194,55 @@ public class InputEventCtrl : MonoBehaviour {
 			ClickFireBtFourEvent( val );
 		}
 		pcvr.SetIsPlayerActivePcvr();
-		
-		/*if (SetPanelUiRoot.GetInstance() == null
-		    && !HardwareCheckCtrl.IsTestHardWare
-		    && ClickStartBtFourEvent != null) {
-			ClickStartBtFourEvent( val );
-		}*/
 	}
 
 	public event EventHandel ClickDaoDanBtOneEvent;
 	public void ClickDaoDanBtOne(ButtonState val)
 	{
-		if(ClickDaoDanBtOneEvent != null)
-		{
-			ClickDaoDanBtOneEvent( val );
-		}
-		pcvr.SetIsPlayerActivePcvr();
+		if (XKGlobalData.GameVersionPlayer == 0) {
+			if(ClickDaoDanBtOneEvent != null)
+			{
+				ClickDaoDanBtOneEvent( val );
+			}
+			pcvr.SetIsPlayerActivePcvr();
 
-		if (val == ButtonState.DOWN) {
-			pcvr.OpenZuoYiQiNang(PlayerEnum.PlayerOne);
-		}
+			if (val == ButtonState.DOWN) {
+				pcvr.OpenZuoYiQiNang(PlayerEnum.PlayerOne);
+			}
 
-		if (SetPanelUiRoot.GetInstance() == null
-		    && !HardwareCheckCtrl.IsTestHardWare
-		    && ClickStartBtOneEvent != null) {
-			ClickStartBtOneEvent( val );
+			if (SetPanelUiRoot.GetInstance() == null
+			    && !HardwareCheckCtrl.IsTestHardWare
+			    && ClickStartBtOneEvent != null) {
+				ClickStartBtOneEvent( val );
+			}
+		}
+		else {
+			ClickDaoDanBtThree(val);
 		}
 	}
 	
 	public event EventHandel ClickDaoDanBtTwoEvent;
 	public void ClickDaoDanBtTwo(ButtonState val)
 	{
-		if(ClickDaoDanBtTwoEvent != null)
-		{
-			ClickDaoDanBtTwoEvent( val );
+		if (XKGlobalData.GameVersionPlayer == 0) {
+			if(ClickDaoDanBtTwoEvent != null)
+			{
+				ClickDaoDanBtTwoEvent( val );
+			}
+			pcvr.SetIsPlayerActivePcvr();
+			
+			if (val == ButtonState.DOWN) {
+				pcvr.OpenZuoYiQiNang(PlayerEnum.PlayerTwo);
+			}
+			
+			if (SetPanelUiRoot.GetInstance() == null
+			    && !HardwareCheckCtrl.IsTestHardWare
+			    && ClickStartBtTwoEvent != null) {
+				ClickStartBtTwoEvent( val );
+			}
 		}
-		pcvr.SetIsPlayerActivePcvr();
-		
-		if (val == ButtonState.DOWN) {
-			pcvr.OpenZuoYiQiNang(PlayerEnum.PlayerTwo);
-		}
-		
-		if (SetPanelUiRoot.GetInstance() == null
-		    && !HardwareCheckCtrl.IsTestHardWare
-		    && ClickStartBtTwoEvent != null) {
-			ClickStartBtTwoEvent( val );
+		else {
+			ClickDaoDanBtFour(val);
 		}
 	}
 	
@@ -623,13 +627,17 @@ public class InputEventCtrl : MonoBehaviour {
 		}
 		
 		if (Input.GetKeyUp(KeyCode.U)) {
-			int coinVal = XKGlobalData.CoinPlayerThree + 1;
-			XKGlobalData.SetCoinPlayerThree(coinVal);
+			if (XKGlobalData.GameVersionPlayer == 0) {
+				int coinVal = XKGlobalData.CoinPlayerThree + 1;
+				XKGlobalData.SetCoinPlayerThree(coinVal);
+			}
 		}
 		
 		if (Input.GetKeyUp(KeyCode.I)) {
-			int coinVal = XKGlobalData.CoinPlayerFour + 1;
-			XKGlobalData.SetCoinPlayerFour(coinVal);
+			if (XKGlobalData.GameVersionPlayer == 0) {
+				int coinVal = XKGlobalData.CoinPlayerFour + 1;
+				XKGlobalData.SetCoinPlayerFour(coinVal);
+			}
 		}
 
 		//StartBt PlayerOne
