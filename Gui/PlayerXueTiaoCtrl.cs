@@ -65,15 +65,52 @@ public class PlayerXueTiaoCtrl : MonoBehaviour
 			CameraTran = Camera.main != null ? Camera.main.transform : null;
 			return;
 		}
-		Vector3 forwardVal = CameraTran.forward;
-		forwardVal.y = 0f;
-		NengLianTran.forward = forwardVal;
+		CheckPlayerHitCol();
 
-		Vector3 pos = NengLianParentTr.position;
-		pos += forwardVal * OffsetXT.z;
-		pos.x += OffsetXT.x;
-		pos.y += OffsetXT.y;
-		NengLianTran.position = pos;
+		Vector3 pos = Vector3.zero;
+		Vector3 forwardVal = Vector3.zero;
+		switch (KeyHitSt) {
+		case 0:
+			forwardVal = CameraTran.forward;
+			forwardVal.y = 0f;
+			NengLianTran.forward = forwardVal;
+			pos = NengLianParentTr.position;
+			pos += forwardVal * OffsetXT.z;
+			pos.x += OffsetXT.x;
+			pos.y += OffsetXT.y;
+			NengLianTran.position = pos;
+			break;
+		case 1:
+			forwardVal = CameraTran.right;
+			forwardVal.y = 0f;
+			NengLianTran.forward = forwardVal;
+			pos = NengLianParentTr.position;
+			pos += forwardVal * (OffsetXT.z + 3f);
+			pos.x += OffsetXT.x;
+			pos.y += OffsetXT.y;
+			NengLianTran.position = pos;
+			break;
+		case 2:
+			forwardVal = -CameraTran.right;
+			forwardVal.y = 0f;
+			NengLianTran.forward = forwardVal;
+			pos = NengLianParentTr.position;
+			pos += forwardVal * (OffsetXT.z + 3f);
+			pos.x += OffsetXT.x;
+			pos.y += OffsetXT.y;
+			NengLianTran.position = pos;
+			break;
+		case 3:
+			forwardVal = CameraTran.forward;
+			forwardVal.y = 0f;
+			NengLianTran.forward = forwardVal;
+			pos = NengLianParentTr.position;
+			pos -= forwardVal * (OffsetXT.z - 3.5f);
+			pos.x += OffsetXT.x;
+			pos.y += OffsetXT.y;
+			NengLianTran.position = pos;
+			break;
+		}
 	}
 
 	public void HandlePlayerXueTiaoInfo(float fillVal)
@@ -110,7 +147,91 @@ public class PlayerXueTiaoCtrl : MonoBehaviour
 		NengLianTran = transform;
 		OffsetXT = NengLianTran.localPosition;
 		NengLianParentTr = NengLianTran.parent;
-		NengLianTran.parent = null;
+		NengLianTran.parent = XkGameCtrl.MissionCleanup;
 		gameObject.SetActive(isActiveXT);
+	}
+	
+	/**
+	 * KeyHitSt == 0 -> 血条在后.
+	 * KeyHitSt == 1 -> 血条在左.
+	 * KeyHitSt == 2 -> 血条在右.
+	 * KeyHitSt == 3 -> 血条在前.
+	 */
+	byte KeyHitSt = 0;
+	void CheckPlayerHitCol()
+	{
+		if (CameraTran == null || (Time.frameCount % 30) != 0) {
+			return;
+		}
+		/**
+		 * keyHit[0] -> 检测后面.
+		 * keyHit[1] -> 检测左面.
+		 * keyHit[2] -> 检测右面.
+		 * keyHit[3] -> 检测前面.
+		 * keyHit == 0 -> 没有检测到碰撞.
+		 * keyHit == 1 -> 有检测到碰撞.
+		 */
+		byte[] keyHit = new byte[4];
+		RaycastHit hitInfo;
+		Vector3 startPos = NengLianParentTr.position + (Vector3.up * 3f);
+		Vector3 forwardVal = -CameraTran.forward;
+		float disVal = 5f;
+		if (Physics.Raycast(startPos, forwardVal, out hitInfo, disVal, XkGameCtrl.GetInstance().XueTiaoCheckLayer)){
+			keyHit[0] = 1;
+		}
+
+		forwardVal = -CameraTran.right;
+		if (Physics.Raycast(startPos, forwardVal, out hitInfo, disVal, XkGameCtrl.GetInstance().XueTiaoCheckLayer)){
+			keyHit[1] = 1;
+		}
+		
+		forwardVal = CameraTran.right;
+		if (Physics.Raycast(startPos, forwardVal, out hitInfo, disVal, XkGameCtrl.GetInstance().XueTiaoCheckLayer)){
+			keyHit[2] = 1;
+		}
+
+		forwardVal = CameraTran.forward;
+		if (Physics.Raycast(startPos, forwardVal, out hitInfo, disVal, XkGameCtrl.GetInstance().XueTiaoCheckLayer)){
+			keyHit[3] = 1;
+		}
+
+		byte keyHitVal = (byte)((keyHit[0] << 3) + (keyHit[1] << 2) + (keyHit[2] << 1) + keyHit[3]);
+		byte keyHitStVal = 0;
+		switch (keyHitVal) {
+		case 0x00:
+			keyHitStVal = 0;
+			break;
+		case 0x08:
+			keyHitStVal = 3;
+			break;
+		}
+
+		if ((keyHitVal & 0x04) == 0x04) {
+			keyHitStVal = 2;
+		}
+		
+		if ((keyHitVal & 0x02) == 0x02) {
+			keyHitStVal = 1;
+		}
+
+//#if UNITY_EDITOR
+//		if (KeyHitSt != keyHitStVal) {
+//			KeyHitSt = keyHitStVal;
+//			switch (KeyHitSt) {
+//			case 0:
+//				Debug.Log("CheckPlayerHitCol -> KeyHitSt is back! player "+PlayerSt);
+//				break;
+//			case 1:
+//				Debug.Log("CheckPlayerHitCol -> KeyHitSt is left! player "+PlayerSt);
+//				break;
+//			case 2:
+//				Debug.Log("CheckPlayerHitCol -> KeyHitSt is right! player "+PlayerSt);
+//				break;
+//			case 3:
+//				Debug.Log("CheckPlayerHitCol -> KeyHitSt is forward! player "+PlayerSt);
+//				break;
+//			}
+//		}
+//#endif
 	}
 }

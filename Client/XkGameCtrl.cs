@@ -62,6 +62,7 @@ public class XkGameCtrl : MonoBehaviour {
 	GameObject ServerCameraTK; //服务器坦克摄像机.
 	public static GameObject ServerCameraObjTK;
 	int CartoonCamMarkIndex = 1;
+	public LayerMask XueTiaoCheckLayer;
 	public LayerMask LandLayer;
 	public LayerMask NpcAmmoHitLayer;
 	public LayerMask PlayerAmmoHitLayer;
@@ -2274,7 +2275,9 @@ public class XkGameCtrl : MonoBehaviour {
 			}
 
 			if (PlayerHealthArray[2] <= 0f) {
-				Debug.Log("SubGamePlayerHealth -> PlayerThree is death!");
+//				#if UNITY_EDITOR
+//				Debug.Log("SubGamePlayerHealth -> PlayerThree is death!");
+//				#endif
 				PlayerHealthArray[2] = 0f;
 				PlayerQuanShu[2] = 1;
 				SetActivePlayerThree(false);

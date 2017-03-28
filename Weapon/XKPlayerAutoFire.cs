@@ -1469,9 +1469,9 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 			break;
 		}
 
-		#if UNITY_EDITOR
-		Debug.Log("ChangePlayerPaoTaObj -> indexJH "+indexJH);
-		#endif
+//		#if UNITY_EDITOR
+//		Debug.Log("ChangePlayerPaoTaObj -> indexJH "+indexJH);
+//		#endif
 		
 		for (int i = 0; i < 4; i++) {
 			if (PaoTaRealObj.Length >= 4 && PaoTaRealObj[i] != null) {
