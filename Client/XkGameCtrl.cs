@@ -2674,7 +2674,7 @@ public class XkGameCtrl : MonoBehaviour {
 		}
 
 		float hight = 20f;
-		float width = 400;
+		float width = 600;
 		string infoA = "PH1: "+PlayerHealthArray[0]+", PH2: "+PlayerHealthArray[1]
 		+", PH3: "+PlayerHealthArray[2]+", PH4: "+PlayerHealthArray[3];
 		GUI.Box(new Rect(0f, 0f, width, hight), infoA);
@@ -2686,13 +2686,15 @@ public class XkGameCtrl : MonoBehaviour {
 		infoA = "PQN1: "+pcvr.QiNangArray[0]+" "+pcvr.QiNangArray[1]+" "+pcvr.QiNangArray[2]+" "+pcvr.QiNangArray[3]
 		+", PQN2: "+pcvr.QiNangArray[4]+" "+pcvr.QiNangArray[5]+" "+pcvr.QiNangArray[6]+" "+pcvr.QiNangArray[7]
 		+", PQN3: "+pcvr.QiNangArray[8]+" "+pcvr.QiNangArray[9]+" "+pcvr.QiNangArray[10]+" "+pcvr.QiNangArray[11]
-		+", PQN4: "+pcvr.QiNangArray[12]+" "+pcvr.QiNangArray[13]+" "+pcvr.QiNangArray[14]+" "+pcvr.QiNangArray[15];
+		+", PQN4: "+pcvr.QiNangArray[12]+" "+pcvr.QiNangArray[13]+" "+pcvr.QiNangArray[14]+" "+pcvr.QiNangArray[15]
+		+", PZYQN: "+pcvr.QiNangArray[16]+" "+pcvr.QiNangArray[17]+" "+pcvr.QiNangArray[18]+" "+pcvr.QiNangArray[19];
 		GUI.Box(new Rect(0f, hight * 2f, width, hight), infoA);
 		
 		infoA = "PRZY1: "+pcvr.RunZuoYiState[0]
 		+", PRZY2: "+pcvr.RunZuoYiState[1]
 		+", PRZY3: "+pcvr.RunZuoYiState[2]
-		+", PRZY4: "+pcvr.RunZuoYiState[3];
+		+", PRZY4: "+pcvr.RunZuoYiState[3]
+		+", DongGanState "+pcvr.DongGanState;
 		GUI.Box(new Rect(0f, hight * 3f, width, hight), infoA);
 
 		infoA = "Coin1: "+XKGlobalData.CoinPlayerOne
@@ -2700,5 +2702,11 @@ public class XkGameCtrl : MonoBehaviour {
 				+", Coin3: "+XKGlobalData.CoinPlayerThree
 				+", Coin4: "+XKGlobalData.CoinPlayerFour;
 		GUI.Box(new Rect(0f, hight * 4f, width, hight), infoA);
+
+		infoA = "fxZD1 "+pcvr.FangXiangPanDouDongVal[0].ToString("x2")
+				+", fxZD2 "+pcvr.FangXiangPanDouDongVal[1].ToString("x2")
+				+", fxZD3 "+pcvr.FangXiangPanDouDongVal[2].ToString("x2")
+				+", fxZD4 "+pcvr.FangXiangPanDouDongVal[3].ToString("x2");
+		GUI.Box(new Rect(0f, hight * 5f, width, hight), infoA);
 	}
 }

@@ -214,9 +214,9 @@ public class PlayerXueTiaoCtrl : MonoBehaviour
 			keyHitStVal = 1;
 		}
 
+		if (KeyHitSt != keyHitStVal) {
+			KeyHitSt = keyHitStVal;
 //#if UNITY_EDITOR
-//		if (KeyHitSt != keyHitStVal) {
-//			KeyHitSt = keyHitStVal;
 //			switch (KeyHitSt) {
 //			case 0:
 //				Debug.Log("CheckPlayerHitCol -> KeyHitSt is back! player "+PlayerSt);
@@ -231,7 +231,7 @@ public class PlayerXueTiaoCtrl : MonoBehaviour
 //				Debug.Log("CheckPlayerHitCol -> KeyHitSt is forward! player "+PlayerSt);
 //				break;
 //			}
-//		}
 //#endif
+		}
 	}
 }

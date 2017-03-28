@@ -144,11 +144,11 @@ public class pcvr : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
+		UpdateZuoYiQiNangState();
 		if (!bIsHardWare || XkGameCtrl.IsLoadingLevel) {
 			return;
 		}
 
-		UpdateZuoYiQiNangState();
 		CheckIsPlayerActivePcvr();
 		if (!TestTanKCom.IsTestTankCom && TKMoveSt == TKMoveState.U_FangXiangPan) {
 			GetPcvrSteerVal();
@@ -298,15 +298,40 @@ QiNangArray[3]			QiNangArray[2]
 			return;
 		}
 
+		if (XKGlobalData.GameVersionPlayer != 0) {
+			switch (indexPlayer) {
+			case PlayerEnum.PlayerThree:
+				indexPlayer = PlayerEnum.PlayerOne;
+				break;
+			case PlayerEnum.PlayerFour:
+				indexPlayer = PlayerEnum.PlayerTwo;
+				break;
+			}
+		}
+
 		switch (indexPlayer) {
 		case PlayerEnum.PlayerOne:
-			if (!XkGameCtrl.IsActivePlayerOne) {
-				return;
+			if (XKGlobalData.GameVersionPlayer == 0) {
+				if (!XkGameCtrl.IsActivePlayerOne) {
+					return;
+				}
+			}
+			else {
+				if (!XkGameCtrl.IsActivePlayerThree) {
+					return;
+				}
 			}
 			break;
 		case PlayerEnum.PlayerTwo:
-			if (!XkGameCtrl.IsActivePlayerTwo) {
-				return;
+			if (XKGlobalData.GameVersionPlayer == 0) {
+				if (!XkGameCtrl.IsActivePlayerTwo) {
+					return;
+				}
+			}
+			else {
+				if (!XkGameCtrl.IsActivePlayerFour) {
+					return;
+				}
 			}
 			break;
 		case PlayerEnum.PlayerThree:
@@ -345,7 +370,7 @@ QiNangArray[3]			QiNangArray[2]
 				continue;
 			}
 			QiNangArray[indexVal] = 0;
-			//Debug.LogWarning("UpdateZuoYiQiNangState -> indexVal "+indexVal);
+//			Debug.LogWarning("UpdateZuoYiQiNangState -> indexVal "+indexVal);
 		}
 	}
 
@@ -356,6 +381,18 @@ QiNangArray[3]			QiNangArray[2]
 	static bool[] IsOpenQiNangYou = new bool[4];
 	public static void OpenQiNangQian(PlayerEnum indexPlayer)
 	{
+		PlayerEnum indexPlayerTmp = indexPlayer;
+		if (XKGlobalData.GameVersionPlayer != 0) {
+			switch (indexPlayer) {
+			case PlayerEnum.PlayerThree:
+				indexPlayer = PlayerEnum.PlayerOne;
+				break;
+			case PlayerEnum.PlayerFour:
+				indexPlayer = PlayerEnum.PlayerTwo;
+				break;
+			}
+		}
+
 		int indexVal = (int)indexPlayer - 1;
 		if (IsOpenQiNangQian[indexVal]) {
 			return;
@@ -363,6 +400,9 @@ QiNangArray[3]			QiNangArray[2]
 		IsOpenQiNangQian[indexVal] = true;
 		
 		byte qnState = (byte)(XkGameCtrl.GetIsActivePlayer(indexPlayer) == true ? 1 : 0);
+		if (XKGlobalData.GameVersionPlayer != 0) {
+			qnState = (byte)(XkGameCtrl.GetIsActivePlayer(indexPlayerTmp) == true ? 1 : 0);
+		}
 		indexVal *= 4;
 		int indexA = 0 + indexVal;
 		int indexB = 1 + indexVal;
@@ -378,6 +418,17 @@ QiNangArray[3]			QiNangArray[2]
 	 */
 	public static void CloseQiNangQian(PlayerEnum indexPlayer, int key = 0)
 	{
+		if (XKGlobalData.GameVersionPlayer != 0) {
+			switch (indexPlayer) {
+			case PlayerEnum.PlayerThree:
+				indexPlayer = PlayerEnum.PlayerOne;
+				break;
+			case PlayerEnum.PlayerFour:
+				indexPlayer = PlayerEnum.PlayerTwo;
+				break;
+			}
+		}
+
 		int indexVal = (int)indexPlayer - 1;
 		if (!IsOpenQiNangQian[indexVal]) {
 			return;
@@ -402,6 +453,18 @@ QiNangArray[3]			QiNangArray[2]
 	
 	public static void OpenQiNangHou(PlayerEnum indexPlayer)
 	{
+		PlayerEnum indexPlayerTmp = indexPlayer;
+		if (XKGlobalData.GameVersionPlayer != 0) {
+			switch (indexPlayer) {
+			case PlayerEnum.PlayerThree:
+				indexPlayer = PlayerEnum.PlayerOne;
+				break;
+			case PlayerEnum.PlayerFour:
+				indexPlayer = PlayerEnum.PlayerTwo;
+				break;
+			}
+		}
+
 		int indexVal = (int)indexPlayer - 1;
 		if (IsOpenQiNangHou[indexVal]) {
 			return;
@@ -409,6 +472,9 @@ QiNangArray[3]			QiNangArray[2]
 		IsOpenQiNangHou[indexVal] = true;
 		
 		byte qnState = (byte)(XkGameCtrl.GetIsActivePlayer(indexPlayer) == true ? 1 : 0);
+		if (XKGlobalData.GameVersionPlayer != 0) {
+			qnState = (byte)(XkGameCtrl.GetIsActivePlayer(indexPlayerTmp) == true ? 1 : 0);
+		}
 		indexVal *= 4;
 		int indexA = 3 + indexVal;
 		int indexB = 2 + indexVal;
@@ -424,6 +490,17 @@ QiNangArray[3]			QiNangArray[2]
 	 */
 	public static void CloseQiNangHou(PlayerEnum indexPlayer, int key = 0)
 	{
+		if (XKGlobalData.GameVersionPlayer != 0) {
+			switch (indexPlayer) {
+			case PlayerEnum.PlayerThree:
+				indexPlayer = PlayerEnum.PlayerOne;
+				break;
+			case PlayerEnum.PlayerFour:
+				indexPlayer = PlayerEnum.PlayerTwo;
+				break;
+			}
+		}
+
 		int indexVal = (int)indexPlayer - 1;
 		if (!IsOpenQiNangHou[indexVal]) {
 			return;
@@ -448,6 +525,18 @@ QiNangArray[3]			QiNangArray[2]
 	
 	public static void OpenQiNangZuo(PlayerEnum indexPlayer)
 	{
+		PlayerEnum indexPlayerTmp = indexPlayer;
+		if (XKGlobalData.GameVersionPlayer != 0) {
+			switch (indexPlayer) {
+			case PlayerEnum.PlayerThree:
+				indexPlayer = PlayerEnum.PlayerOne;
+				break;
+			case PlayerEnum.PlayerFour:
+				indexPlayer = PlayerEnum.PlayerTwo;
+				break;
+			}
+		}
+
 		int indexVal = (int)indexPlayer - 1;
 		if (IsOpenQiNangZuo[indexVal]) {
 			return;
@@ -455,6 +544,9 @@ QiNangArray[3]			QiNangArray[2]
 		IsOpenQiNangZuo[indexVal] = true;
 
 		byte qnState = (byte)(XkGameCtrl.GetIsActivePlayer(indexPlayer) == true ? 1 : 0);
+		if (XKGlobalData.GameVersionPlayer != 0) {
+			qnState = (byte)(XkGameCtrl.GetIsActivePlayer(indexPlayerTmp) == true ? 1 : 0);
+		}
 		indexVal *= 4;
 		int indexA = 0 + indexVal;
 		int indexB = 3 + indexVal;
@@ -470,6 +562,17 @@ QiNangArray[3]			QiNangArray[2]
 	 */
 	public static void CloseQiNangZuo(PlayerEnum indexPlayer, int key = 0)
 	{
+		if (XKGlobalData.GameVersionPlayer != 0) {
+			switch (indexPlayer) {
+			case PlayerEnum.PlayerThree:
+				indexPlayer = PlayerEnum.PlayerOne;
+				break;
+			case PlayerEnum.PlayerFour:
+				indexPlayer = PlayerEnum.PlayerTwo;
+				break;
+			}
+		}
+
 		int indexVal = (int)indexPlayer - 1;
 		if (!IsOpenQiNangZuo[indexVal]) {
 			return;
@@ -494,6 +597,18 @@ QiNangArray[3]			QiNangArray[2]
 	
 	public static void OpenQiNangYou(PlayerEnum indexPlayer)
 	{
+		PlayerEnum indexPlayerTmp = indexPlayer;
+		if (XKGlobalData.GameVersionPlayer != 0) {
+			switch (indexPlayer) {
+			case PlayerEnum.PlayerThree:
+				indexPlayer = PlayerEnum.PlayerOne;
+				break;
+			case PlayerEnum.PlayerFour:
+				indexPlayer = PlayerEnum.PlayerTwo;
+				break;
+			}
+		}
+
 		int indexVal = (int)indexPlayer - 1;
 		if (IsOpenQiNangYou[indexVal]) {
 			return;
@@ -501,6 +616,9 @@ QiNangArray[3]			QiNangArray[2]
 		IsOpenQiNangYou[indexVal] = true;
 
 		byte qnState = (byte)(XkGameCtrl.GetIsActivePlayer(indexPlayer) == true ? 1 : 0);
+		if (XKGlobalData.GameVersionPlayer != 0) {
+			qnState = (byte)(XkGameCtrl.GetIsActivePlayer(indexPlayerTmp) == true ? 1 : 0);
+		}
 		indexVal *= 4;
 		int indexA = 1 + indexVal;
 		int indexB = 2 + indexVal;
@@ -516,6 +634,17 @@ QiNangArray[3]			QiNangArray[2]
 	 */
 	public static void CloseQiNangYou(PlayerEnum indexPlayer, int key = 0)
 	{
+		if (XKGlobalData.GameVersionPlayer != 0) {
+			switch (indexPlayer) {
+			case PlayerEnum.PlayerThree:
+				indexPlayer = PlayerEnum.PlayerOne;
+				break;
+			case PlayerEnum.PlayerFour:
+				indexPlayer = PlayerEnum.PlayerTwo;
+				break;
+			}
+		}
+
 		int indexVal = (int)indexPlayer - 1;
 		if (!IsOpenQiNangYou[indexVal]) {
 			return;
@@ -1131,6 +1260,17 @@ QiNangArray[3]			QiNangArray[2]
 	public static byte[] FangXiangPanDouDongLPVal = {0, 0, 0, 0};
 	public void ActiveFangXiangDouDong(PlayerEnum playerVal, bool isLoopDouDong)
 	{
+		if (XKGlobalData.GameVersionPlayer != 0) {
+			switch (playerVal) {
+			case PlayerEnum.PlayerThree:
+				playerVal = PlayerEnum.PlayerOne;
+				break;
+			case PlayerEnum.PlayerFour:
+				playerVal = PlayerEnum.PlayerTwo;
+				break;
+			}
+		}
+
 		int indexVal = (int)playerVal - 1;
 		FangXiangPanDouDongVal[indexVal] = 0xaa;
 		FangXiangPanDouDongLPVal[indexVal] = (byte)(isLoopDouDong == true ? 1 : 0);
@@ -1170,6 +1310,17 @@ QiNangArray[3]			QiNangArray[2]
 
 	public void CloseFangXiangPanPower(PlayerEnum playerVal = PlayerEnum.Null)
 	{
+		if (XKGlobalData.GameVersionPlayer != 0) {
+			switch (playerVal) {
+			case PlayerEnum.PlayerThree:
+				playerVal = PlayerEnum.PlayerOne;
+				break;
+			case PlayerEnum.PlayerFour:
+				playerVal = PlayerEnum.PlayerTwo;
+				break;
+			}
+		}
+
 		if (playerVal != PlayerEnum.Null) {
 			int indexVal = (int)playerVal - 1;
 			StopCoroutine(PlayFangXiangPanDouDong(playerVal));

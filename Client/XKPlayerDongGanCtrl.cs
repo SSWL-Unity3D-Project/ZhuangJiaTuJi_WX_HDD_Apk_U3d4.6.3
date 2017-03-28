@@ -78,6 +78,11 @@ public class XKPlayerDongGanCtrl : MonoBehaviour {
 
 		int indexVal = (int)IndexPlayer - 1;
 		eulerAngleZ = -InputEventCtrl.PlayerFX[indexVal];
+		if (XKGlobalData.GameVersionPlayer != 0) {
+			indexVal -= 2;
+			eulerAngleZ = -InputEventCtrl.PlayerFX[indexVal];
+		}
+
 		offsetAngle = 0.1f;
 		if (Mathf.Abs(eulerAngleZ) <= offsetAngle) {
 			//左右气囊放气.
