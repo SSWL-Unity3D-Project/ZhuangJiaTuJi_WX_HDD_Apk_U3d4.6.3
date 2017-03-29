@@ -530,7 +530,7 @@ public class HardwareCheckCtrl : MonoBehaviour
 			return;
 		}
 		Application.Quit();
-		RunCmd("start ThunderChariot.exe");
+		RunCmd("start BlazeTanks.exe");
 	}
 
 	static void RunCmd(string command)

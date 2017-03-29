@@ -606,11 +606,11 @@ public class InputEventCtrl : MonoBehaviour {
 
 	void Update()
 	{
-		#if !UNITY_EDITOR
-		if (SetEnterBtSt == ButtonState.DOWN && Time.time - TimeSetEnterMoveBt > 2f) {
-			HardwareCheckCtrl.OnRestartGame();
-		}
-		#endif
+//		#if !UNITY_EDITOR
+//		if (SetEnterBtSt == ButtonState.DOWN && Time.time - TimeSetEnterMoveBt > 2f) {
+//			HardwareCheckCtrl.OnRestartGame();
+//		}
+//		#endif
 
 		if (pcvr.bIsHardWare && !TestTanKCom.IsTestTankCom && !pcvr.IsTestInput) {
 			return;
