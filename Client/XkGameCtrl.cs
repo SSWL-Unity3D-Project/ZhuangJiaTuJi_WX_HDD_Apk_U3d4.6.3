@@ -1506,6 +1506,7 @@ public class XkGameCtrl : MonoBehaviour {
 	public static void SetActivePlayerOne(bool isActive)
 	{
 		IsActivePlayerOne = isActive;
+		pcvr.OpenAllPlayerFangXiangPanPower(PlayerEnum.PlayerOne);
 		CheckPlayerActiveNum();
 		if (isActive) {
 			IsPlayGamePOne = true;
@@ -1530,6 +1531,7 @@ public class XkGameCtrl : MonoBehaviour {
 	public static void SetActivePlayerTwo(bool isActive)
 	{
 		IsActivePlayerTwo = isActive;
+		pcvr.OpenAllPlayerFangXiangPanPower(PlayerEnum.PlayerTwo);
 		CheckPlayerActiveNum();
 		if (isActive) {
 			IsPlayGamePTwo = true;
@@ -1554,6 +1556,7 @@ public class XkGameCtrl : MonoBehaviour {
 	public static void SetActivePlayerThree(bool isActive)
 	{
 		IsActivePlayerThree = isActive;
+		pcvr.OpenAllPlayerFangXiangPanPower(PlayerEnum.PlayerThree);
 		CheckPlayerActiveNum();
 		if (isActive) {
 			IsPlayGamePThree = true;
@@ -1578,6 +1581,7 @@ public class XkGameCtrl : MonoBehaviour {
 	public static void SetActivePlayerFour(bool isActive)
 	{
 		IsActivePlayerFour = isActive;
+		pcvr.OpenAllPlayerFangXiangPanPower(PlayerEnum.PlayerFour);
 		CheckPlayerActiveNum();
 		if (isActive) {
 			IsPlayGamePFour = true;

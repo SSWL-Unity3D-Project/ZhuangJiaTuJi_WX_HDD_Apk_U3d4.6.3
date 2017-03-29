@@ -1278,10 +1278,38 @@ QiNangArray[3]			QiNangArray[2]
 		StartCoroutine(PlayFangXiangPanDouDong(playerVal));
 	}
 
-	public static void OpenAllPlayerFangXiangPanPower()
+	public static void OpenAllPlayerFangXiangPanPower(PlayerEnum playerVal = PlayerEnum.Null)
 	{
+		if (playerVal != PlayerEnum.Null) {
+			int index = (int)(playerVal - 1);
+			if (XKGlobalData.GameVersionPlayer == 0) {
+				FangXiangPanDouDongVal[index] = (byte)(XkGameCtrl.GetIsActivePlayer(playerVal) == true ? 0xaa : 0x00);
+			}
+			else {
+				if (playerVal == PlayerEnum.PlayerThree || playerVal == PlayerEnum.PlayerFour) {
+					FangXiangPanDouDongVal[index] = 0x00;
+					FangXiangPanDouDongVal[index-2] = (byte)(XkGameCtrl.GetIsActivePlayer(playerVal) == true ? 0xaa : 0x00);
+				}
+			}
+			return;
+		}
+
 		for (int i = 0; i < 4; i++) {
-			FangXiangPanDouDongVal[i] = 0xaa;
+			if (Application.loadedLevel == (int)GameLevel.Scene_1) {
+				PlayerEnum indexPlayer = (PlayerEnum)(i+1);
+				if (XKGlobalData.GameVersionPlayer == 0) {
+					FangXiangPanDouDongVal[i] = (byte)(XkGameCtrl.GetIsActivePlayer(indexPlayer) == true ? 0xaa : 0x00);
+				}
+				else {
+					if (indexPlayer == PlayerEnum.PlayerThree || indexPlayer == PlayerEnum.PlayerFour) {
+						FangXiangPanDouDongVal[i] = 0x00;
+						FangXiangPanDouDongVal[i-2] = (byte)(XkGameCtrl.GetIsActivePlayer(indexPlayer) == true ? 0xaa : 0x00);
+					}
+				}
+			}
+			else {
+				FangXiangPanDouDongVal[i] = 0xaa;
+			}
 		}
 	}
 
@@ -1295,7 +1323,18 @@ QiNangArray[3]			QiNangArray[2]
 			if ((count >= 6 && FangXiangPanDouDongLPVal[indexVal] == 0)
 			    || FangXiangPanDouDongVal[indexVal] == 0x00) {
 				if (FangXiangPanDouDongVal[indexVal] != 0x00) {
-					FangXiangPanDouDongVal[indexVal] = 0xaa;
+					if (XKGlobalData.GameVersionPlayer == 0) {
+						FangXiangPanDouDongVal[indexVal] = (byte)(XkGameCtrl.GetIsActivePlayer(playerVal) == true ? 0xaa : 0x00);
+					}
+					else {
+						if (playerVal == PlayerEnum.PlayerOne) {
+							playerVal = PlayerEnum.PlayerThree;
+						}
+						if (playerVal == PlayerEnum.PlayerTwo) {
+							playerVal = PlayerEnum.PlayerFour;
+						}
+						FangXiangPanDouDongVal[indexVal] = (byte)(XkGameCtrl.GetIsActivePlayer(playerVal) == true ? 0xaa : 0x00);
+					}
 				}
 				isPlayDouDong = false;
 				/*Debug.Log("PlayFangXiangPanDouDong -> playerVal "+playerVal

@@ -42,8 +42,7 @@ public class XKGameFPSCtrl : MonoBehaviour
 		IsShowGameFPS = !IsShowGameFPS;
 		gameObject.SetActive(IsShowGameFPS);
 	}
-	
-	
+
 	void OnGUI()
 	{
 		this.timeleft -= Time.deltaTime;
