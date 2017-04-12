@@ -1422,6 +1422,14 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 			IsPaiJiPaoFire = false;
 			ChangePlayerPaoTaObj(ammoType);
 		}
+		else if (ammoType == PlayerAmmoType.SanDanAmmo) {
+			IsPaiJiPaoFire = false;
+			ChangePlayerPaoTaObj(ammoType);
+		}
+		else if (ammoType == PlayerAmmoType.PaiJiPaoAmmo) {
+			IsPaiJiPaoFire = false;
+			ChangePlayerPaoTaObj(ammoType);
+		}
 		else {
 			ChangePlayerPaoTaObj(PlayerAmmoType.Null);
 		}
