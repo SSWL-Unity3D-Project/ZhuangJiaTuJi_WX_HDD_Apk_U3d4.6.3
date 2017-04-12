@@ -94,8 +94,8 @@ public class XKPlayerAutoFire : MonoBehaviour
 //	[Range(1f, 500f)] public float DaoDanTimeMin = 1.5f; //导弹冷却时间.
 	bool IsActiveFireBtJQ; //机枪开火.
 	bool IsActiveFireBtZP; //主炮开火.
-	float LastFireTimeJiQiang = -1;
-	float LastFireTimeZhuPao = -1;
+	float LastFireTimeJiQiang = -1f;
+	float LastFireTimeZhuPao = -1f;
 	public PlayerAmmoType AmmoStateJiQiang = PlayerAmmoType.PuTongAmmo;
 	public PlayerAmmoType AmmoStateZhuPao = PlayerAmmoType.DaoDanAmmo;
 	/*public static PlayerAmmoType AmmoStatePOne = PlayerAmmoType.PuTongAmmo;
@@ -1057,6 +1057,8 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 		//Debug.Log("ClickFireBtOneEvent***state "+state);
 		if (state == ButtonState.DOWN) {
 			SetIsActiveFireBtJQ(true);
+			LastFireTimeJiQiang = -100f;
+			CheckPlayerJiQiangFireBt();
 		}
 		else {
 			SetIsActiveFireBtJQ(false);
