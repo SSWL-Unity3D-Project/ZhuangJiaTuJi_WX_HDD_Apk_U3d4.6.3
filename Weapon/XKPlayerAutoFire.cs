@@ -1055,26 +1055,58 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 	void ClickFireBtEvent(ButtonState state)
 	{
 		//Debug.Log("ClickFireBtOneEvent***state "+state);
-		if (state == ButtonState.DOWN) {
+		if (state == ButtonState.DOWN)
+        {
 			SetIsActiveFireBtJQ(true);
 			LastFireTimeJiQiang = -100f;
 			CheckPlayerJiQiangFireBt();
-		}
-		else {
+            if (pcvr.IsHongDDShouBing)
+            {
+                ClickFireDaoDanBtEvent(ButtonState.UP);
+                //StopCoroutine(DelayResetFire());
+                //StartCoroutine(DelayResetFire());
+            }
+        }
+		else
+        {
 			SetIsActiveFireBtJQ(false);
 		}
-	}
+    }
 
-	void ClickFireDaoDanBtEvent(ButtonState state)
+    IEnumerator DelayResetFire()
+    {
+        //Debug.Log("DelayResetFire...111");
+        yield return new WaitForSeconds(0.5f);
+        ClickFireBtEvent(ButtonState.UP);
+        //Debug.Log("DelayResetFire...222");
+    }
+
+    void ClickFireDaoDanBtEvent(ButtonState state)
 	{
 		//Debug.Log("ClickFireBtOneEvent***state "+state);
-		if (state == ButtonState.DOWN) {
-			IsActiveFireBtZP = true;
-		}
-		else {
+		if (state == ButtonState.DOWN)
+        {
+            IsActiveFireBtZP = true;
+            if (pcvr.IsHongDDShouBing)
+            {
+                ClickFireBtEvent(ButtonState.UP);
+                //StopCoroutine(DelayResetFireDaoDan());
+                //StartCoroutine(DelayResetFireDaoDan());
+            }
+        }
+		else
+        {
 			IsActiveFireBtZP = false;
 		}
 	}
+
+    IEnumerator DelayResetFireDaoDan()
+    {
+        //Debug.Log("DelayResetFireDaoDan...111");
+        yield return new WaitForSeconds(0.1f);
+        ClickFireDaoDanBtEvent(ButtonState.UP);
+        //Debug.Log("DelayResetFireDaoDan...222");
+    }
 
 	public void SpawnPlayerDaoDan(Transform ammoTran, GameObject playerDaoDan)
 	{

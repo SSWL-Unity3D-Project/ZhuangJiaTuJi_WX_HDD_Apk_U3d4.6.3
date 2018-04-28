@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System;
+using UnityEngine;
 
 public class InputEventCtrl : MonoBehaviour {
 	public static bool IsClickFireBtOneDown;
@@ -58,8 +58,8 @@ public class InputEventCtrl : MonoBehaviour {
 		return Instance;
 	}
 
-	#region Click Button Envent
-	public delegate void EventHandel(ButtonState val);
+    #region Click Button Envent
+    public delegate void EventHandel(ButtonState val);
 	public event EventHandel ClickStartBtOneEvent;
 	public void ClickStartBtOne(ButtonState val)
 	{
@@ -615,6 +615,11 @@ public class InputEventCtrl : MonoBehaviour {
 		if (pcvr.bIsHardWare && !TestTanKCom.IsTestTankCom && !pcvr.IsTestInput) {
 			return;
 		}
+
+        if (pcvr.IsHongDDShouBing)
+        {
+            return;
+        }
 
 		if (Input.GetKeyUp(KeyCode.T)) {
 			int coinVal = XKGlobalData.CoinPlayerOne + 1;

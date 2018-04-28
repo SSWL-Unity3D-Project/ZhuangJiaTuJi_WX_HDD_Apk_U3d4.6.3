@@ -1,8 +1,12 @@
 ﻿//#define TEST_MOVIE
 using UnityEngine;
-using System.Collections;
 
-public class GameMovieCtrl : MonoBehaviour {
+public class GameMovieCtrl : MonoBehaviour
+{
+    /// <summary>
+    /// Websocket预制.
+    /// </summary>
+    public GameObject m_WebSocketBoxPrefab;
 	public MovieTexture Movie;
 	public static bool IsTestLJGame; //测试联机小窗口游戏.
 	AudioSource AudioSourceObj;
@@ -124,7 +128,18 @@ public class GameMovieCtrl : MonoBehaviour {
 		pcvr.GetInstance().CloseFangXiangPanPower();
 	}
 
-	#if TEST_MOVIE
+    /// <summary>
+    /// 产生Websocket预制.
+    /// </summary>
+    public GameObject SpawnWebSocketBox(Transform tr)
+    {
+        Debug.Log("SpawnWebSocketBox...");
+        GameObject obj = (GameObject)Instantiate(m_WebSocketBoxPrefab);
+        obj.transform.parent = tr;
+        return obj;
+    }
+
+#if TEST_MOVIE
 	int CountMv = 0;
 	float TimeMv = 0f;
 	void OnGUI()
@@ -141,5 +156,5 @@ public class GameMovieCtrl : MonoBehaviour {
 						+", timeMvPlay "+timeMvPlay.ToString("f2");
 		GUI.Box(new Rect(0f, 0f, 500f, 35f), mvInfo);
 	}
-	#endif
+#endif
 }

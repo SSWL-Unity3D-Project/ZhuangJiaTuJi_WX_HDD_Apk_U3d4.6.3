@@ -1525,8 +1525,9 @@ public class XkGameCtrl : MonoBehaviour {
 			if (isActive && Application.loadedLevel == (int)GameLevel.Movie) {
 				StopMovie();
 			}
-		}
-	}
+        }
+        pcvr.GetInstance().SetIndexPlayerActiveGameState(0, (byte)(isActive == true ? 1 : 0));
+    }
 
 	public static void SetActivePlayerTwo(bool isActive)
 	{
@@ -1550,8 +1551,9 @@ public class XkGameCtrl : MonoBehaviour {
 			if (isActive && Application.loadedLevel == (int)GameLevel.Movie) {
 				StopMovie();
 			}
-		}
-	}
+        }
+        pcvr.GetInstance().SetIndexPlayerActiveGameState(1, (byte)(isActive == true ? 1 : 0));
+    }
 	
 	public static void SetActivePlayerThree(bool isActive)
 	{
@@ -1575,8 +1577,9 @@ public class XkGameCtrl : MonoBehaviour {
 			if (isActive && Application.loadedLevel == (int)GameLevel.Movie) {
 				StopMovie();
 			}
-		}
-	}
+        }
+        pcvr.GetInstance().SetIndexPlayerActiveGameState(2, (byte)(isActive == true ? 1 : 0));
+    }
 
 	public static void SetActivePlayerFour(bool isActive)
 	{
@@ -1600,8 +1603,9 @@ public class XkGameCtrl : MonoBehaviour {
 			if (isActive && Application.loadedLevel == (int)GameLevel.Movie) {
 				StopMovie();
 			}
-		}
-	}
+        }
+        pcvr.GetInstance().SetIndexPlayerActiveGameState(3, (byte)(isActive == true ? 1 : 0));
+    }
 
 	static void SetPlayerFireMaxAmmoCount()
 	{		
