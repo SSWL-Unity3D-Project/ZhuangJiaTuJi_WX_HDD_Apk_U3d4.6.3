@@ -5,10 +5,22 @@ public class XueKuangCtrl : MonoBehaviour
 {
 	public PlayerEnum PlayerSt = PlayerEnum.Null;
 	public UITexture XueKuangNum;
-	/**
+    /// <summary>
+    /// 血框数字图片的大小.
+    /// XueKuangNumWH[0] - 未激活.
+    /// XueKuangNumWH[1] - 激活.
+    /// </summary>
+    public Vector2[] XueKuangNumWH = new Vector2[2];
+    /// <summary>
+    /// 血框数字图片的位置.
+    /// XueKuangNumPos[0] - 未激活.
+    /// XueKuangNumPos[1] - 激活.
+    /// </summary>
+    public Vector2[] XueKuangNumPos = new Vector2[2];
+    /**
 	 * 四人版血框数字.
 	 */
-	public Texture[] XueKuangTexture;
+    public Texture[] XueKuangTexture;
 	/**
 	 * 双人版血框数字.
 	 */
@@ -94,8 +106,16 @@ public class XueKuangCtrl : MonoBehaviour
 			indexVal = XkGameCtrl.IsActivePlayerFour == true ? 1 : 0;
 			break;
 		}
+
 		CoinDiKuang.mainTexture = CoinDKTexture[indexVal];
-		if (XKGlobalData.GameVersionPlayer == 0) {
+        //if (pcvr.IsHongDDShouBing)
+        //{
+        //    XueKuangNum.transform.localPosition = XueKuangNumPos[indexVal];
+        //    XueKuangNum.width = (int)XueKuangNumWH[indexVal].x;
+        //    XueKuangNum.height = (int)XueKuangNumWH[indexVal].y;
+        //}
+
+        if (XKGlobalData.GameVersionPlayer == 0) {
 			XueKuangNum.mainTexture = XueKuangTexture[indexVal];
 		}
 		else {

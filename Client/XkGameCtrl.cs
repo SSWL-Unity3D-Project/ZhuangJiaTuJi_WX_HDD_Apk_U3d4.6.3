@@ -313,14 +313,14 @@ public class XkGameCtrl : MonoBehaviour {
 		}
 
 		if (IsCartoonShootTest) {
-			Screen.SetResolution(1360, 768, true);
+			Screen.SetResolution(1280, 720, false);
 		}
 		else if (!XkGameCtrl.IsGameOnQuit) {
-			if (!Screen.fullScreen
-			    || Screen.currentResolution.width != 1360
-			    || Screen.currentResolution.height != 768) {
+			if (Screen.fullScreen
+			    || Screen.currentResolution.width != 1280
+			    || Screen.currentResolution.height != 720) {
 				if (GameMovieCtrl.IsActivePlayer && !GameMovieCtrl.IsTestXiaoScreen) {
-					Screen.SetResolution(1360, 768, true);
+					Screen.SetResolution(1280, 720, false);
 				}
 			}
 		}

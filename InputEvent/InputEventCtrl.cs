@@ -618,6 +618,12 @@ public class InputEventCtrl : MonoBehaviour {
 
         if (pcvr.IsHongDDShouBing)
         {
+            if (Input.GetKeyUp(KeyCode.Escape))
+            {
+                //接收遥控器的返回键/键盘上的Esc按键信息.
+                Application.Quit();
+                Debug.Log("Player exit application...");
+            }
             return;
         }
 

@@ -1651,6 +1651,11 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 			isHiddenNpcTest = false;
 		}
 
+        if (NpcAniScript != null)
+        {
+            NpcAniScript.gameObject.SetActive(false);
+        }
+
 		if (!isHiddenNpcTest) {
 			if (Network.peerType == NetworkPeerType.Disconnected) {
 				XKNpcSpawnListCtrl.GetInstance().CheckNpcObjByNpcSpawnListDt(NpcObj);

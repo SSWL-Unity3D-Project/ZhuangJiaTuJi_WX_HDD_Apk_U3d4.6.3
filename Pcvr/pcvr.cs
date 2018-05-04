@@ -9,7 +9,7 @@ public class pcvr : MonoBehaviour {
     /// <summary>
     /// 是否为红点点微信手柄操作模式.
     /// </summary>
-    public static bool IsHongDDShouBing = false;
+    public static bool IsHongDDShouBing = true;
     /// <summary>
     /// 是否为硬件版本.
     /// </summary>

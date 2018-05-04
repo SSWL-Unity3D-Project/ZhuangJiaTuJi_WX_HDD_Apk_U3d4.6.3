@@ -266,9 +266,9 @@ public class WebSocketSimpet : MonoBehaviour
         }
     }
 
-    void OnGUI()
-    {
-        GUI.Box(new Rect(10f, 0f, Screen.width - 20f, 25f), _address);
-    }
+    //void OnGUI()
+    //{
+    //    GUI.Box(new Rect(10f, 0f, Screen.width - 20f, 25f), _address);
+    //}
     #endregion
 }
