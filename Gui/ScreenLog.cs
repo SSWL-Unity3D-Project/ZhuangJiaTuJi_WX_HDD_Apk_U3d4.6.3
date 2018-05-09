@@ -212,7 +212,7 @@ public class ScreenLog : MonoBehaviour
 			logInfoList_.Add(msg);
 		}
 
-		Debug.Log(info);
+		Debug.Log("Unity:"+info);
 	}
 	
 	public static void LogWarning(string info)
@@ -232,7 +232,7 @@ public class ScreenLog : MonoBehaviour
 			logInfoList_.Add(msg);
 		}
 		
-		Debug.LogWarning(info);
+		Debug.LogWarning("Unity:"+info);
 	}
 
 	public static void LogError(string info)
@@ -252,7 +252,7 @@ public class ScreenLog : MonoBehaviour
 			logInfoList_.Add(msg);
 		}
 		
-		Debug.LogError(info);
+		Debug.LogError("Unity:"+info);
 	}
 
 	public static void ClearScreenLog()

@@ -13,7 +13,7 @@ public class NpcPathCtrl : MonoBehaviour {
 		this.enabled = false;
 		NpcMark[] markScript = GetComponentsInChildren<NpcMark>();
 		if (markScript.Length != transform.childCount) {
-			Debug.LogWarning("NpcPathScript was wrong!");
+			Debug.LogWarning("Unity:"+"NpcPathScript was wrong!");
 			GameObject obj = null;
 			obj.name = "null";
 		}
@@ -53,7 +53,7 @@ public class NpcPathCtrl : MonoBehaviour {
 	{
 		NpcMark[] markScript = GetComponentsInChildren<NpcMark>();
 		if (markScript.Length != transform.childCount) {
-			Debug.LogWarning("NpcPath was wrong! markLen "+markScript.Length);
+			Debug.LogWarning("Unity:"+"NpcPath was wrong! markLen "+markScript.Length);
 			GameObject obj = null;
 			obj.name = "null";
 		}

@@ -22,7 +22,7 @@ public class PSCameraMark : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
-		//Debug.Log("OnTriggerEnter...hitName "+other.name+", markName "+name);
+		//Debug.Log("Unity:"+"OnTriggerEnter...hitName "+other.name+", markName "+name);
 //		PSZiYouMoveCamera script = other.GetComponent<PSZiYouMoveCamera>();
 //		if (script == null) {
 //			return;

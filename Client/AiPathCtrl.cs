@@ -90,7 +90,7 @@ public class AiPathCtrl : MonoBehaviour
 	{
 		AiMark[] markScript = GetComponentsInChildren<AiMark>();
 		if (markScript.Length != transform.childCount) {
-			Debug.LogWarning("PlayerPath was wrong! markLen "+markScript.Length);
+			Debug.LogWarning("Unity:"+"PlayerPath was wrong! markLen "+markScript.Length);
 			GameObject obj = null;
 			obj.name = "null";
 		}
@@ -101,7 +101,7 @@ public class AiPathCtrl : MonoBehaviour
 	{
 		if (markCount > (transform.childCount - 1) || markCount < 0) {
 			//markCount > (transform.childCount - 1)该路径已经走完.
-			Debug.LogWarning("markCount was wrong! markCount "+markCount);
+			Debug.LogWarning("Unity:"+"markCount was wrong! markCount "+markCount);
 			return null;
 		}
 
@@ -162,7 +162,7 @@ public class AiPathCtrl : MonoBehaviour
 		for (int i = startCount; i < endCount; i++) {
 			pm = (float) i / SmoothAmount;
 			indexNode = i - startCount;
-			//Debug.Log("indexNode "+indexNode+", i "+i+", len "+pathNode.Length);
+			//Debug.Log("Unity:"+"indexNode "+indexNode+", i "+i+", len "+pathNode.Length);
 			pathNode[indexNode] = Interp(vector3s,pm);
 			//Gizmos.DrawCube(pathNode[indexNode], size);
 		}
@@ -228,7 +228,7 @@ public class AiPathCtrl : MonoBehaviour
 	{
 		CheckNpcPathScript();
 		if (transform.childCount < 2) {
-			Debug.LogWarning("AiPath node count was wrong!");
+			Debug.LogWarning("Unity:"+"AiPath node count was wrong!");
 			GameObject obj = null;
 			obj.name = "null";
 		}
@@ -317,7 +317,7 @@ public class AiPathCtrl : MonoBehaviour
 ////				Gizmos.DrawWireSphere(prevPt, 0.01f);
 ////				Gizmos.DrawLine(currPt, prevPt);
 ////			}else if(method == "handles"){
-////				Debug.LogError("iTween Error: Drawing a path with Handles is temporarily disabled because of compatability issues with Unity 2.6!");
+////				Debug.LogError("Unity:"+"iTween Error: Drawing a path with Handles is temporarily disabled because of compatability issues with Unity 2.6!");
 ////				//UnityEditor.Handles.DrawLine(currPt, prevPt);
 ////			}
 ////			prevPt = currPt;
@@ -359,7 +359,7 @@ public class AiPathCtrl : MonoBehaviour
 				}
 				Gizmos.DrawLine(currPt, prevPt);
 			}else if(method == "handles"){
-				Debug.LogError("iTween Error: Drawing a path with Handles is temporarily disabled because of compatability issues with Unity 2.6!");
+				Debug.LogError("Unity:"+"iTween Error: Drawing a path with Handles is temporarily disabled because of compatability issues with Unity 2.6!");
 				//UnityEditor.Handles.DrawLine(currPt, prevPt);
 			}
 			prevPt = currPt;

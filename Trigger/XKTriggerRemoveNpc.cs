@@ -30,7 +30,7 @@ public class XKTriggerRemoveNpc : MonoBehaviour {
 		
 		for (int i = 0; i < SpawnPointArray.Length; i++) {
 			if (SpawnPointArray[i] == null) {
-				Debug.LogWarning("SpawnPointArray was wrong! index "+(i+1));
+				Debug.LogWarning("Unity:"+"SpawnPointArray was wrong! index "+(i+1));
 				GameObject obj = null;
 				obj.name = "null";
 				break;
@@ -71,7 +71,7 @@ public class XKTriggerRemoveNpc : MonoBehaviour {
 
 	public void RemoveSpawnPointNpc()
 	{
-		//Debug.Log("XKTriggerRemoveNpc::OnTriggerEnter -> hit "+other.name);
+		//Debug.Log("Unity:"+"XKTriggerRemoveNpc::OnTriggerEnter -> hit "+other.name);
 		for (int i = 0; i < SpawnPointArray.Length; i++) {
 			SpawnPointArray[i].RemovePointAllNpc();
 		}
@@ -90,7 +90,7 @@ public class XKTriggerRemoveNpc : MonoBehaviour {
 		if (SpawnPointArray.Length > 0) {
 			for (int i = 0; i < SpawnPointArray.Length; i++) {
 				if (SpawnPointArray[i] == null) {
-					Debug.LogWarning("SpawnPointArray was wrong! SpawnPoint is null, index "+i);
+					Debug.LogWarning("Unity:"+"SpawnPointArray was wrong! SpawnPoint is null, index "+i);
 					GameObject obj = null;
 					obj.name = "null";
 					break;

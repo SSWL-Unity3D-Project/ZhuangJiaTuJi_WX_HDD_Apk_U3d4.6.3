@@ -26,7 +26,7 @@ public class XKTriggerGameOver : MonoBehaviour {
 		int max = AmmoPointTran.Length;
 		for (int i = 0; i < max; i++) {
 			if (AmmoPointTran[i] == null) {
-				Debug.LogWarning("AmmoPointTran was wrong! index "+i);
+				Debug.LogWarning("Unity:"+"AmmoPointTran was wrong! index "+i);
 				GameObject obj = null;
 				obj.name = "null";
 				break;
@@ -94,7 +94,7 @@ public class XKTriggerGameOver : MonoBehaviour {
 		if (IsActiveGameOver) {
 			return;
 		}
-		Debug.Log("CheckIsActiveGameOver...");
+		Debug.Log("Unity:"+"CheckIsActiveGameOver...");
 		IsActiveGameOver = true;
 		XKGlobalData.GetInstance().StopAudioRanLiaoJingGao();
 		SpawnPlayerDaoDan(script);

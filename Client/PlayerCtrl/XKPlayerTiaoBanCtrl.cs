@@ -6,7 +6,7 @@ public class XKPlayerTiaoBanCtrl : MonoBehaviour
 	public XKPlayerMoveCtrl PlayerMoveScript;
 	public void MovePlayerOverPaoWuXianByITween()
 	{
-		Debug.Log("XKPlayerTiaoBanCtrl -> MovePlayerOverPaoWuXianByITween...");
+		Debug.Log("Unity:"+"XKPlayerTiaoBanCtrl -> MovePlayerOverPaoWuXianByITween...");
 		PlayerMoveScript.MovePlayerOverPaoWuXianByITween();
 	}
 }

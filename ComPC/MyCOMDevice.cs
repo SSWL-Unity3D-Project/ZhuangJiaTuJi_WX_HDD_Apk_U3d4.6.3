@@ -69,14 +69,14 @@ public class MyCOMDevice : MonoBehaviour
 					if (_SerialPort.IsOpen)
 					{
 						_SerialPort.Close();
-						Debug.Log("Closing port, because it was already open!");
+						Debug.Log("Unity:"+"Closing port, because it was already open!");
 					}
 					else
 					{
 						_SerialPort.Open();
 						if (_SerialPort.IsOpen) {
 							IsFindDeviceDt = true;
-							Debug.Log("COM open sucess");
+							Debug.Log("Unity:"+"COM open sucess");
 						}
 					}
 				}
@@ -85,12 +85,12 @@ public class MyCOMDevice : MonoBehaviour
 					if (XkGameCtrl.IsGameOnQuit || ComThread == null) {
 						return;
 					}
-					Debug.Log("error:COM already opened by other PRG... " + exception);
+					Debug.Log("Unity:"+"error:COM already opened by other PRG... " + exception);
 				}
 			}
 			else
 			{
-				Debug.Log("Port == null");
+				Debug.Log("Unity:"+"Port == null");
 			}
 		}
 
@@ -134,7 +134,7 @@ public class MyCOMDevice : MonoBehaviour
 			}
 			while (_SerialPort.IsOpen);
 			CloseComPort();
-			Debug.Log("Close run thead...");
+			Debug.Log("Unity:"+"Close run thead...");
 		}
 
 		void COMTxData()
@@ -155,7 +155,7 @@ public class MyCOMDevice : MonoBehaviour
 				if (XkGameCtrl.IsGameOnQuit || ComThread == null) {
 					return;
 				}
-				Debug.Log("Tx error:COM!!! " + exception);
+				Debug.Log("Unity:"+"Tx error:COM!!! " + exception);
 			}
 		}
 
@@ -181,7 +181,7 @@ public class MyCOMDevice : MonoBehaviour
 					return;
 				}
 
-				Debug.Log("Rx error:COM..." + exception);
+				Debug.Log("Unity:"+"Rx error:COM..." + exception);
 				IsReadMsgComTimeOut = true;
 				IsReadComMsg = false;
 				ReadTimeOutCount++;
@@ -339,7 +339,7 @@ public class MyCOMDevice : MonoBehaviour
 
 	void OnApplicationQuit()
 	{
-		Debug.Log("OnApplicationQuit...Com");
+		Debug.Log("Unity:"+"OnApplicationQuit...Com");
 		XkGameCtrl.IsGameOnQuit = true;
 		ComThreadClass.CloseComPort();
 		Invoke("CloseComThread", 2f);

@@ -43,10 +43,10 @@ public class GameTimeBossCtrl : MonoBehaviour
 	public int GetTimeBossResidual()
 	{
 		int timeVal = TimeBossVal - TimeBossUse;
-		/*Debug.Log("TimeBossUse *** "+TimeBossUse
+		/*Debug.Log("Unity:"+"TimeBossUse *** "+TimeBossUse
 		          +", TimeBossVal *** "+TimeBossVal);*/
 		timeVal = timeVal < 0 ? 0 : timeVal;
-		//Debug.Log("GetTimeBossResidual -> timeVal "+timeVal);
+		//Debug.Log("Unity:"+"GetTimeBossResidual -> timeVal "+timeVal);
 		return timeVal;
 	}
 
@@ -56,12 +56,12 @@ public class GameTimeBossCtrl : MonoBehaviour
 		miaoShuVal = (miaoShuVal / 10) * 10 + 9;
 		TimeBossVal = miaoShuVal;
 		TimeBossUse = 0;
-		//Debug.Log("miaoShuVal "+miaoShuVal);
+		//Debug.Log("Unity:"+"miaoShuVal "+miaoShuVal);
 		TimeVal[3] = 9;
 		TimeVal[2] = (miaoShuVal / 10) % 6;
 		TimeVal[1] = (miaoShuVal / 60) % 10;
 		TimeVal[0] = (miaoShuVal / 600) % 10;
-		//Debug.Log("TimeVal[0] "+TimeVal[0]+", TimeVal[1] "+TimeVal[1]
+		//Debug.Log("Unity:"+"TimeVal[0] "+TimeVal[0]+", TimeVal[1] "+TimeVal[1]
 		          //+", TimeVal[2] "+TimeVal[2]+", TimeVal[3] "+TimeVal[3]);
 		
 		TimeMiaoGeWeiStr = "timeJiFenBoss_0";
@@ -96,7 +96,7 @@ public class GameTimeBossCtrl : MonoBehaviour
 		    && TimeSprite[1].spriteName == "p1_0"
 		    && TimeSprite[0].spriteName == "p1_0") {
 			XKBossXueTiaoCtrl.GetInstance().SetBloodBossAmount(0f);
-			Debug.Log("bossTimeOver...");
+			Debug.Log("Unity:"+"bossTimeOver...");
 			return;
 		}
 

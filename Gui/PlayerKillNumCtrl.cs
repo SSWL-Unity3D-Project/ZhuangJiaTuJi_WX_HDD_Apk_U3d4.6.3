@@ -101,7 +101,7 @@ public class PlayerKillNumCtrl : MonoBehaviour {
 
 			powVal = (int)Mathf.Pow(10, max - i - 1);
 			valTmp = numVal / powVal;
-			//Debug.Log("valTmp *** "+valTmp);
+			//Debug.Log("Unity:"+"valTmp *** "+valTmp);
 			/*if (!isShowZero) {
 			    if (valTmp > 0) {
 					isShowZero = true;
@@ -153,7 +153,7 @@ public class PlayerKillNumCtrl : MonoBehaviour {
 			
 			powVal = (int)Mathf.Pow(10, max - i - 1);
 			valTmp = numVal / powVal;
-			//Debug.Log("valTmp *** "+valTmp);
+			//Debug.Log("Unity:"+"valTmp *** "+valTmp);
 			/*if (!isShowZero) {
 				if (valTmp > 0) {
 					isShowZero = true;
@@ -205,7 +205,7 @@ public class PlayerKillNumCtrl : MonoBehaviour {
 			
 			powVal = (int)Mathf.Pow(10, max - i - 1);
 			valTmp = numVal / powVal;
-			//Debug.Log("valTmp *** "+valTmp);
+			//Debug.Log("Unity:"+"valTmp *** "+valTmp);
 			/*if (!isShowZero) {
 				if (valTmp > 0) {
 					isShowZero = true;
@@ -257,7 +257,7 @@ public class PlayerKillNumCtrl : MonoBehaviour {
 			
 			powVal = (int)Mathf.Pow(10, max - i - 1);
 			valTmp = numVal / powVal;
-			//Debug.Log("valTmp *** "+valTmp);
+			//Debug.Log("Unity:"+"valTmp *** "+valTmp);
 			/*if (!isShowZero) {
 				if (valTmp > 0) {
 					isShowZero = true;
@@ -281,7 +281,7 @@ public class PlayerKillNumCtrl : MonoBehaviour {
 			return;
 		}
 		IsEndPlayerKillNumCartoon = true;
-		Debug.Log("EndPlayerKillNumCartoon...");
+		Debug.Log("Unity:"+"EndPlayerKillNumCartoon...");
 		
 		XKGlobalData.GetInstance().StopAudioJiFenGunDong();
 		if (XkGameCtrl.IsPlayGamePOne) {

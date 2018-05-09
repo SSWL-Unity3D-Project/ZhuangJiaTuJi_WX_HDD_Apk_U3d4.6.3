@@ -60,14 +60,14 @@ public class PSTriggerCamera : MonoBehaviour {
 		switch (CamState) {
 		case PSCameraState.DingDianAimCam:
 			if (DingDianAimCam == null) {
-				Debug.LogWarning("DingDianAimCam is null");
+				Debug.LogWarning("Unity:"+"DingDianAimCam is null");
 				isOutPrintError = true;
 			}
 			break;
 			
 		case PSCameraState.DingDianNoAimCam:
 			if (DingDianNoAimObj == null) {
-				Debug.LogWarning("DingDianNoAimObj is null");
+				Debug.LogWarning("Unity:"+"DingDianNoAimObj is null");
 				isOutPrintError = true;
 			}
 			else if (XkGameCtrl.GetInstance().IsCartoonShootTest) {
@@ -75,7 +75,7 @@ public class PSTriggerCamera : MonoBehaviour {
 				if (cameraCom != null) {
 					PSDingDianNoAimCamera noAimCamera = DingDianNoAimObj.GetComponent<PSDingDianNoAimCamera>();
 					if (noAimCamera == null) {
-						Debug.LogWarning("DingDianNoAimObj cannot find PSDingDianNoAimCamera!");
+						Debug.LogWarning("Unity:"+"DingDianNoAimObj cannot find PSDingDianNoAimCamera!");
 						isOutPrintError = true;
 					}
 					else {
@@ -84,7 +84,7 @@ public class PSTriggerCamera : MonoBehaviour {
 					}
 				}
 				else {
-					Debug.LogWarning("DingDianNoAimObj cannot find camera component!");
+					Debug.LogWarning("Unity:"+"DingDianNoAimObj cannot find camera component!");
 					isOutPrintError = true;
 				}
 			}
@@ -103,14 +103,14 @@ public class PSTriggerCamera : MonoBehaviour {
 					if (pathCtrl.PathState == PlayerTypeEnum.FeiJi) {
 						if (XkGameCtrl.GameModeVal != GameMode.DanJiTanKe && Network.peerType == NetworkPeerType.Disconnected) {
 							if (PSGenSuiMoveCamera.GetInstanceFeiJi() == null) {
-								Debug.LogWarning("PSGenSuiMoveCameraFeiJi is null");
+								Debug.LogWarning("Unity:"+"PSGenSuiMoveCameraFeiJi is null");
 								isOutPrintError = true;
 							}
 							else {
 								if (IndexGenSuiMove < 0
 								    || IndexGenSuiMove >= PSGenSuiMoveCamera.GetInstanceFeiJi().GenSuiMoveCam.Length
 								    || PSGenSuiMoveCamera.GetInstanceFeiJi().GenSuiMoveCam[IndexGenSuiMove] == null) {
-									Debug.LogWarning("IndexGenSuiMoveFeiJi was wrong!");
+									Debug.LogWarning("Unity:"+"IndexGenSuiMoveFeiJi was wrong!");
 									isOutPrintError = true;
 								}
 							}
@@ -119,14 +119,14 @@ public class PSTriggerCamera : MonoBehaviour {
 					else {
 						if (XkGameCtrl.GameModeVal != GameMode.DanJiFeiJi && Network.peerType == NetworkPeerType.Disconnected) {
 							if (PSGenSuiMoveCamera.GetInstanceTanKe() == null) {
-								Debug.LogWarning("PSGenSuiMoveCameraTanKe is null");
+								Debug.LogWarning("Unity:"+"PSGenSuiMoveCameraTanKe is null");
 								isOutPrintError = true;
 							}
 							else {
 								if (IndexGenSuiMove < 0
 								    || IndexGenSuiMove >= PSGenSuiMoveCamera.GetInstanceTanKe().GenSuiMoveCam.Length
 								    || PSGenSuiMoveCamera.GetInstanceTanKe().GenSuiMoveCam[IndexGenSuiMove] == null) {
-									Debug.LogWarning("IndexGenSuiMoveTanKe was wrong!");
+									Debug.LogWarning("Unity:"+"IndexGenSuiMoveTanKe was wrong!");
 									isOutPrintError = true;
 								}
 							}
@@ -138,13 +138,13 @@ public class PSTriggerCamera : MonoBehaviour {
 			
 		case PSCameraState.ZiYouMoveCam:
 			if (ZiYouMoveCam == null) {
-				Debug.LogWarning("ZiYouMoveCam is null");
+				Debug.LogWarning("Unity:"+"ZiYouMoveCam is null");
 				isOutPrintError = true;
 			}
 			break;
 			
 		/*case PSCameraState.Null:
-			Debug.LogWarning("CamState is null");
+			Debug.LogWarning("Unity:"+"CamState is null");
 			isOutPrintError = true;
 			break;*/
 		}
@@ -172,7 +172,7 @@ public class PSTriggerCamera : MonoBehaviour {
 		if (script == null) {
 			return;
 		}
-		//Debug.Log("*********************name "+gameObject.name);
+		//Debug.Log("Unity:"+"*********************name "+gameObject.name);
 
 		PSDingDianAimCamera.DingDianAimCamera = null;
 		PSDingDianNoAimCamera.DingDianNoAimCamera = null;
@@ -294,7 +294,7 @@ public class PSTriggerCamera : MonoBehaviour {
 		switch (CamState) {
 		case PSCameraState.DingDianAimCam:
 			if (DingDianAimCam == null) {
-				Debug.LogWarning("DingDianAimCam is null");
+				Debug.LogWarning("Unity:"+"DingDianAimCam is null");
 				isOutPrintError = true;
 			}
 			
@@ -309,7 +309,7 @@ public class PSTriggerCamera : MonoBehaviour {
 			
 		case PSCameraState.DingDianNoAimCam:
 			if (DingDianNoAimObj == null) {
-				Debug.LogWarning("DingDianNoAimObj is null");
+				Debug.LogWarning("Unity:"+"DingDianNoAimObj is null");
 				isOutPrintError = true;
 			}
 			
@@ -328,28 +328,28 @@ public class PSTriggerCamera : MonoBehaviour {
 				if (pathCtrl != null) {
 					if (pathCtrl.PathState == PlayerTypeEnum.FeiJi) {
 						if (PSGenSuiMoveCamera.GetInstanceFeiJi() == null) {
-							Debug.LogWarning("PSGenSuiMoveCameraFeiJi is null");
+							Debug.LogWarning("Unity:"+"PSGenSuiMoveCameraFeiJi is null");
 							isOutPrintError = true;
 						}
 						else {
 							if (IndexGenSuiMove < 0
 							    || IndexGenSuiMove >= PSGenSuiMoveCamera.GetInstanceFeiJi().GenSuiMoveCam.Length
 							    || PSGenSuiMoveCamera.GetInstanceFeiJi().GenSuiMoveCam[IndexGenSuiMove] == null) {
-								Debug.LogWarning("IndexGenSuiMoveFeiJi was wrong!");
+								Debug.LogWarning("Unity:"+"IndexGenSuiMoveFeiJi was wrong!");
 								isOutPrintError = true;
 							}
 						}
 					}
 					else {
 						if (PSGenSuiMoveCamera.GetInstanceTanKe() == null) {
-							Debug.LogWarning("PSGenSuiMoveCameraTanKe is null");
+							Debug.LogWarning("Unity:"+"PSGenSuiMoveCameraTanKe is null");
 							isOutPrintError = true;
 						}
 						else {
 							if (IndexGenSuiMove < 0
 							    || IndexGenSuiMove >= PSGenSuiMoveCamera.GetInstanceTanKe().GenSuiMoveCam.Length
 							    || PSGenSuiMoveCamera.GetInstanceTanKe().GenSuiMoveCam[IndexGenSuiMove] == null) {
-								Debug.LogWarning("IndexGenSuiMoveTanKe was wrong!");
+								Debug.LogWarning("Unity:"+"IndexGenSuiMoveTanKe was wrong!");
 								isOutPrintError = true;
 							}
 						}
@@ -378,7 +378,7 @@ public class PSTriggerCamera : MonoBehaviour {
 			
 		case PSCameraState.ZiYouMoveCam:
 			if (ZiYouMoveCam == null) {
-				Debug.LogWarning("ZiYouMoveCam is null");
+				Debug.LogWarning("Unity:"+"ZiYouMoveCam is null");
 				isOutPrintError = true;
 			}
 			
@@ -393,7 +393,7 @@ public class PSTriggerCamera : MonoBehaviour {
 		}
 		
 		/*if (CamShakeScript == null) {
-			Debug.LogWarning("CamShakeScript is null");
+			Debug.LogWarning("Unity:"+"CamShakeScript is null");
 			GameObject obj = null;
 			obj.name = "null";
 		}*/
@@ -413,7 +413,7 @@ public class PSTriggerCamera : MonoBehaviour {
 				}
 			}
 			else {
-				Debug.LogWarning("Cannot find CameraMain");
+				Debug.LogWarning("Unity:"+"Cannot find CameraMain");
 				GameObject obj = null;
 				obj.name = "null";
 				return;

@@ -211,7 +211,7 @@ public class DanYaoInfoCtrl : MonoBehaviour {
 		for (int i = 0; i < 2; i++) {
 			powVal = (int)Mathf.Pow(10, max - i - 1);
 			valTmp = numVal / powVal;
-			//Debug.Log("valTmp *** "+valTmp);
+			//Debug.Log("Unity:"+"valTmp *** "+valTmp);
 			if (!isShowZero) {
 				if (valTmp > 0) {
 					isShowZero = true;
@@ -247,7 +247,7 @@ public class DanYaoInfoCtrl : MonoBehaviour {
 		for (int i = 0; i < 2; i++) {
 			powVal = (int)Mathf.Pow(10, max - i - 1);
 			valTmp = numVal / powVal;
-			//Debug.Log("valTmp *** "+valTmp);
+			//Debug.Log("Unity:"+"valTmp *** "+valTmp);
 			if (!isShowZero) {
 				if (valTmp > 0) {
 					isShowZero = true;
@@ -283,7 +283,7 @@ public class DanYaoInfoCtrl : MonoBehaviour {
 		for (int i = 0; i < 2; i++) {
 			powVal = (int)Mathf.Pow(10, max - i - 1);
 			valTmp = numVal / powVal;
-			//Debug.Log("valTmp *** "+valTmp);
+			//Debug.Log("Unity:"+"valTmp *** "+valTmp);
 			if (!isShowZero) {
 				if (valTmp > 0) {
 					isShowZero = true;
@@ -319,7 +319,7 @@ public class DanYaoInfoCtrl : MonoBehaviour {
 		for (int i = 0; i < 2; i++) {
 			powVal = (int)Mathf.Pow(10, max - i - 1);
 			valTmp = numVal / powVal;
-			//Debug.Log("valTmp *** "+valTmp);
+			//Debug.Log("Unity:"+"valTmp *** "+valTmp);
 			if (!isShowZero) {
 				if (valTmp > 0) {
 					isShowZero = true;
@@ -355,7 +355,7 @@ public class DanYaoInfoCtrl : MonoBehaviour {
 		for (int i = 0; i < 2; i++) {
 			powVal = (int)Mathf.Pow(10, max - i - 1);
 			valTmp = numVal / powVal;
-			//Debug.Log("valTmp *** "+valTmp);
+			//Debug.Log("Unity:"+"valTmp *** "+valTmp);
 			if (!isShowZero) {
 				if (valTmp > 0) {
 					isShowZero = true;
@@ -391,7 +391,7 @@ public class DanYaoInfoCtrl : MonoBehaviour {
 //		for (int i = 0; i < 2; i++) {
 //			powVal = (int)Mathf.Pow(10, max - i - 1);
 //			valTmp = numVal / powVal;
-//			//Debug.Log("valTmp *** "+valTmp+", numVal *** "+numVal);
+//			//Debug.Log("Unity:"+"valTmp *** "+valTmp+", numVal *** "+numVal);
 //			if (!isShowZero) {
 //				if (valTmp > 0) {
 //					isShowZero = true;
@@ -773,7 +773,7 @@ public class DanYaoInfoCtrl : MonoBehaviour {
 	
 	/*void HiddenHuoLiJQSprite()
 	{
-		//Debug.Log("HiddenHuoLiJQSprite...");
+		//Debug.Log("Unity:"+"HiddenHuoLiJQSprite...");
 		if (!HuoLiJQSprite.gameObject.activeSelf) {
 			return;
 		}
@@ -838,7 +838,7 @@ public class DanYaoInfoCtrl : MonoBehaviour {
 	
 	/*void HiddenDaoDanSprite()
 	{
-		//Debug.Log("HiddenDaoDanSprite...");
+		//Debug.Log("Unity:"+"HiddenDaoDanSprite...");
 		if (!DaoDanSprite.gameObject.activeSelf) {
 			return;
 		}

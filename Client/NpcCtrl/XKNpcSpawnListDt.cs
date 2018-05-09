@@ -162,7 +162,7 @@ public class XKNpcSpawnListDt : MonoBehaviour {
 		int max = NpcList.Count;
 		for (int i = 0; i < max; i++) {
 			if (NpcList[i] == npcObj) {
-				//Debug.Log("CheckRemoveNpcSpawnListDt -> npcObj "+npcObj.name);
+				//Debug.Log("Unity:"+"CheckRemoveNpcSpawnListDt -> npcObj "+npcObj.name);
 				NpcList.RemoveAt(i);
 				break;
 			}

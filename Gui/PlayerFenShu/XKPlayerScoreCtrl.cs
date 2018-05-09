@@ -170,7 +170,7 @@ public class XKPlayerScoreCtrl : MonoBehaviour
 				indexVal = i;
 			}
 		}
-		//Debug.Log("CheckPlayerZuiGaoFen -> maxScore "+maxScore+", index "+indexVal);
+		//Debug.Log("Unity:"+"CheckPlayerZuiGaoFen -> maxScore "+maxScore+", index "+indexVal);
 
 		XKPlayerScoreCtrl playerScore = null;
 		switch (indexVal) {
@@ -259,7 +259,7 @@ public class XKPlayerScoreCtrl : MonoBehaviour
 		for (int i = 0; i < max; i++) {
 			powVal = (int)Mathf.Pow(10, max - i - 1);
 			valTmp = numVal / powVal;
-			//Debug.Log("valTmp *** "+valTmp);
+			//Debug.Log("Unity:"+"valTmp *** "+valTmp);
 			PlayerJF[i].spriteName = "KillNum_" + valTmp;
 			numVal -= valTmp * powVal;
 		}

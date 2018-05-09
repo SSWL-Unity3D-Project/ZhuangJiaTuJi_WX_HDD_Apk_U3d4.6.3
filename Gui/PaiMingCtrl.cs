@@ -53,7 +53,7 @@ public class PaiMingCtrl : MonoBehaviour
 		for (int i = 0; i < max; i++) {
 			powVal = (int)Mathf.Pow(10, max - i - 1);
 			valTmp = numVal / powVal;
-			//Debug.Log("valTmp *** "+valTmp);
+			//Debug.Log("Unity:"+"valTmp *** "+valTmp);
 			uiSpriteJF[i].spriteName = "KillNum_" + valTmp;
 			numVal -= valTmp * powVal;
 		}
@@ -66,13 +66,13 @@ public class PaiMingCtrl : MonoBehaviour
 	const int MaxGameFenShu = 99999999;
 	public void ShowGamePaiMing()
 	{
-		//Debug.Log("ShowGamePaiMing...");
+		//Debug.Log("Unity:"+"ShowGamePaiMing...");
 		int timeShengYu = GameTimeBossCtrl.GetInstance().GetTimeBossResidual();
 		//timeShengYu = 51; //test.
 		BossJiFenCtrl.GetInstance().ShowBossJiFenInfo(timeShengYu);
 
 		int fenShuBoss = BossFenShuVal * timeShengYu;
-		//Debug.Log("fenShuBoss ****************** "+fenShuBoss);
+		//Debug.Log("Unity:"+"fenShuBoss ****************** "+fenShuBoss);
 		if (XkGameCtrl.IsActivePlayerOne) {
 			XkGameCtrl.PlayerJiFenArray[0] += fenShuBoss;
 			if (fenShuBoss > 0) {
@@ -131,7 +131,7 @@ public class PaiMingCtrl : MonoBehaviour
 		int[] jiLuFenShuKey = {0, 0, 0, 0};
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
-				/*Debug.Log("playerJFArray["+i+"] *** "+playerJFArray[i]
+				/*Debug.Log("Unity:"+"playerJFArray["+i+"] *** "+playerJFArray[i]
 				          +", PlayerJiFenList["+j+"] *** "+PlayerJiFenList[j]);*/
 				if (playerJFArray[i] == PlayerJiFenList[j] && jiLuFenShuKey[j] == 0) {
 					jiLuFenShuKey[j] = 1;

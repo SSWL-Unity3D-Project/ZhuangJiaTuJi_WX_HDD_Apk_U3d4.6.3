@@ -27,7 +27,7 @@ public class ServerPortCameraCtrl : MonoBehaviour {
 	// Use this for initialization
 	void Awake()
 	{
-		Debug.Log("Init serverPortCamera -> CameraType "+CameraType);
+		Debug.Log("Unity:"+"Init serverPortCamera -> CameraType "+CameraType);
 		switch (CameraType) {
 		case PlayerTypeEnum.FeiJi:
 			_InstanceFJ = this;
@@ -95,8 +95,8 @@ public class ServerPortCameraCtrl : MonoBehaviour {
 	void GetCameraFollowTran()
 	{
 		CameraIndex = (CameraIndex + 1 + (Random.Range(0, 100) % 3)) % 4;
-//		Debug.Log("GetCameraFollowTran -> indexCam "+CameraIndex+", CameraType "+CameraType);
-//		Debug.Log("CountFJ "+CountFJ+", CountTK "+CountTK);
+//		Debug.Log("Unity:"+"GetCameraFollowTran -> indexCam "+CameraIndex+", CameraType "+CameraType);
+//		Debug.Log("Unity:"+"CountFJ "+CountFJ+", CountTK "+CountTK);
 		Transform tran = null;
 		switch (CameraType) {
 		case PlayerTypeEnum.FeiJi:
@@ -247,7 +247,7 @@ public class ServerPortCameraCtrl : MonoBehaviour {
 
 	public static void CloseAllServerPortCamera()
 	{
-		Debug.Log("CloseAllServerPortCamera...");
+		Debug.Log("Unity:"+"CloseAllServerPortCamera...");
 		_InstanceFJ.CloseCameraServer();
 		_InstanceTK.CloseCameraServer();
 		

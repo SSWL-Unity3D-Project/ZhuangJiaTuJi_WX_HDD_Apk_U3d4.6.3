@@ -119,7 +119,7 @@ public class XKDaoJuGlobalDt : MonoBehaviour
 	public static void SetTimeFenShuBeiLv(PlayerEnum indexPlayer, int beiLv = 2)
 	{
 		int indexVal = (int)indexPlayer - 1;
-		//Debug.Log("FenShuBeiLv ************** "+FenShuBeiLv[indexVal]);
+		//Debug.Log("Unity:"+"FenShuBeiLv ************** "+FenShuBeiLv[indexVal]);
 		if (FenShuBeiLv[indexVal] > 1) {
 			FenShuBeiLv[indexVal] = FenShuBeiLv[indexVal] < 10 ? (FenShuBeiLv[indexVal]+1) : 10;
 			return;

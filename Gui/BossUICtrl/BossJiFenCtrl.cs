@@ -35,11 +35,11 @@ public class BossJiFenCtrl : MonoBehaviour
 		int valTmp = 0;
 		int powVal = 0;
 		bool isHiddenZero = true;
-		//Debug.Log("ShowBossJiFenInfo -> timeVal "+timeVal+", max "+max);
+		//Debug.Log("Unity:"+"ShowBossJiFenInfo -> timeVal "+timeVal+", max "+max);
 		for (int i = 0; i < max; i++) {
 			powVal = (int)Mathf.Pow(10, max - i - 1);
 			valTmp = numVal / powVal;
-			//Debug.Log("valTmp "+valTmp+", powVal "+powVal);
+			//Debug.Log("Unity:"+"valTmp "+valTmp+", powVal "+powVal);
 			if (valTmp == 0 && isHiddenZero) {
 				TimeSpriteArray[i].gameObject.SetActive(false);
 				continue;

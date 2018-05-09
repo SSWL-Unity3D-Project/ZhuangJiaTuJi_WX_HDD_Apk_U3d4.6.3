@@ -13,7 +13,7 @@ public class SSBoxPostNet : MonoBehaviour
             m_WebSocketSimpet.Init(this);
         }
         HttpSendPostLoginBox();
-        //Debug.Log("md5: " + Md5Sum("23456sswl"));
+        //Debug.Log("Unity:"+"md5: " + Md5Sum("23456sswl"));
     }
     
     /// <summary>
@@ -43,11 +43,11 @@ public class SSBoxPostNet : MonoBehaviour
         yield return getData;
         if (getData.error != null)
         {
-            Debug.Log("GetError: " + getData.error);
+            Debug.Log("Unity:"+"GetError: " + getData.error);
         }
         else
         {
-            Debug.Log("GetData: " + getData.text);
+            Debug.Log("Unity:"+"GetData: " + getData.text);
         }
     }
 
@@ -104,11 +104,11 @@ public class SSBoxPostNet : MonoBehaviour
         yield return postData;
         if (postData.error != null)
         {
-            Debug.Log("PostError: " + postData.error);
+            Debug.Log("Unity:"+"PostError: " + postData.error);
         }
         else
         {
-            Debug.Log(cmd + " -> PostData: " + postData.text);
+            Debug.Log("Unity:"+cmd + " -> PostData: " + postData.text);
             switch(cmd)
             {
                 case PostCmd.BoxLogin:
@@ -119,12 +119,12 @@ public class SSBoxPostNet : MonoBehaviour
                         {
                             m_BoxLoginDt.serverIp = jd["data"]["serverIp"].ToString();
                             m_BoxLoginDt.token = jd["data"]["token"].ToString();
-                            Debug.Log("serverIp " + m_BoxLoginDt.serverIp + ", token " + m_BoxLoginDt.token);
+                            Debug.Log("Unity:"+"serverIp " + m_BoxLoginDt.serverIp + ", token " + m_BoxLoginDt.token);
                             ConnectWebSocketServer();
                         }
                         else
                         {
-                            Debug.Log("Login box failed! code == " + jd["code"]);
+                            Debug.Log("Unity:"+"Login box failed! code == " + jd["code"]);
                         }
                         break;
                     }
@@ -143,12 +143,12 @@ public class SSBoxPostNet : MonoBehaviour
     {
         if (m_BoxLoginRt != BoxLoginRt.Success)
         {
-            Debug.Log("ConnectWebSocket -> m_BoxLoginRt == " + m_BoxLoginRt);
+            Debug.Log("Unity:"+"ConnectWebSocket -> m_BoxLoginRt == " + m_BoxLoginRt);
             return;
         }
 
         string url = "ws://" + m_BoxLoginDt.serverIp + "/websocket.do?token=" + m_BoxLoginDt.token;
-        Debug.Log("ConnectWebSocket -> url " + url);
+        Debug.Log("Unity:"+"ConnectWebSocket -> url " + url);
         if (m_WebSocketSimpet != null)
         {
             m_WebSocketSimpet.OpenWebSocket(url);
@@ -160,7 +160,7 @@ public class SSBoxPostNet : MonoBehaviour
     /// </summary>
     public void HttpSendPostLoginBox()
     {
-        Debug.Log("HttpSendPostLoginBox...");
+        Debug.Log("Unity:"+"HttpSendPostLoginBox...");
         //POST方法.
         WWWForm form = new WWWForm();
         form.AddField("boxNumber", m_BoxLoginData.boxNumber);

@@ -18,7 +18,7 @@ public class XKGlobalData {
 	public static string GameDiff;
 	public static int GameAudioVolume;
 	static string FilePath = "";
-	static public string FileName = "../config/XKGameConfig.xml";
+	static public string FileName = "/config/XKGameConfig.xml";
 	static public HandleJson HandleJsonObj = null;
 	float TimeValDaoDanJingGao;
 	static XKGlobalData Instance;
@@ -27,13 +27,14 @@ public class XKGlobalData {
 		if (Instance == null) {
 			Instance = new XKGlobalData();
 			Instance.InitInfo();
-			if (!Directory.Exists(FilePath)) {
+			/*if (!Directory.Exists(FilePath)) {
 				Directory.CreateDirectory(FilePath);
-			}
+			}*/
 
 			if(HandleJsonObj == null) {
 				HandleJsonObj = HandleJson.GetInstance();
 			}
+			return Instance;
 
 			string startCoinInfo = HandleJsonObj.ReadFromFileXml(FileName, "START_COIN");
 			if(startCoinInfo == null || startCoinInfo == "") {
@@ -102,7 +103,7 @@ public class XKGlobalData {
 
 	void InitInfo()
 	{
-		FilePath = Application.dataPath + "/../config";
+		FilePath = Application.dataPath + "/config";
 	}
 
 	public static void SetCoinPlayerOne(int coin)

@@ -118,7 +118,7 @@ public class BuJiBaoCtrl : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision)
 	{
-		//Debug.Log("OnCollisionEnter -> nameHit "+collision.gameObject.name);
+		//Debug.Log("Unity:"+"OnCollisionEnter -> nameHit "+collision.gameObject.name);
 		string layerName = LayerMask.LayerToName(collision.gameObject.layer);
 		if (layerName == XkGameCtrl.TerrainLayer
 		    && IsSpawnDaoJu
@@ -366,7 +366,7 @@ public class BuJiBaoCtrl : MonoBehaviour {
 			if (Vector3.Distance(posA, posB) > XKDaoJuGlobalDt.GetInstance().CiLiDaoJuDis) {
 				continue;
 			}
-			//Debug.Log("player "+XKPlayerGlobalDt.PlayerMoveList[i].name);
+			//Debug.Log("Unity:"+"player "+XKPlayerGlobalDt.PlayerMoveList[i].name);
 
 			AimPlayerTr = XKPlayerGlobalDt.PlayerMoveList[i].transform;
 			SetBuJiBaoRigbody(true);
@@ -393,7 +393,7 @@ public class BuJiBaoCtrl : MonoBehaviour {
 		dirVal = dirVal.normalized * XKDaoJuGlobalDt.GetInstance().CiLiDaoJuSpeed * Time.deltaTime;
 		DaoJuTr.Translate(dirVal, Space.World);
 		if (Vector3.Distance(AimPlayerTr.position, DaoJuTr.position) <= 0.5f) {
-			//Debug.Log("MoveDaoJuToPlayer...");
+			//Debug.Log("Unity:"+"MoveDaoJuToPlayer...");
 			IsMoveOverDaoJuToPlayer = true;
 			XKPlayerMoveCtrl script = AimPlayerTr.GetComponent<XKPlayerMoveCtrl>();
 			if (script == null) {

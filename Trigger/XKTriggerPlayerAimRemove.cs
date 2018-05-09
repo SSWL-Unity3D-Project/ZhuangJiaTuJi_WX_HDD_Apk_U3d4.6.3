@@ -10,7 +10,7 @@ public class XKTriggerPlayerAimRemove : MonoBehaviour {
 	{
 		int max = SpawnPoint.Length;
 		if (max <= 0) {
-			Debug.LogWarning("SpawnPoint.len is wrong!");
+			Debug.LogWarning("Unity:"+"SpawnPoint.len is wrong!");
 			GameObject obj = null;
 			obj.name = "null";
 			return;
@@ -19,7 +19,7 @@ public class XKTriggerPlayerAimRemove : MonoBehaviour {
 		XKSpawnNpcPoint script = null;
 		for (int i = 0; i < max; i++) {
 			if (SpawnPoint[i] == null) {
-				Debug.LogWarning("SpawnPoint is wrong! index is " + i);
+				Debug.LogWarning("Unity:"+"SpawnPoint is wrong! index is " + i);
 				GameObject obj = null;
 				obj.name = "null";
 				break;

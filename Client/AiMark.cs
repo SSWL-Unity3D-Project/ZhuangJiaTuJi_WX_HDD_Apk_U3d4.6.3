@@ -37,7 +37,7 @@ public class AiMark : MonoBehaviour
 		//MvSpeed = XkGameCtrl.GetInstance().MvSpeed;
 		bool isOutputError = false;
 		if (PlayerAni == ZhiShengJiAction.Null && TimePlayerAni > 0f && MvSpeed > 1f) {
-			Debug.Log("PlayerAni is null, but MvSpeed is greater than 1f");
+			Debug.Log("Unity:"+"PlayerAni is null, but MvSpeed is greater than 1f");
 			isOutputError = true;
 		}
 
@@ -82,8 +82,8 @@ public class AiMark : MonoBehaviour
 		if (playerScript == null) {
 			return;
 		}
-//		Debug.Log("AiMark::OnTriggerEnter -> AniName "+PlayerAni);
-//		Debug.Log("AiMark::OnTriggerEnter -> MarkName "+gameObject.name);
+//		Debug.Log("Unity:"+"AiMark::OnTriggerEnter -> AniName "+PlayerAni);
+//		Debug.Log("Unity:"+"AiMark::OnTriggerEnter -> MarkName "+gameObject.name);
 		playerScript.PlayZhuJiaoMarkAction(this);
 	}
 

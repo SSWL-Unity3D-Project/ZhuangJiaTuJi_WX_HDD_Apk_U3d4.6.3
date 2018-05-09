@@ -100,7 +100,7 @@ public class JiFenJieMianCtrl : MonoBehaviour {
 	public void StopJiFenTime()
 	{
 		if (Time.realtimeSinceStartup - TimeStartVal < 8f) {
-			Debug.Log("StopJiFenTime -> TimeStartVal was wrong!");
+			Debug.Log("Unity:"+"StopJiFenTime -> TimeStartVal was wrong!");
 			return;
 		}
 
@@ -110,7 +110,7 @@ public class JiFenJieMianCtrl : MonoBehaviour {
 		IsMakeJiFenStop = true;
 		IsShowFinishTask = false;
 		JiFenJieMianObj.SetActive(false);
-		Debug.Log("StopJiFenTime...");
+		Debug.Log("Unity:"+"StopJiFenTime...");
 
 		if (GameOverCtrl.IsShowGameOver) {
 			XkGameCtrl.LoadingGameMovie();

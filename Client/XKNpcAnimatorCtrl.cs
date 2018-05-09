@@ -65,13 +65,13 @@ public class XKNpcAnimatorCtrl : MonoBehaviour {
 
 	public void PlayNpcAnimatoin(string aniName)
 	{
-		//Debug.Log("aniName "+aniName);
+		//Debug.Log("Unity:"+"aniName "+aniName);
 		if (aniName == "") {
 			return;
 		}
 
 		if (AnimatorCom == null || AnimatorCom.runtimeAnimatorController == null) {
-			//Debug.LogWarning("AnimatorCom or runtimeAnimatorController is null, name "+gameObject.name);
+			//Debug.LogWarning("Unity:"+"AnimatorCom or runtimeAnimatorController is null, name "+gameObject.name);
 			return;
 		}
 
@@ -103,7 +103,7 @@ public class XKNpcAnimatorCtrl : MonoBehaviour {
 		}
 
 		if (AnimatorCom == null || AnimatorCom.runtimeAnimatorController == null) {
-//			Debug.LogWarning("AnimatorCom is null, name " + gameObject.name);
+//			Debug.LogWarning("Unity:"+"AnimatorCom is null, name " + gameObject.name);
 //			AnimatorCom.name = "null";
 			return;
 		}
@@ -167,7 +167,7 @@ public class XKNpcAnimatorCtrl : MonoBehaviour {
 		if (!NpcScript.GetIsAimPlayerByFire()) {
 			return;
 		}
-		//Debug.Log("OnTriggerFireAimAnimation -> name "+gameObject.name);
+		//Debug.Log("Unity:"+"OnTriggerFireAimAnimation -> name "+gameObject.name);
 		SpeedActionCur = AnimatorCom.speed;
 		AnimatorCom.speed = 0f;
 	}
@@ -181,7 +181,7 @@ public class XKNpcAnimatorCtrl : MonoBehaviour {
 	void OnTriggerFireAnimation()
 	{
 		//return; //test
-		//Debug.Log("OnTriggerFireAnimation**NpcName "+AnimatorCom.name);
+		//Debug.Log("Unity:"+"OnTriggerFireAnimation**NpcName "+AnimatorCom.name);
 		if (!XkGameCtrl.IsMoveOnPlayerDeath) {
 			if (!XkGameCtrl.IsActivePlayerOne && !XkGameCtrl.IsActivePlayerTwo) {
 				return;
@@ -286,7 +286,7 @@ public class XKNpcAnimatorCtrl : MonoBehaviour {
 				RaycastHit hit;
 				LayerMask FireLayer = XkGameCtrl.GetInstance().PlayerAmmoHitLayer;
 				if (Physics.Raycast(startPos, ammoForward, out hit, fireDisVal, FireLayer.value)) {
-					//Debug.Log("npc fire PlayerAmmo, fire obj -> "+hit.collider.name);
+					//Debug.Log("Unity:"+"npc fire PlayerAmmo, fire obj -> "+hit.collider.name);
 					firePos = hit.point;
 					XKNpcHealthCtrl healthScript = hit.collider.GetComponent<XKNpcHealthCtrl>();
 					if (healthScript != null) {
@@ -305,7 +305,7 @@ public class XKNpcAnimatorCtrl : MonoBehaviour {
 	
 	void OnTriggerHuanDanAnimation()
 	{
-//		Debug.Log("OnTriggerHuanDanAnimation...");
+//		Debug.Log("Unity:"+"OnTriggerHuanDanAnimation...");
 		RandomPlayNpcFireAction();
 		IsDoHuanDanAction = false;
 	}
@@ -340,12 +340,12 @@ public class XKNpcAnimatorCtrl : MonoBehaviour {
 	int AddCountFireAction()
 	{
 		if (IsDoHuanDanAction) {
-//			Debug.LogWarning("IsDoHuanDanAction is true");
+//			Debug.LogWarning("Unity:"+"IsDoHuanDanAction is true");
 			return -1;
 		}
 		
 		if (IsDoRunFireAction) {
-//			Debug.LogWarning("IsDoRunFireAction is true");
+//			Debug.LogWarning("Unity:"+"IsDoRunFireAction is true");
 			return -1;
 		}
 		
@@ -354,7 +354,7 @@ public class XKNpcAnimatorCtrl : MonoBehaviour {
 		if (firePointScript != null) {
 			CountFireRun = firePointScript.CountFire;
 			CountFireRunVal++;
-//			Debug.Log("CountFireAction "+CountFireAction+", CountFireRunVal "+CountFireRunVal);
+//			Debug.Log("Unity:"+"CountFireAction "+CountFireAction+", CountFireRunVal "+CountFireRunVal);
 			if (CountFireRun <= CountFireRunVal) {
 				//Play Run_Fire Action
 				CountFireRunVal = 0;
@@ -459,7 +459,7 @@ public class XKNpcAnimatorCtrl : MonoBehaviour {
 			return;
 		}
 		IsClearNpcAmmo = true;
-//		Debug.Log("XKNpcAnimatorCtrl::ClearNpcAmmoList -> NpcAmmoCount "+AmmoList.Count);
+//		Debug.Log("Unity:"+"XKNpcAnimatorCtrl::ClearNpcAmmoList -> NpcAmmoCount "+AmmoList.Count);
 
 		if (AmmoList == null || AmmoList.Count < 1) {
 			return;
@@ -504,7 +504,7 @@ public class XKNpcAnimatorCtrl : MonoBehaviour {
 			tranAmmo.position = spawnPoint.position;
 			tranAmmo.rotation = spawnPoint.rotation;
 //			if (gameObject.name == "kuanggong") {
-//				Debug.LogError("***********************11");
+//				Debug.LogError("Unity:"+"***********************11");
 //			}
 		}
 		return objAmmo;

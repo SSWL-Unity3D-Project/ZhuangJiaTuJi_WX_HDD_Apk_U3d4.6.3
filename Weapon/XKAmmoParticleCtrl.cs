@@ -7,7 +7,7 @@ public class XKAmmoParticleCtrl : MonoBehaviour {
 	void Start()
 	{
 		if (PuTongAmmoLZ == null) {
-			Debug.LogWarning("PuTongAmmoLZ is null");
+			Debug.LogWarning("Unity:"+"PuTongAmmoLZ is null");
 			GameObject obj = null;
 			obj.name = "null";
 		}

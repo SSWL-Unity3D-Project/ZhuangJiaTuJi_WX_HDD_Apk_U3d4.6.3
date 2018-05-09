@@ -79,7 +79,7 @@ public class XKTriggerCameraFieldOfView : MonoBehaviour {
 		}
 
 		Instance = this;
-		Debug.Log("XKTriggerCameraFieldOfView -> OnTriggerEnter...");
+		Debug.Log("Unity:"+"XKTriggerCameraFieldOfView -> OnTriggerEnter...");
 		XKPlayerCamera cameraScript = playerScript.GetPlayerCameraScript();
 		CameraObj = cameraScript.gameObject;
 		TweenCamFOV = CameraObj.GetComponent<TweenFOV>();
@@ -106,7 +106,7 @@ public class XKTriggerCameraFieldOfView : MonoBehaviour {
 		if (IsChangeWorldTime) {
 			return;
 		}
-		Debug.Log("XKTriggerCameraFieldOfView::ChangeWorldTimeVal -> key "+key
+		Debug.Log("Unity:"+"XKTriggerCameraFieldOfView::ChangeWorldTimeVal -> key "+key
 		          +", fieldOfView "+PlayerCamera.fieldOfView);
 		IsChangeWorldTime = true;
 		Time.timeScale = WorldTimeScale;
@@ -116,13 +116,13 @@ public class XKTriggerCameraFieldOfView : MonoBehaviour {
 				DestroyObject(TweenCamFOV);
 			}
 			PlayerCamera.fieldOfView = CameraFieldView;
-			Debug.Log("XKTriggerCameraFieldOfView::ChangeWorldTimeVal -> fieldOfView "+PlayerCamera.fieldOfView);
+			Debug.Log("Unity:"+"XKTriggerCameraFieldOfView::ChangeWorldTimeVal -> fieldOfView "+PlayerCamera.fieldOfView);
 		}
 	}
 
 	public void ResetWorldTimeVal()
 	{
-		Debug.Log("XKTriggerCameraFieldOfView -> ResetWorldTimeVal...");
+		Debug.Log("Unity:"+"XKTriggerCameraFieldOfView -> ResetWorldTimeVal...");
 		if (!IsChangeWorldTime) {
 			return;
 		}

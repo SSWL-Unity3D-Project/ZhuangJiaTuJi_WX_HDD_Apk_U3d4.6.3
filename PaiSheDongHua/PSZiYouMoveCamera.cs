@@ -36,12 +36,12 @@ public class PSZiYouMoveCamera : MonoBehaviour {
 		bool isOutputError = false;
 		if (AiPathScript == null) {
 			isOutputError = true;
-			Debug.LogWarning("AiPathScript is null");
+			Debug.LogWarning("Unity:"+"AiPathScript is null");
 		}
 		else {
 			if (AiPathScript.transform.childCount < 2) {
 				isOutputError = true;
-				Debug.LogWarning("AiPathScript.childCount was wrong");
+				Debug.LogWarning("Unity:"+"AiPathScript.childCount was wrong");
 			}
 			else {
 				Transform tranMark = AiPathScript.transform.GetChild(0);
@@ -53,31 +53,31 @@ public class PSZiYouMoveCamera : MonoBehaviour {
 //		Rigidbody rig = GetComponent<Rigidbody>();
 //		if (rig == null) {
 //			isOutputError = true;
-//			Debug.LogError("PSZiYouMoveCamera cannot find Rigidbody");
+//			Debug.LogError("Unity:"+"PSZiYouMoveCamera cannot find Rigidbody");
 //		}
 //
 //		BoxCollider box = GetComponent<BoxCollider>();
 //		if (box == null) {
 //			isOutputError = true;
-//			Debug.LogError("PSZiYouMoveCamera cannot find BoxCollider");
+//			Debug.LogError("Unity:"+"PSZiYouMoveCamera cannot find BoxCollider");
 //		}
 
 		if (RealCamTran == null) {
 			isOutputError = true;
-			Debug.LogWarning("RealCamTran is null");
+			Debug.LogWarning("Unity:"+"RealCamTran is null");
 		}
 		else if (XkGameCtrl.GetInstance().IsCartoonShootTest) {
 			RealCamera = RealCamTran.GetComponent<Camera>();
 			if (RealCamera == null) {
 				isOutputError = true;
-				Debug.LogWarning("PSZiYouMoveCamera cannot find RealCamera");
+				Debug.LogWarning("Unity:"+"PSZiYouMoveCamera cannot find RealCamera");
 			}
 			else {
 				RealCamera.tag = "MainCamera";
 				ZiYouCamera = RealCamTran.GetComponent<PSZiYouCameraCtrl>();
 				if (ZiYouCamera == null) {
 					isOutputError = true;
-					Debug.LogWarning("PSZiYouMoveCamera cannot find PSZiYouCameraCtrl");
+					Debug.LogWarning("Unity:"+"PSZiYouMoveCamera cannot find PSZiYouCameraCtrl");
 				}
 			}
 			RealCamTran.gameObject.SetActive(false);
@@ -91,14 +91,14 @@ public class PSZiYouMoveCamera : MonoBehaviour {
 			RealCamera = XkGameCtrl.ServerCameraObj.GetComponent<Camera>();
 			if (RealCamera == null) {
 				isOutputError = true;
-				Debug.LogWarning("PSZiYouMoveCamera cannot find RealCamera");
+				Debug.LogWarning("Unity:"+"PSZiYouMoveCamera cannot find RealCamera");
 			}
 			else {
 				RealCamera.tag = "MainCamera";
 				ZiYouCamera = RealCamTran.GetComponent<PSZiYouCameraCtrl>();
 				if (ZiYouCamera == null) {
 					isOutputError = true;
-					Debug.LogWarning("PSZiYouMoveCamera cannot find PSZiYouCameraCtrl");
+					Debug.LogWarning("Unity:"+"PSZiYouMoveCamera cannot find PSZiYouCameraCtrl");
 				}
 			}
 			RealCamTran.gameObject.SetActive(false);
@@ -150,7 +150,7 @@ public class PSZiYouMoveCamera : MonoBehaviour {
 
 	public void SetCameraMarkInfo(AiMark script)
 	{
-		Debug.Log("SetCameraMarkInfo...");
+		Debug.Log("Unity:"+"SetCameraMarkInfo...");
 		if (script == null) {
 			return;
 		}
@@ -193,7 +193,7 @@ public class PSZiYouMoveCamera : MonoBehaviour {
 		int maxCountNode = PathNodes.Length;
 		EndPos = PathNodes[1];
 		
-//		Debug.Log("MovePlayerByMarkSpeed -> start time "+Time.realtimeSinceStartup);
+//		Debug.Log("Unity:"+"MovePlayerByMarkSpeed -> start time "+Time.realtimeSinceStartup);
 		float timeLastVal = Time.realtimeSinceStartup;
 		float timeRotationVal = 0f;
 		do {
@@ -246,10 +246,10 @@ public class PSZiYouMoveCamera : MonoBehaviour {
 				perRot = perRot > 1f ? 1f : perRot;
 				transform.rotation = Quaternion.Lerp(RotationStart, RotationEnd, perRot);
 			}
-//			Debug.Log("SpeedA "+SpeedA+", ds "+ds+", dTime "+dTime);
+//			Debug.Log("Unity:"+"SpeedA "+SpeedA+", ds "+ds+", dTime "+dTime);
 			
 			if (disAimNode <= ds) {
-//				Debug.Log("Over, ds "+ds+", realDis "+Vector3.Distance(transform.position, EndPos)+", time "+dTime);
+//				Debug.Log("Unity:"+"Over, ds "+ds+", realDis "+Vector3.Distance(transform.position, EndPos)+", time "+dTime);
 				countNode++;
 				float disVal = ds - disAimNode;
 				float disNode = 0f;
@@ -274,8 +274,8 @@ public class PSZiYouMoveCamera : MonoBehaviour {
 					EndPos = PathNodes[countNode+1]; //更新EndPos.
 					ForwardMoveVal = Vector3.Normalize(EndPos - transform.position); //更新ForwardMoveVal.
 					
-//					Debug.Log("***realDis "+Vector3.Distance(transform.position, EndPos));
-//					Debug.Log("***ForwardMoveVal "+Vector3.Distance(ForwardMoveVal, Vector3.zero));
+//					Debug.Log("Unity:"+"***realDis "+Vector3.Distance(transform.position, EndPos));
+//					Debug.Log("Unity:"+"***ForwardMoveVal "+Vector3.Distance(ForwardMoveVal, Vector3.zero));
 					yield return new WaitForSeconds(TimeUnitMove);
 					continue;
 				}
@@ -317,12 +317,12 @@ public class PSZiYouMoveCamera : MonoBehaviour {
 		Transform pathTran = AiPathScript.transform;
 		if (MarkCount >= pathTran.childCount) {
 			if (AiPathScript.mNextPath1 == null) {
-				Debug.Log("ZiYouMoveCamera move to end position");
+				Debug.Log("Unity:"+"ZiYouMoveCamera move to end position");
 				return false;
 			}
 			MarkCount = 0;
 			AiPathScript = AiPathScript.mNextPath1.GetComponent<AiPathCtrl>();
-			//Debug.Log("move next path, path is "+AiPathScript.name);
+			//Debug.Log("Unity:"+"move next path, path is "+AiPathScript.name);
 		}
 		MovePlayerByItween();
 		return true;
@@ -362,7 +362,7 @@ public class PSZiYouMoveCamera : MonoBehaviour {
 		
 		PathNodes = AiPathScript.GetPathNodes(MarkCount);
 		if (PathNodes == null) {
-			Debug.Log("PathNodes is null! MarkCount "+MarkCount);
+			Debug.Log("Unity:"+"PathNodes is null! MarkCount "+MarkCount);
 			return;
 		}
 		
@@ -385,8 +385,8 @@ public class PSZiYouMoveCamera : MonoBehaviour {
 		}
 		RotationStart = tranArray[0].rotation;
 		RotationEnd = tranArray[1].rotation;
-//		Debug.LogError("SpeedA *** "+SpeedA+", MarkCount "+MarkCount+", maxNodes "+maxNodes);
-//		Debug.LogWarning("SpeedA *** "+SpeedA+", SpeedB "+SpeedB);
+//		Debug.LogError("Unity:"+"SpeedA *** "+SpeedA+", MarkCount "+MarkCount+", maxNodes "+maxNodes);
+//		Debug.LogWarning("Unity:"+"SpeedA *** "+SpeedA+", SpeedB "+SpeedB);
 		if (!IsStartMovePlayerByMark) {
 			gameObject.SetActive(true);
 			StartCoroutine(MovePlayerByMarkSpeed());

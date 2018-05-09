@@ -40,7 +40,7 @@ public class NpcAmmoCtrl : MonoBehaviour {
 	// Use this for initialization
 	void Awake()
 	{
-		//Debug.Log("*************** TKMoveSt "+pcvr.TKMoveSt);
+		//Debug.Log("Unity:"+"*************** TKMoveSt "+pcvr.TKMoveSt);
 		if (pcvr.TKMoveSt == TKMoveState.U_FangXiangPan && IsChangeAmmoSpeed) {
 			MvSpeed *= XkGameCtrl.GetInstance().NpcAmmoSpeed;
 		}
@@ -200,7 +200,7 @@ public class NpcAmmoCtrl : MonoBehaviour {
 			Physics.Raycast(startPos, forwardVal, out hitInfo, disVal, NpcAmmoHitLayer);
 			if (hitInfo.collider != null){
 				firePos = hitInfo.point;
-				//Debug.Log("*****npcAmmoHitObj "+hitInfo.collider.name);
+				//Debug.Log("Unity:"+"*****npcAmmoHitObj "+hitInfo.collider.name);
 				XKPlayerMoveCtrl playerScript = hitInfo.collider.GetComponent<XKPlayerMoveCtrl>();
 				if (playerScript != null && !playerScript.GetIsWuDiState()) {
 					XkGameCtrl.GetInstance().SubGamePlayerHealth(playerScript.PlayerIndex, PlayerDamage);
@@ -474,7 +474,7 @@ public class NpcAmmoCtrl : MonoBehaviour {
 
 	public void MoveAmmoOnCompelteITween()
 	{
-		//Debug.Log("MoveAmmoOnCompelteITween...");
+		//Debug.Log("Unity:"+"MoveAmmoOnCompelteITween...");
 		RemoveItweenComponents(gameObject);
 
 		if (AmmoType == PlayerAmmoType.GenZongAmmo) {
@@ -601,7 +601,7 @@ public class NpcAmmoCtrl : MonoBehaviour {
 		if (IsRemoveAmmo) {
 			return;
 		}
-//		Debug.Log("GameNeedRemoveAmmo...ammo "+gameObject.name);
+//		Debug.Log("Unity:"+"GameNeedRemoveAmmo...ammo "+gameObject.name);
 
 		CancelInvoke("DelayRemoveNpcAmmo");
 		RemoveAmmo();

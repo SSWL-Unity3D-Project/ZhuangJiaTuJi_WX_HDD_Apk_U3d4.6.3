@@ -28,7 +28,7 @@ public class XKTriggerAudioNpc : MonoBehaviour
 			//gameObject.SetActive(false);
 			return;
 		}
-		//Debug.Log("CheckAudioCount -> PlayCount "+PlayCount+", CountAudio "+CountAudio);
+		//Debug.Log("Unity:"+"CheckAudioCount -> PlayCount "+PlayCount+", CountAudio "+CountAudio);
 		AudioSourceCom.Stop();
 		AudioSourceCom.Play();
 		CountAudio++;

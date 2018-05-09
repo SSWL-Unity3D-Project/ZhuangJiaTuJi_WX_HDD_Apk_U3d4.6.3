@@ -53,7 +53,7 @@ public class GameStartTimeCtrl : MonoBehaviour {
 	{
 		TimeCount++;
 		if (TimeCount >= TimeTexture.Length) {
-			Debug.Log("ChangeStartTimeUI -> change over!");
+			Debug.Log("Unity:"+"ChangeStartTimeUI -> change over!");
 			gameObject.SetActive(false);
 			ScreenDanHeiCtrl.GetInstance().ActiveGameUiCamera();
 			XkPlayerCtrl.GetInstanceFeiJi().RestartMovePlayer();
@@ -61,7 +61,7 @@ public class GameStartTimeCtrl : MonoBehaviour {
 			return;
 		}
 
-		//Debug.Log("ChangeStartTimeUI -> TimeCount "+TimeCount);
+		//Debug.Log("Unity:"+"ChangeStartTimeUI -> TimeCount "+TimeCount);
 		StartTimeTexture.mainTexture = TimeTexture[TimeCount];
 		PlayStartTimeUI();
 	}

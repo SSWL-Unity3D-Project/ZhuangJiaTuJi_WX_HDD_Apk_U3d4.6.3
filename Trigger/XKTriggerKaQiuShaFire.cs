@@ -10,7 +10,7 @@ public class XKTriggerKaQiuShaFire : MonoBehaviour
 	void Start()
 	{
 		if (SpawnNpcPoint == null) {
-			Debug.LogError("SpawnNpcPoint is null");
+			Debug.LogError("Unity:"+"SpawnNpcPoint is null");
 			GameObject obj = null;
 			obj.name = "null";
 		}
@@ -44,7 +44,7 @@ public class XKTriggerKaQiuShaFire : MonoBehaviour
 		if (IsCloseKaQiuShaTest) {
 			return; //test;
 		}
-		Debug.Log("XKTriggerKaQiuShaFire -> kaQiuSha fire...");
+		Debug.Log("Unity:"+"XKTriggerKaQiuShaFire -> kaQiuSha fire...");
 		if (JiFenJieMianCtrl.GetInstance().GetIsShowFinishTask()) {
 			return;
 		}
@@ -81,17 +81,17 @@ public class XKTriggerKaQiuShaFire : MonoBehaviour
 			}
 			XKCannonCtrl cannonScript = npcObj.GetComponentInChildren<XKCannonCtrl>();
 			cannonScript.SetIsActiveTrigger();
-			Debug.Log("XKTriggerKaQiuShaFire -> Open kaQiuSha fire...");
+			Debug.Log("Unity:"+"XKTriggerKaQiuShaFire -> Open kaQiuSha fire...");
 //			if (Network.peerType == NetworkPeerType.Server) {
 //				XKNpcMoveCtrl npcScript = npcObj.GetComponent<XKNpcMoveCtrl>();
 //				if (npcScript != null) {
-//					Debug.Log("XKTriggerKaQiuShaFire -> Send open kaQiuSha fire...");
+//					Debug.Log("Unity:"+"XKTriggerKaQiuShaFire -> Send open kaQiuSha fire...");
 //					npcScript.OpenKaQiuShaFire();
 //				}
 //			}
 		}
 		else {
-			Debug.LogWarning("XKTriggerKaQiuShaFire -> KaQiuSha has been deleted");
+			Debug.LogWarning("Unity:"+"XKTriggerKaQiuShaFire -> KaQiuSha has been deleted");
 		}
 	}
 

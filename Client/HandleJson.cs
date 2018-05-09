@@ -23,6 +23,7 @@ public class HandleJson {
 	//valueStr: write the value to the file
 	public void WriteToFileXml(string fileName, string attribute, string valueStr)
 	{
+		return ;
 		string filepath = Application.dataPath + "/" + fileName;
 		#if UNITY_ANDROID
 		filepath = Application.persistentDataPath + "//" + fileName;
@@ -60,13 +61,14 @@ public class HandleJson {
 	
 	public void WriteToFilePathXml(string filepath, string attribute, string valueStr)
 	{
+		return;
 		//string filepath = Application.dataPath + "/" + fileName;
-		#if UNITY_ANDROID
-//		filepath = Application.persistentDataPath + "//" + fileName;
-		#endif
-		
+#if UNITY_ANDROID
+		//		filepath = Application.persistentDataPath + "//" + fileName;
+#endif
+
 		//create file
-		if(!File.Exists (filepath))
+		if (!File.Exists (filepath))
 		{
 			XmlDocument xmlDoc = new XmlDocument();
 			XmlElement root = xmlDoc.CreateElement("transforms");
@@ -100,9 +102,10 @@ public class HandleJson {
 	//int.TryParse(valueStr, out aaa);
 	public string ReadFromFileXml(string fileName, string attribute)
 	{
+		return "";
 		string filepath = Application.dataPath + "/" + fileName;
 		#if UNITY_ANDROID
-		filepath = Application.persistentDataPath + "//" + fileName;
+		//filepath = Application.persistentDataPath + "//" + fileName;
 		#endif
 		string valueStr = null;
 		
@@ -124,7 +127,7 @@ public class HandleJson {
 			{
 				File.SetAttributes(filepath, FileAttributes.Normal);
 				File.Delete(filepath);
-				UnityEngine.Debug.LogError("error: xml was wrong! " + exception);
+				UnityEngine.Debug.LogError("Unity:"+"error: xml was wrong! " + exception);
 			}
 		}
 		return valueStr;
@@ -132,10 +135,11 @@ public class HandleJson {
 
 	public string ReadFromFilePathXml(string filepath, string attribute)
 	{
+		return "";
 		//string filepath = Application.dataPath + "/" + fileName;
-		#if UNITY_ANDROID
+#if UNITY_ANDROID
 		//filepath = Application.persistentDataPath + "//" + fileName;
-		#endif
+#endif
 		string valueStr = null;
 		
 		if(File.Exists (filepath))

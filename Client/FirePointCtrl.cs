@@ -9,7 +9,7 @@ public class FirePointCtrl : MonoBehaviour
 		enabled = false;
 		FirePointArray = transform.GetComponentsInChildren<FirePoint>();
 		if (FirePointArray.Length != transform.childCount || FirePointArray.Length <= 0) {
-			Debug.LogWarning("FirePoint was wrong!");
+			Debug.LogWarning("Unity:"+"FirePoint was wrong!");
 			GameObject obj = null;
 			obj.name = "null";
 		}

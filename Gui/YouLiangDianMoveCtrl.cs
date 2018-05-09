@@ -41,7 +41,7 @@ public class YouLiangDianMoveCtrl : MonoBehaviour {
 
 	void MoveYouLiangDianOnCompelte()
 	{
-		//Debug.Log("MoveYouLiangDianOnCompelte...");
+		//Debug.Log("Unity:"+"MoveYouLiangDianOnCompelte...");
 		YouLiangAddCtrl.GetInstance().ShowYouLiangGuangObj();
 		gameObject.SetActive(false);
 	}

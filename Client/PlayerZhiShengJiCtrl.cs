@@ -145,7 +145,7 @@ public class PlayerZhiShengJiCtrl : MonoBehaviour {
 		if (isChangeAngle) {
 			RigidbodyCom.angularVelocity = Vector3.zero;
 		}
-		//Debug.Log("localEulerAngles ** "+transform.localEulerAngles);
+		//Debug.Log("Unity:"+"localEulerAngles ** "+transform.localEulerAngles);
 		transform.localEulerAngles = eulerAngles;
 	}
 

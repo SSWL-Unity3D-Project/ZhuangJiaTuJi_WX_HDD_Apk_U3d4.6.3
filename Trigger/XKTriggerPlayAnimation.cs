@@ -8,7 +8,7 @@ public class XKTriggerPlayAnimation : MonoBehaviour {
 	void Start()
 	{
 		if (NpcAnimator == null) {
-			Debug.LogError("NpcAnimator is null");
+			Debug.LogError("Unity:"+"NpcAnimator is null");
 			NpcAnimator.name = "null";
 		}
 		XkGameCtrl.GetInstance().ChangeBoxColliderSize(transform);

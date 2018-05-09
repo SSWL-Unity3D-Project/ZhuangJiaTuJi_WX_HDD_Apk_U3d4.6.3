@@ -9,6 +9,6 @@ public class TestNpcAni : MonoBehaviour
 		if (!IsShowInfo) {
 			return;
 		}
-		Debug.Log("OnTriggerFireAnimation...");
+		Debug.Log("Unity:"+"OnTriggerFireAnimation...");
 	}
 }

@@ -186,7 +186,7 @@ public class XunZhangJBCtrl : MonoBehaviour {
 			break;
 		}
 
-		//Debug.Log("XunZhangNum "+XunZhangNum);
+		//Debug.Log("Unity:"+"XunZhangNum "+XunZhangNum);
 		if (XunZhangNum > 0) {
 			gameObject.SetActive(true);
 		}

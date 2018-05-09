@@ -80,7 +80,7 @@ public class TestFollowAmmo : MonoBehaviour {
 		
 		if (collided) {
 			Destroy(gameObject);
-			Debug.Log("***********");
+			Debug.Log("Unity:"+"***********");
 			//Instantiate(explosionPrefab, transform.position, transform.rotation);
 		}
 	}

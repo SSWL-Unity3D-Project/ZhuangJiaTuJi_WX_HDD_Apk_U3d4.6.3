@@ -146,8 +146,8 @@ public class TestTanKCom : MonoBehaviour
 	void OnGUI()
 	{
 		if (MyCOMDevice.ComThreadClass.ReadByteMsg.Length < (MyCOMDevice.ComThreadClass.BufLenRead - MyCOMDevice.ComThreadClass.BufLenReadEnd)) {
-//			Debug.Log("ReadBufLen: "+MyCOMDevice.ComThreadClass.ReadByteMsg.Length);
-//			Debug.LogError("ReadMsgError: msg -> "+TestReadMsg);
+//			Debug.Log("Unity:"+"ReadBufLen: "+MyCOMDevice.ComThreadClass.ReadByteMsg.Length);
+//			Debug.LogError("Unity:"+"ReadMsgError: msg -> "+TestReadMsg);
 			return;
 		}
 

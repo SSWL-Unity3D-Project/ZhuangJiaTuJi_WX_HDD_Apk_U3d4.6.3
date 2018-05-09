@@ -31,7 +31,7 @@ public class XKDaPaoCtrl : MonoBehaviour {
 			CannonScript = gameObject.GetComponentsInChildren<XKCannonCtrl>();
 		}
 
-		//Debug.Log("name "+gameObject.name+", IsHuoCheNpc "+IsHuoCheNpc);
+		//Debug.Log("Unity:"+"name "+gameObject.name+", IsHuoCheNpc "+IsHuoCheNpc);
 		if (XkGameCtrl.GetInstance().IsCartoonShootTest) {
 			if (TestSpawnPoint != null) {
 				XKSpawnNpcPoint spawnPoint = TestSpawnPoint.GetComponent<XKSpawnNpcPoint>();
@@ -45,7 +45,7 @@ public class XKDaPaoCtrl : MonoBehaviour {
 
 	void DelayChangeNpcParent()
 	{
-//		Debug.Log("DelayChangeNpcParent -> IsHuoCheNpc "+IsHuoCheNpc+", name "+gameObject.name);
+//		Debug.Log("Unity:"+"DelayChangeNpcParent -> IsHuoCheNpc "+IsHuoCheNpc+", name "+gameObject.name);
 		if (!IsHuoCheNpc) {
 			if (transform.parent == null) {
 				transform.parent = XkGameCtrl.NpcObjArray;
@@ -58,7 +58,7 @@ public class XKDaPaoCtrl : MonoBehaviour {
 		IsHandleRpc = true;
 		SpawnPointScript = script;
 		IsHuoCheNpc = SpawnPointScript.GetIsHuoCheNpc();
-//		Debug.Log("SetSpawnPointScript -> IsHuoCheNpc "+IsHuoCheNpc);
+//		Debug.Log("Unity:"+"SetSpawnPointScript -> IsHuoCheNpc "+IsHuoCheNpc);
 		TestSpawnPoint = script.gameObject;
 		
 		if (CannonScript == null || CannonScript.Length < 1) {
@@ -67,7 +67,7 @@ public class XKDaPaoCtrl : MonoBehaviour {
 
 		if (CannonScript.Length > 0) {
 			int max = CannonScript.Length;
-//			Debug.Log("SetSpawnPointScript -> max "+max);
+//			Debug.Log("Unity:"+"SetSpawnPointScript -> max "+max);
 			for (int i = 0; i < max; i++) {
 				CannonScript[i].SetSpawnPointScript(this);
 			}
@@ -111,7 +111,7 @@ public class XKDaPaoCtrl : MonoBehaviour {
 	
 	[RPC] void XKCannonSendSetNpcAimPlayerState(int valAim, float valFireDis)
 	{
-		//Debug.Log("XKCannonSendSetNpcAimPlayerState.............");
+		//Debug.Log("Unity:"+"XKCannonSendSetNpcAimPlayerState.............");
 		SetCannonNpcInfo(valAim, valFireDis);
 	}
 	
@@ -239,7 +239,7 @@ public class XKDaPaoCtrl : MonoBehaviour {
 	IEnumerator DelaySetHuoCheNpcInfo(int indexPoint)
 	{
 		yield return new WaitForSeconds(0.5f);
-//		Debug.Log("XKDaPaoSendSetHuoCheNpcInfo -> indexPoint "+indexPoint+", name "+transform.name);
+//		Debug.Log("Unity:"+"XKDaPaoSendSetHuoCheNpcInfo -> indexPoint "+indexPoint+", name "+transform.name);
 		if (Network.peerType == NetworkPeerType.Server) {
 			yield break;
 		}
@@ -250,12 +250,12 @@ public class XKDaPaoCtrl : MonoBehaviour {
 		}
 		
 		XKSpawnNpcPoint[] pointScript = huoCheScript.gameObject.GetComponentsInChildren<XKSpawnNpcPoint>();
-//		Debug.Log("XKDaPaoSendSetHuoCheNpcInfo -> pointScript.Len "+pointScript.Length);
+//		Debug.Log("Unity:"+"XKDaPaoSendSetHuoCheNpcInfo -> pointScript.Len "+pointScript.Length);
 		if (pointScript.Length > 0) {
 			for (int i = 0; i < pointScript.Length; i++) {
 				if (i == indexPoint) {
 					IsHuoCheNpc = true;
-//					Debug.Log("XKDaPaoSendSetHuoCheNpcInfo... IsHuoCheNpc "+IsHuoCheNpc+", parentName "
+//					Debug.Log("Unity:"+"XKDaPaoSendSetHuoCheNpcInfo... IsHuoCheNpc "+IsHuoCheNpc+", parentName "
 //					          +pointScript[i].transform.parent.name);
 					CancelInvoke("DelayChangeNpcParent");
 					transform.parent = pointScript[i].transform.parent;
@@ -274,7 +274,7 @@ public class XKDaPaoCtrl : MonoBehaviour {
 
 	public void ResetNpcDaPaoInfo()
 	{
-		//Debug.Log("ResetNpcDaPaoInfo -> npcObj "+gameObject.name+", npcId "+NpcId);
+		//Debug.Log("Unity:"+"ResetNpcDaPaoInfo -> npcObj "+gameObject.name+", npcId "+NpcId);
 		IsDeathNpc = false;
 	}
 }

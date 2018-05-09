@@ -16,7 +16,7 @@ public class SetPanelCtrl : MonoBehaviour {
 	// Use this for initialization
 	void Start()
 	{
-		//Debug.Log("SetPanelCtrl::init...");
+		//Debug.Log("Unity:"+"SetPanelCtrl::init...");
 		InputEventCtrl.GetInstance().ClickSetEnterBtEvent += ClickSetEnterBtEvent;
 	}
 
@@ -39,7 +39,7 @@ public class SetPanelCtrl : MonoBehaviour {
 	void loadLevelSetPanel()
 	{
 		if (XkGameCtrl.IsLoadingLevel) {
-//			Debug.Log("*************Loading...");
+//			Debug.Log("Unity:"+"*************Loading...");
 			return;
 		}
 		

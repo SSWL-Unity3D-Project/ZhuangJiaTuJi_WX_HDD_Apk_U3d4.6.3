@@ -112,7 +112,7 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 
 		if (NpcObj == null) {
 			if (!XkGameCtrl.GetInstance().IsCartoonShootTest) {
-				Debug.LogWarning("NpcObj was null");
+				Debug.LogWarning("Unity:"+"NpcObj was null");
 				GameObject obj = null;
 				obj.name = "null";
 			}
@@ -121,7 +121,7 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 //		else {
 //			NetworkView netView = NpcObj.GetComponent<NetworkView>();
 //			if (netView == null) {
-//				Debug.LogWarning("npc cannot find NetworkView");
+//				Debug.LogWarning("Unity:"+"npc cannot find NetworkView");
 //				GameObject obj = null;
 //				obj.name = "null";
 //				return;
@@ -131,7 +131,7 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 		XKNpcMoveCtrl npcScript = NpcObj.GetComponent<XKNpcMoveCtrl>();
 		if (npcScript != null) {
 			if (IsFireMove && IsAimPlayer) {
-				Debug.LogWarning("SpawnPoint.IsFireMove and SpawnPoint.IsAimPlayer is true!");
+				Debug.LogWarning("Unity:"+"SpawnPoint.IsFireMove and SpawnPoint.IsAimPlayer is true!");
 				GameObject obj = null;
 				obj.name = "null";
 			}
@@ -142,7 +142,7 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 			
 //			if (npcScript.NpcState == NpcType.FlyNpc) {
 //				if (NpcPath != null && NpcPath.childCount < 2) {
-//					Debug.LogWarning("NpcPath.childCount was wrong!");
+//					Debug.LogWarning("Unity:"+"NpcPath.childCount was wrong!");
 //					GameObject obj = null;
 //					obj.name = "null";
 //				}
@@ -151,13 +151,13 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 
 		if (NpcPath != null) {
 		    if (NpcPath.childCount < 1) {
-				Debug.LogWarning("NpcPath.childCount was wrong! childCount = "+NpcPath.childCount);
+				Debug.LogWarning("Unity:"+"NpcPath.childCount was wrong! childCount = "+NpcPath.childCount);
 				GameObject obj = null;
 				obj.name = "null";
 			}
 
 			if (NpcPath.GetComponent<NpcPathCtrl>() == null) {
-				Debug.LogWarning("NpcPath was wrong! cannot find NpcPathCtrl script");
+				Debug.LogWarning("Unity:"+"NpcPath was wrong! cannot find NpcPathCtrl script");
 				GameObject obj = null;
 				obj.name = "null";
 			}
@@ -166,7 +166,7 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 //		if (FirePointGroup.Length > 0) {
 //			for (int i = 0; i < FirePointGroup.Length; i++) {
 //				if (FirePointGroup[i] == null) {
-//					Debug.LogWarning("FirePointGroup was wrong! index "+(i+1));
+//					Debug.LogWarning("Unity:"+"FirePointGroup was wrong! index "+(i+1));
 //					GameObject obj = null;
 //					obj.name = "null";
 //					break;
@@ -174,7 +174,7 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 //			}
 //
 //			if (SpeedFangZhenFireRun <= 0f) {
-//				Debug.LogWarning("SpeedFangZhenFireRun was wrong! SpeedFangZhenFireRun "+SpeedFangZhenFireRun);
+//				Debug.LogWarning("Unity:"+"SpeedFangZhenFireRun was wrong! SpeedFangZhenFireRun "+SpeedFangZhenFireRun);
 //				GameObject obj = null;
 //				obj.name = "null";
 //			}
@@ -183,7 +183,7 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 		if (NpcSpawnLoop.Length > 0) {
 			for (int i = 0; i < NpcSpawnLoop.Length; i++) {
 				if (NpcSpawnLoop[i] == null) {
-					Debug.LogWarning("NpcSpawnLoop was wrong! index "+(i+1));
+					Debug.LogWarning("Unity:"+"NpcSpawnLoop was wrong! index "+(i+1));
 					GameObject obj = null;
 					obj.name = "null";
 					break;
@@ -194,7 +194,7 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 		if (ChildSpawnPoint.Length > 0) {
 			for (int i = 0; i < ChildSpawnPoint.Length; i++) {
 				if (ChildSpawnPoint[i] == null) {
-					Debug.LogWarning("ChildSpawnPoint was wrong! index "+(i+1));
+					Debug.LogWarning("Unity:"+"ChildSpawnPoint was wrong! index "+(i+1));
 					GameObject obj = null;
 					obj.name = "null";
 					break;
@@ -203,7 +203,7 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 		}
 
 		if (ChildSpawnPoint.Length > 0 && NpcFangZhen == null) {
-			Debug.LogWarning("NpcFangZhen is null! fangZhenLength "+ChildSpawnPoint.Length);
+			Debug.LogWarning("Unity:"+"NpcFangZhen is null! fangZhenLength "+ChildSpawnPoint.Length);
 			GameObject obj = null;
 			obj.name = "null";
 		}
@@ -226,7 +226,7 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 			return;
 		}
 
-		//Debug.Log("HandleFeiJiNpcSpawnInfo -> indexVal "+indexVal);
+		//Debug.Log("Unity:"+"HandleFeiJiNpcSpawnInfo -> indexVal "+indexVal);
 		XKSpawnNpcPoint spawnScript = FiJiNpcPointList[indexVal];
 		spawnScript.SaveFeiJiNpcSpawnInfo(npcScript);
 	}
@@ -371,7 +371,7 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 		if (hcScript != null) {
 			obj = SpawnPointNpc(NpcObj, transform.position, transform.rotation);
 			if (obj == null) {
-				//Debug.Log("StartSpawnNpc -> Cannot spawn HuoCheNpc!");
+				//Debug.Log("Unity:"+"StartSpawnNpc -> Cannot spawn HuoCheNpc!");
 				return;
 			}
 
@@ -385,10 +385,10 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 
 		DaPaoScript = NpcObj.GetComponent<XKDaPaoCtrl>();
 		if (DaPaoScript != null) {
-//			Debug.Log("Spawn Cannon... ");
+//			Debug.Log("Unity:"+"Spawn Cannon... ");
 			obj = SpawnPointNpc(NpcObj, transform.position, transform.rotation);
 			if (obj == null) {
-				//Debug.Log("StartSpawnNpc -> Cannot spawn DaPaoNpc!");
+				//Debug.Log("Unity:"+"StartSpawnNpc -> Cannot spawn DaPaoNpc!");
 				return;
 			}
 
@@ -410,12 +410,12 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 			return;
 		}
 
-		//Debug.Log("SpawnPointAllNpc...NpcObj is "+NpcObj.name+", SpawnNpcCount "+SpawnNpcCount);
+		//Debug.Log("Unity:"+"SpawnPointAllNpc...NpcObj is "+NpcObj.name+", SpawnNpcCount "+SpawnNpcCount);
 		if (ChildSpawnPoint.Length > 0) {
 			//spawn fangZhenNpc
 			GameObject fangZhenObj = SpawnPointNpc(NpcFangZhen, transform.position, transform.rotation);
 			if (fangZhenObj == null) {
-				//Debug.LogError("StartSpawnNpc -> Cannot spawn FangZhenNpc! NpcFangZhen "+NpcFangZhen.name);
+				//Debug.LogError("Unity:"+"StartSpawnNpc -> Cannot spawn FangZhenNpc! NpcFangZhen "+NpcFangZhen.name);
 				//fangZhenObj.name = "null";
 				return;
 			}
@@ -427,7 +427,7 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 			fangZhenTran.parent = XkGameCtrl.NpcObjArray;
 			obj = SpawnPointNpc(NpcObj, transform.position, transform.rotation);
 			if (obj == null) {
-				//Debug.Log("StartSpawnNpc -> Cannot spawn FangZhenChildNpc --- 1");
+				//Debug.Log("Unity:"+"StartSpawnNpc -> Cannot spawn FangZhenChildNpc --- 1");
 				return;
 			}
 
@@ -441,7 +441,7 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 			for (int i = 0; i < ChildSpawnPoint.Length; i++) {
 				obj = SpawnPointNpc(NpcObj, ChildSpawnPoint[i].position, ChildSpawnPoint[i].rotation);
 				if (obj == null) {
-					//Debug.LogWarning("StartSpawnNpc -> Cannot spawn FangZhenChildNpc --- index "+i);
+					//Debug.LogWarning("Unity:"+"StartSpawnNpc -> Cannot spawn FangZhenChildNpc --- index "+i);
 					break;
 				}
 
@@ -486,7 +486,7 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 		}
 
 		if (obj == null) {
-			//Debug.Log("StartSpawnNpc -> Cannot spawn PuTongNpc!");
+			//Debug.Log("Unity:"+"StartSpawnNpc -> Cannot spawn PuTongNpc!");
 			return;
 		}
 
@@ -523,12 +523,12 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 	GameObject SpawnPointNpc(GameObject objPrefab, Vector3 pos, Quaternion rot)
 	{
 		GameObject obj = XKNpcSpawnListCtrl.GetInstance().GetNpcObjFromNpcDtList(objPrefab, pos, rot);
-//		Debug.Log("SpawnPointNpc -> objPrefab "+objPrefab.name);
+//		Debug.Log("Unity:"+"SpawnPointNpc -> objPrefab "+objPrefab.name);
 //		if (obj == null) {
-//			Debug.Log("SpawnPointNpc -> obj is null");
+//			Debug.Log("Unity:"+"SpawnPointNpc -> obj is null");
 //		}
 //		else {
-//			Debug.Log("SpawnPointNpc -> obj is "+obj.name);
+//			Debug.Log("Unity:"+"SpawnPointNpc -> obj is "+obj.name);
 //		}
 
 //		if (Network.peerType == NetworkPeerType.Disconnected) {
@@ -551,7 +551,7 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 		}
 
 		if (NpcObj == null) {
-			Debug.LogError("NpcObj is null");
+			Debug.LogError("Unity:"+"NpcObj is null");
 			return;
 		}
 
@@ -584,14 +584,14 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 
 		if (NpcFangZhenScript != null) {
 			if (NpcFangZhenScript.TestSpawnPoint != gameObject) {
-				//Debug.LogWarning("RemovePointAllNpc -> Cannot remove fangZhenNpc");
+				//Debug.LogWarning("Unity:"+"RemovePointAllNpc -> Cannot remove fangZhenNpc");
 				return;
 			}
 			NpcFangZhenScript.TriggerRemovePointNpc(0);
 		}
 		else if (DaPaoScript != null) {
 			if (DaPaoScript.TestSpawnPoint != gameObject) {
-				//Debug.LogWarning("RemovePointAllNpc -> Cannot remove daPaoNpc");
+				//Debug.LogWarning("Unity:"+"RemovePointAllNpc -> Cannot remove daPaoNpc");
 				return;
 			}
 			DaPaoScript.OnRemoveCannon(PlayerEnum.Null, 0);
@@ -604,7 +604,7 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 			for (int i = 0; i < max; i++) {
 				if(NpcScript[i] != null) {
 					if (NpcScript[i].TestSpawnPoint != gameObject) {
-						//Debug.LogWarning("RemovePointAllNpc -> Cannot remove puTongNpc");
+						//Debug.LogWarning("Unity:"+"RemovePointAllNpc -> Cannot remove puTongNpc");
 						continue;
 					}
 					NpcScript[i].TriggerRemovePointNpc(0);
@@ -639,7 +639,7 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 	{
 		if (IsPlayerAimTrigger && !IsPlayerLeaveTrigger) {
 			//该产生点有瞄准触发器，但是它没有加离开触发器.
-			Debug.LogWarning("The SpawnPoint has not XKTriggerPlayerAimRemove!");
+			Debug.LogWarning("Unity:"+"The SpawnPoint has not XKTriggerPlayerAimRemove!");
 			GameObject obj = null;
 			obj.name = "null";
 		}
@@ -665,7 +665,7 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 		}
 
 		//使用了该产生点，但是没有在删除触发器中调用.
-		Debug.LogWarning("This spawnPoint has no removeTrigger!");
+		Debug.LogWarning("Unity:"+"This spawnPoint has no removeTrigger!");
 		GameObject obj = null;
 		obj.name = "null";
 	}

@@ -48,14 +48,14 @@ public class NetCtrl : MonoBehaviour {
 	
 	[RPC] void NetCtrlMakeClientPlayerMove()
 	{
-		Debug.Log("NetCtrlMakeClientPlayerMove......");
+		Debug.Log("Unity:"+"NetCtrlMakeClientPlayerMove......");
 		if (GameTypeCtrl.AppTypeStatic == AppGameType.LianJiFeiJi) {
 			if (XkPlayerCtrl.GetInstanceFeiJi() != null) {
 				XkPlayerCtrl.GetInstanceFeiJi().RestartMovePlayer();
 				XkGameCtrl.GetInstance().ChangePlayerCameraTag();
 			}
 			else {
-				Debug.Log("NetCtrlMakeClientPlayerMove -> FeiJiPlayer is null");
+				Debug.Log("Unity:"+"NetCtrlMakeClientPlayerMove -> FeiJiPlayer is null");
 				StartCoroutine(LoopCheckPlayerRestartMove());
 			}
 		}
@@ -66,7 +66,7 @@ public class NetCtrl : MonoBehaviour {
 				XkGameCtrl.GetInstance().ChangePlayerCameraTag();
 			}
 			else {
-				Debug.Log("NetCtrlMakeClientPlayerMove -> TanKePlayer is null");
+				Debug.Log("Unity:"+"NetCtrlMakeClientPlayerMove -> TanKePlayer is null");
 				StartCoroutine(LoopCheckPlayerRestartMove());
 			}
 		}
@@ -117,7 +117,7 @@ public class NetCtrl : MonoBehaviour {
 		if (IsSendAddLinkCount) {
 			return;
 		}
-		Debug.Log("SendAddLinkCount...");
+		Debug.Log("Unity:"+"SendAddLinkCount...");
 		IsSendAddLinkCount = true;
 		IsSendSubLinkCount = false;
 		NetworkViewCom.RPC("NetCtrlSendAddLinkCount", RPCMode.Server);
@@ -130,7 +130,7 @@ public class NetCtrl : MonoBehaviour {
 		}
 		SelectLinkCount++;
 
-		Debug.Log("NetCtrlSendAddLinkCount -> SelectLinkCount "+SelectLinkCount+", MaxPlayerCount "+MaxPlayerCount);
+		Debug.Log("Unity:"+"NetCtrlSendAddLinkCount -> SelectLinkCount "+SelectLinkCount+", MaxPlayerCount "+MaxPlayerCount);
 		if (SelectLinkCount >= MaxPlayerCount) {
 			//Loading game, start to link game.
 			SelectLinkCount = 0;
@@ -165,7 +165,7 @@ public class NetCtrl : MonoBehaviour {
 
 	void DelayLoadingGameScene_1()
 	{
-		Debug.Log("DelayLoadingGameScene...");
+		Debug.Log("Unity:"+"DelayLoadingGameScene...");
 		if (Application.loadedLevel == (int)GameLevel.Movie) {
 			XkGameCtrl.LoadingGameScene_1();
 		}
@@ -275,7 +275,7 @@ public class NetCtrl : MonoBehaviour {
 		if (ScreenDanHeiCtrl.IsStartGame) {
 			return;
 		}
-		Debug.Log("NetCtrlSendSetScreenDanHeiIsStartGame...");
+		Debug.Log("Unity:"+"NetCtrlSendSetScreenDanHeiIsStartGame...");
 		XkGameCtrl.ClearCartoonSpawnNpc();
 		ScreenDanHeiCtrl.IsStartGame = true;
 		Time.timeScale = 1.0f;
@@ -302,7 +302,7 @@ public class NetCtrl : MonoBehaviour {
 			return;
 		}
 		IsMakeGameStopJiFenTime = true;
-		Debug.Log("MakeOtherPortStopJiFenTime...");
+		Debug.Log("Unity:"+"MakeOtherPortStopJiFenTime...");
 		NetworkViewCom.RPC("NetCtrlMakeOtherPortStopJiFenTime", RPCMode.OthersBuffered);
 	}
 	
@@ -311,7 +311,7 @@ public class NetCtrl : MonoBehaviour {
 		if (IsMakeGameStopJiFenTime) {
 			return;
 		}
-		Debug.Log("NetCtrlMakeOtherPortStopJiFenTime...");
+		Debug.Log("Unity:"+"NetCtrlMakeOtherPortStopJiFenTime...");
 		IsMakeGameStopJiFenTime = true;
 		JiFenJieMianCtrl.GetInstance().StopJiFenTime();
 	}

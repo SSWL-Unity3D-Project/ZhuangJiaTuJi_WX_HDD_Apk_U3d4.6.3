@@ -25,7 +25,7 @@ public class XKPlayerFenShuMove : MonoBehaviour
 		if (isShowShuangBeiUI) {
 			int indexBeiLv = XKDaoJuGlobalDt.FenShuBeiLv[indexPlayer] - 2;
 			indexBeiLv = indexBeiLv > 8 ? 8 : indexBeiLv;
-			//Debug.Log("SetPlayerFenShuVal -> indexBeiLv "+indexBeiLv+", indexPlayer "+indexPlayer);
+			//Debug.Log("Unity:"+"SetPlayerFenShuVal -> indexBeiLv "+indexBeiLv+", indexPlayer "+indexPlayer);
 			if (BeiLvUITexture == null) {
 				BeiLvUITexture = ShuangBeiObj.GetComponent<UITexture>();
 			}

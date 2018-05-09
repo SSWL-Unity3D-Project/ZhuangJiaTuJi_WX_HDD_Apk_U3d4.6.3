@@ -7,7 +7,7 @@ public class XkAmmoTieHuaCtrl : MonoBehaviour
 	void Start()
 	{
 		if (TieHuaTran == null) {
-			Debug.LogWarning("TieHuaTran is null");
+			Debug.LogWarning("Unity:"+"TieHuaTran is null");
 			GameObject obj = null;
 			obj.name = "null";
 		}
