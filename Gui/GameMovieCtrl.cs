@@ -7,7 +7,9 @@ public class GameMovieCtrl : MonoBehaviour
     /// Websocket预制.
     /// </summary>
     public GameObject m_WebSocketBoxPrefab;
+#if UNITY_STANDALONE_WIN
 	public MovieTexture Movie;
+#endif
 	public static bool IsTestLJGame; //测试联机小窗口游戏.
 	AudioSource AudioSourceObj;
 	bool IsStopMovie;
@@ -75,39 +77,45 @@ public class GameMovieCtrl : MonoBehaviour
 			Invoke("CloseAllFangXiangPanPower", 10f);
 		}
 		PlayMovie();
-	}
+    }
 
 	void DelayResetIsLoadingLevel()
 	{
 		XkGameCtrl.ResetIsLoadingLevel();
 		if (NetworkServerNet.GetInstance() != null) {
 			NetworkServerNet.GetInstance().TryToCreateServer();
-		}
-	}
+        }
+
+        //InputEventCtrl.GetInstance().ClickStartBtOne(ButtonState.DOWN); //test.
+        //InputEventCtrl.GetInstance().ClickStartBtOne(ButtonState.UP);
+    }
 	
 	void PlayMovie()
 	{
-		if (renderer != null) {
+#if UNITY_STANDALONE_WIN
+        if (renderer != null) {
 			renderer.enabled = true;
 			renderer.material.mainTexture = Movie;
 		}
 		Movie.loop = true;
 		Movie.Play();
 		
-		#if TEST_MOVIE
+#if TEST_MOVIE
 		TimeMv = Time.realtimeSinceStartup;
-		#endif
+#endif
 		
 		if (AudioSourceObj != null) {
 			AudioSourceObj.clip = Movie.audioClip;
 			AudioSourceObj.enabled = true;
 			AudioSourceObj.Play();
 		}
+#endif
 	}
 
 	public void StopPlayMovie()
 	{
-		if (IsStopMovie) {
+#if UNITY_STANDALONE_WIN
+        if (IsStopMovie) {
 			return;
 		}
 		IsStopMovie = true;
@@ -121,6 +129,7 @@ public class GameMovieCtrl : MonoBehaviour
 			return;
 		}
 		gameObject.SetActive(false);
+#endif
 	}
 
 	void CloseAllFangXiangPanPower()
