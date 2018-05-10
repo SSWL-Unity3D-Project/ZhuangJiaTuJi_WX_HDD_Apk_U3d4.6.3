@@ -203,29 +203,49 @@ public class GameMovieCtrl : MonoBehaviour
 		GUI.Box(new Rect(0f, 0f, 500f, 35f), mvInfo);
 	}
 #endif
-    
-#if UNITY_ANDROID
+
+    public float m_MovieTime = 15f;
+    float m_LastMovieTime = -10000f;
+    public Rect m_ErWeiMaRect;
+    public Texture m_ErWeiMaImg;
+
     void OnGUI()
     {
-        if (GUI.Button(new Rect(20, 10, 300, 25), "PLAY ControlMode.CancelOnTouch"))
-        {
-            Handheld.PlayFullScreenMovie(m_MoviePath, Color.black, FullScreenMovieControlMode.CancelOnInput);
-        }
+#if UNITY_STANDALONE_WIN
+        Rect movieRt = new Rect(0f, 0f, Screen.width, Screen.height);
+        GUI.DrawTexture(movieRt, Movie);
+#endif
 
-        if (GUI.Button(new Rect(20, 90, 300, 25), "PLAY ControlMode.Full"))
-        {
-            Handheld.PlayFullScreenMovie(m_MoviePath, Color.black, FullScreenMovieControlMode.Full);
-        }
+        m_ErWeiMaRect.x = (Screen.width / 2) - (m_ErWeiMaRect.width / 2);
+        m_ErWeiMaRect.y = Screen.height - m_ErWeiMaRect.height - 10f;
+        GUI.DrawTexture(m_ErWeiMaRect, m_ErWeiMaImg);
 
-        if (GUI.Button(new Rect(20, 170, 300, 25), "PLAY ControlMode.Hidden"))
+#if UNITY_ANDROID
+        if (Time.time - m_LastMovieTime >= m_MovieTime)
         {
+            m_LastMovieTime = m_MovieTime;
             Handheld.PlayFullScreenMovie(m_MoviePath, Color.black, FullScreenMovieControlMode.Hidden);
         }
-
-        if (GUI.Button(new Rect(20, 250, 300, 25), "PLAY ControlMode.Minimal"))
-        {
-            Handheld.PlayFullScreenMovie(m_MoviePath, Color.black, FullScreenMovieControlMode.Minimal);
-        }
-    }
 #endif
+
+        //if (GUI.Button(new Rect(20, 10, 300, 25), "PLAY ControlMode.CancelOnTouch"))
+        //{
+        //    Handheld.PlayFullScreenMovie(m_MoviePath, Color.black, FullScreenMovieControlMode.CancelOnInput);
+        //}
+
+        //if (GUI.Button(new Rect(20, 90, 300, 25), "PLAY ControlMode.Full"))
+        //{
+        //    Handheld.PlayFullScreenMovie(m_MoviePath, Color.black, FullScreenMovieControlMode.Full);
+        //}
+
+        //if (GUI.Button(new Rect(20, 170, 300, 25), "PLAY ControlMode.Hidden"))
+        //{
+        //    Handheld.PlayFullScreenMovie(m_MoviePath, Color.black, FullScreenMovieControlMode.Hidden);
+        //}
+
+        //if (GUI.Button(new Rect(20, 250, 300, 25), "PLAY ControlMode.Minimal"))
+        //{
+        //    Handheld.PlayFullScreenMovie(m_MoviePath, Color.black, FullScreenMovieControlMode.Minimal);
+        //}
+    }
 }
