@@ -1,8 +1,13 @@
 ﻿//#define TEST_MOVIE
 using UnityEngine;
 
-public class GameMovieCtrl : MonoBehaviour
+public class GameMovieCtrl : SSGameMono
 {
+    public Transform m_UITrParent;
+    /// <summary>
+    /// 循环动画logo的动画.
+    /// </summary>
+    public GameObject m_MovieAniPrefab;
 #if UNITY_ANDROID
     public string m_MoviePath = "Movie/cartoonNew.mov";
 #endif
@@ -102,14 +107,50 @@ public class GameMovieCtrl : MonoBehaviour
 				Invoke("CloseAllFangXiangPanPower", 10f);
 			}
 			Debug.Log("Unity:!!!!!!IsOpenFXZhenDong!!!!!!");
-			PlayMovie();
-		}
+            //PlayMovie();
+            //创建Logo播放对象.
+            //CrateMovieLogoAni();
+        }
 		catch (System.Exception e)
 		{
 			Debug.Log("Unity:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			Debug.LogException(e);
 			Debug.Log("Unity:"+e.Message);
 		}
+    }
+
+    bool IsCrateMovieLogo = false;
+    Object m_MovieAniObj;
+    /// <summary>
+    /// 创建Logo播放对象.
+    /// </summary>
+    void CrateMovieLogoAni()
+    {
+        Debug.Log("Unity: CrateMovieLogoAni...");
+        if (IsCrateMovieLogo)
+        {
+            return;
+        }
+        IsCrateMovieLogo = true;
+
+        if (m_MovieAniPrefab != null && m_UITrParent != null)
+        {
+            m_MovieAniObj = Instantiate(m_MovieAniPrefab, m_UITrParent);
+        }
+        else
+        {
+            Debug.LogWarning("Unity: m_MovieAniPrefab or m_UITrParent was null");
+        }
+    }
+
+    void RemoveMovieLogoAni()
+    {
+        Debug.Log("Unity: RemoveMovieLogoAni...");
+        if (IsCrateMovieLogo)
+        {
+            IsCrateMovieLogo = false;
+            Destroy(m_MovieAniObj);
+        }
     }
 
 	void DelayResetIsLoadingLevel()
@@ -126,14 +167,14 @@ public class GameMovieCtrl : MonoBehaviour
 		//Debug.Log("Unity:!!!!!!DelayResetIsLoadingLevel4!!!!!!");
 	}
 
-	void PlayMovie()
+	public void PlayMovie()
 	{
 #if UNITY_STANDALONE_WIN
         if (renderer != null) {
 			renderer.enabled = true;
 			renderer.material.mainTexture = Movie;
 		}
-		Movie.loop = true;
+		Movie.loop = false;
 		Movie.Play();
 		
 #if TEST_MOVIE
@@ -146,7 +187,8 @@ public class GameMovieCtrl : MonoBehaviour
 			AudioSourceObj.Play();
 		}
 #endif
-	}
+        RemoveMovieLogoAni();
+    }
 
 	public void StopPlayMovie()
 	{
@@ -212,8 +254,18 @@ public class GameMovieCtrl : MonoBehaviour
     void OnGUI()
     {
 #if UNITY_STANDALONE_WIN
-        Rect movieRt = new Rect(0f, 0f, Screen.width, Screen.height);
-        GUI.DrawTexture(movieRt, Movie);
+        if (Movie.isPlaying)
+        {
+            Rect movieRt = new Rect(0f, 0f, Screen.width, Screen.height);
+            GUI.DrawTexture(movieRt, Movie);
+        }
+        else
+        {
+            if (!IsCrateMovieLogo)
+            {
+                CrateMovieLogoAni();
+            }
+        }
 #endif
 
         m_ErWeiMaRect.x = (Screen.width / 2) - (m_ErWeiMaRect.width / 2);
