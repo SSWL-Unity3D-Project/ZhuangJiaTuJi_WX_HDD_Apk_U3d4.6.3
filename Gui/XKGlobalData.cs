@@ -27,11 +27,14 @@ public class XKGlobalData {
 		if (Instance == null) {
 			Instance = new XKGlobalData();
 			Instance.InitInfo();
-			/*if (!Directory.Exists(FilePath)) {
-				Directory.CreateDirectory(FilePath);
-			}*/
 
-			if(HandleJsonObj == null) {
+#if UNITY_STANDALONE_WIN
+            if (!Directory.Exists(FilePath)) {
+				Directory.CreateDirectory(FilePath);
+			}
+#endif
+
+            if(HandleJsonObj == null) {
 				HandleJsonObj = HandleJson.GetInstance();
 			}
 			return Instance;
@@ -103,10 +106,16 @@ public class XKGlobalData {
 
 	void InitInfo()
 	{
-		FilePath = Application.dataPath + "/config";
-	}
+#if UNITY_STANDALONE_WIN
+        FilePath = Application.dataPath + "/../config";
+#endif
 
-	public static void SetCoinPlayerOne(int coin)
+#if UNITY_ANDROID
+        FileName = "GameConfig.xml";
+#endif
+    }
+
+    public static void SetCoinPlayerOne(int coin)
 	{
 		if (XKGlobalData.GameVersionPlayer != 0) {
 			CoinPlayerOne = coin;
