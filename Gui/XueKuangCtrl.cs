@@ -6,6 +6,10 @@ public class XueKuangCtrl : MonoBehaviour
 	public PlayerEnum PlayerSt = PlayerEnum.Null;
 	public UITexture XueKuangNum;
     /// <summary>
+    /// 微信头像.
+    /// </summary>
+    public UITexture m_WeiXinHead;
+    /// <summary>
     /// 血框数字图片的大小.
     /// XueKuangNumWH[0] - 未激活.
     /// XueKuangNumWH[1] - 激活.
@@ -108,14 +112,23 @@ public class XueKuangCtrl : MonoBehaviour
         {
             if (XKGlobalData.GameVersionPlayer == 0)
             {
-                if (indexVal == 0)
+                XueKuangNum.mainTexture = XueKuangTexture[indexVal];
+                if (indexVal == 1)
                 {
-                    XueKuangNum.mainTexture = XueKuangTexture[indexVal];
+                    if (m_WeiXinHead != null)
+                    {
+                        m_WeiXinHead.gameObject.SetActive(true);
+                        string url = pcvr.GetInstance().m_PlayerHeadUrl[indexUrl];
+                        XkGameCtrl.GetInstance().m_AsyImage.LoadPlayerHeadImg(url, m_WeiXinHead);
+                    }
                 }
                 else
                 {
-                    string url = pcvr.GetInstance().m_PlayerHeadUrl[indexUrl];
-                    XkGameCtrl.GetInstance().m_AsyImage.LoadPlayerHeadImg(url, XueKuangNum);
+                    if (m_WeiXinHead != null)
+                    {
+                        m_WeiXinHead.mainTexture = null;
+                        m_WeiXinHead.gameObject.SetActive(false);
+                    }
                 }
             }
             else
