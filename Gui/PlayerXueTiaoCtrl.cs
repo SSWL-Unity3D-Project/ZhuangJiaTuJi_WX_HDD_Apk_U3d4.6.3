@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class PlayerXueTiaoCtrl : MonoBehaviour
 {
+    public Texture m_PlayerNumImg;
     [HideInInspector]
 	public PlayerEnum PlayerSt = PlayerEnum.Null;
 	public Renderer NengLiangRenderer;
@@ -118,11 +118,18 @@ public class PlayerXueTiaoCtrl : MonoBehaviour
     string m_HeadUrl = "";
 	public void HandlePlayerXueTiaoInfo(float fillVal)
 	{
-        int indexVal = (int)PlayerSt - 1;
-        if (m_HeadUrl != pcvr.GetInstance().m_PlayerHeadUrl[indexVal])
+        if (pcvr.IsHongDDShouBing)
         {
-            m_HeadUrl = pcvr.GetInstance().m_PlayerHeadUrl[indexVal];
-            XkGameCtrl.GetInstance().m_AsyImage.LoadPlayerHeadImg(m_HeadUrl, m_MatNum);
+            int indexVal = (int)PlayerSt - 1;
+            if (m_HeadUrl != pcvr.GetInstance().m_PlayerHeadUrl[indexVal])
+            {
+                m_HeadUrl = pcvr.GetInstance().m_PlayerHeadUrl[indexVal];
+                XkGameCtrl.GetInstance().m_AsyImage.LoadPlayerHeadImg(m_HeadUrl, m_MatNum);
+            }
+        }
+        else
+        {
+            m_MatNum.mainTexture = m_PlayerNumImg;
         }
 
         float xueLiangVal = 1f - fillVal;
@@ -160,13 +167,20 @@ public class PlayerXueTiaoCtrl : MonoBehaviour
 		NengLianTran.parent = XkGameCtrl.MissionCleanup;
 		gameObject.SetActive(isActiveXT);
 
-        if (isActiveXT)
+        if (isActiveXT && pcvr.IsHongDDShouBing)
         {
-            int indexVal = (int)PlayerSt - 1;
-            if (m_HeadUrl != pcvr.GetInstance().m_PlayerHeadUrl[indexVal])
+            if (pcvr.IsHongDDShouBing)
             {
-                m_HeadUrl = pcvr.GetInstance().m_PlayerHeadUrl[indexVal];
-                XkGameCtrl.GetInstance().m_AsyImage.LoadPlayerHeadImg(m_HeadUrl, m_MatNum);
+                int indexVal = (int)PlayerSt - 1;
+                if (m_HeadUrl != pcvr.GetInstance().m_PlayerHeadUrl[indexVal])
+                {
+                    m_HeadUrl = pcvr.GetInstance().m_PlayerHeadUrl[indexVal];
+                    XkGameCtrl.GetInstance().m_AsyImage.LoadPlayerHeadImg(m_HeadUrl, m_MatNum);
+                }
+            }
+            else
+            {
+                m_MatNum.mainTexture = m_PlayerNumImg;
             }
         }
 	}

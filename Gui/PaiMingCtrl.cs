@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class PaiMingCtrl : MonoBehaviour
@@ -141,10 +140,20 @@ public class PaiMingCtrl : MonoBehaviour
 					}
 
 					countJF++;
-					if (XKGlobalData.GameVersionPlayer == 0) {
-						PlayerNumUITexture[j].mainTexture = PlayerTexture[i];
+					if (XKGlobalData.GameVersionPlayer == 0)
+                    {
+                        if (pcvr.IsHongDDShouBing)
+                        {
+                            string url = pcvr.GetInstance().m_PlayerHeadUrl[i];
+                            XkGameCtrl.GetInstance().m_AsyImage.LoadPlayerHeadImg(url, PlayerNumUITexture[j]);
+                        }
+                        else
+                        {
+                            PlayerNumUITexture[j].mainTexture = PlayerTexture[i];
+                        }
 					}
-					else {
+					else
+                    {
 						PlayerNumUITexture[j].mainTexture = PlayerTextureShR[i];
 					}
 
