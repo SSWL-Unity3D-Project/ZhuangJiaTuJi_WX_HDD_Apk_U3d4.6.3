@@ -116,6 +116,7 @@ public class PlayerXueTiaoCtrl : MonoBehaviour
 	}
 
     string m_HeadUrl = "";
+    public Texture m_TouMingHead;
 	public void HandlePlayerXueTiaoInfo(float fillVal)
 	{
         if (pcvr.IsHongDDShouBing)
@@ -137,6 +138,14 @@ public class PlayerXueTiaoCtrl : MonoBehaviour
 		NengLiangRenderer.materials[0].SetTextureOffset("_MainTex", new Vector2(xueLiangVal, 0f));
 		bool isActiveXT = xueLiangVal >= 1f ? false : true;
 		gameObject.SetActive(isActiveXT);
+
+        if (pcvr.IsHongDDShouBing && !isActiveXT)
+        {
+            if (m_TouMingHead != null)
+            {
+                m_MatNum.mainTexture = m_TouMingHead;
+            }
+        }
 	}
 	
 	public void SetPlayerIndex(PlayerEnum playerIndex)
