@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class GameMovieCtrl : MonoBehaviour
 {
+#if UNITY_ANDROID
+    public string m_MoviePath = "Movie/cartoonNew.mov";
+#endif
     /// <summary>
     /// Websocket预制.
     /// </summary>
@@ -199,5 +202,30 @@ public class GameMovieCtrl : MonoBehaviour
 						+", timeMvPlay "+timeMvPlay.ToString("f2");
 		GUI.Box(new Rect(0f, 0f, 500f, 35f), mvInfo);
 	}
+#endif
+    
+#if UNITY_ANDROID
+    void OnGUI()
+    {
+        if (GUI.Button(new Rect(20, 10, 300, 25), "PLAY ControlMode.CancelOnTouch"))
+        {
+            Handheld.PlayFullScreenMovie(m_MoviePath, Color.black, FullScreenMovieControlMode.CancelOnInput);
+        }
+
+        if (GUI.Button(new Rect(20, 90, 300, 25), "PLAY ControlMode.Full"))
+        {
+            Handheld.PlayFullScreenMovie(m_MoviePath, Color.black, FullScreenMovieControlMode.Full);
+        }
+
+        if (GUI.Button(new Rect(20, 170, 300, 25), "PLAY ControlMode.Hidden"))
+        {
+            Handheld.PlayFullScreenMovie(m_MoviePath, Color.black, FullScreenMovieControlMode.Hidden);
+        }
+
+        if (GUI.Button(new Rect(20, 250, 300, 25), "PLAY ControlMode.Minimal"))
+        {
+            Handheld.PlayFullScreenMovie(m_MoviePath, Color.black, FullScreenMovieControlMode.Minimal);
+        }
+    }
 #endif
 }
