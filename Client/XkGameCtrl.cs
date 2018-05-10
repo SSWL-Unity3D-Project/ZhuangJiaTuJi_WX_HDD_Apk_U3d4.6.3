@@ -28,6 +28,10 @@ public enum GameJiTaiType
 }
 
 public class XkGameCtrl : MonoBehaviour {
+    /// <summary>
+    /// 微信头像处理组件.
+    /// </summary>
+    public AsyncImageDownload m_AsyImage;
 	/**
 	 * 在游戏场景测试玩家运动模式.
 	 */

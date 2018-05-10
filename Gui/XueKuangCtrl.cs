@@ -10,13 +10,13 @@ public class XueKuangCtrl : MonoBehaviour
     /// XueKuangNumWH[0] - 未激活.
     /// XueKuangNumWH[1] - 激活.
     /// </summary>
-    public Vector2[] XueKuangNumWH = new Vector2[2];
+    //public Vector2[] XueKuangNumWH = new Vector2[2];
     /// <summary>
     /// 血框数字图片的位置.
     /// XueKuangNumPos[0] - 未激活.
     /// XueKuangNumPos[1] - 激活.
     /// </summary>
-    public Vector2[] XueKuangNumPos = new Vector2[2];
+    //public Vector2[] XueKuangNumPos = new Vector2[2];
     /**
 	 * 四人版血框数字.
 	 */
@@ -75,12 +75,6 @@ public class XueKuangCtrl : MonoBehaviour
 		HandleXueKuangNum();
 	}
 	
-	// Update is called once per frame
-//	void Update()
-//	{
-//	
-//	}
-
 	public void HandlePlayerXueTiaoInfo(float playerBlood)
 	{
 		XueTiaoSprite.fillAmount = (XkGameCtrl.KeyBloodUI * playerBlood) + XkGameCtrl.MinBloodUIAmount;
@@ -106,23 +100,48 @@ public class XueKuangCtrl : MonoBehaviour
 			indexVal = XkGameCtrl.IsActivePlayerFour == true ? 1 : 0;
 			break;
 		}
+        int indexUrl = (int)PlayerSt - 1;
 
 		CoinDiKuang.mainTexture = CoinDKTexture[indexVal];
-        //if (pcvr.IsHongDDShouBing)
-        //{
-        //    XueKuangNum.transform.localPosition = XueKuangNumPos[indexVal];
-        //    XueKuangNum.width = (int)XueKuangNumWH[indexVal].x;
-        //    XueKuangNum.height = (int)XueKuangNumWH[indexVal].y;
-        //}
 
-        if (XKGlobalData.GameVersionPlayer == 0) {
-			XueKuangNum.mainTexture = XueKuangTexture[indexVal];
-		}
-		else {
-			if (PlayerSt == PlayerEnum.PlayerThree || PlayerSt == PlayerEnum.PlayerFour) {
-				XueKuangNum.mainTexture = XueKuangGmTexture[indexVal];
-			}
-		}
+        if (pcvr.IsHongDDShouBing)
+        {
+            if (XKGlobalData.GameVersionPlayer == 0)
+            {
+                if (indexVal == 0)
+                {
+                    XueKuangNum.mainTexture = XueKuangTexture[indexVal];
+                }
+                else
+                {
+                    string url = pcvr.GetInstance().m_PlayerHeadUrl[indexUrl];
+                    XkGameCtrl.GetInstance().m_AsyImage.LoadPlayerHeadImg(url, XueKuangNum);
+                }
+            }
+            else
+            {
+                if (PlayerSt == PlayerEnum.PlayerThree || PlayerSt == PlayerEnum.PlayerFour)
+                {
+                    XueKuangNum.mainTexture = XueKuangGmTexture[indexVal];
+                }
+            }
+        }
+        else
+        {
+            if (XKGlobalData.GameVersionPlayer == 0)
+            {
+                XueKuangNum.mainTexture = XueKuangTexture[indexVal];
+            }
+            else
+            {
+                if (PlayerSt == PlayerEnum.PlayerThree || PlayerSt == PlayerEnum.PlayerFour)
+                {
+                    XueKuangNum.mainTexture = XueKuangGmTexture[indexVal];
+                }
+            }
+        }
+
+
 		bool isActiveInfo = indexVal == 1 ? true : false;
 		XueTiaoSprite.gameObject.SetActive(isActiveInfo);
 		XueTiaoSprite.fillAmount = 1f;

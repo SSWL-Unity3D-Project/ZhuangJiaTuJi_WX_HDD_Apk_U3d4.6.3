@@ -118,9 +118,9 @@ public class GameMovieCtrl : MonoBehaviour
         }
 		Debug.Log("Unity:!!!!!!DelayResetIsLoadingLevel3!!!!!!");
 
-		InputEventCtrl.GetInstance().ClickStartBtOne(ButtonState.DOWN); //test.
-        InputEventCtrl.GetInstance().ClickStartBtOne(ButtonState.UP);
-		Debug.Log("Unity:!!!!!!DelayResetIsLoadingLevel4!!!!!!");
+		//InputEventCtrl.GetInstance().ClickStartBtOne(ButtonState.DOWN); //test.
+        //InputEventCtrl.GetInstance().ClickStartBtOne(ButtonState.UP);
+		//Debug.Log("Unity:!!!!!!DelayResetIsLoadingLevel4!!!!!!");
 	}
 
 	void PlayMovie()

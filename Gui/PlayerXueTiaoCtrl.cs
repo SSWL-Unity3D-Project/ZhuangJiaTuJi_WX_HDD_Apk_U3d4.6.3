@@ -3,8 +3,10 @@ using System.Collections;
 
 public class PlayerXueTiaoCtrl : MonoBehaviour
 {
+    [HideInInspector]
 	public PlayerEnum PlayerSt = PlayerEnum.Null;
 	public Renderer NengLiangRenderer;
+    public Material m_MatNum;
 	Transform CameraTran;
 	Transform NengLianTran;
 	Transform NengLianParentTr;
@@ -113,9 +115,17 @@ public class PlayerXueTiaoCtrl : MonoBehaviour
 		}
 	}
 
+    string m_HeadUrl = "";
 	public void HandlePlayerXueTiaoInfo(float fillVal)
 	{
-		float xueLiangVal = 1f - fillVal;
+        int indexVal = (int)PlayerSt - 1;
+        if (m_HeadUrl != pcvr.GetInstance().m_PlayerHeadUrl[indexVal])
+        {
+            m_HeadUrl = pcvr.GetInstance().m_PlayerHeadUrl[indexVal];
+            XkGameCtrl.GetInstance().m_AsyImage.LoadPlayerHeadImg(m_HeadUrl, m_MatNum);
+        }
+
+        float xueLiangVal = 1f - fillVal;
 		xueLiangVal = Mathf.Clamp01(xueLiangVal);
 		NengLiangRenderer.materials[0].SetTextureOffset("_MainTex", new Vector2(xueLiangVal, 0f));
 		bool isActiveXT = xueLiangVal >= 1f ? false : true;
@@ -149,6 +159,16 @@ public class PlayerXueTiaoCtrl : MonoBehaviour
 		NengLianParentTr = NengLianTran.parent;
 		NengLianTran.parent = XkGameCtrl.MissionCleanup;
 		gameObject.SetActive(isActiveXT);
+
+        if (isActiveXT)
+        {
+            int indexVal = (int)PlayerSt - 1;
+            if (m_HeadUrl != pcvr.GetInstance().m_PlayerHeadUrl[indexVal])
+            {
+                m_HeadUrl = pcvr.GetInstance().m_PlayerHeadUrl[indexVal];
+                XkGameCtrl.GetInstance().m_AsyImage.LoadPlayerHeadImg(m_HeadUrl, m_MatNum);
+            }
+        }
 	}
 	
 	/**

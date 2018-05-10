@@ -868,6 +868,7 @@ public class pcvr : MonoBehaviour {
 
         if (isActivePlayer)
         {
+            m_PlayerHeadUrl[indexPlayer] = playerDt.m_PlayerWeiXinData.headUrl;
             switch (indexPlayer)
             {
                 case 0:
@@ -897,6 +898,8 @@ public class pcvr : MonoBehaviour {
             }
         }
     }
+
+    public string[] m_PlayerHeadUrl = new string[4];
 
     // Update is called once per frame
     void Update()

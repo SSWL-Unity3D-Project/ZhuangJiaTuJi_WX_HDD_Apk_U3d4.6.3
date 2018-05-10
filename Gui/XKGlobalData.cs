@@ -16,7 +16,7 @@ public class XKGlobalData {
 	public static int GameVersionPlayer = 0;
 	public static bool IsFreeMode;
 	public static string GameDiff;
-	public static int GameAudioVolume;
+	public static int GameAudioVolume = 10;
 	static string FilePath = "";
 	static public string FileName = "/config/XKGameConfig.xml";
 	static public HandleJson HandleJsonObj = null;
