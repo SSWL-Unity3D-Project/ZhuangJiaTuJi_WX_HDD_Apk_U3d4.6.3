@@ -31,7 +31,7 @@ public class XKTriggerHuoJianDan : MonoBehaviour {
 //		if (ScriptPlayer == null) {
 //			return;
 //		}
-//		//Debug.Log("XKTriggerHuoJianDan::OnTriggerEnter -> hit "+other.name);
+//		//Debug.Log("Unity:"+"XKTriggerHuoJianDan::OnTriggerEnter -> hit "+other.name);
 //		if (!IsPanXuanPath) {
 //			StartCoroutine(SpawnHuoJianDan(ScriptPlayer));
 //		}
@@ -59,7 +59,7 @@ public class XKTriggerHuoJianDan : MonoBehaviour {
 //		do {
 //			script.SpawnPlayerHuoJianDan(AimPointTran);
 //			count++;
-//			//Debug.Log("SpawnHuoJianDan -> count "+count);
+//			//Debug.Log("Unity:"+"SpawnHuoJianDan -> count "+count);
 //			if (count >= AmmoNum) {
 //				IsSpawnObj = false;
 //				break;
@@ -78,7 +78,7 @@ public class XKTriggerHuoJianDan : MonoBehaviour {
 //		if (!IsPanXuanPath || IsActivePanXuanPath || IsActiveTrigger) {
 //			return;
 //		}
-//		//Debug.Log("ActivePanXuanPathInfo...");
+//		//Debug.Log("Unity:"+"ActivePanXuanPathInfo...");
 //		IsActivePanXuanPath = true;
 //		IsActiveTrigger = true;
 //		Instance = this;
@@ -88,7 +88,7 @@ public class XKTriggerHuoJianDan : MonoBehaviour {
 //	{
 //		KillCount++;
 //		if (KillCount >= KillNpcMin) {
-//			//Debug.Log("AddKillNpcNum -> KillCount "+KillCount);
+//			//Debug.Log("Unity:"+"AddKillNpcNum -> KillCount "+KillCount);
 //			StartCoroutine(SpawnHuoJianDan(ScriptPlayer));
 //			HuoLiZhiYuanCtrl.GetInstance().SetIsActive(true);
 //			ResetPanXuanPathInfo();

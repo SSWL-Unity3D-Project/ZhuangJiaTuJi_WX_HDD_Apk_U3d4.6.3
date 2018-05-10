@@ -139,7 +139,7 @@ public class XKPlayerGlobalDt : MonoBehaviour
 		CheckPlayerAmmoFrequency();
 		for (int i = 0; i < 2; i++) {
 			if (AmmoParticle[i] == null) {
-				Debug.LogWarning("AmmoParticle["+i+"] is null");
+				Debug.LogWarning("Unity:"+"AmmoParticle["+i+"] is null");
 				AmmoParticle[i].name = "null";
 				return;
 			}
@@ -147,7 +147,7 @@ public class XKPlayerGlobalDt : MonoBehaviour
 		
 		for (int i = 0; i < 2; i++) {
 			if (SanDanAmmoParticle[i] == null) {
-				Debug.LogWarning("SanDanAmmoParticle["+i+"] is null");
+				Debug.LogWarning("Unity:"+"SanDanAmmoParticle["+i+"] is null");
 				SanDanAmmoParticle[i].name = "null";
 				return;
 			}
@@ -155,7 +155,7 @@ public class XKPlayerGlobalDt : MonoBehaviour
 
 		for (int i = 0; i < 2; i++) {
 			if (PaiJiPaoAmmoParticle[i] == null) {
-				Debug.LogWarning("PaiJiPaoAmmoParticle["+i+"] is null");
+				Debug.LogWarning("Unity:"+"PaiJiPaoAmmoParticle["+i+"] is null");
 				PaiJiPaoAmmoParticle[i].name = "null";
 				return;
 			}
@@ -163,7 +163,7 @@ public class XKPlayerGlobalDt : MonoBehaviour
 
 		for (int i = 0; i < 2; i++) {
 			if (ChuanTouDanAmmoParticle[i] == null) {
-				Debug.LogWarning("ChuanTouDanAmmoParticle["+i+"] is null");
+				Debug.LogWarning("Unity:"+"ChuanTouDanAmmoParticle["+i+"] is null");
 				ChuanTouDanAmmoParticle[i].name = "null";
 				return;
 			}
@@ -171,14 +171,14 @@ public class XKPlayerGlobalDt : MonoBehaviour
 
 		for (int i = 0; i < 2; i++) {
 			if (DaoDanAmmoParticle[i] == null) {
-				Debug.LogWarning("DaoDanAmmoParticle["+i+"] is null");
+				Debug.LogWarning("Unity:"+"DaoDanAmmoParticle["+i+"] is null");
 				DaoDanAmmoParticle[i].name = "null";
 				return;
 			}
 		}
 
 		if (DeathExplodPrefab == null) {
-			Debug.LogWarning("DeathExplodPrefab is null");
+			Debug.LogWarning("Unity:"+"DeathExplodPrefab is null");
 			DeathExplodPrefab.name = "null";
 			return;
 		}

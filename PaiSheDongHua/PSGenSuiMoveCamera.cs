@@ -52,7 +52,7 @@ public class PSGenSuiMoveCamera : MonoBehaviour {
 	public void ActiveGenSuiMoveCam(int indexVal)
 	{
 		if (indexVal < 0 || indexVal >= GenSuiMoveCam.Length || GenSuiMoveCam[indexVal] == null) {
-			Debug.LogWarning("indexVal or GenSuiMoveCam[i] was wrong!");
+			Debug.LogWarning("Unity:"+"indexVal or GenSuiMoveCam[i] was wrong!");
 			GameObject obj = null;
 			obj.name = "null";
 			return;

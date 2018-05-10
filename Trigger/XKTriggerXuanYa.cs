@@ -16,7 +16,7 @@ public class XKTriggerXuanYa : MonoBehaviour
 		    || playerMoveScript.GetIsActiveZhuiYa()) {
 			return;
 		}
-		//Debug.Log("XKTriggerXuanYa::OnTriggerEnter -> hit "+other.name);
+		//Debug.Log("Unity:"+"XKTriggerXuanYa::OnTriggerEnter -> hit "+other.name);
 		StartCoroutine(DelayActivePlayerToGame(playerMoveScript));
 	}
 

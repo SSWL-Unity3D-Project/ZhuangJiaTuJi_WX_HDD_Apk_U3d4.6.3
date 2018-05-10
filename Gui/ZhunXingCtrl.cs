@@ -105,7 +105,7 @@ public class ZhunXingCtrl : MonoBehaviour {
 		if (script == null) {
 			return;
 		}
-//		Debug.Log("OnTriggerEnter -> Collider "+other.gameObject.name);
+//		Debug.Log("Unity:"+"OnTriggerEnter -> Collider "+other.gameObject.name);
 
 		switch (script.AppModeVal) {
 		case GameMode.LianJi:

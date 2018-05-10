@@ -71,12 +71,12 @@ public class XKCannonCtrl : MonoBehaviour {
 		}
 
 		if (SpawnAmmoPoint.Length <= 0) {
-			//Debug.LogWarning("XKCannonCtrl -> SpawnAmmoPoint was wrong!");
+			//Debug.LogWarning("Unity:"+"XKCannonCtrl -> SpawnAmmoPoint was wrong!");
 		}
 		else {
 			for (int i = 0; i < SpawnAmmoPoint.Length; i ++) {
 				if (SpawnAmmoPoint[i] == null) {
-					Debug.LogWarning("XKCannonCtrl -> SpawnAmmoPoint was wrong! index = "+i);
+					Debug.LogWarning("Unity:"+"XKCannonCtrl -> SpawnAmmoPoint was wrong! index = "+i);
 					IsOutputError = true;
 					break;
 				}
@@ -140,7 +140,7 @@ public class XKCannonCtrl : MonoBehaviour {
 			if (Mathf.Abs(PaoGuan.localEulerAngles.x) > AngleMin) {
 				Vector3 eulerAnglesTmpVal = PaoGuan.localEulerAngles;
 				if (eulerAnglesTmpVal.x > 90f) {
-//					Debug.Log("A "+PaoGuan.localEulerAngles+", B "+AngleMin);
+//					Debug.Log("Unity:"+"A "+PaoGuan.localEulerAngles+", B "+AngleMin);
 					eulerAnglesTmpVal.x = eulerAnglesTmpVal.x - 360f;
 				}
 				eulerAnglesTmpVal = Vector3.Lerp(eulerAnglesTmpVal, eulerAnglesTmp, Time.deltaTime * PaoGuanSDVal);
@@ -158,7 +158,7 @@ public class XKCannonCtrl : MonoBehaviour {
 			eulerAnglesTmp.x = UpPaoGuanJDVal;
 			Vector3 eulerAnglesTmpVal = PaoGuan.localEulerAngles;
 			if (eulerAnglesTmpVal.x > 90f) {
-//				Debug.Log("A "+PaoGuan.localEulerAngles+", B "+AngleMin);
+//				Debug.Log("Unity:"+"A "+PaoGuan.localEulerAngles+", B "+AngleMin);
 				eulerAnglesTmpVal.x = eulerAnglesTmpVal.x - 360f;
 			}
 			eulerAnglesTmpVal = Vector3.Lerp(eulerAnglesTmpVal, eulerAnglesTmp, Time.deltaTime * PaoGuanSDVal);
@@ -174,7 +174,7 @@ public class XKCannonCtrl : MonoBehaviour {
 			eulerAnglesTmp.x = DownPaoGuanJDVal;
 			Vector3 eulerAnglesTmpVal = PaoGuan.localEulerAngles;
 			if (eulerAnglesTmpVal.x > 90f) {
-				//Debug.Log("A "+PaoGuan.localEulerAngles+", B "+AngleMin);
+				//Debug.Log("Unity:"+"A "+PaoGuan.localEulerAngles+", B "+AngleMin);
 				eulerAnglesTmpVal.x = eulerAnglesTmpVal.x - 360f;
 			}
 			eulerAnglesTmpVal = Vector3.Lerp(eulerAnglesTmpVal, eulerAnglesTmp, Time.deltaTime * PaoGuanSDVal);
@@ -200,7 +200,7 @@ public class XKCannonCtrl : MonoBehaviour {
 		if (Network.peerType == NetworkPeerType.Client) {
 			IsDoFireAnimation = true;
 			IsStopAnimation = false;
-			Debug.Log("KaQiuSha -> SetIsActiveTrigger...");
+			Debug.Log("Unity:"+"KaQiuSha -> SetIsActiveTrigger...");
 		}
 	}
 
@@ -318,7 +318,7 @@ public class XKCannonCtrl : MonoBehaviour {
 	//int NpcAimPlayerState = -1;
 	public void SetCannonSpawnPointInfo(int aimState, float fireDisVal)
 	{
-		//Debug.Log("SetCannonSpawnPointInfo -> aimState "+aimState+", fireDisVal "+fireDisVal);
+		//Debug.Log("Unity:"+"SetCannonSpawnPointInfo -> aimState "+aimState+", fireDisVal "+fireDisVal);
 		ResetCannonInfo();
 		FireDis = fireDisVal;
 		TimeStartSpawn = Time.realtimeSinceStartup;
@@ -362,7 +362,7 @@ public class XKCannonCtrl : MonoBehaviour {
 	{
 		CountPaoGuanAni++;
 		if (CountPaoGuanAni > 1) {
-			//Debug.LogWarning("PlayPaoGuanAnimation -> CountPaoGuanAni "+CountPaoGuanAni);
+			//Debug.LogWarning("Unity:"+"PlayPaoGuanAnimation -> CountPaoGuanAni "+CountPaoGuanAni);
 			yield break;
 		}
 
@@ -423,7 +423,7 @@ public class XKCannonCtrl : MonoBehaviour {
 							RaycastHit hit;
 							LayerMask FireLayer = XkGameCtrl.GetInstance().PlayerAmmoHitLayer;
 							if (Physics.Raycast(startPos, ammoForward, out hit, fireDisVal, FireLayer.value)) {
-								//Debug.Log("npc fire PlayerAmmo, fire obj -> "+hit.collider.name);
+								//Debug.Log("Unity:"+"npc fire PlayerAmmo, fire obj -> "+hit.collider.name);
 								firePos = hit.point;
 								XKNpcHealthCtrl healthScript = hit.collider.GetComponent<XKNpcHealthCtrl>();
 								if (healthScript != null) {
@@ -467,7 +467,7 @@ public class XKCannonCtrl : MonoBehaviour {
 	{
 		CountPaoGuanAni++;
 		if (CountPaoGuanAni > 1) {
-			//Debug.LogWarning("PlayPaoGuanAnimation -> CountPaoGuanAni "+CountPaoGuanAni);
+			//Debug.LogWarning("Unity:"+"PlayPaoGuanAnimation -> CountPaoGuanAni "+CountPaoGuanAni);
 			yield break;
 		}
 
@@ -479,7 +479,7 @@ public class XKCannonCtrl : MonoBehaviour {
 		int count = countMax;
 		do {
 			if (IsDeathNpc || GameOverCtrl.IsShowGameOver) {
-				Debug.Log(this.name+" -> IsDeathNpc "+IsDeathNpc
+				Debug.Log("Unity:"+this.name+" -> IsDeathNpc "+IsDeathNpc
 				          +", IsShowGameOver "+GameOverCtrl.IsShowGameOver);
 				yield break;
 			}
@@ -500,7 +500,7 @@ public class XKCannonCtrl : MonoBehaviour {
 			PlayAudioCannonFire();
 			GameObject obj = GetNpcAmmoFromList(SpawnAmmoPoint[count]);
 			if (obj == null) {
-				Debug.Log(this.name+" is not find ammo!");
+				Debug.Log("Unity:"+this.name+" is not find ammo!");
 				yield break;
 			}
 
@@ -548,7 +548,7 @@ public class XKCannonCtrl : MonoBehaviour {
 		}
 
 		if (key == 1 && DaPaoCtrlScript != null && NpcMoveScript == null) {
-			//Debug.Log("XKDaPaoCtrl -> OnRemoveCannon...");
+			//Debug.Log("Unity:"+"XKDaPaoCtrl -> OnRemoveCannon...");
 			DaPaoCtrlScript.OnRemoveCannon(PlayerEnum.Null, 1, TimeDestroy);
 		}
 	}
@@ -586,7 +586,7 @@ public class XKCannonCtrl : MonoBehaviour {
 		}
 		IsClearNpcAmmo = true;
 
-//		Debug.Log("XKCannonCtrl::ClearNpcAmmoList -> NpcAmmoCount "+AmmoList.Count);
+//		Debug.Log("Unity:"+"XKCannonCtrl::ClearNpcAmmoList -> NpcAmmoCount "+AmmoList.Count);
 		if (AmmoList == null || AmmoList.Count < 1) {
 			return;
 		}
@@ -707,7 +707,7 @@ public class XKCannonCtrl : MonoBehaviour {
 				break;
 			}
 		} while (PlayerMoveScript == null);
-		//Debug.Log("GetAimPlayerMoveScript -> player "+PlayerMoveScript.name);
+		//Debug.Log("Unity:"+"GetAimPlayerMoveScript -> player "+PlayerMoveScript.name);
 
 		if (IsInvoking("ResetPlayerMoveScript")) {
 			CancelInvoke("ResetPlayerMoveScript");

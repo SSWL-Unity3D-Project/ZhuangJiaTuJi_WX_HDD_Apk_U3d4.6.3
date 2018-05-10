@@ -74,7 +74,7 @@ namespace UnityStandardAssets.Utility
 		public void SetCarPathInfo(WaypointCircuit wayPath)
 		{
 			if (wayPath == null) {
-				Debug.LogWarning("wayPath is null");
+				Debug.LogWarning("Unity:"+"wayPath is null");
 				return;
 			}
 
@@ -134,7 +134,7 @@ namespace UnityStandardAssets.Utility
 							AiCarCom.SetIsStopMoveCar(true);
 							return;
 						}
-						//Debug.Log("progressNum "+progressNum);
+						//Debug.Log("Unity:"+"progressNum "+progressNum);
 					}
 				}
 

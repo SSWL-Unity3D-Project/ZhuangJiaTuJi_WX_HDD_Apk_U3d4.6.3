@@ -116,7 +116,7 @@ public class XunZhangZPCtrl : MonoBehaviour {
 		}
 
 		if (IsShouldStopJiFenPanel) {
-			Debug.Log("CheckLianJiIsShouldStopJiFenPanel...");
+			Debug.Log("Unity:"+"CheckLianJiIsShouldStopJiFenPanel...");
 			IsShouldStopJiFenPanel = false;
 			IsOverPlayerZPXunZhang = false;
 			Invoke("DelayStopJiFenPanel", 2.5f);

@@ -182,7 +182,7 @@ public class XKNpcFangZhenCtrl : MonoBehaviour {
 				count = 0;
 			}
 		} while(!isBreak);
-		//Debug.Log("MoveFangZhenNpcToFirePoint...");
+		//Debug.Log("Unity:"+"MoveFangZhenNpcToFirePoint...");
 	}
 
 	public void ActiveFangZhenNpc()
@@ -190,7 +190,7 @@ public class XKNpcFangZhenCtrl : MonoBehaviour {
 		if (IsHiddenNpcObj) {
 			IsHiddenNpcObj = false;
 			IsActiveFangZhen = true;
-			//Debug.Log("ActiveFangZhenNpc -> objName "+NpcObj.name+", npcId "+NpcId);
+			//Debug.Log("Unity:"+"ActiveFangZhenNpc -> objName "+NpcObj.name+", npcId "+NpcId);
 		}
 	}
 	bool IsActiveFangZhen = true;
@@ -229,7 +229,7 @@ public class XKNpcFangZhenCtrl : MonoBehaviour {
 			NpcMoveScript[i].SetIndexNpc(i);
 		}
 		FangZhenNpcCount = NpcMoveScript.Length;
-		//Debug.Log("SetSpawnNpcInfo -> FangZhenNpcCount "+FangZhenNpcCount+", fangZhenObj "+NpcObj.name);
+		//Debug.Log("Unity:"+"SetSpawnNpcInfo -> FangZhenNpcCount "+FangZhenNpcCount+", fangZhenObj "+NpcObj.name);
 
 		if (spawnScript.TimeRootAni > 0f) {
 			PlayNpcAnimation(spawnScript.AniRootName);
@@ -368,7 +368,7 @@ public class XKNpcFangZhenCtrl : MonoBehaviour {
 		MvSpeed = markScript.MvSpeed;
 		PlayNpcAnimation(markScript.AniName);
 		
-		//Debug.Log("MoveNpcOnCompelteITween...npc is "+NpcObj.name);
+		//Debug.Log("Unity:"+"MoveNpcOnCompelteITween...npc is "+NpcObj.name);
 		if (markScript.AnimatorTime > 0f && markScript.AniName != AnimatorNameNPC.Null) {
 			Invoke("DelayMoveNpcWaitAnimationEnd", markScript.AnimatorTime);
 		}
@@ -444,7 +444,7 @@ public class XKNpcFangZhenCtrl : MonoBehaviour {
 					npcChildTran.parent = XkGameCtrl.NpcObjArray;
 				}
 			}
-			//Debug.Log("****max "+max+", fangZhenObj "+NpcObj.name);
+			//Debug.Log("Unity:"+"****max "+max+", fangZhenObj "+NpcObj.name);
 			NpcTran.position = new Vector3(-18000f, -18000f, 0f);
 			ResetFangZhenObjInfo();
 			IsHiddenNpcObj = true;

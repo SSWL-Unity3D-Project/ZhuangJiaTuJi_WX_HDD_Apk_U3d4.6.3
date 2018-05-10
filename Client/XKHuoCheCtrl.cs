@@ -152,7 +152,7 @@ public class XKHuoCheCtrl : MonoBehaviour {
 		else {
 			MoveNpcByItween();
 		}
-		//Debug.Log("MoveNpcOnCompelteITween...npc is "+NpcObj.name);
+		//Debug.Log("Unity:"+"MoveNpcOnCompelteITween...npc is "+NpcObj.name);
 	}
 
 	void ResetNpcAnimation()
@@ -202,7 +202,7 @@ public class XKHuoCheCtrl : MonoBehaviour {
 		}
 		
 		XKSpawnNpcPoint[] pointScript = GetComponentsInChildren<XKSpawnNpcPoint>();
-		//Debug.Log("pointScript.Len "+pointScript.Length);
+		//Debug.Log("Unity:"+"pointScript.Len "+pointScript.Length);
 		max = pointScript.Length;
 		if (max > 0) {
 			//for (int i = 0; i < 1; i++) { //test
@@ -267,7 +267,7 @@ public class XKHuoCheCtrl : MonoBehaviour {
 	
 	[RPC] void XKHuoCheSendSetNpcAimPlayerState(int valAim, float valFireDis)
 	{
-		//Debug.Log("XKCannonSendSetNpcAimPlayerState.............");
+		//Debug.Log("Unity:"+"XKCannonSendSetNpcAimPlayerState.............");
 		SetCannonNpcInfo(valAim, valFireDis);
 	}
 	

@@ -150,7 +150,7 @@ public class DaoJiShiCtrl : MonoBehaviour {
 			StopDaoJiShi();
 			ShowGameOverObj();
 //			if (XkGameCtrl.PlayerActiveNum <= 0 && CountDaoJiShi > 0) {
-//				Debug.LogWarning("ChangeDaoJiShiVal -> CountDaoJiShi "+CountDaoJiShi);
+//				Debug.LogWarning("Unity:"+"ChangeDaoJiShiVal -> CountDaoJiShi "+CountDaoJiShi);
 //			}
 
 			if (XkGameCtrl.PlayerActiveNum <= 0 && CountDaoJiShi <= 0) {

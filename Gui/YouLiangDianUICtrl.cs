@@ -73,7 +73,7 @@ public class YouLiangDianUICtrl : MonoBehaviour {
 		startPos.z = 0f;
 		startPos.x = (XkGameCtrl.ScreenWidth * startPos.x) / Screen.width;
 		startPos.y = (XkGameCtrl.ScreenHeight * startPos.y) / Screen.height;
-		//Debug.Log("startPos **** "+startPos);
+		//Debug.Log("Unity:"+"startPos **** "+startPos);
 		scriptYLD.StartMoveYouLiangDian(startPos, YLDEndPosTran.position);
 	}
 

@@ -14,13 +14,13 @@ public class PSAutoFireCtrl : MonoBehaviour {
 	void Start()
 	{
 		if (AmmoNpcPrefab == null) {
-			Debug.LogWarning("AmmoNpcPrefab is null");
+			Debug.LogWarning("Unity:"+"AmmoNpcPrefab is null");
 			AmmoNpcPrefab.name = "null";
 		}
 		else {
 			NpcAmmoCtrl ammoScript = AmmoNpcPrefab.GetComponent<NpcAmmoCtrl>();
 			if (ammoScript == null) {
-				Debug.LogWarning("AmmoNpcPrefab cannot find NpcAmmoCtrl");
+				Debug.LogWarning("Unity:"+"AmmoNpcPrefab cannot find NpcAmmoCtrl");
 				GameObject obj = null;
 				obj.name = "null";
 			}

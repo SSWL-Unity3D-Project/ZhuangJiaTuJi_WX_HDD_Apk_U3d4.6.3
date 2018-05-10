@@ -211,7 +211,7 @@ public class XKAiCarMoveCtrl : MonoBehaviour
 	XKCarMoveCtrl CarMoveCom;
 	public void SetIsStopMoveCar(bool isStop)
 	{
-		//Debug.Log("SetIsStopMoveCar -> isStop "+isStop);
+		//Debug.Log("Unity:"+"SetIsStopMoveCar -> isStop "+isStop);
 		if (IsStopMoveCar == isStop) {
 			return;
 		}

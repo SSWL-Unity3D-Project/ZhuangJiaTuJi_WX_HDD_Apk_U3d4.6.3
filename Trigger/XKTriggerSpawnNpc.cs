@@ -19,7 +19,7 @@ public class XKTriggerSpawnNpc : MonoBehaviour
 		bool isWrong = false;
 		for (int i = 0; i < SpawnPointArray.Length; i++) {
 			if (SpawnPointArray[i] == null) {
-				Debug.LogWarning("SpawnPointArray was null! index "+i);
+				Debug.LogWarning("Unity:"+"SpawnPointArray was null! index "+i);
 				GameObject obj = null;
 				obj.name = "null";
 				break;
@@ -28,7 +28,7 @@ public class XKTriggerSpawnNpc : MonoBehaviour
 			SpawnPointArray[i].SetIsSpawnTrigger();
 			isWrong = SpawnPointArray[i].AddTriggerSpawnScript(this);
 			if (isWrong) {
-				Debug.LogWarning("SpawnPointArray was overlap! index "+i);
+				Debug.LogWarning("Unity:"+"SpawnPointArray was overlap! index "+i);
 				GameObject obj = null;
 				obj.name = "null";
 				break;
@@ -71,7 +71,7 @@ public class XKTriggerSpawnNpc : MonoBehaviour
 			return;
 		}
 
-		//Debug.Log("XKTriggerSpawnNpc::OnTriggerEnter -> hit "+other.name);
+		//Debug.Log("Unity:"+"XKTriggerSpawnNpc::OnTriggerEnter -> hit "+other.name);
 		for (int i = 0; i < SpawnPointArray.Length; i++) {
 //			if (SpawnPointArray[i].NpcObj.name != TestNpcName || SpawnPointArray[i].NpcFangZhen != null) {
 //					continue; //test
@@ -102,7 +102,7 @@ public class XKTriggerSpawnNpc : MonoBehaviour
 //		List<XKSpawnNpcPoint> spawnPointList = new List<XKSpawnNpcPoint>(SpawnPointArray){};
 //		XKSpawnNpcPoint[] spawnPointArrayTmp = SpawnPointGroup.GetComponentsInChildren<XKSpawnNpcPoint>();
 //		for (int i = 0; i < spawnPointArrayTmp.Length; i++) {
-//			//Debug.Log("name "+spawnPointArrayTmp[i].name);
+//			//Debug.Log("Unity:"+"name "+spawnPointArrayTmp[i].name);
 //			if (spawnPointList.Contains(spawnPointArrayTmp[i])) {
 //				continue;
 //			}
@@ -189,7 +189,7 @@ public class XKTriggerSpawnNpc : MonoBehaviour
 		if (SpawnPointArray != null) {
 			for (int i = 0; i < SpawnPointArray.Length; i++) {
 				if (SpawnPointArray[i] == null) {
-					Debug.LogWarning("SpawnPointArray was wrong! index "+i);
+					Debug.LogWarning("Unity:"+"SpawnPointArray was wrong! index "+i);
 //					GameObject obj = null;
 //					obj.name = "null";
 					break;
@@ -215,10 +215,10 @@ public class XKTriggerSpawnNpc : MonoBehaviour
 		XKSpawnNpcPoint[] spawnScriptArray = null;
 		XKSpawnNpcPointGroup[] spawnPointGroupArray = GameObject.FindObjectsOfType(typeof(XKSpawnNpcPointGroup)) as XKSpawnNpcPointGroup[];
 		if (spawnPointGroupArray == null) {
-			//Debug.Log("CleanEmptySpawnPointGroup -> spawnPointGroupArray is null");
+			//Debug.Log("Unity:"+"CleanEmptySpawnPointGroup -> spawnPointGroupArray is null");
 			return;
 		}
-		//Debug.Log("CleanEmptySpawnPointGroup -> spawnPointGroupArray.Length "+spawnPointGroupArray.Length);
+		//Debug.Log("Unity:"+"CleanEmptySpawnPointGroup -> spawnPointGroupArray.Length "+spawnPointGroupArray.Length);
 		List<XKSpawnNpcPointGroup> spawnPointGroupList = new List<XKSpawnNpcPointGroup>(spawnPointGroupArray){};
 
 		bool isFindEmptySpawnPoint = false;
@@ -419,7 +419,7 @@ public class SpawnPointListDrawer : PropertyDrawer
 				}
 
 //				if (triggerSpawn.SpawnPointGroup != null) {
-//					//Debug.Log("*********** pointGroup "+triggerSpawn.SpawnPointGroup);
+//					//Debug.Log("Unity:"+"*********** pointGroup "+triggerSpawn.SpawnPointGroup);
 //					pointGroup = triggerSpawn.SpawnPointGroup.gameObject;
 //					var children = new Transform[pointGroup.transform.childCount];
 //					int n = 0;

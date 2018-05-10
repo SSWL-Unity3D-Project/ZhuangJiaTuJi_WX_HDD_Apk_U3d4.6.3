@@ -114,7 +114,7 @@ public class PSZiYouCameraCtrl : MonoBehaviour {
 	{
 //		string info = "ChangeAimTran...";
 //		info += aimVal != null ? "aim "+aimVal.name : "";
-//		Debug.Log(info);
+//		Debug.Log("Unity:"+info);
 		if (aimVal == null) {
 			if (AimTran != null) {
 				IsOutAim = true;

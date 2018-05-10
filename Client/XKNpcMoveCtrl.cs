@@ -459,11 +459,11 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 //				IndexFirePointGroup = 0;
 //			}
 //		}
-//		Debug.Log("SetFirePointScript...");
+//		Debug.Log("Unity:"+"SetFirePointScript...");
 
 //		FirePointCtrl pointCtrl = SpawnPointScript.FirePointGroup[IndexFirePointGroup];
 //		Transform pointCtrlTran = pointCtrl.transform;
-//		Debug.Log("IndexNpc "+IndexNpc+", childCount "+pointCtrlTran.childCount);
+//		Debug.Log("Unity:"+"IndexNpc "+IndexNpc+", childCount "+pointCtrlTran.childCount);
 //		if (IndexNpc < pointCtrlTran.childCount) {
 //			FirePointScript = pointCtrlTran.GetChild(IndexNpc).GetComponent<FirePoint>();
 //		}
@@ -586,7 +586,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 //				}
 //
 //				if (ZaiTiNpcAni[i].gameObject.GetComponent<XKNpcAnimatorCtrl>() != null) {
-//					//Debug.LogWarning("XKNpcAnimatorCtrl is not null, name "+gameObject.name);
+//					//Debug.LogWarning("Unity:"+"XKNpcAnimatorCtrl is not null, name "+gameObject.name);
 //					continue;
 //				}
 //				ZaiTiNpcAniScript[i] = ZaiTiNpcAni[i].gameObject.AddComponent<XKNpcAnimatorCtrl>();
@@ -735,7 +735,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 		}
 		if (CannonScript.Length > 0) {
 			int max = CannonScript.Length;
-			//Debug.Log("SetSpawnNpcInfo -> max "+max);
+			//Debug.Log("Unity:"+"SetSpawnNpcInfo -> max "+max);
 			for (int i = 0; i < max; i++) {
 				CannonScript[i].SetSpawnPointScript(null);
 			}
@@ -801,7 +801,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 
 	[RPC] void XKNpcSendFeiJiNpcPointIndex(int indexVal)
 	{
-		//Debug.Log("XKNpcSendFeiJiNpcPointIndex -> indexVal "+indexVal);
+		//Debug.Log("Unity:"+"XKNpcSendFeiJiNpcPointIndex -> indexVal "+indexVal);
 		XKSpawnNpcPoint.HandleFeiJiNpcSpawnInfo(this, indexVal);
 	}
 	
@@ -837,7 +837,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 	
 	[RPC] void XKCannonSendSetNpcAimPlayerState(int valAim, float valFireDis)
 	{
-		//Debug.Log("XKCannonSendSetNpcAimPlayerState.............");
+		//Debug.Log("Unity:"+"XKCannonSendSetNpcAimPlayerState.............");
 		SetCannonNpcInfo(valAim, valFireDis);
 	}
 	
@@ -912,7 +912,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 		}
 
 		if (NpcPathTran == null) {
-			//Debug.Log("The npc has no path! name "+gameObject.name);
+			//Debug.Log("Unity:"+"The npc has no path! name "+gameObject.name);
 			return;
 		}
 
@@ -996,14 +996,14 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 		if (dis > disMin) {
 			return;
 		}
-//		Debug.Log("CheckMoveNpcOnCompelteITween -> npc has moved to markPoint");
+//		Debug.Log("Unity:"+"CheckMoveNpcOnCompelteITween -> npc has moved to markPoint");
 		IsMoveToMarkPoint = true;
 
 		if (NpcState == NpcType.FlyNpc) {
 			if (MarkCount >= NpcPathTran.childCount) {
 				return;
 			}
-//			Debug.Log("MarkCount***"+MarkCount);
+//			Debug.Log("Unity:"+"MarkCount***"+MarkCount);
 
 			MarkTranAim = NpcPathTran.GetChild(MarkCount);
 			NpcMark markScript = MarkTranAim.GetComponent<NpcMark>();
@@ -1030,7 +1030,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 		Vector3 vecSpeed = forwardVal * speedVal;
 		do {
 			if (!IsHuoCheNpc || IsDeathNPC) {
-//				Debug.LogWarning("MoveNpcByLocalPos -> IsHuoCheNpc "+IsHuoCheNpc
+//				Debug.LogWarning("Unity:"+"MoveNpcByLocalPos -> IsHuoCheNpc "+IsHuoCheNpc
 //				          +", IsDeathNPC "+IsDeathNPC+", npcName "+NpcObj.name);
 				yield break;
 			}
@@ -1084,7 +1084,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 			PlayNpcAnimation(markScript.AniName);
 		}*/
 		MoveNpcByItween();
-		//Debug.Log("MoveNpcOnCompelteITween...npc is "+NpcObj.name);
+		//Debug.Log("Unity:"+"MoveNpcOnCompelteITween...npc is "+NpcObj.name);
 //		if (markScript.AnimatorTime > 0f && markScript.AniName != AnimatorNameNPC.Null) {
 //			Invoke("DelayMoveNpcWaitAnimationEnd", markScript.AnimatorTime);
 //		}
@@ -1122,7 +1122,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 				NpcAniScript.ResetFireAnimationSpeed();
 			}
 //			else {
-//				Debug.Log("ZaiTiNpcFireCount *** "+ZaiTiNpcFireCount);
+//				Debug.Log("Unity:"+"ZaiTiNpcFireCount *** "+ZaiTiNpcFireCount);
 //				if (ZaiTiNpcAniScript[ZaiTiNpcFireCount] == null) {
 //					return;
 //				}
@@ -1136,7 +1136,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 	{
 		yield return new WaitForSeconds(timeVal);
 		SetIsAimPlayerByFire(false);
-//		Debug.Log("DelayResetIsAimPlayerByFire***name "+gameObject.name);
+//		Debug.Log("Unity:"+"DelayResetIsAimPlayerByFire***name "+gameObject.name);
 	}
 
 	void DelayPlayFireAction()
@@ -1148,7 +1148,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 //		if (!IsZaiTiNpc) {
 //			IsDelayFireAction = true;
 //		}
-//		Debug.Log("DelayPlayFireAction***name "+gameObject.name);
+//		Debug.Log("Unity:"+"DelayPlayFireAction***name "+gameObject.name);
 //		float rv = Random.Range(TimeMinFire, TimeMaxFire);
 //		SetIsAimPlayerByFire(true);
 //		StartCoroutine(DelayResetIsAimPlayerByFire(rv));
@@ -1187,7 +1187,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 
 	public void MakeNpcDoFireAnimation()
 	{
-		//Debug.Log("MakeNpcDoFireAnimation****");
+		//Debug.Log("Unity:"+"MakeNpcDoFireAnimation****");
 		if (IsDeathNPC) {
 			return;
 		}
@@ -1221,7 +1221,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 		}
 		else {
 			if (NpcMoveType == NpcJiFenEnum.ShiBing && !IsZaiTiNpc) {
-				//Debug.Log("***********play run4");
+				//Debug.Log("Unity:"+"***********play run4");
 				PlayNpcAnimation(AnimatorNameNPC.Run4);
 				return;
 			}
@@ -1235,7 +1235,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 
 	public void SetIsDoFireAnimation(bool isDoFire)
 	{
-		//Debug.Log("SetIsDoFireAnimation...isDoFire "+isDoFire);
+		//Debug.Log("Unity:"+"SetIsDoFireAnimation...isDoFire "+isDoFire);
 		if (isDoFire == IsDoFireAnimation) {
 			return;
 		}
@@ -1364,7 +1364,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 			markScript = markTran.GetComponent<NpcMark>();
 		}
 
-		//Debug.Log("MoveNpcOnCompelteITween...npc is "+NpcObj.name);
+		//Debug.Log("Unity:"+"MoveNpcOnCompelteITween...npc is "+NpcObj.name);
 		if (markScript.AnimatorTime > 0f) {
 			switch (MoveStyle) {
 			case UITweener.Style.Loop:
@@ -1388,7 +1388,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 	{
 		IsWuDi = script.IsWuDi;
 //		if (IsWuDi) {
-//			Debug.Log("SetFeiJiMarkInfo ********* IsWuDi "+IsWuDi);
+//			Debug.Log("Unity:"+"SetFeiJiMarkInfo ********* IsWuDi "+IsWuDi);
 //		}
 	}
 
@@ -1542,7 +1542,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 
 			if (Vector3.Distance(Vector3.zero, RealNpcTran.localPosition) > 0.1f
 			    && Network.peerType == NetworkPeerType.Disconnected) {
-				//Debug.Log("fix realnpc localPosition, name "+NpcObj.name);
+				//Debug.Log("Unity:"+"fix realnpc localPosition, name "+NpcObj.name);
 				Vector3 posTmpVal = RealNpcTran.position;
 				RealNpcTran.parent = XkGameCtrl.NpcObjArray;
 				NpcObj.transform.position = posTmpVal;
@@ -1632,7 +1632,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 	bool IsRemoveNpcObj;
 	public void SetIsRemoveNpcObj()
 	{
-		//Debug.Log("SetIsRemoveNpcObj -> npcName "+NpcObj.name);
+		//Debug.Log("Unity:"+"SetIsRemoveNpcObj -> npcName "+NpcObj.name);
 		IsRemoveNpcObj = true;
 	}
 
@@ -1736,7 +1736,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 
 	public void SetFireDistance(float val)
 	{
-		//Debug.Log("valDis "+val);
+		//Debug.Log("Unity:"+"valDis "+val);
 		FireDistance = val;
 		IsDoFireAnimation = true;
 	}
@@ -1761,7 +1761,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 	IEnumerator DelaySetHuoCheNpcInfo(int indexPoint)
 	{
 		yield return new WaitForSeconds(0.5f);
-//		Debug.Log("XKNpcSendSetHuoCheNpcInfo -> indexPoint "+indexPoint+", name "+transform.name);
+//		Debug.Log("Unity:"+"XKNpcSendSetHuoCheNpcInfo -> indexPoint "+indexPoint+", name "+transform.name);
 		if (Network.peerType == NetworkPeerType.Server) {
 			yield break;
 		}
@@ -1772,12 +1772,12 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 		}
 		
 		XKSpawnNpcPoint[] pointScript = huoCheScript.gameObject.GetComponentsInChildren<XKSpawnNpcPoint>();
-//		Debug.Log("XKNpcSendSetHuoCheNpcInfo -> pointScript.Len "+pointScript.Length);
+//		Debug.Log("Unity:"+"XKNpcSendSetHuoCheNpcInfo -> pointScript.Len "+pointScript.Length);
 		if (pointScript.Length > 0) {
 			for (int i = 0; i < pointScript.Length; i++) {
 				if (i == indexPoint) {
 					IsHuoCheNpc = true;
-//					Debug.Log("XKNpcSendSetHuoCheNpcInfo... IsHuoCheNpc "+IsHuoCheNpc+", parentName "
+//					Debug.Log("Unity:"+"XKNpcSendSetHuoCheNpcInfo... IsHuoCheNpc "+IsHuoCheNpc+", parentName "
 //					          +pointScript[i].transform.parent.name);
 					CancelInvoke("DelayChangeNpcParent");
 					transform.parent = pointScript[i].transform.parent;
@@ -1809,7 +1809,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 	IEnumerator DelaySetFeiJiNpcInfo(int indexPoint)
 	{
 		yield return new WaitForSeconds(0.5f);
-//		Debug.Log("XKNpcSendSetHuoCheNpcInfo -> indexPoint "+indexPoint+", name "+transform.name);
+//		Debug.Log("Unity:"+"XKNpcSendSetHuoCheNpcInfo -> indexPoint "+indexPoint+", name "+transform.name);
 		if (Network.peerType == NetworkPeerType.Server) {
 			yield break;
 		}
@@ -1820,12 +1820,12 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 		}
 		
 		XKSpawnNpcPoint[] pointScript = huoCheScript.gameObject.GetComponentsInChildren<XKSpawnNpcPoint>();
-//		Debug.Log("XKNpcSendSetHuoCheNpcInfo -> pointScript.Len "+pointScript.Length);
+//		Debug.Log("Unity:"+"XKNpcSendSetHuoCheNpcInfo -> pointScript.Len "+pointScript.Length);
 		if (pointScript.Length > 0) {
 			for (int i = 0; i < pointScript.Length; i++) {
 				if (i == indexPoint) {
 					IsHuoCheNpc = true;
-//					Debug.Log("XKNpcSendSetHuoCheNpcInfo... IsHuoCheNpc "+IsHuoCheNpc+", parentName "
+//					Debug.Log("Unity:"+"XKNpcSendSetHuoCheNpcInfo... IsHuoCheNpc "+IsHuoCheNpc+", parentName "
 //					          +pointScript[i].transform.parent.name);
 					CancelInvoke("DelayChangeNpcParent");
 					transform.parent = pointScript[i].transform.parent;
@@ -1871,7 +1871,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 			disFJ = Vector3.Distance(posB, posA);
 			disTK = Vector3.Distance(posC, posA);
 			if (disFJ > minDis && disTK > minDis) {
-				//Debug.Log("npcMoveTest*******************111");
+				//Debug.Log("Unity:"+"npcMoveTest*******************111");
 				TriggerRemovePointNpc(0);
 			}
 			return;
@@ -1883,7 +1883,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 			posA.y = posB.y = posC.y = 0f;
 			disFJ = Vector3.Distance(posB, posA);
 			if (disFJ > minDis) {
-				//Debug.Log("npcMoveTest*******************222");
+				//Debug.Log("Unity:"+"npcMoveTest*******************222");
 				TriggerRemovePointNpc(0);
 			}
 			return;
@@ -1895,7 +1895,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 			posA.y = posB.y = posC.y = 0f;
 			disTK = Vector3.Distance(posC, posA);
 			if (disTK > minDis) {
-				//Debug.Log("npcMoveTest*******************333");
+				//Debug.Log("Unity:"+"npcMoveTest*******************333");
 				TriggerRemovePointNpc(0);
 			}
 			return;
@@ -2019,7 +2019,7 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 	{
 		GameObject playerObj = XkGameCtrl.GetInstance().GetRandAimPlayerObj();
 		PlayerMoveScript = playerObj == null ? null : playerObj.GetComponent<XKPlayerMoveCtrl>();
-		//Debug.Log("GetAimPlayerMoveScript -> player "+PlayerMoveScript.name);
+		//Debug.Log("Unity:"+"GetAimPlayerMoveScript -> player "+PlayerMoveScript.name);
 		
 		if (IsInvoking("ResetPlayerMoveScript")) {
 			CancelInvoke("ResetPlayerMoveScript");

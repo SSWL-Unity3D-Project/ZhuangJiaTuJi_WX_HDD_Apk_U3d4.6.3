@@ -9,7 +9,7 @@ public class XKTriggerMoveToAiMark : MonoBehaviour {
 	void Start()
 	{
 		if (MarkCom == null) {
-			Debug.LogWarning("MarkCom was null");
+			Debug.LogWarning("Unity:"+"MarkCom was null");
 			GameObject obj = null;
 			obj.name = "null";
 		}
@@ -26,7 +26,7 @@ public class XKTriggerMoveToAiMark : MonoBehaviour {
 		if (playerScript == null) {
 			return;
 		}
-		//Debug.Log("XKTriggerSpawnNpc::OnTriggerEnter -> hit "+other.name);
+		//Debug.Log("Unity:"+"XKTriggerSpawnNpc::OnTriggerEnter -> hit "+other.name);
 		ScreenDanHeiCtrl.GetInstance().OpenScreenDanHui();
 		playerScript.MakePlayerMoveToAiMark(MarkCom);
 		gameObject.SetActive(false);

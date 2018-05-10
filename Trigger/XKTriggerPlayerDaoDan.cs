@@ -16,14 +16,14 @@ public class XKTriggerPlayerDaoDan : MonoBehaviour
 
 		bool isOutputError = false;
 		if (PlayerDaoDan == null) {
-			Debug.LogWarning("PlayerDaoDan was null");
+			Debug.LogWarning("Unity:"+"PlayerDaoDan was null");
 			isOutputError = true;
 		}
 
 		int max = AmmoPointTran.Length;
 		for (int i = 0; i < max; i++) {
 			if (AmmoPointTran[i] == null) {
-				Debug.LogWarning("AmmoPointTran was wrong! index "+i);
+				Debug.LogWarning("Unity:"+"AmmoPointTran was wrong! index "+i);
 				isOutputError = true;
 				break;
 			}

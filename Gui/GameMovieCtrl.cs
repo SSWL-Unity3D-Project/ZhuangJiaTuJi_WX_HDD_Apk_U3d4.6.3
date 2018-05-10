@@ -36,60 +36,93 @@ public class GameMovieCtrl : MonoBehaviour
 	void Start()
 	{
 		_instance = this;
-		XKGlobalData.GetInstance();
-		AudioListener.volume = (float)XKGlobalData.GameAudioVolume / 10f;
-		if (AudioListCtrl.GetInstance() != null) {
-			AudioListCtrl.GetInstance().CloseGameAudioBJ();
-		}
-		Screen.showCursor = false;
-		LoadingGameCtrl.ResetLoadingInfo();
-		Time.timeScale = 1.0f;
-		AudioManager.Instance.SetParentTran(null);
-		GameOverCtrl.IsShowGameOver = false;
-		if (IsOpenFXZhenDong) {
-			pcvr.OpenAllPlayerFangXiangPanPower();
-		}
-		pcvr.CloseAllQiNangArray(PlayerEnum.Null, 1);
-		//IsTestLJGame = true; //test
-		//IsTestXiaoScreen = true; //test
-		if (!XkGameCtrl.IsGameOnQuit) {
-			if (Screen.fullScreen
-			    || Screen.currentResolution.width != 1280
-			    || Screen.currentResolution.height != 720) {
-				if (!IsTestLJGame && !IsTestXiaoScreen) {
-					Screen.SetResolution(1280, 720, false);
+		try
+		{
+			XKGlobalData.GetInstance();
+			Debug.Log("Unity:!!!!!!GetInstance!!!!!!");
+			AudioListener.volume = (float)XKGlobalData.GameAudioVolume / 10f;
+			if (AudioListCtrl.GetInstance() != null)
+			{
+				AudioListCtrl.GetInstance().CloseGameAudioBJ();
+			}
+			else
+			{
+				Debug.Log("Unity:!!!!!!AudioListCtrl.GetInstance() == null!!!!!!");
+			}
+			Screen.showCursor = false;
+			LoadingGameCtrl.ResetLoadingInfo();
+			Debug.Log("Unity:!!!!!!ResetLoadingInfo!!!!!!");
+			Time.timeScale = 1.0f;
+			AudioManager.Instance.SetParentTran(null);
+			Debug.Log("Unity:!!!!!!Instance.SetParentTran!!!!!!");
+			GameOverCtrl.IsShowGameOver = false;
+			Debug.Log("Unity:!!!!!!IsOpenFXZhenDong!!!!!!"+ IsOpenFXZhenDong.ToString());
+			if (IsOpenFXZhenDong)
+			{
+				pcvr.OpenAllPlayerFangXiangPanPower();
+			}
+			pcvr.CloseAllQiNangArray(PlayerEnum.Null, 1);
+			Debug.Log("Unity:!!!!!!CloseAllQiNangArray!!!!!!");
+			//IsTestLJGame = true; //test
+			//IsTestXiaoScreen = true; //test
+			if (!XkGameCtrl.IsGameOnQuit)
+			{
+				if (Screen.fullScreen
+					|| Screen.currentResolution.width != 1280
+					|| Screen.currentResolution.height != 720)
+				{
+					if (!IsTestLJGame && !IsTestXiaoScreen)
+					{
+						Screen.SetResolution(1280, 720, false);
+					}
 				}
 			}
-		}
+			Debug.Log("Unity:!!!!!!IsGameOnQuit!!!!!!");
 
-		if (!IsTestLJGame) {
-			IsActivePlayer = true;
-			if (IsTestXiaoScreen) {
-				Screen.SetResolution(680, 384, false); //test
+			if (!IsTestLJGame)
+			{
+				IsActivePlayer = true;
+				if (IsTestXiaoScreen)
+				{
+					Screen.SetResolution(680, 384, false); //test
+				}
 			}
-		}
+			Debug.Log("Unity:!!!!!!IsTestLJGame!!!!!!");
 
-		QualitySettings.SetQualityLevel((int)QualityLevelEnum.Fast);
-		AudioSourceObj = transform.GetComponent<AudioSource>();
-		Invoke("DelayResetIsLoadingLevel", 4f);
-		if (IsOpenFXZhenDong) {
-			IsOpenFXZhenDong = false;
-			Invoke("CloseAllFangXiangPanPower", 10f);
+			QualitySettings.SetQualityLevel((int)QualityLevelEnum.Fast);
+			Debug.Log("Unity:!!!!!!SetQualityLevel!!!!!!");
+			AudioSourceObj = transform.GetComponent<AudioSource>();
+			Invoke("DelayResetIsLoadingLevel", 4f);
+			if (IsOpenFXZhenDong)
+			{
+				IsOpenFXZhenDong = false;
+				Invoke("CloseAllFangXiangPanPower", 10f);
+			}
+			Debug.Log("Unity:!!!!!!IsOpenFXZhenDong!!!!!!");
+			PlayMovie();
 		}
-		PlayMovie();
+		catch (System.Exception e)
+		{
+			Debug.Log("Unity:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			Debug.LogException(e);
+			Debug.Log("Unity:"+e.Message);
+		}
     }
 
 	void DelayResetIsLoadingLevel()
 	{
+		Debug.Log("Unity:!!!!!!DelayResetIsLoadingLevel2!!!!!!");
 		XkGameCtrl.ResetIsLoadingLevel();
 		if (NetworkServerNet.GetInstance() != null) {
 			NetworkServerNet.GetInstance().TryToCreateServer();
         }
+		Debug.Log("Unity:!!!!!!DelayResetIsLoadingLevel3!!!!!!");
 
-        //InputEventCtrl.GetInstance().ClickStartBtOne(ButtonState.DOWN); //test.
-        //InputEventCtrl.GetInstance().ClickStartBtOne(ButtonState.UP);
-    }
-	
+		InputEventCtrl.GetInstance().ClickStartBtOne(ButtonState.DOWN); //test.
+        InputEventCtrl.GetInstance().ClickStartBtOne(ButtonState.UP);
+		Debug.Log("Unity:!!!!!!DelayResetIsLoadingLevel4!!!!!!");
+	}
+
 	void PlayMovie()
 	{
 #if UNITY_STANDALONE_WIN
@@ -134,6 +167,7 @@ public class GameMovieCtrl : MonoBehaviour
 
 	void CloseAllFangXiangPanPower()
 	{
+		Debug.Log("Unity:!!!!!!CloseAllFangXiangPanPower!!!!!!");
 		pcvr.GetInstance().CloseFangXiangPanPower();
 	}
 
@@ -142,7 +176,7 @@ public class GameMovieCtrl : MonoBehaviour
     /// </summary>
     public GameObject SpawnWebSocketBox(Transform tr)
     {
-        Debug.Log("SpawnWebSocketBox...");
+        Debug.Log("Unity:"+"SpawnWebSocketBox...");
         GameObject obj = (GameObject)Instantiate(m_WebSocketBoxPrefab);
         obj.transform.parent = tr;
         return obj;

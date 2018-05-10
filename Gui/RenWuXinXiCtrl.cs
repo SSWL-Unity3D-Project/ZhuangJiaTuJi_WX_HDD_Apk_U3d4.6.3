@@ -56,7 +56,7 @@ public class RenWuXinXiCtrl : MonoBehaviour {
 					indexVal = 2;
 				}
 				spriteNameTmp = levelNum + "_" + indexVal + "_" + indexTmp;
-				//Debug.Log("name "+spriteNameTmp);
+				//Debug.Log("Unity:"+"name "+spriteNameTmp);
 				RwSpriteInfo[i].spriteName = spriteNameTmp;
 			}
 		}
@@ -71,7 +71,7 @@ public class RenWuXinXiCtrl : MonoBehaviour {
 			indexTmp = i % 3;
 			if (indexTmp < CountRenWuRedInfo[LoadedLevelVal]) {
 				spriteNameTmp = levelNum + "_1_" + indexTmp;
-				//Debug.Log("name ** "+spriteNameTmp);
+				//Debug.Log("Unity:"+"name ** "+spriteNameTmp);
 				RedSprite[i].spriteName = spriteNameTmp;
 			}
 		}
@@ -105,7 +105,7 @@ public class RenWuXinXiCtrl : MonoBehaviour {
 				CountRw += (3 - CountRenWuInfo[LoadedLevelVal]);
 			}
 			CountRw++;
-			//Debug.Log("test **** countRw "+CountRw+", countTmp "+countTmp+", loadedLevel "+LoadedLevelVal);
+			//Debug.Log("Unity:"+"test **** countRw "+CountRw+", countTmp "+countTmp+", loadedLevel "+LoadedLevelVal);
 
 			if (CountRw == 3) {
 				TimeStart = Time.realtimeSinceStartup;

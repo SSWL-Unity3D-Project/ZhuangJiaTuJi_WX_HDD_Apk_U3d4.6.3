@@ -144,7 +144,7 @@ public class XKBossXueTiaoCtrl : MonoBehaviour
 			return;
 		}
 
-		//Debug.Log("startVec "+startVec);
+		//Debug.Log("Unity:"+"startVec "+startVec);
 		BossXueTiaoHongSprite.fillAmount = startVec.x;
 		BossXueTiaoSprite.fillAmount = startVec.y;
 	}

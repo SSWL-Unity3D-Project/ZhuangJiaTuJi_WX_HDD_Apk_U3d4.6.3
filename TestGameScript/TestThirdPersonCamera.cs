@@ -39,7 +39,7 @@ public class TestThirdPersonCamera : MonoBehaviour {
 		if(!cameraTransform && Camera.main)
 			cameraTransform = Camera.main.transform;
 		if(!cameraTransform) {
-			Debug.Log("Please assign a camera to the ThirdPersonCamera script.");
+			Debug.Log("Unity:"+"Please assign a camera to the ThirdPersonCamera script.");
 			enabled = false;	
 		}
 		
@@ -58,7 +58,7 @@ public class TestThirdPersonCamera : MonoBehaviour {
 //			headOffset.y = characterController.bounds.max.y - _target.position.y;
 //		}
 //		else
-//			Debug.Log("Please assign a target to the camera that has a ThirdPersonController script attached.");
+//			Debug.Log("Unity:"+"Please assign a target to the camera that has a ThirdPersonController script attached.");
 		
 		
 		Cut(_target, centerOffset);

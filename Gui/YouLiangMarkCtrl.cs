@@ -40,7 +40,7 @@ public class YouLiangMarkCtrl : MonoBehaviour {
 	
 	void MoveYouLiangMarkOnCompelteITween()
 	{
-//		Debug.Log("MoveYouLiangMarkOnCompelteITween...");
+//		Debug.Log("Unity:"+"MoveYouLiangMarkOnCompelteITween...");
 		YouLiangMark.SetActive(false);
 		XKGlobalData.GetInstance().PlayJiaYouBaoZhaAudio();
 		GameObject obj = (GameObject)Instantiate(ExplodeObj, YouLiangMark.transform.position, YouLiangMark.transform.rotation);

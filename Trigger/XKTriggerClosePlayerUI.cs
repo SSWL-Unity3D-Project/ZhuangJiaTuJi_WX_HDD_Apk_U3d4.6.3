@@ -123,7 +123,7 @@ public class XKTriggerClosePlayerUI : MonoBehaviour {
 
 	public void HandlePlayerOnTriggerEnter(XkPlayerCtrl playerScript)
 	{
-		Debug.Log("HandlePlayerOnTriggerEnter...");
+		Debug.Log("Unity:"+"HandlePlayerOnTriggerEnter...");
 		if (XKTriggerKaQiuShaFire.IsCloseKaQiuShaTest) {
 			return; //test;
 		}

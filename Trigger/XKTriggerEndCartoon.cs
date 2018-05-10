@@ -19,7 +19,7 @@ public class XKTriggerEndCartoon : MonoBehaviour {
 		int max = SpawnArray.Length;
 		for (int i = 0; i < max; i++) {
 			if (SpawnArray[i] == null) {
-				Debug.LogWarning("SpawnArray was wrong! index = "+i);
+				Debug.LogWarning("Unity:"+"SpawnArray was wrong! index = "+i);
 				isOutputError = true;
 				break;
 			}
@@ -28,7 +28,7 @@ public class XKTriggerEndCartoon : MonoBehaviour {
 		max = RemoveArray.Length;
 		for (int i = 0; i < max; i++) {
 			if (RemoveArray[i] == null) {
-				Debug.LogWarning("RemoveArray was wrong! index = "+i);
+				Debug.LogWarning("Unity:"+"RemoveArray was wrong! index = "+i);
 				isOutputError = true;
 				break;
 			}
@@ -52,7 +52,7 @@ public class XKTriggerEndCartoon : MonoBehaviour {
 		if (other.GetComponent<XkPlayerCtrl>() == null) {
 			return;
 		}
-		//Debug.Log("XKTriggerSpawnNpc::OnTriggerEnter -> hit "+other.name);
+		//Debug.Log("Unity:"+"XKTriggerSpawnNpc::OnTriggerEnter -> hit "+other.name);
 		CloseStartCartoon();
 	}
 

@@ -45,7 +45,7 @@ public class GameJiLuFenShuCtrl : MonoBehaviour
 		for (int i = 0; i < max; i++) {
 			powVal = (int)Mathf.Pow(10, max - i - 1);
 			valTmp = numVal / powVal;
-			//Debug.Log("valTmp *** "+valTmp);
+			//Debug.Log("Unity:"+"valTmp *** "+valTmp);
 			uiSpriteJF[i].spriteName = "timeJiFen_" + valTmp;
 			numVal -= valTmp * powVal;
 		}

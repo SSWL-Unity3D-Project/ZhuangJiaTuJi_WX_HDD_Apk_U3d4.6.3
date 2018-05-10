@@ -701,7 +701,7 @@ public class HardwareCheckCtrl : MonoBehaviour
 	public void SetFangXiangDouDongP1()
 	{
 		int playerIndex = 0;
-		UnityEngine.Debug.Log("SetFangXiangDouDong -> p"+playerIndex
+		UnityEngine.Debug.Log("Unity:"+"SetFangXiangDouDong -> p"+playerIndex
 		          +": FangXiangDouDongSt "+FangXiangDouDongSt[playerIndex]);
 		switch (FangXiangDouDongSt[playerIndex]) {
 		case 0:
@@ -720,7 +720,7 @@ public class HardwareCheckCtrl : MonoBehaviour
 	public void SetFangXiangDouDongP2()
 	{
 		int playerIndex = 1;
-		UnityEngine.Debug.Log("SetFangXiangDouDong -> p"+playerIndex
+		UnityEngine.Debug.Log("Unity:"+"SetFangXiangDouDong -> p"+playerIndex
 		          +": FangXiangDouDongSt "+FangXiangDouDongSt[playerIndex]);
 		switch (FangXiangDouDongSt[playerIndex]) {
 		case 0:
@@ -739,7 +739,7 @@ public class HardwareCheckCtrl : MonoBehaviour
 	public void SetFangXiangDouDongP3()
 	{
 		int playerIndex = 2;
-		UnityEngine.Debug.Log("SetFangXiangDouDong -> p"+playerIndex
+		UnityEngine.Debug.Log("Unity:"+"SetFangXiangDouDong -> p"+playerIndex
 		          +": FangXiangDouDongSt "+FangXiangDouDongSt[playerIndex]);
 		switch (FangXiangDouDongSt[playerIndex]) {
 		case 0:
@@ -758,7 +758,7 @@ public class HardwareCheckCtrl : MonoBehaviour
 	public void SetFangXiangDouDongP4()
 	{
 		int playerIndex = 3;
-		UnityEngine.Debug.Log("SetFangXiangDouDong -> p"+playerIndex
+		UnityEngine.Debug.Log("Unity:"+"SetFangXiangDouDong -> p"+playerIndex
 		          +": FangXiangDouDongSt "+FangXiangDouDongSt[playerIndex]);
 		switch (FangXiangDouDongSt[playerIndex]) {
 		case 0:
@@ -778,24 +778,24 @@ public class HardwareCheckCtrl : MonoBehaviour
 	public void OnClickLoopFangXiangDouDong()
 	{
 		IsLoopDouDongFX = !IsLoopDouDongFX;
-		UnityEngine.Debug.Log("OnClickLoopFangXiangDouDong -> IsLoopDouDongFX "+IsLoopDouDongFX);
+		UnityEngine.Debug.Log("Unity:"+"OnClickLoopFangXiangDouDong -> IsLoopDouDongFX "+IsLoopDouDongFX);
 	}
 
 	public void OnClickZuoYiShangP1()
 	{
-		UnityEngine.Debug.Log("OnClickZuoYiShangP1...");
+		UnityEngine.Debug.Log("Unity:"+"OnClickZuoYiShangP1...");
 		pcvr.GetInstance().SetZuoYiDianJiSpeed(PlayerEnum.PlayerOne, 1);
 	}
 
 	public void OnClickZuoYiZhongP1()
 	{
-		UnityEngine.Debug.Log("OnClickZuoYiZhongP1...");
+		UnityEngine.Debug.Log("Unity:"+"OnClickZuoYiZhongP1...");
 		pcvr.GetInstance().MakeZuoYiMoveCenter(PlayerEnum.PlayerOne);
 	}
 	
 	public void OnClickZuoYiXiaP1()
 	{
-		UnityEngine.Debug.Log("OnClickZuoYiXiaP1...");
+		UnityEngine.Debug.Log("Unity:"+"OnClickZuoYiXiaP1...");
 		pcvr.GetInstance().SetZuoYiDianJiSpeed(PlayerEnum.PlayerOne, -1);
 	}
 
@@ -817,19 +817,19 @@ public class HardwareCheckCtrl : MonoBehaviour
 
 	public void OnClickZuoYiShangP2()
 	{
-		UnityEngine.Debug.Log("OnClickZuoYiShangP2...");
+		UnityEngine.Debug.Log("Unity:"+"OnClickZuoYiShangP2...");
 		pcvr.GetInstance().SetZuoYiDianJiSpeed(PlayerEnum.PlayerTwo, 1);
 	}
 	
 	public void OnClickZuoYiZhongP2()
 	{
-		UnityEngine.Debug.Log("OnClickZuoYiZhongP2...");
+		UnityEngine.Debug.Log("Unity:"+"OnClickZuoYiZhongP2...");
 		pcvr.GetInstance().MakeZuoYiMoveCenter(PlayerEnum.PlayerTwo);
 	}
 	
 	public void OnClickZuoYiXiaP2()
 	{
-		UnityEngine.Debug.Log("OnClickZuoYiXiaP2...");
+		UnityEngine.Debug.Log("Unity:"+"OnClickZuoYiXiaP2...");
 		pcvr.GetInstance().SetZuoYiDianJiSpeed(PlayerEnum.PlayerTwo, -1);
 	}
 
@@ -851,19 +851,19 @@ public class HardwareCheckCtrl : MonoBehaviour
 	
 	public void OnClickZuoYiShangP3()
 	{
-		UnityEngine.Debug.Log("OnClickZuoYiShangP3...");
+		UnityEngine.Debug.Log("Unity:"+"OnClickZuoYiShangP3...");
 		pcvr.GetInstance().SetZuoYiDianJiSpeed(PlayerEnum.PlayerThree, 1);
 	}
 	
 	public void OnClickZuoYiZhongP3()
 	{
-		UnityEngine.Debug.Log("OnClickZuoYiZhongP3...");
+		UnityEngine.Debug.Log("Unity:"+"OnClickZuoYiZhongP3...");
 		pcvr.GetInstance().MakeZuoYiMoveCenter(PlayerEnum.PlayerThree);
 	}
 	
 	public void OnClickZuoYiXiaP3()
 	{
-		UnityEngine.Debug.Log("OnClickZuoYiXiaP3...");
+		UnityEngine.Debug.Log("Unity:"+"OnClickZuoYiXiaP3...");
 		pcvr.GetInstance().SetZuoYiDianJiSpeed(PlayerEnum.PlayerThree, -1);
 	}
 
@@ -885,19 +885,19 @@ public class HardwareCheckCtrl : MonoBehaviour
 
 	public void OnClickZuoYiShangP4()
 	{
-		UnityEngine.Debug.Log("OnClickZuoYiShangP4...");
+		UnityEngine.Debug.Log("Unity:"+"OnClickZuoYiShangP4...");
 		pcvr.GetInstance().SetZuoYiDianJiSpeed(PlayerEnum.PlayerFour, 1);
 	}
 	
 	public void OnClickZuoYiZhongP4()
 	{
-		UnityEngine.Debug.Log("OnClickZuoYiZhongP4...");
+		UnityEngine.Debug.Log("Unity:"+"OnClickZuoYiZhongP4...");
 		pcvr.GetInstance().MakeZuoYiMoveCenter(PlayerEnum.PlayerFour);
 	}
 	
 	public void OnClickZuoYiXiaP4()
 	{
-		UnityEngine.Debug.Log("OnClickZuoYiXiaP4...");
+		UnityEngine.Debug.Log("Unity:"+"OnClickZuoYiXiaP4...");
 		pcvr.GetInstance().SetZuoYiDianJiSpeed(PlayerEnum.PlayerFour, -1);
 	}
 	

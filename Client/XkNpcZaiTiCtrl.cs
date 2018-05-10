@@ -47,7 +47,7 @@ public class XkNpcZaiTiCtrl : MonoBehaviour {
 		if (NpcAniController.Length > 0) {
 			for (int i = 0; i < NpcAniController.Length; i++) {
 				if (NpcAniController[i] == null) {
-					Debug.LogWarning("NpcAniController was wrong!");
+					Debug.LogWarning("Unity:"+"NpcAniController was wrong!");
 					GameObject obj = null;
 					obj.name = "null";
 					break;
@@ -63,7 +63,7 @@ public class XkNpcZaiTiCtrl : MonoBehaviour {
 
 		if (IsTeShuFireNpc) {
 			if (TimeFireAmmo.Length != AmmoPrefabTeShu.Length || TimeFireAmmo.Length != AmmoSpawnTranTeShu.Length) {
-				Debug.LogWarning("IsTeShuFireNpc was true, but TimeFireAmmo or AmmoPrefabTeShu or AmmoSpawnTranTeShu length was wrong!");
+				Debug.LogWarning("Unity:"+"IsTeShuFireNpc was true, but TimeFireAmmo or AmmoPrefabTeShu or AmmoSpawnTranTeShu length was wrong!");
 				GameObject obj = null;
 				obj.name = "null";
 			}
@@ -200,7 +200,7 @@ public class XkNpcZaiTiCtrl : MonoBehaviour {
 
 //	public void SetNpcIsDoFire(NpcMark script)
 //	{
-//		//Debug.Log("SetNpcIsDoFire -> IsFireFeiJiNpc "+script.IsFireFeiJiNpc);
+//		//Debug.Log("Unity:"+"SetNpcIsDoFire -> IsFireFeiJiNpc "+script.IsFireFeiJiNpc);
 //		if (!NpcScript.IsAniMove) {
 //			return;
 //		}
@@ -214,7 +214,7 @@ public class XkNpcZaiTiCtrl : MonoBehaviour {
 //		if (npcPath != markPar) {
 //			return;
 //		}
-//		//Debug.Log("***********SetNpcIsDoFire -> IsFireFeiJiNpc "+script.IsFireFeiJiNpc);
+//		//Debug.Log("Unity:"+"***********SetNpcIsDoFire -> IsFireFeiJiNpc "+script.IsFireFeiJiNpc);
 //		NpcScript.SetIsDoFireAnimation(script.IsFireFeiJiNpc);
 //		NpcScript.SetFeiJiMarkInfo(script);
 //	}
@@ -262,7 +262,7 @@ public class XkNpcZaiTiCtrl : MonoBehaviour {
 			TimeTeShuFire[i] += Time.deltaTime;
 			if (TimeTeShuFire[i] >= TimeFireAmmo[i]) {
 				TimeTeShuFire[i] = 0f; //fire ammo
-//				Debug.Log("teShuFireNpc -> i = "+i);
+//				Debug.Log("Unity:"+"teShuFireNpc -> i = "+i);
 
 				if (i < AudioTeShuNpcFire.Length && AudioTeShuNpcFire[i] != null) {
 					if (AudioTeShuNpcFire[i].isPlaying) {
@@ -310,7 +310,7 @@ public class XkNpcZaiTiCtrl : MonoBehaviour {
 						RaycastHit hit;
 						LayerMask FireLayer = XkGameCtrl.GetInstance().PlayerAmmoHitLayer;
 						if (Physics.Raycast(startPos, ammoForward, out hit, fireDisVal, FireLayer.value)) {
-							//Debug.Log("npc fire PlayerAmmo, fire obj -> "+hit.collider.name);
+							//Debug.Log("Unity:"+"npc fire PlayerAmmo, fire obj -> "+hit.collider.name);
 							firePos = hit.point;
 							XKNpcHealthCtrl healthScript = hit.collider.GetComponent<XKNpcHealthCtrl>();
 							if (healthScript != null) {
@@ -367,7 +367,7 @@ public class XkNpcZaiTiCtrl : MonoBehaviour {
 			return;
 		}
 		IsClearNpcAmmo = true;
-//		Debug.Log("XkNpcZaiTiCtrl::ClearNpcAmmoList -> NpcAmmoCount "+AmmoList.Count);
+//		Debug.Log("Unity:"+"XkNpcZaiTiCtrl::ClearNpcAmmoList -> NpcAmmoCount "+AmmoList.Count);
 		
 		if (AmmoList == null || AmmoList.Count < 1) {
 			return;

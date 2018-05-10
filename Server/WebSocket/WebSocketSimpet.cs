@@ -45,7 +45,7 @@ public class WebSocketSimpet : MonoBehaviour
             if (Time.time - m_TimeSendXinTiaoMsg > 10f)
             {
                 IsCheckXinTiaoMsg = false;
-                Debug.Log("XinTiao Check TimeOut!");
+                Debug.Log("Unity:"+"XinTiao Check TimeOut!");
                 if (m_SSBoxPostNet != null)
                 {
                     m_SSBoxPostNet.HttpSendPostLoginBox();
@@ -56,7 +56,7 @@ public class WebSocketSimpet : MonoBehaviour
 
     void OnDestroy()
     {
-        Debug.Log("OnDestroy...");
+        Debug.Log("Unity:"+"OnDestroy...");
         if (_wabData.WebSocket != null)
         {
             _wabData.WebSocket.Close();
@@ -73,7 +73,7 @@ public class WebSocketSimpet : MonoBehaviour
             _wabData.Address = url;
             _address = url;
             _wabData.OpenWebSocket();
-            Debug.Log("Opening Web Socket -> url == " + url);
+            Debug.Log("Unity:"+"Opening Web Socket -> url == " + url);
         }
     }
 
@@ -99,11 +99,11 @@ public class WebSocketSimpet : MonoBehaviour
             string msgToSend = boxNumber + "," + boxNumber + ",0,{\"_msg_name\":\"GameCenter_Logon\"}";
             // Send message to the server  
             _wabData.WebSocket.Send(msgToSend);
-            Debug.Log("NetSendWebSocketXinTiaoMsg -> msgToSend == " + msgToSend);
+            Debug.Log("Unity:"+"NetSendWebSocketXinTiaoMsg -> msgToSend == " + msgToSend);
         }
         else
         {
-            Debug.Log("NetSendWebSocketXinTiaoMsg -> Restart game box!");
+            Debug.Log("Unity:"+"NetSendWebSocketXinTiaoMsg -> Restart game box!");
             m_SSBoxPostNet.HttpSendPostLoginBox();
         }
     }
@@ -124,7 +124,7 @@ public class WebSocketSimpet : MonoBehaviour
         {
             if (message == m_XinTiaoReturnMsg)
             {
-                Debug.Log("XinTiao Check Success!");
+                Debug.Log("Unity:"+"XinTiao Check Success!");
                 IsCheckXinTiaoMsg = false;
             }
             return;
@@ -217,7 +217,7 @@ public class WebSocketSimpet : MonoBehaviour
     public event EventPlayerLoginBox OnEventPlayerLoginBox;
     public void OnNetReceivePlayerLoginBoxMsg(PlayerWeiXinData val)
     {
-        Debug.Log("OnNetReceivePlayerLoginBoxMsg -> userName == " + val.userName + ", userId == " + val.userId);
+        Debug.Log("Unity:"+"OnNetReceivePlayerLoginBoxMsg -> userName == " + val.userName + ", userId == " + val.userId);
         if (OnEventPlayerLoginBox != null)
         {
             OnEventPlayerLoginBox(val);
@@ -231,7 +231,7 @@ public class WebSocketSimpet : MonoBehaviour
     public event EventPlayerExitBox OnEventPlayerExitBox;
     public void OnNetReceivePlayerExitBoxMsg(int userId)
     {
-        Debug.Log("OnNetReceivePlayerExitBoxMsg -> userId == " + userId);
+        Debug.Log("Unity:"+"OnNetReceivePlayerExitBoxMsg -> userId == " + userId);
         if (OnEventPlayerExitBox != null)
         {
             OnEventPlayerExitBox(userId);
@@ -245,7 +245,7 @@ public class WebSocketSimpet : MonoBehaviour
     public event EventDirectionAngle OnEventDirectionAngle;
     public void OnNetReceiveDirectionAngleMsg(int val, int userId)
     {
-        //Debug.Log("OnNetReceiveDirectionAngleMsg -> val == " + val + ", userId == " + userId);
+        //Debug.Log("Unity:"+"OnNetReceiveDirectionAngleMsg -> val == " + val + ", userId == " + userId);
         if (OnEventDirectionAngle != null)
         {
             OnEventDirectionAngle(val, userId);
@@ -259,7 +259,7 @@ public class WebSocketSimpet : MonoBehaviour
     public event EventActionOperation OnEventActionOperation;
     public void OnNetReceiveActionOperationMsg(string val, int userId)
     {
-        //Debug.Log("OnNetReceiveActionOperationMsg -> val == " + val + ", userId == " + userId);
+        //Debug.Log("Unity:"+"OnNetReceiveActionOperationMsg -> val == " + val + ", userId == " + userId);
         if (OnEventActionOperation != null)
         {
             OnEventActionOperation(val, userId);

@@ -1095,10 +1095,10 @@ public class SetPanelUiRoot : MonoBehaviour {
 	void OnClickCheckQiNang()
 	{
 		int indexVal = StarMoveCount - (int)SelectSetPanelDate.CheckQiNang1;
-		//Debug.Log("*** "+pcvr.QiNangArray[indexVal]+", DongGanState "+pcvr.DongGanState);
+		//Debug.Log("Unity:"+"*** "+pcvr.QiNangArray[indexVal]+", DongGanState "+pcvr.DongGanState);
 		pcvr.QiNangArray[indexVal] = (byte)(pcvr.QiNangArray[indexVal] != 1 ? 1 : 0);
 		QiNangCQObj.SetActive(pcvr.QiNangArray[indexVal] == 0 ? false : true);
-		//Debug.Log("--- "+pcvr.QiNangArray[indexVal]);
+		//Debug.Log("Unity:"+"--- "+pcvr.QiNangArray[indexVal]);
 	}
 	
 	

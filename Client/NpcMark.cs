@@ -99,7 +99,7 @@ public class NpcMark : MonoBehaviour {
 	
 //	void OnTriggerEnter(Collider other)
 //	{
-//		//Debug.Log("OnTriggerEnter...name "+other.name);
+//		//Debug.Log("Unity:"+"OnTriggerEnter...name "+other.name);
 //		if (Network.peerType == NetworkPeerType.Client) {
 //			return;
 //		}

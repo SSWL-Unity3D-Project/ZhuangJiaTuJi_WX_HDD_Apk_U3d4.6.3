@@ -36,7 +36,7 @@ public class ZhunXingTeXiaoCtrl : MonoBehaviour {
 			return;
 		}
 
-		Debug.Log("ShowZhunXingTeXiao...");
+		Debug.Log("Unity:"+"ShowZhunXingTeXiao...");
 		if (!XkGameCtrl.IsActivePlayerOne) {
 			ZhunXingArray[0].SetActive(false);
 			ZhunXingArray[1].SetActive(false);

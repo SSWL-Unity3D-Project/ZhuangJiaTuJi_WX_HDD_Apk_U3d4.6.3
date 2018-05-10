@@ -408,7 +408,7 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 			firePos = FirePosValTmp * ammoSpawnForward + ammoSpawnPos;
 			FireRayDirLen = ammoScript.MvSpeed * ammoScript.LiveTime;
 			if (Physics.Raycast(ammoSpawnPos, ammoSpawnForward, out hit, FireRayDirLen, FireLayer.value)) {
-				//Debug.Log("Player fire obj -> "+hit.collider.name);
+				//Debug.Log("Unity:"+"Player fire obj -> "+hit.collider.name);
 				if (ammoScript.AmmoType != PlayerAmmoType.ChuanTouAmmo) {
 					firePos = hit.point;
 				}
@@ -418,7 +418,7 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 			ammoForward = obj.transform.forward;
 			firePos = FirePosValTmp * ammoForward + ammoSpawnPos;
 			if (Physics.Raycast(ammoSpawnPos, ammoForward, out hit, FireRayDirLen, FireLayer.value)) {
-				//Debug.Log("Player fire obj -> "+hit.collider.name);
+				//Debug.Log("Unity:"+"Player fire obj -> "+hit.collider.name);
 				if (ammoScript.AmmoType != PlayerAmmoType.ChuanTouAmmo) {
 					firePos = hit.point;
 				}
@@ -494,7 +494,7 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 			return;
 		}
 		IsQianHouFire = isFire;
-		//Debug.Log("SetIsQianHouFire -> isFire "+isFire);
+		//Debug.Log("Unity:"+"SetIsQianHouFire -> isFire "+isFire);
 
 		BuJiBaoType daoJuTypeVal = isFire == true ? BuJiBaoType.QianHouFireDJ : BuJiBaoType.Null;
 		JiQiangAmmoSt = daoJuTypeVal;
@@ -513,7 +513,7 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 		if (IsJiQiangSanDanFire == isFire) {
 			return;
 		}
-		//Debug.Log("SetIsJiQiangSanDanFire -> isFire "+isFire);
+		//Debug.Log("Unity:"+"SetIsJiQiangSanDanFire -> isFire "+isFire);
 		IsJiQiangSanDanFire = isFire;
 		BuJiBaoType daoJuTypeVal = isFire == true ? BuJiBaoType.SanDanJiQiang : BuJiBaoType.Null;
 		JiQiangAmmoSt = daoJuTypeVal;
@@ -533,7 +533,7 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 			return;
 		}
 		IsChangChengFire = isFire;
-		//Debug.Log("SetIsChangChengFire -> isFire "+isFire);
+		//Debug.Log("Unity:"+"SetIsChangChengFire -> isFire "+isFire);
 		BuJiBaoType daoJuTypeVal = isFire == true ? BuJiBaoType.ChangChengJiQiang : BuJiBaoType.Null;
 		JiQiangAmmoSt = daoJuTypeVal;
 		
@@ -552,7 +552,7 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 			return;
 		}
 		IsQiangJiFire = isFire;
-		//Debug.Log("SetIsQiangJiFire -> isFire "+isFire);
+		//Debug.Log("Unity:"+"SetIsQiangJiFire -> isFire "+isFire);
 		BuJiBaoType daoJuTypeVal = isFire == true ? BuJiBaoType.QiangJiJiQiang : BuJiBaoType.Null;
 		JiQiangAmmoSt = daoJuTypeVal;
 
@@ -574,7 +574,7 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 		ChangePlayerPaoTaObj(isFire == true ? PlayerAmmoType.PaiJiPaoAmmo : PlayerAmmoType.Null);
 		PlayerAmmoType ammoTypeVal = isFire == true ? PlayerAmmoType.PaiJiPaoAmmo : PlayerAmmoType.DaoDanAmmo;
 		XKPlayerAutoFire.GetInstanceAutoFire(PlayerIndex).SetAmmoStateZhuPao(ammoTypeVal);
-		//Debug.Log("SetIsPaiJiPaoFire -> isFire "+isFire);
+		//Debug.Log("Unity:"+"SetIsPaiJiPaoFire -> isFire "+isFire);
 		
 		BuJiBaoType daoJuTypeVal = isFire == true ? BuJiBaoType.PaiJiPaoDJ : BuJiBaoType.DaoDan;
 		ZhuPaoAmmoSt = daoJuTypeVal;
@@ -594,7 +594,7 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 		ChangePlayerPaoTaObj(isFire == true ? PlayerAmmoType.SanDanAmmo : PlayerAmmoType.Null);
 		PlayerAmmoType ammoTypeVal = isFire == true ? PlayerAmmoType.SanDanAmmo : PlayerAmmoType.DaoDanAmmo;
 		XKPlayerAutoFire.GetInstanceAutoFire(PlayerIndex).SetAmmoStateZhuPao(ammoTypeVal);
-		//Debug.Log("SetIsSanDanZPFire -> isFire "+isFire);
+		//Debug.Log("Unity:"+"SetIsSanDanZPFire -> isFire "+isFire);
 
 		BuJiBaoType daoJuTypeVal = isFire == true ? BuJiBaoType.ZhuPaoSanDanDJ : BuJiBaoType.DaoDan;
 		ZhuPaoAmmoSt = daoJuTypeVal;
@@ -612,7 +612,7 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 
 	public void SetIsHuoLiAllOpen(bool isFire)
 	{
-		//Debug.Log("SetIsHuoLiAllOpen -> isFire "+isFire);
+		//Debug.Log("Unity:"+"SetIsHuoLiAllOpen -> isFire "+isFire);
 		if (isFire) {
 			XKPlayerHuoLiAllOpenUICtrl huoLiUIScript = XKPlayerHuoLiAllOpenUICtrl.GetInstanceHuoLiOpen(PlayerIndex);
 			if (huoLiUIScript != null) {
@@ -624,7 +624,7 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 			return;
 		}
 		IsHuoLiAllOpen = isFire;
-		//Debug.Log("SetIsSanDanZPFire -> isFire "+isFire);
+		//Debug.Log("Unity:"+"SetIsSanDanZPFire -> isFire "+isFire);
 		
 		BuJiBaoType daoJuTypeValZP = isFire == true ? BuJiBaoType.HuoLiAllOpenDJ : BuJiBaoType.DaoDan;
 		BuJiBaoType daoJuTypeValJQ = isFire == true ? BuJiBaoType.HuoLiAllOpenDJ : BuJiBaoType.Null;
@@ -763,7 +763,7 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 			firePos = FirePosValTmp * ammoSpawnForward + ammoSpawnPos;
 			FireRayDirLen = ammoScript.MvSpeed * ammoScript.LiveTime;
 			if (Physics.Raycast(ammoSpawnPos, ammoSpawnForward, out hit, FireRayDirLen, FireLayer.value)) {
-				//Debug.Log("Player fire obj -> "+hit.collider.name);
+				//Debug.Log("Unity:"+"Player fire obj -> "+hit.collider.name);
 				if (ammoScript.AmmoType != PlayerAmmoType.ChuanTouAmmo) {
 					firePos = hit.point;
 				}
@@ -773,7 +773,7 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 			ammoForward = obj.transform.forward;
 			firePos = FirePosValTmp * ammoForward + ammoSpawnPos;
 			if (Physics.Raycast(ammoSpawnPos, ammoForward, out hit, FireRayDirLen, FireLayer.value)) {
-				//Debug.Log("Player fire obj -> "+hit.collider.name);
+				//Debug.Log("Unity:"+"Player fire obj -> "+hit.collider.name);
 				if (ammoScript.AmmoType != PlayerAmmoType.ChuanTouAmmo) {
 					firePos = hit.point;
 				}
@@ -796,7 +796,7 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 		PlayerAmmoCtrl ammoScript = null;
 		PlayerAmmoCtrl ammoPrefabScript = null;
 		bool isFindAmmo = false;
-		//Debug.Log("ammoType "+ammoType+", ammoIndex "+ammoIndex+", GetPlayerAmmo");
+		//Debug.Log("Unity:"+"ammoType "+ammoType+", ammoIndex "+ammoIndex+", GetPlayerAmmo");
 		switch (ammoType) {
 		case PlayerAmmoType.PuTongAmmo:
 			max = AmmoList_TK.Count;
@@ -1054,7 +1054,7 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 
 	void ClickFireBtEvent(ButtonState state)
 	{
-		//Debug.Log("ClickFireBtOneEvent***state "+state);
+		//Debug.Log("Unity:"+"ClickFireBtOneEvent***state "+state);
 		if (state == ButtonState.DOWN)
         {
 			SetIsActiveFireBtJQ(true);
@@ -1075,15 +1075,15 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 
     IEnumerator DelayResetFire()
     {
-        //Debug.Log("DelayResetFire...111");
+        //Debug.Log("Unity:"+"DelayResetFire...111");
         yield return new WaitForSeconds(0.5f);
         ClickFireBtEvent(ButtonState.UP);
-        //Debug.Log("DelayResetFire...222");
+        //Debug.Log("Unity:"+"DelayResetFire...222");
     }
 
     void ClickFireDaoDanBtEvent(ButtonState state)
 	{
-		//Debug.Log("ClickFireBtOneEvent***state "+state);
+		//Debug.Log("Unity:"+"ClickFireBtOneEvent***state "+state);
 		if (state == ButtonState.DOWN)
         {
             IsActiveFireBtZP = true;
@@ -1102,15 +1102,15 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 
     IEnumerator DelayResetFireDaoDan()
     {
-        //Debug.Log("DelayResetFireDaoDan...111");
+        //Debug.Log("Unity:"+"DelayResetFireDaoDan...111");
         yield return new WaitForSeconds(0.1f);
         ClickFireDaoDanBtEvent(ButtonState.UP);
-        //Debug.Log("DelayResetFireDaoDan...222");
+        //Debug.Log("Unity:"+"DelayResetFireDaoDan...222");
     }
 
 	public void SpawnPlayerDaoDan(Transform ammoTran, GameObject playerDaoDan)
 	{
-		//Debug.Log("SpawnPlayerDaoDan***");
+		//Debug.Log("Unity:"+"SpawnPlayerDaoDan***");
 		Vector3 ammoSpawnPos = ammoTran.position;
 		GameObject obj = SpawnPlayerAmmo(playerDaoDan, ammoSpawnPos, ammoTran.rotation);
 		obj.transform.parent = XkGameCtrl.PlayerAmmoArray;
@@ -1138,7 +1138,7 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 		for (int i = 0; i < max; i++) {
 			if (JiQiangFireAudioState[i] == 1) {
 				isPlay = false;
-				//Debug.Log("CheckJiQiangFireAudioState -> PlayerIndex "+PlayerIndex);
+				//Debug.Log("Unity:"+"CheckJiQiangFireAudioState -> PlayerIndex "+PlayerIndex);
 				break;
 			}
 		}
@@ -1342,7 +1342,7 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 			}
 		}
 
-		//Debug.Log("ammoType "+ammoType+", PlayerIndex "+PlayerIndex+", SpawnPlayerAmmoByAmmoType");
+		//Debug.Log("Unity:"+"ammoType "+ammoType+", PlayerIndex "+PlayerIndex+", SpawnPlayerAmmoByAmmoType");
 		switch (ammoType) {
 		case PlayerAmmoType.PuTongAmmo:
 			ammoParticle = AmmoParticle[ammoIndex];
@@ -1437,7 +1437,7 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 		Vector3 firePos = Vector3.zero;
 		firePos = FirePosValTmp * ammoSpawnForward + ammoSpawnPos;
 		if (Physics.Raycast(ammoSpawnPos, ammoSpawnForward, out hit, FireRayDirLen, FireLayer.value)) {
-			//Debug.Log("Player fire obj -> "+hit.collider.name);
+			//Debug.Log("Unity:"+"Player fire obj -> "+hit.collider.name);
 			firePos = hit.point;
 		}
 		ammoScript.StartMoveAmmo(firePos, PlayerIndex);
@@ -1512,7 +1512,7 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 		}
 
 //		#if UNITY_EDITOR
-//		Debug.Log("ChangePlayerPaoTaObj -> indexJH "+indexJH);
+//		Debug.Log("Unity:"+"ChangePlayerPaoTaObj -> indexJH "+indexJH);
 //		#endif
 		
 		for (int i = 0; i < 4; i++) {

@@ -11,7 +11,7 @@ public class XKTiaoBanCtrl : MonoBehaviour
 		if (playerMoveScript == null) {
 			return;
 		}
-		Debug.Log("XKTiaoBanCtrl::OnTriggerEnter -> hit "+other.name);
+		Debug.Log("Unity:"+"XKTiaoBanCtrl::OnTriggerEnter -> hit "+other.name);
 		//XkGameCtrl.ActivePlayerToGame(playerMoveScript.PlayerIndex, true);
 		playerMoveScript.MakePlayerToTiaoYueDian(TiaoDianTr);
 	}

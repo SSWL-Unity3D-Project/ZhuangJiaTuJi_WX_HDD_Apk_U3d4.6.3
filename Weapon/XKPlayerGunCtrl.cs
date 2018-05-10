@@ -24,13 +24,13 @@ public class XKPlayerGunCtrl : MonoBehaviour {
 	void Start()
 	{
 		if (UpPaoGuanJDVal >= DownPaoGuanJDVal) {
-			Debug.LogError("XKCannonCtrl-> MaxPaoGuanJDVal was wrong!");
+			Debug.LogError("Unity:"+"XKCannonCtrl-> MaxPaoGuanJDVal was wrong!");
 			GameObject obj = null;
 			obj.name = "null";
 		}
 		
 		if (MaxPaoShenJDVal < MinPaoShenJDVal) {
-			Debug.LogError("XKCannonCtrl-> MaxPaoShenJDVal was wrong!");
+			Debug.LogError("Unity:"+"XKCannonCtrl-> MaxPaoShenJDVal was wrong!");
 			GameObject obj = null;
 			obj.name = "null";
 		}

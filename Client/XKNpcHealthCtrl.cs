@@ -100,7 +100,7 @@ public class XKNpcHealthCtrl : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision)
 	{
-		//Debug.Log("**********OnCollisionEnter-> collision "+collision.gameObject.name);
+		//Debug.Log("Unity:"+"**********OnCollisionEnter-> collision "+collision.gameObject.name);
 		XKPlayerMoveCtrl playerScript = collision.gameObject.GetComponent<XKPlayerMoveCtrl>();
 		if (playerScript == null) {
 			return;
@@ -193,7 +193,7 @@ public class XKNpcHealthCtrl : MonoBehaviour {
 			return;
 		}
 		IsDeathNpc = true;
-		//Debug.Log("MakeNpcHidden -> name "+gameObject.name);
+		//Debug.Log("Unity:"+"MakeNpcHidden -> name "+gameObject.name);
 		
 		if (NpcScript != null) {
 			if (CannonScript != null) {
@@ -217,7 +217,7 @@ public class XKNpcHealthCtrl : MonoBehaviour {
 		}
 
 		if (GameCameraTr == null) {
-			Debug.LogWarning("CheckDisGameCamera -> GameCameraTr is null");
+			Debug.LogWarning("Unity:"+"CheckDisGameCamera -> GameCameraTr is null");
 			return;
 		}
 		Vector3 vecA = GameCameraTr.forward;
@@ -231,7 +231,7 @@ public class XKNpcHealthCtrl : MonoBehaviour {
 			return;
 		}
 		DisCamera = MinDisCamera;
-		//Debug.Log("DisCamera "+DisCamera);
+		//Debug.Log("Unity:"+"DisCamera "+DisCamera);
 	}
 
 	string NpcNameInfo = "";
@@ -262,7 +262,7 @@ public class XKNpcHealthCtrl : MonoBehaviour {
 					float healthPer = (float)PuTongAmmoCount / puTongAmmoNumTmp;
 					//int oldPuTongAmmoCount = PuTongAmmoCount;
 					PuTongAmmoCount = (int)(healthPer * MaxPuTongAmmo[indexValTmp]);
-					/*Debug.Log("fix npc health -> PuTongAmmoCount "+PuTongAmmoCount
+					/*Debug.Log("Unity:"+"fix npc health -> PuTongAmmoCount "+PuTongAmmoCount
 					          +", oldPuTongAmmoCount "+oldPuTongAmmoCount);*/
 				}
 			}
@@ -286,7 +286,7 @@ public class XKNpcHealthCtrl : MonoBehaviour {
 			XKBossXueTiaoCtrl.GetInstance().SetBloodBossAmount(bossAmount, this);
 		}
 
-		/*Debug.Log("OnDamageNpc -> "
+		/*Debug.Log("Unity:"+"OnDamageNpc -> "
 		          +", nameNpc "+NpcNameInfo
 		          +", puTongAmmoNum "+puTongAmmoNum);*/
 		if (PuTongAmmoCount >= puTongAmmoNum ){
@@ -314,7 +314,7 @@ public class XKNpcHealthCtrl : MonoBehaviour {
 //			if (NpcScript != null && CannonScript != null) {
 //				if (NpcScript.GetIsDeathNPC()) {
 //					isAddKillNpcNum = false;
-//					Debug.Log("name "+NpcScript.name+", isAddKillNpcNum "+isAddKillNpcNum);
+//					Debug.Log("Unity:"+"name "+NpcScript.name+", isAddKillNpcNum "+isAddKillNpcNum);
 //				}
 //			}
 			

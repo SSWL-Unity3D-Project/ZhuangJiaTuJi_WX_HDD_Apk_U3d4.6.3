@@ -111,7 +111,7 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 
 		DeathExplodPrefab = XKPlayerGlobalDt.GetInstance().DeathExplodPrefab;
 		if (GenZongDanAimPoint == null) {
-			Debug.LogWarning("GenZongDanAimPoint is null");
+			Debug.LogWarning("Unity:"+"GenZongDanAimPoint is null");
 			GenZongDanAimPoint.name = "null";
 			return;
 		}
@@ -209,7 +209,7 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision)
 	{
-		//Debug.Log("OnCollisionEnter -> colName "+collision.gameObject.name);
+		//Debug.Log("Unity:"+"OnCollisionEnter -> colName "+collision.gameObject.name);
 		CheckPlayerIsOpenCheckPaoWuXianTerrain(collision.gameObject);
 		XKPlayerMvFanWei playerFanWeiScript = collision.transform.GetComponentInParent<XKPlayerMvFanWei>();
 		if (IsMoveToTiaoYueDian) {
@@ -222,7 +222,7 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 
 		if (playerFanWeiScript != null) {
 			if (playerFanWeiScript.FanWeiState == PointState.Hou) {
-				//Debug.Log("OnCollisionEnter -> FanWeiState "+playerFanWeiScript.FanWeiState);
+				//Debug.Log("Unity:"+"OnCollisionEnter -> FanWeiState "+playerFanWeiScript.FanWeiState);
 				RigCom.drag = 10f;
 				IsAutoMoving = true;
 			}
@@ -243,7 +243,7 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 		XKPlayerMvFanWei playerFanWeiScript = collision.transform.GetComponentInParent<XKPlayerMvFanWei>();
 		if (playerFanWeiScript != null) {
 			if (playerFanWeiScript.FanWeiState == PointState.Hou) {
-				//Debug.Log("OnCollisionExit -> FanWeiState "+playerFanWeiScript.FanWeiState);
+				//Debug.Log("Unity:"+"OnCollisionExit -> FanWeiState "+playerFanWeiScript.FanWeiState);
 				RigCom.drag = 100f;
 				IsAutoMoving = false;
 			}
@@ -425,7 +425,7 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 			if (PlayerRotStateYG != 0) {
 				euA.y = euA.y >= 0f ? 1f : 359f;
 				PlayerCore.transform.localEulerAngles = euA;
-				/*Debug.Log("testAngleY "+PlayerCore.transform.localEulerAngles.y.ToString("f2")
+				/*Debug.Log("Unity:"+"testAngleY "+PlayerCore.transform.localEulerAngles.y.ToString("f2")
 				          +", euA.y "+euA.y.ToString("f2"));*/
 			}
 			PlayerRotStateYG = 0;
@@ -450,7 +450,7 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 //			if (PlayerRotStateYG != 0) {
 //				euA.y = euA.y >= 0f ? 1f : 359f;
 //				PlayerCore.transform.localEulerAngles = euA;
-//				/*Debug.Log("testAngleY "+PlayerCore.transform.localEulerAngles.y.ToString("f2")
+//				/*Debug.Log("Unity:"+"testAngleY "+PlayerCore.transform.localEulerAngles.y.ToString("f2")
 //				          +", euA.y "+euA.y.ToString("f2"));*/
 //			}
 //			PlayerRotStateYG = 0;
@@ -467,7 +467,7 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 //				if (Mathf.Abs(euA.y) < speedAngleVal) {
 //					euA.y = euA.y >= 0f ? 1f : 359f;
 //					PlayerCore.transform.localEulerAngles = euA;
-//					/*Debug.Log("testAngleY "+PlayerCore.transform.localEulerAngles.y.ToString("f2")
+//					/*Debug.Log("Unity:"+"testAngleY "+PlayerCore.transform.localEulerAngles.y.ToString("f2")
 //					          +", euA.y "+euA.y.ToString("f2"));*/
 //				}
 //			}
@@ -475,7 +475,7 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 //				if (PlayerRotStateYG != 0) {
 //					euA.y = euA.y >= 0f ? 1f : 359f;
 //					PlayerCore.transform.localEulerAngles = euA;
-//					/*Debug.Log("testAngleY "+PlayerCore.transform.localEulerAngles.y.ToString("f2")
+//					/*Debug.Log("Unity:"+"testAngleY "+PlayerCore.transform.localEulerAngles.y.ToString("f2")
 //				          +", euA.y "+euA.y.ToString("f2"));*/
 //				}
 //				PlayerRotStateYG = 0;
@@ -1108,7 +1108,7 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 
 	public void HiddenGamePlayer(int key = 0)
 	{
-		//Debug.Log("HiddenGamePlayer -> key "+key);
+		//Debug.Log("Unity:"+"HiddenGamePlayer -> key "+key);
 		if (!gameObject.activeSelf) {
 			return;
 		}
@@ -1146,12 +1146,12 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 		IsWuDiState = true;
 		WuDiTXObj.SetActive(true);
 		//gameObject.layer = LayerMask.NameToLayer("UI");
-		//Debug.Log("active player wuDiState -> playerIndex "+PlayerIndex);
+		//Debug.Log("Unity:"+"active player wuDiState -> playerIndex "+PlayerIndex);
 	}
 
 	public void ResetIsWuDiState()
 	{
-		//Debug.Log("ResetIsWuDiState -> playerIndex "+PlayerIndex);
+		//Debug.Log("Unity:"+"ResetIsWuDiState -> playerIndex "+PlayerIndex);
 		IsWuDiState = false;
 		WuDiTXObj.SetActive(false);
 		gameObject.layer = LayerMask.NameToLayer("Player");
@@ -1342,7 +1342,7 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 			disCur = ((cosAngCur - CosAngMin) / KeyCosDis) + DisMin;
 			if (cosAngCur < 0f && vecB.magnitude > disCur) {
 				isResetPosition = true;
-				//Debug.Log("cosAngCur "+cosAngCur+", disCur "+disCur+", vecBLen "+vecB.magnitude);
+				//Debug.Log("Unity:"+"cosAngCur "+cosAngCur+", disCur "+disCur+", vecBLen "+vecB.magnitude);
 				break;
 			}
 		}
@@ -1427,7 +1427,7 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 
 	void OnHitMoveFanWeiByPaoWuXianRun()
 	{
-		//Debug.Log("OnHitMoveFanWeiByPaoWuXianRun...");
+		//Debug.Log("Unity:"+"OnHitMoveFanWeiByPaoWuXianRun...");
 		SetRigbodyKinematic(false);
 		IsOpenCheckPaoWuXianTerrain = true;
 	}
@@ -1457,7 +1457,7 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 		XKNpcHealthCtrl healthScript = null;
 		Transform[] npcArray = XkGameCtrl.GetInstance().GetNpcTranList().ToArray();
 		int max = npcArray.Length;
-		//Debug.Log("max *** "+max);
+		//Debug.Log("Unity:"+"max *** "+max);
 		Vector3 posA = PlayerTran.position;
 		Vector3 posB = Vector3.zero;
 		for (int i = 0; i < max; i++) {
@@ -1468,7 +1468,7 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 			posB = npcArray[i].position;
 			posA.y = posB.y = 0f;
 			/*float disTest = Vector3.Distance(posA, posB);
-			Debug.Log("disTest "+disTest+", posA "+posA+", posB "+posB+", AmmoDamageDis "+AmmoDamageDis);*/
+			Debug.Log("Unity:"+"disTest "+disTest+", posA "+posA+", posB "+posB+", AmmoDamageDis "+AmmoDamageDis);*/
 			if (Vector3.Distance(posA, posB) <= XKPlayerGlobalDt.GetInstance().DamageDisTiaoBan) {
 				healthScript = npcArray[i].GetComponentInChildren<XKNpcHealthCtrl>();
 				if (healthScript != null) {

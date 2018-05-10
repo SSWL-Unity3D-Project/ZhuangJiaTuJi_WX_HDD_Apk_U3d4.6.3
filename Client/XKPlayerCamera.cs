@@ -119,7 +119,7 @@ public class XKPlayerCamera : MonoBehaviour {
 		if (isActive && !ScreenDanHeiCtrl.IsStartGame && PlayerSt != PlayerTypeEnum.CartoonCamera) {
 			isActive = false;
 		}
-		//Debug.Log("SetActiveCamera -> player "+PlayerSt+", isEnable "+isActive);
+		//Debug.Log("Unity:"+"SetActiveCamera -> player "+PlayerSt+", isEnable "+isActive);
 		PlayerCamera.enabled = isActive;
 	}
 
@@ -141,7 +141,7 @@ public class XKPlayerCamera : MonoBehaviour {
 				break;
 			}
 		}
-		//Debug.Log("SetEnableCamera -> player "+PlayerSt+", isEnable "+isEnable);
+		//Debug.Log("Unity:"+"SetEnableCamera -> player "+PlayerSt+", isEnable "+isEnable);
 		PlayerCamera.enabled = isEnable;
 	}
 
@@ -164,7 +164,7 @@ public class XKPlayerCamera : MonoBehaviour {
 				break;
 			}
 		}
-		//Debug.Log("ActivePlayerCamera -> player "+PlayerSt+", isEnable "+isEnable+", jiTai "+jiTai);
+		//Debug.Log("Unity:"+"ActivePlayerCamera -> player "+PlayerSt+", isEnable "+isEnable+", jiTai "+jiTai);
 		PlayerCamera.enabled = isEnable;
 		
 		if (isEnable) {
@@ -260,7 +260,7 @@ public class XKPlayerCamera : MonoBehaviour {
 		if (AimTran == null) {
 			if (IsOutAim) {
 				float angle = Quaternion.Angle(CameraTran.rotation, CameraParent.rotation);
-				//Debug.Log("angle ****** "+angle);
+				//Debug.Log("Unity:"+"angle ****** "+angle);
 				if (angle <= 0.001f) {
 					IsChangeSpeedOutAim = true;
 				}
@@ -324,7 +324,7 @@ public class XKPlayerCamera : MonoBehaviour {
 
 	void ChangeAimTran(Transform aimVal)
 	{
-//		Debug.Log("ChangeAimTran...");
+//		Debug.Log("Unity:"+"ChangeAimTran...");
 		if (aimVal == null) {
 			if (AimTran != null) {
 				IsOutAim = true;
@@ -343,7 +343,7 @@ public class XKPlayerCamera : MonoBehaviour {
 	public void SetAimTranInfo(AiMark markScript)
 	{
 		if (AimNpcObj != null) {
-//			Debug.Log("SetAimTranInfo -> AimNpcObj should be null");
+//			Debug.Log("Unity:"+"SetAimTranInfo -> AimNpcObj should be null");
 			return;
 		}
 
@@ -359,7 +359,7 @@ public class XKPlayerCamera : MonoBehaviour {
 		else {
 			SpeedIntoAim = markScript.SpeedIntoAim;
 			SpeedOutAim = markScript.SpeedOutAim;
-			//Debug.Log("111*************SpeedOutAim "+SpeedOutAim);
+			//Debug.Log("Unity:"+"111*************SpeedOutAim "+SpeedOutAim);
 		}
 
 		AimTran = aimVal;

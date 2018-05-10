@@ -324,7 +324,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 	public void RestartMovePlayer(int key = 0)
 	{
 		if (key == 1) {
-			Debug.Log("RestartMovePlayer:: key is "+key);
+			Debug.Log("Unity:"+"RestartMovePlayer:: key is "+key);
 			IsStartMovePlayerByMark = false;
 			PlayerObj.SetActive(true);
 			PlayerCamera.SetEnableCamera(false);
@@ -348,7 +348,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 		IsStopMovePlayer = false;
 
 		if (PlayerSt == PlayerTypeEnum.FeiJi) {
-			Debug.Log("RestartMovePlayer -> player "+PlayerSt);
+			Debug.Log("Unity:"+"RestartMovePlayer -> player "+PlayerSt);
 		}
 
 		if (ITweenScript != null) {
@@ -363,7 +363,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 	{
 		if (!XkGameCtrl.GetInstance().IsCartoonShootTest) {
 			if (!IsStopMovePlayer) {
-				Debug.Log("MakePlayerFlyToPathMark -> player "+PlayerSt);
+				Debug.Log("Unity:"+"MakePlayerFlyToPathMark -> player "+PlayerSt);
 				return;
 			}
 		}
@@ -493,7 +493,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 		Transform[] tranArray = new Transform[2];
 		tranArray[0] = transform;
 		tranArray[1] = tran.GetChild(MarkCount);
-//		Debug.Log("InitMovePlayerByMarkSpeed -> path "+AiPathScript.name
+//		Debug.Log("Unity:"+"InitMovePlayerByMarkSpeed -> path "+AiPathScript.name
 //		          +", mark "+tranArray[1].name);
 
 		if (tranArray[1] == XkGameCtrl.GetInstance().GmCamMark.transform) {
@@ -515,7 +515,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 
 		PathNodes = AiPathScript.GetPathNodes(MarkCount);
 		if (PathNodes == null) {
-			Debug.Log("PathNodes is null! MarkCount "+MarkCount);
+			Debug.Log("Unity:"+"PathNodes is null! MarkCount "+MarkCount);
 			return;
 		}
 		
@@ -538,8 +538,8 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 		}
 		RotationStart = tranArray[0].rotation;
 		RotationEnd = tranArray[1].rotation;
-//		Debug.LogError("SpeedA *** "+SpeedA+", MarkCount "+MarkCount+", maxNodes "+maxNodes);
-//		Debug.LogWarning("SpeedA *** "+SpeedA+", SpeedB "+SpeedB);
+//		Debug.LogError("Unity:"+"SpeedA *** "+SpeedA+", MarkCount "+MarkCount+", maxNodes "+maxNodes);
+//		Debug.LogWarning("Unity:"+"SpeedA *** "+SpeedA+", SpeedB "+SpeedB);
 		if (!IsStartMovePlayerByMark) {
 			StartCoroutine(MovePlayerByMarkSpeed());
 			IsStartMovePlayerByMark = true;
@@ -555,19 +555,19 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 		int maxCountNode = PathNodes.Length;
 		EndPos = PathNodes[1];
 
-//		Debug.Log("MovePlayerByMarkSpeed -> start time "+Time.realtimeSinceStartup);
+//		Debug.Log("Unity:"+"MovePlayerByMarkSpeed -> start time "+Time.realtimeSinceStartup);
 		float timeLastVal = Time.realtimeSinceStartup;
 		float timeRotationVal = 0f;
 		do {
 			if (JiFenJieMianCtrl.GetInstance().GetIsShowFinishTask() && XkGameCtrl.IsLoadingLevel) {
-				Debug.Log("MovePlayerByMarkSpeed -> IsLoadingLevel "+XkGameCtrl.IsLoadingLevel
+				Debug.Log("Unity:"+"MovePlayerByMarkSpeed -> IsLoadingLevel "+XkGameCtrl.IsLoadingLevel
 				          +", IsShowFinishTask "+JiFenJieMianCtrl.GetInstance().GetIsShowFinishTask());
 				yield break;
 			}
 
 			if (PlayerSt == PlayerTypeEnum.CartoonCamera) {
 				if (XkGameCtrl.GetInstance().IsCartoonShootTest) {
-					Debug.Log("MovePlayerByMarkSpeed -> IsCartoonShootTest "
+					Debug.Log("Unity:"+"MovePlayerByMarkSpeed -> IsCartoonShootTest "
 					          +XkGameCtrl.GetInstance().IsCartoonShootTest);
 					yield break;
 				}
@@ -693,10 +693,10 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 					transform.forward = Vector3.Lerp(transform.forward, forwardVal, dTime * SpeedA * 0.5f);
 				}
 			}
-//			Debug.Log("SpeedA "+SpeedA+", ds "+ds+", dTime "+dTime);
+//			Debug.Log("Unity:"+"SpeedA "+SpeedA+", ds "+ds+", dTime "+dTime);
 
 			if (disAimNode <= ds) {
-//				Debug.Log("Over, ds "+ds+", realDis "+Vector3.Distance(transform.position, EndPos)+", time "+dTime);
+//				Debug.Log("Unity:"+"Over, ds "+ds+", realDis "+Vector3.Distance(transform.position, EndPos)+", time "+dTime);
 				countNode++;
 				float disVal = ds - disAimNode;
 				float disNode = 0f;
@@ -721,7 +721,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 				/*if (count > 0) {
 					string outPut = PlayerSt == PlayerTypeEnum.FeiJi ? "feiJi: " : "tanKe: ";
 					outPut += "countNode "+countNode+",count "+count+", maxCountNode "+maxCountNode;
-					Debug.Log(outPut);
+					Debug.Log("Unity:"+outPut);
 				}*/
 
 				if (countNode < (maxCountNode - 1) && (countNode+1) < PathNodes.Length) {
@@ -730,8 +730,8 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 					EndPos = PathNodes[countNode+1]; //更新EndPos.
 					ForwardMoveVal = Vector3.Normalize(EndPos - transform.position); //更新ForwardMoveVal.
 
-//					Debug.Log("***realDis "+Vector3.Distance(transform.position, EndPos));
-//					Debug.Log("***ForwardMoveVal "+Vector3.Distance(ForwardMoveVal, Vector3.zero));
+//					Debug.Log("Unity:"+"***realDis "+Vector3.Distance(transform.position, EndPos));
+//					Debug.Log("Unity:"+"***ForwardMoveVal "+Vector3.Distance(ForwardMoveVal, Vector3.zero));
 					yield return new WaitForSeconds(TimeUnitMove);
 					continue;
 				}
@@ -793,7 +793,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 				if (!IsDelayMovePlayer && IsPlayerTingLiu) {
 					IsDelayMovePlayer = true;
 					TimeDelayMove = TimeTingLiuVal - (Time.realtimeSinceStartup - TimeTingLiuValStart);
-					//Debug.Log("CheckIsDelayMovePlayer***************TimeDelayMove "+TimeDelayMove);
+					//Debug.Log("Unity:"+"CheckIsDelayMovePlayer***************TimeDelayMove "+TimeDelayMove);
 				}
 			}
 		}
@@ -807,18 +807,18 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 			if (AiPathScript.mNextPath1 == null) {
 				switch (PlayerSt) {
 				case PlayerTypeEnum.FeiJi:
-					Debug.Log("FeiJiPlayer move to end position");
+					Debug.Log("Unity:"+"FeiJiPlayer move to end position");
 					break;
 					
 				case PlayerTypeEnum.TanKe:
-					//Debug.Log("TanKePlayer move to end position");
+					//Debug.Log("Unity:"+"TanKePlayer move to end position");
 					break;
 				}
 				return false;
 			}
 			MarkCount = 0;
 			AiPathScript = AiPathScript.mNextPath1.GetComponent<AiPathCtrl>();
-			//Debug.Log("move next path, path is "+AiPathScript.name);
+			//Debug.Log("Unity:"+"move next path, path is "+AiPathScript.name);
 		}
 		MovePlayerByItween();
 		return true;
@@ -826,9 +826,9 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 
 	public void ExitPlayerLoopPath()
 	{
-		//Debug.Log("ExitPlayerLoopPath***");
+		//Debug.Log("Unity:"+"ExitPlayerLoopPath***");
 		if (AiPathScript.mNextPath1 == null) {
-			Debug.Log("Player move to end position");
+			Debug.Log("Unity:"+"Player move to end position");
 			return;
 		}
 		
@@ -1055,7 +1055,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 //		if (PlayerSt == PlayerTypeEnum.TanKe) {
 //			if (key == 1 && PaoTaiScript != null) {
 //				if (PlayerZhiShengJiScript != null) {
-//					Debug.Log("SetPlayerCameraTran -> fix tanKe info...");
+//					Debug.Log("Unity:"+"SetPlayerCameraTran -> fix tanKe info...");
 //					Transform tkTran = PlayerZhiShengJiScript.transform;
 //					tkTran.parent = transform;
 //					tkTran.localPosition = Vector3.zero;

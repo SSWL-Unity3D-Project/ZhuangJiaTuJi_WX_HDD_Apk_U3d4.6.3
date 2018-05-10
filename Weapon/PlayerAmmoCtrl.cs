@@ -87,7 +87,7 @@ public class PlayerAmmoCtrl : MonoBehaviour {
 
 		XKNpcHealthCtrl healthScript = hitObjNpc.GetComponent<XKNpcHealthCtrl>();
 		if (healthScript != null && !healthScript.GetIsDeathNpc()) {
-			/*Debug.Log("CheckAmmoHitObj -> OnDamageNpc: "
+			/*Debug.Log("Unity:"+"CheckAmmoHitObj -> OnDamageNpc: "
 			          +"AmmoType "+AmmoType
 			          +", AmmoName "+AmmoTran.name
 			          +", NpcName "+healthScript.GetNpcName()
@@ -146,7 +146,7 @@ public class PlayerAmmoCtrl : MonoBehaviour {
 			|| disTmp > MaxDisVal
 		    || AmmoType == PlayerAmmoType.PaiJiPaoAmmo) {
 			firePos = AmmoTran.position + (vecA.normalized * MaxDisVal);
-			//Debug.Log("StartMoveAmmo::fix firePos -> "+"disTmp "+disTmp+", disMax "+MaxDisVal);
+			//Debug.Log("Unity:"+"StartMoveAmmo::fix firePos -> "+"disTmp "+disTmp+", disMax "+MaxDisVal);
 		}
 		IsChuanJiaDanHitCamColForward = false;
 

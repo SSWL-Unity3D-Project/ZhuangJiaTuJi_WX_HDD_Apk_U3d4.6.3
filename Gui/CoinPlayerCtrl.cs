@@ -362,7 +362,7 @@ public class CoinPlayerCtrl : MonoBehaviour {
 
 	void SetPlayerCoinSprite(int num)
 	{
-		//Debug.Log("SetPlayerCoinSprite -> coin "+num+", playerIndex "+PlayerSt);
+		//Debug.Log("Unity:"+"SetPlayerCoinSprite -> coin "+num+", playerIndex "+PlayerSt);
 		if(num > 99)
 		{
 			CoinSpriteA.spriteName = "p1_9";

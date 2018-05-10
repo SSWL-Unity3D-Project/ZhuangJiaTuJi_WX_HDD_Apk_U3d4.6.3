@@ -195,234 +195,269 @@ public class XkGameCtrl : MonoBehaviour {
 	// Use this for initialization
 	void Awake()
 	{
-		_Instance = this;
-		pcvr.OpenDongGanState();
-		pcvr.OpenAllPlayerFangXiangPanPower();
-		switch (XKGlobalData.GameDiff) {
-		case "0":
-			PlayerXueLiangMax = 14000f;
-			break;
-		case "2":
-			PlayerXueLiangMax = 6000f;
-			break;
-		default:
-			PlayerXueLiangMax = 10000f;
-			break;
-		}
-		MaxPlayerHealth = PlayerXueLiangMax;
-		KeyBloodUI = (1f - MinBloodUIAmount) / MaxPlayerHealth;
-		XKSpawnNpcPoint.ClearFiJiNpcPointList();
-		XKTriggerStopMovePlayer.IsActiveTrigger = false;
-		XKTriggerYuLeCtrl.IsActiveYuLeTrigger = false;
-		XKPlayerHeTiData.IsActiveHeTiPlayer = false;
-		XKTriggerClosePlayerUI.IsActiveHeTiCloseUI = false;
-		XKTriggerClosePlayerUI.IsClosePlayerUI = false;
-		XKTriggerKaQiuShaFire.IsFireKaQiuSha = false;
-		XKTriggerOpenPlayerUI.IsActiveOpenPlayerUI = false;
-		XKGlobalData.GetInstance().StopModeBeiJingAudio();
-		CountNpcAmmo = 0;
-		PlayerJiFenArray = new int[] {0, 0, 0, 0};
-
-		ShiBingNumPOne = 0;
-		CheLiangNumPOne = 0;
-		ChuanBoNumPOne = 0;
-		FeiJiNumPOne = 0;
-
-		ShiBingNumPTwo = 0;
-		CheLiangNumPTwo = 0;
-		ChuanBoNumPTwo = 0;
-		FeiJiNumPTwo = 0;
-		
-		ShiBingNumPThree = 0;
-		CheLiangNumPThree = 0;
-		ChuanBoNumPThree = 0;
-		FeiJiNumPThree = 0;
-		
-		ShiBingNumPFour = 0;
-		CheLiangNumPFour = 0;
-		ChuanBoNumPFour = 0;
-		FeiJiNumPFour = 0;
-
-		GaoBaoDanNumPOne = 0;
-		GaoBaoDanNumPTwo = 0;
-
-		YouLiangDianAddPOne = 0;
-		YouLiangDianAddPTwo = 0;
-
-		for (int i = 0; i < 4; i++) {
-			PlayerHealthArray[i] = MaxPlayerHealth;
-		}
-		IsActiveFinishTask = false;
-		IsAddPlayerYouLiang = false;
-		ScreenDanHeiCtrl.IsStartGame = false;
-
-		if (GameFpsPrefab != null) {
-			Instantiate(GameFpsPrefab);
-		}
-
-		PlayerAmmoCtrl.PlayerAmmoHitLayer = PlayerAmmoHitLayer;
-		PlayerAmmoCtrl.NpcCollisionLayer = NpcCollisionLayer;
-		NpcAmmoList = new List<GameObject>();
-		CartoonTriggerSpawnList = new List<XKTriggerRemoveNpc>();
-		if (Network.peerType == NetworkPeerType.Disconnected) {
-			if (!GameMovieCtrl.IsActivePlayer) {
-				if (IsServerCameraTest) {
-					TestGameModeVal = GameMode.LianJi;
-				}
-				GameModeVal = TestGameModeVal != GameMode.Null ? TestGameModeVal : GameModeVal; //TestGame
-			}
-			else {
-				if (GameTypeCtrl.AppTypeStatic == AppGameType.DanJiFeiJi
-				    || GameTypeCtrl.AppTypeStatic == AppGameType.LianJiFeiJi) {
-					GameModeVal = GameMode.DanJiFeiJi;
-				}
-				else if (GameTypeCtrl.AppTypeStatic == AppGameType.DanJiTanKe
-				         || GameTypeCtrl.AppTypeStatic == AppGameType.LianJiTanKe) {
-					GameModeVal = GameMode.DanJiTanKe;
-				}
-			}
-		}
-		else {
-			GameModeVal = GameMode.LianJi;
-			if (Network.peerType == NetworkPeerType.Server) {
-				GameJiTaiSt = GameJiTaiType.Null;
-			}
-			else if (Network.peerType == NetworkPeerType.Client) {
-				if (GameTypeCtrl.AppTypeStatic == AppGameType.DanJiFeiJi
-				    || GameTypeCtrl.AppTypeStatic == AppGameType.LianJiFeiJi) {
-					GameJiTaiSt = GameJiTaiType.FeiJiJiTai;
-				}
-				else if (GameTypeCtrl.AppTypeStatic == AppGameType.DanJiTanKe
-				         || GameTypeCtrl.AppTypeStatic == AppGameType.LianJiTanKe) {
-					GameJiTaiSt = GameJiTaiType.TanKeJiTai;
-				}
-			}
-		}
-
-		if (GameMovieCtrl.IsActivePlayer) {
-			IsCartoonShootTest = false;
-			IsServerCameraTest = false;
-			Screen.showCursor = false;
-		}
-		else {
-			pcvr.TKMoveSt = TestTKMoveSt;
-		}
-
-		if (IsServerCameraTest) {
-			IsCartoonShootTest = false;
-		}
-
-		if (IsCartoonShootTest) {
-			Screen.SetResolution(1280, 720, false);
-		}
-		else if (!XkGameCtrl.IsGameOnQuit) {
-			if (Screen.fullScreen
-			    || Screen.currentResolution.width != 1280
-			    || Screen.currentResolution.height != 720) {
-				if (GameMovieCtrl.IsActivePlayer && !GameMovieCtrl.IsTestXiaoScreen) {
-					Screen.SetResolution(1280, 720, false);
-				}
-			}
-		}
-
-		NpcAmmoCtrl.NpcAmmoHitLayer = NpcAmmoHitLayer;
-		GameObject obj = null;
-		XkPlayerCtrl playerScript = null;
-		Transform pathTran = null;
-		if (GmCamMark != null) {
-			FeiJiPlayerTran = GmCamMark.transform;
-			FeiJiPlayerPath = FeiJiPlayerTran.parent.GetComponent<AiPathCtrl>();
-			pathTran = FeiJiPlayerPath.transform;
-
-			for (int i = 0; i < pathTran.childCount; i++) {
-				if (FeiJiPlayerTran == pathTran.GetChild(i)) {
-					FeiJiMarkIndex = i + 1;
+		try
+		{
+			_Instance = this;
+			pcvr.OpenDongGanState();
+			pcvr.OpenAllPlayerFangXiangPanPower();
+			switch (XKGlobalData.GameDiff)
+			{
+				case "0":
+					PlayerXueLiangMax = 14000f;
 					break;
-				}
+				case "2":
+					PlayerXueLiangMax = 6000f;
+					break;
+				default:
+					PlayerXueLiangMax = 10000f;
+					break;
 			}
-		}
-		else {
-			Debug.LogWarning("FeiJiPlayerMark was wrong!");
-			obj.name = "null";
-			return;
-		}
+			MaxPlayerHealth = PlayerXueLiangMax;
+			KeyBloodUI = (1f - MinBloodUIAmount) / MaxPlayerHealth;
+			XKSpawnNpcPoint.ClearFiJiNpcPointList();
+			XKTriggerStopMovePlayer.IsActiveTrigger = false;
+			XKTriggerYuLeCtrl.IsActiveYuLeTrigger = false;
+			XKPlayerHeTiData.IsActiveHeTiPlayer = false;
+			XKTriggerClosePlayerUI.IsActiveHeTiCloseUI = false;
+			XKTriggerClosePlayerUI.IsClosePlayerUI = false;
+			XKTriggerKaQiuShaFire.IsFireKaQiuSha = false;
+			XKTriggerOpenPlayerUI.IsActiveOpenPlayerUI = false;
+			XKGlobalData.GetInstance().StopModeBeiJingAudio();
+			CountNpcAmmo = 0;
+			PlayerJiFenArray = new int[] { 0, 0, 0, 0 };
 
-		Vector3 posPlayerFJ = new Vector3(0f, -1700f, 0f);
-		switch (GameModeVal) {
-		case GameMode.DanJiFeiJi:
-			GameJiTaiSt = GameJiTaiType.FeiJiJiTai; //test.
-			obj = (GameObject)Instantiate(GmCamPrefab, posPlayerFJ, FeiJiPlayerTran.rotation);
-			playerScript = obj.GetComponent<XkPlayerCtrl>();
-			playerScript.SetAiPathScript(FeiJiPlayerPath);
-			break;
+			ShiBingNumPOne = 0;
+			CheLiangNumPOne = 0;
+			ChuanBoNumPOne = 0;
+			FeiJiNumPOne = 0;
 
-		case GameMode.DanJiTanKe:
-			break;
+			ShiBingNumPTwo = 0;
+			CheLiangNumPTwo = 0;
+			ChuanBoNumPTwo = 0;
+			FeiJiNumPTwo = 0;
 
-		case GameMode.LianJi:
-			//Debug.Log("peerType "+Network.peerType);
-			if (Network.peerType == NetworkPeerType.Disconnected) {
-				obj = (GameObject)Instantiate(GmCamPrefab, posPlayerFJ, FeiJiPlayerTran.rotation);
-				playerScript = obj.GetComponent<XkPlayerCtrl>();
-				playerScript.SetAiPathScript(FeiJiPlayerPath);
+			ShiBingNumPThree = 0;
+			CheLiangNumPThree = 0;
+			ChuanBoNumPThree = 0;
+			FeiJiNumPThree = 0;
+
+			ShiBingNumPFour = 0;
+			CheLiangNumPFour = 0;
+			ChuanBoNumPFour = 0;
+			FeiJiNumPFour = 0;
+
+			GaoBaoDanNumPOne = 0;
+			GaoBaoDanNumPTwo = 0;
+
+			YouLiangDianAddPOne = 0;
+			YouLiangDianAddPTwo = 0;
+
+			for (int i = 0; i < 4; i++)
+			{
+				PlayerHealthArray[i] = MaxPlayerHealth;
 			}
-			else {
-				if (Network.peerType == NetworkPeerType.Client) {
-					Invoke("DelaySpawnClientPlayer", 6f);
+			IsActiveFinishTask = false;
+			IsAddPlayerYouLiang = false;
+			ScreenDanHeiCtrl.IsStartGame = false;
+
+			if (GameFpsPrefab != null)
+			{
+				Instantiate(GameFpsPrefab);
+			}
+
+			PlayerAmmoCtrl.PlayerAmmoHitLayer = PlayerAmmoHitLayer;
+			PlayerAmmoCtrl.NpcCollisionLayer = NpcCollisionLayer;
+			NpcAmmoList = new List<GameObject>();
+			CartoonTriggerSpawnList = new List<XKTriggerRemoveNpc>();
+			if (Network.peerType == NetworkPeerType.Disconnected)
+			{
+				if (!GameMovieCtrl.IsActivePlayer)
+				{
+					if (IsServerCameraTest)
+					{
+						TestGameModeVal = GameMode.LianJi;
+					}
+					GameModeVal = TestGameModeVal != GameMode.Null ? TestGameModeVal : GameModeVal; //TestGame
 				}
 				else {
-					AmmoNumMaxNpc = 25;
+					if (GameTypeCtrl.AppTypeStatic == AppGameType.DanJiFeiJi
+						|| GameTypeCtrl.AppTypeStatic == AppGameType.LianJiFeiJi)
+					{
+						GameModeVal = GameMode.DanJiFeiJi;
+					}
+					else if (GameTypeCtrl.AppTypeStatic == AppGameType.DanJiTanKe
+							 || GameTypeCtrl.AppTypeStatic == AppGameType.LianJiTanKe)
+					{
+						GameModeVal = GameMode.DanJiTanKe;
+					}
 				}
 			}
-			break;
-		}
+			else {
+				GameModeVal = GameMode.LianJi;
+				if (Network.peerType == NetworkPeerType.Server)
+				{
+					GameJiTaiSt = GameJiTaiType.Null;
+				}
+				else if (Network.peerType == NetworkPeerType.Client)
+				{
+					if (GameTypeCtrl.AppTypeStatic == AppGameType.DanJiFeiJi
+						|| GameTypeCtrl.AppTypeStatic == AppGameType.LianJiFeiJi)
+					{
+						GameJiTaiSt = GameJiTaiType.FeiJiJiTai;
+					}
+					else if (GameTypeCtrl.AppTypeStatic == AppGameType.DanJiTanKe
+							 || GameTypeCtrl.AppTypeStatic == AppGameType.LianJiTanKe)
+					{
+						GameJiTaiSt = GameJiTaiType.TanKeJiTai;
+					}
+				}
+			}
 
-		//CartoonCamPlayer
-//		if (GameModeVal != GameMode.LianJi || Network.peerType == NetworkPeerType.Disconnected) {
-//			obj = (GameObject)Instantiate(CartoonCamPlayer, CartoonCamPlayerTran.position, CartoonCamPlayerTran.rotation);
-//			playerScript = obj.GetComponent<XkPlayerCtrl>();
-//			playerScript.SetAiPathScript(CartoonCamPlayerPath);
-//		}
-
-		GameObject objMiss = new GameObject();
-		objMiss.name = "MissionCleanup";
-		objMiss.transform.parent = transform;
-		MissionCleanup = objMiss.transform;
-
-		objMiss = new GameObject();
-		objMiss.name = "NpcAmmoArray";
-		objMiss.transform.parent = MissionCleanup;
-		NpcAmmoArray = objMiss.transform;
-		
-		objMiss = new GameObject();
-		objMiss.name = "NpcObjArray";
-		objMiss.transform.parent = MissionCleanup;
-		NpcObjArray = objMiss.transform;
-
-		objMiss = new GameObject();
-		objMiss.name = "PlayerAmmoArray";
-		objMiss.transform.parent = MissionCleanup;
-		PlayerAmmoArray = objMiss.transform;
-		XKNpcSpawnListCtrl.GetInstance();
-
-		PlayerYouLiangCur = 0f;
-		Invoke("DelayResetIsLoadingLevel", 2f);
-		Invoke("TestInitCameraRender", 0.5f);
-
-		if (!GameMovieCtrl.IsActivePlayer) {
-			if (XKGlobalData.GameVersionPlayer == 0) {
-				SetActivePlayerOne(true);
+			if (GameMovieCtrl.IsActivePlayer)
+			{
+				IsCartoonShootTest = false;
+				IsServerCameraTest = false;
+				Screen.showCursor = false;
 			}
 			else {
-				SetActivePlayerThree(true);
+				pcvr.TKMoveSt = TestTKMoveSt;
 			}
+
+			if (IsServerCameraTest)
+			{
+				IsCartoonShootTest = false;
+			}
+
+			if (IsCartoonShootTest)
+			{
+				Screen.SetResolution(1280, 720, false);
+			}
+			else if (!XkGameCtrl.IsGameOnQuit)
+			{
+				if (Screen.fullScreen
+					|| Screen.currentResolution.width != 1280
+					|| Screen.currentResolution.height != 720)
+				{
+					if (GameMovieCtrl.IsActivePlayer && !GameMovieCtrl.IsTestXiaoScreen)
+					{
+						Screen.SetResolution(1280, 720, false);
+					}
+				}
+			}
+
+			NpcAmmoCtrl.NpcAmmoHitLayer = NpcAmmoHitLayer;
+			GameObject obj = null;
+			XkPlayerCtrl playerScript = null;
+			Transform pathTran = null;
+			if (GmCamMark != null)
+			{
+				FeiJiPlayerTran = GmCamMark.transform;
+				FeiJiPlayerPath = FeiJiPlayerTran.parent.GetComponent<AiPathCtrl>();
+				pathTran = FeiJiPlayerPath.transform;
+
+				for (int i = 0; i < pathTran.childCount; i++)
+				{
+					if (FeiJiPlayerTran == pathTran.GetChild(i))
+					{
+						FeiJiMarkIndex = i + 1;
+						break;
+					}
+				}
+			}
+			else {
+				Debug.LogWarning("Unity:" + "FeiJiPlayerMark was wrong!");
+				obj.name = "null";
+				return;
+			}
+
+			Vector3 posPlayerFJ = new Vector3(0f, -1700f, 0f);
+			switch (GameModeVal)
+			{
+				case GameMode.DanJiFeiJi:
+					GameJiTaiSt = GameJiTaiType.FeiJiJiTai; //test.
+					obj = (GameObject)Instantiate(GmCamPrefab, posPlayerFJ, FeiJiPlayerTran.rotation);
+					playerScript = obj.GetComponent<XkPlayerCtrl>();
+					playerScript.SetAiPathScript(FeiJiPlayerPath);
+					break;
+
+				case GameMode.DanJiTanKe:
+					break;
+
+				case GameMode.LianJi:
+					//Debug.Log("Unity:"+"peerType "+Network.peerType);
+					if (Network.peerType == NetworkPeerType.Disconnected)
+					{
+						obj = (GameObject)Instantiate(GmCamPrefab, posPlayerFJ, FeiJiPlayerTran.rotation);
+						playerScript = obj.GetComponent<XkPlayerCtrl>();
+						playerScript.SetAiPathScript(FeiJiPlayerPath);
+					}
+					else {
+						if (Network.peerType == NetworkPeerType.Client)
+						{
+							Invoke("DelaySpawnClientPlayer", 6f);
+						}
+						else {
+							AmmoNumMaxNpc = 25;
+						}
+					}
+					break;
+			}
+
+			//CartoonCamPlayer
+			//		if (GameModeVal != GameMode.LianJi || Network.peerType == NetworkPeerType.Disconnected) {
+			//			obj = (GameObject)Instantiate(CartoonCamPlayer, CartoonCamPlayerTran.position, CartoonCamPlayerTran.rotation);
+			//			playerScript = obj.GetComponent<XkPlayerCtrl>();
+			//			playerScript.SetAiPathScript(CartoonCamPlayerPath);
+			//		}
+
+			GameObject objMiss = new GameObject();
+			objMiss.name = "MissionCleanup";
+			objMiss.transform.parent = transform;
+			MissionCleanup = objMiss.transform;
+
+			objMiss = new GameObject();
+			objMiss.name = "NpcAmmoArray";
+			objMiss.transform.parent = MissionCleanup;
+			NpcAmmoArray = objMiss.transform;
+
+			objMiss = new GameObject();
+			objMiss.name = "NpcObjArray";
+			objMiss.transform.parent = MissionCleanup;
+			NpcObjArray = objMiss.transform;
+
+			objMiss = new GameObject();
+			objMiss.name = "PlayerAmmoArray";
+			objMiss.transform.parent = MissionCleanup;
+			PlayerAmmoArray = objMiss.transform;
+			XKNpcSpawnListCtrl.GetInstance();
+
+			PlayerYouLiangCur = 0f;
+			Invoke("DelayResetIsLoadingLevel", 2f);
+			Invoke("TestInitCameraRender", 0.5f);
+
+			if (!GameMovieCtrl.IsActivePlayer)
+			{
+				if (XKGlobalData.GameVersionPlayer == 0)
+				{
+					SetActivePlayerOne(true);
+				}
+				else {
+					SetActivePlayerThree(true);
+				}
+			}
+			IsPlayGamePOne = IsActivePlayerOne;
+			IsPlayGamePTwo = IsActivePlayerTwo;
+			IsPlayGamePThree = IsActivePlayerThree;
+			IsPlayGamePFour = IsActivePlayerFour;
+			AudioBeiJingCtrl.IndexBeiJingAd = 0;
+			XKGlobalData.GetInstance().PlayGuanKaBeiJingAudio();
 		}
-		IsPlayGamePOne = IsActivePlayerOne;
-		IsPlayGamePTwo = IsActivePlayerTwo;
-		IsPlayGamePThree = IsActivePlayerThree;
-		IsPlayGamePFour = IsActivePlayerFour;
-		AudioBeiJingCtrl.IndexBeiJingAd = 0;
-		XKGlobalData.GetInstance().PlayGuanKaBeiJingAudio();
+		catch (System.Exception e)
+		{
+			Debug.Log("Unity:!!!!!!!!!!!!!XKGameCtrl!!!!!!!!!!!!!!!!!!");
+			Debug.LogException(e);
+			Debug.Log("Unity:2" + e.Message);
+		}
 	}
 
 #if UNITY_EDITOR
@@ -469,7 +504,7 @@ public class XkGameCtrl : MonoBehaviour {
 			return;
 		}
 
-		Debug.Log("ChangeAudioListParent -> GameJiTaiSt "+GameJiTaiSt);
+		Debug.Log("Unity:"+"ChangeAudioListParent -> GameJiTaiSt "+GameJiTaiSt);
 		switch (GameJiTaiSt) {
 		case GameJiTaiType.FeiJiJiTai:
 			if (XkPlayerCtrl.GetInstanceFeiJi() != null) {
@@ -533,6 +568,8 @@ public class XkGameCtrl : MonoBehaviour {
 	void DelayResetIsLoadingLevel()
 	{
 		XkGameCtrl.ResetIsLoadingLevel();
+		Debug.Log("Unity:!!!!!!DelayResetIsLoadingLevel!!!!!!");
+
 	}
 
 	public static void ResetIsLoadingLevel()
@@ -681,7 +718,7 @@ public class XkGameCtrl : MonoBehaviour {
 
 	public void AddPlayerKillNpc(PlayerEnum playerSt, NpcJiFenEnum npcSt, int jiFenVal)
 	{
-//		Debug.Log("AddPlayerKillNpc -> playerSt "+playerSt
+//		Debug.Log("Unity:"+"AddPlayerKillNpc -> playerSt "+playerSt
 //		          + ", jiFenVal "+jiFenVal);
 		switch (playerSt) {
 		case PlayerEnum.Null:
@@ -912,7 +949,7 @@ public class XkGameCtrl : MonoBehaviour {
 		bool isHiddenDaoJuGui = false;
 		switch (playerSt) {
 		case PlayerEnum.PlayerOne:
-			//Debug.Log("SubGaoBaoDanNumPOne -> GaoBaoDanNumPOne "+GaoBaoDanNumPOne);
+			//Debug.Log("Unity:"+"SubGaoBaoDanNumPOne -> GaoBaoDanNumPOne "+GaoBaoDanNumPOne);
 			GaoBaoDanNumPOne--;
 			if (GaoBaoDanNumPOne <= 0) {
 				isHiddenDaoJuGui = true;
@@ -924,7 +961,7 @@ public class XkGameCtrl : MonoBehaviour {
 			break;
 			
 		case PlayerEnum.PlayerTwo:
-			//Debug.Log("SubGaoBaoDanNumPTwo -> GaoBaoDanNumPTwo "+GaoBaoDanNumPTwo);
+			//Debug.Log("Unity:"+"SubGaoBaoDanNumPTwo -> GaoBaoDanNumPTwo "+GaoBaoDanNumPTwo);
 			GaoBaoDanNumPTwo--;
 			if (GaoBaoDanNumPTwo <= 0) {
 				isHiddenDaoJuGui = true;
@@ -936,7 +973,7 @@ public class XkGameCtrl : MonoBehaviour {
 			break;
 			
 		case PlayerEnum.PlayerThree:
-			//Debug.Log("SubGaoBaoDanNumPThree -> GaoBaoDanNumPThree "+GaoBaoDanNumPThree);
+			//Debug.Log("Unity:"+"SubGaoBaoDanNumPThree -> GaoBaoDanNumPThree "+GaoBaoDanNumPThree);
 			GaoBaoDanNumPThree--;
 			if (GaoBaoDanNumPThree <= 0) {
 				isHiddenDaoJuGui = true;
@@ -948,7 +985,7 @@ public class XkGameCtrl : MonoBehaviour {
 			break;
 			
 		case PlayerEnum.PlayerFour:
-			//Debug.Log("SubGaoBaoDanNumPFour -> GaoBaoDanNumPFour "+GaoBaoDanNumPFour);
+			//Debug.Log("Unity:"+"SubGaoBaoDanNumPFour -> GaoBaoDanNumPFour "+GaoBaoDanNumPFour);
 			GaoBaoDanNumPFour--;
 			if (GaoBaoDanNumPFour <= 0) {
 				isHiddenDaoJuGui = true;
@@ -1038,7 +1075,7 @@ public class XkGameCtrl : MonoBehaviour {
 		bool isHiddenDaoJuGui = false;
 		switch (playerSt) {
 		case PlayerEnum.PlayerOne:
-			//Debug.Log("SubSanDanNumPOne -> SanDanNumPOne "+SanDanNumPOne);
+			//Debug.Log("Unity:"+"SubSanDanNumPOne -> SanDanNumPOne "+SanDanNumPOne);
 			SanDanNumPOne--;
 			if (SanDanNumPOne <= 0) {
 				isHiddenDaoJuGui = true;
@@ -1050,7 +1087,7 @@ public class XkGameCtrl : MonoBehaviour {
 			break;
 			
 		case PlayerEnum.PlayerTwo:
-			//Debug.Log("SubSanDanNumPTwo -> SanDanNumPTwo "+SanDanNumPTwo);
+			//Debug.Log("Unity:"+"SubSanDanNumPTwo -> SanDanNumPTwo "+SanDanNumPTwo);
 			SanDanNumPTwo--;
 			if (SanDanNumPTwo <= 0) {
 				isHiddenDaoJuGui = true;
@@ -1062,7 +1099,7 @@ public class XkGameCtrl : MonoBehaviour {
 			break;
 			
 		case PlayerEnum.PlayerThree:
-			//Debug.Log("SubSanDanNumPThree -> SanDanNumPThree "+SanDanNumPThree);
+			//Debug.Log("Unity:"+"SubSanDanNumPThree -> SanDanNumPThree "+SanDanNumPThree);
 			SanDanNumPThree--;
 			if (SanDanNumPThree <= 0) {
 				isHiddenDaoJuGui = true;
@@ -1074,7 +1111,7 @@ public class XkGameCtrl : MonoBehaviour {
 			break;
 			
 		case PlayerEnum.PlayerFour:
-			//Debug.Log("SubSanDanNumPFour -> SanDanNumPFour "+SanDanNumPFour);
+			//Debug.Log("Unity:"+"SubSanDanNumPFour -> SanDanNumPFour "+SanDanNumPFour);
 			SanDanNumPFour--;
 			if (SanDanNumPFour <= 0) {
 				isHiddenDaoJuGui = true;
@@ -1164,7 +1201,7 @@ public class XkGameCtrl : MonoBehaviour {
 		bool isHiddenDaoJuGui = false;
 		switch (playerSt) {
 		case PlayerEnum.PlayerOne:
-			//Debug.Log("SubGenZongDanNumPOne -> GenZongDanNumPOne "+GenZongDanNumPOne);
+			//Debug.Log("Unity:"+"SubGenZongDanNumPOne -> GenZongDanNumPOne "+GenZongDanNumPOne);
 			GenZongDanNumPOne--;
 			if (GenZongDanNumPOne <= 0) {
 				isHiddenDaoJuGui = true;
@@ -1176,7 +1213,7 @@ public class XkGameCtrl : MonoBehaviour {
 			break;
 			
 		case PlayerEnum.PlayerTwo:
-			//Debug.Log("SubGenZongDanNumPTwo -> GenZongDanNumPTwo "+GenZongDanNumPTwo);
+			//Debug.Log("Unity:"+"SubGenZongDanNumPTwo -> GenZongDanNumPTwo "+GenZongDanNumPTwo);
 			GenZongDanNumPTwo--;
 			if (GenZongDanNumPTwo <= 0) {
 				isHiddenDaoJuGui = true;
@@ -1188,7 +1225,7 @@ public class XkGameCtrl : MonoBehaviour {
 			break;
 			
 		case PlayerEnum.PlayerThree:
-			//Debug.Log("SubGenZongDanNumPThree -> GenZongDanNumPThree "+GenZongDanNumPThree);
+			//Debug.Log("Unity:"+"SubGenZongDanNumPThree -> GenZongDanNumPThree "+GenZongDanNumPThree);
 			GenZongDanNumPThree--;
 			if (GenZongDanNumPThree <= 0) {
 				isHiddenDaoJuGui = true;
@@ -1200,7 +1237,7 @@ public class XkGameCtrl : MonoBehaviour {
 			break;
 			
 		case PlayerEnum.PlayerFour:
-			//Debug.Log("SubGenZongDanNumPFour -> GenZongDanNumPFour "+GenZongDanNumPFour);
+			//Debug.Log("Unity:"+"SubGenZongDanNumPFour -> GenZongDanNumPFour "+GenZongDanNumPFour);
 			GenZongDanNumPFour--;
 			if (GenZongDanNumPFour <= 0) {
 				isHiddenDaoJuGui = true;
@@ -1290,7 +1327,7 @@ public class XkGameCtrl : MonoBehaviour {
 		bool isHiddenDaoJuGui = false;
 		switch (playerSt) {
 		case PlayerEnum.PlayerOne:
-			//Debug.Log("SubChuanTouDanNumPOne -> ChuanTouDanNumPOne "+ChuanTouDanNumPOne);
+			//Debug.Log("Unity:"+"SubChuanTouDanNumPOne -> ChuanTouDanNumPOne "+ChuanTouDanNumPOne);
 			ChuanTouDanNumPOne--;
 			if (ChuanTouDanNumPOne <= 0) {
 				isHiddenDaoJuGui = true;
@@ -1302,7 +1339,7 @@ public class XkGameCtrl : MonoBehaviour {
 			break;
 			
 		case PlayerEnum.PlayerTwo:
-			//Debug.Log("SubChuanTouDanNumPTwo -> ChuanTouDanNumPTwo "+ChuanTouDanNumPTwo);
+			//Debug.Log("Unity:"+"SubChuanTouDanNumPTwo -> ChuanTouDanNumPTwo "+ChuanTouDanNumPTwo);
 			ChuanTouDanNumPTwo--;
 			if (ChuanTouDanNumPTwo <= 0) {
 				isHiddenDaoJuGui = true;
@@ -1314,7 +1351,7 @@ public class XkGameCtrl : MonoBehaviour {
 			break;
 			
 		case PlayerEnum.PlayerThree:
-			//Debug.Log("SubChuanTouDanNumPThree -> ChuanTouDanNumPThree "+ChuanTouDanNumPThree);
+			//Debug.Log("Unity:"+"SubChuanTouDanNumPThree -> ChuanTouDanNumPThree "+ChuanTouDanNumPThree);
 			ChuanTouDanNumPThree--;
 			if (ChuanTouDanNumPThree <= 0) {
 				isHiddenDaoJuGui = true;
@@ -1326,7 +1363,7 @@ public class XkGameCtrl : MonoBehaviour {
 			break;
 			
 		case PlayerEnum.PlayerFour:
-			//Debug.Log("SubChuanTouDanNumPFour -> ChuanTouDanNumPFour "+ChuanTouDanNumPFour);
+			//Debug.Log("Unity:"+"SubChuanTouDanNumPFour -> ChuanTouDanNumPFour "+ChuanTouDanNumPFour);
 			ChuanTouDanNumPFour--;
 			if (ChuanTouDanNumPFour <= 0) {
 				isHiddenDaoJuGui = true;
@@ -1416,7 +1453,7 @@ public class XkGameCtrl : MonoBehaviour {
 		bool isHiddenDaoJuGui = false;
 		switch (playerSt) {
 		case PlayerEnum.PlayerOne:
-			//Debug.Log("SubJianSuDanNumPOne -> JianSuDanNumPOne "+JianSuDanNumPOne);
+			//Debug.Log("Unity:"+"SubJianSuDanNumPOne -> JianSuDanNumPOne "+JianSuDanNumPOne);
 			JianSuDanNumPOne--;
 			if (JianSuDanNumPOne <= 0) {
 				isHiddenDaoJuGui = true;
@@ -1428,7 +1465,7 @@ public class XkGameCtrl : MonoBehaviour {
 			break;
 			
 		case PlayerEnum.PlayerTwo:
-			//Debug.Log("SubJianSuDanNumPTwo -> JianSuDanNumPTwo "+JianSuDanNumPTwo);
+			//Debug.Log("Unity:"+"SubJianSuDanNumPTwo -> JianSuDanNumPTwo "+JianSuDanNumPTwo);
 			JianSuDanNumPTwo--;
 			if (JianSuDanNumPTwo <= 0) {
 				isHiddenDaoJuGui = true;
@@ -1440,7 +1477,7 @@ public class XkGameCtrl : MonoBehaviour {
 			break;
 			
 		case PlayerEnum.PlayerThree:
-			//Debug.Log("SubJianSuDanNumPThree -> JianSuDanNumPThree "+JianSuDanNumPThree);
+			//Debug.Log("Unity:"+"SubJianSuDanNumPThree -> JianSuDanNumPThree "+JianSuDanNumPThree);
 			JianSuDanNumPThree--;
 			if (JianSuDanNumPThree <= 0) {
 				isHiddenDaoJuGui = true;
@@ -1452,7 +1489,7 @@ public class XkGameCtrl : MonoBehaviour {
 			break;
 			
 		case PlayerEnum.PlayerFour:
-			//Debug.Log("SubJianSuDanNumPFour -> JianSuDanNumPFour "+JianSuDanNumPFour);
+			//Debug.Log("Unity:"+"SubJianSuDanNumPFour -> JianSuDanNumPFour "+JianSuDanNumPFour);
 			JianSuDanNumPFour--;
 			if (JianSuDanNumPFour <= 0) {
 				isHiddenDaoJuGui = true;
@@ -1638,7 +1675,7 @@ public class XkGameCtrl : MonoBehaviour {
 
 	public static void LoadingGameScene_1()
 	{
-		//Debug.Log("LoadingGameScene_1...");
+		//Debug.Log("Unity:"+"LoadingGameScene_1...");
 		if (GameJiLuFenShuCtrl.GetInstance() != null) {
 			GameJiLuFenShuCtrl.GetInstance().HiddenGameJiLuFenShu();
 		}
@@ -1682,7 +1719,7 @@ public class XkGameCtrl : MonoBehaviour {
 		else {
 			PlayerYouLiangMax = 60f;
 		}
-		//Debug.Log("AddPlayerYouLiangToMax -> PlayerYouLiangMax "+PlayerYouLiangMax);
+		//Debug.Log("Unity:"+"AddPlayerYouLiangToMax -> PlayerYouLiangMax "+PlayerYouLiangMax);
 		PlayerYouLiangCur = PlayerYouLiangMax;
 //		PlayerYouLiangCur = 10f; //test
 		if (YouLiangCtrl.GetInstance() != null) {
@@ -1728,7 +1765,7 @@ public class XkGameCtrl : MonoBehaviour {
 
 	public static void ClearCartoonSpawnNpc()
 	{
-		Debug.Log("ClearCartoonSpawnNpc...");
+		Debug.Log("Unity:"+"ClearCartoonSpawnNpc...");
 		int max = CartoonTriggerSpawnList.Count;
 		for (int i = 0; i < max; i++) {
 			CartoonTriggerSpawnList[i].RemoveSpawnPointNpc();
@@ -1846,7 +1883,7 @@ public class XkGameCtrl : MonoBehaviour {
 		if (script == null) {
 			script = obj.AddComponent<DestroyThisTimed>();
 			script.TimeRemove = 5f;
-			Debug.LogError("obj is not find DestroyThisTimed! name is "+obj.name);
+			Debug.LogError("Unity:"+"obj is not find DestroyThisTimed! name is "+obj.name);
 		}
 	}
 
@@ -1887,7 +1924,7 @@ public class XkGameCtrl : MonoBehaviour {
 
 	public static void ActiveServerCameraTran()
 	{
-		Debug.Log("ActiveServerCameraTran...");
+		Debug.Log("Unity:"+"ActiveServerCameraTran...");
 		ServerPortCameraCtrl.RandOpenServerPortCamera();
 	}
 	
@@ -2056,7 +2093,7 @@ public class XkGameCtrl : MonoBehaviour {
 			int indexTmp = (int)(indexPlayer - 1);
 			Transform tranTmp = null;
 			do {
-				//Debug.Log("indexVal "+indexVal);
+				//Debug.Log("Unity:"+"indexVal "+indexVal);
 				if (indexVal >= 4) {
 					isContinue = false;
 					startPos = tran.position;
@@ -2185,7 +2222,7 @@ public class XkGameCtrl : MonoBehaviour {
 				return;
 			}
 			
-//			Debug.Log("SubGamePlayerHealth -> indexVal "+indexVal
+//			Debug.Log("Unity:"+"SubGamePlayerHealth -> indexVal "+indexVal
 //			          +", isWuDi "+playerMoveCtrl.GetIsWuDiState()
 //			          +", isShanShuo "+playerMoveCtrl.GetIsShanShuoState());
 			if (!playerMoveCtrl.GetIsWuDiState()
@@ -2231,7 +2268,7 @@ public class XkGameCtrl : MonoBehaviour {
 			}
 
 			if (PlayerHealthArray[0] <= 0f) {
-				Debug.Log("SubGamePlayerHealth -> PlayerOne is death!");
+				Debug.Log("Unity:"+"SubGamePlayerHealth -> PlayerOne is death!");
 				PlayerHealthArray[0] = 0f;
 				PlayerQuanShu[0] = 1;
 				SetActivePlayerOne(false);
@@ -2257,7 +2294,7 @@ public class XkGameCtrl : MonoBehaviour {
 			}
 
 			if (PlayerHealthArray[1] <= 0f) {
-				Debug.Log("SubGamePlayerHealth -> PlayerTwo is death!");
+				Debug.Log("Unity:"+"SubGamePlayerHealth -> PlayerTwo is death!");
 				PlayerHealthArray[1] = 0f;
 				PlayerQuanShu[1] = 1;
 				SetActivePlayerTwo(false);
@@ -2284,7 +2321,7 @@ public class XkGameCtrl : MonoBehaviour {
 
 			if (PlayerHealthArray[2] <= 0f) {
 //				#if UNITY_EDITOR
-//				Debug.Log("SubGamePlayerHealth -> PlayerThree is death!");
+//				Debug.Log("Unity:"+"SubGamePlayerHealth -> PlayerThree is death!");
 //				#endif
 				PlayerHealthArray[2] = 0f;
 				PlayerQuanShu[2] = 1;
@@ -2311,7 +2348,7 @@ public class XkGameCtrl : MonoBehaviour {
 			}
 
 			if (PlayerHealthArray[3] <= 0f) {
-				Debug.Log("SubGamePlayerHealth -> PlayerFour is death!");
+				Debug.Log("Unity:"+"SubGamePlayerHealth -> PlayerFour is death!");
 				PlayerHealthArray[3] = 0f;
 				PlayerQuanShu[3] = 1;
 				SetActivePlayerFour(false);
@@ -2392,7 +2429,7 @@ public class XkGameCtrl : MonoBehaviour {
 				break;
 			}
 		} while (playerObj == null);
-		//Debug.Log("GetRandAimPlayerObj -> player "+playerObj.name);
+		//Debug.Log("Unity:"+"GetRandAimPlayerObj -> player "+playerObj.name);
 		return playerObj;
 	}
 

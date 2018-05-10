@@ -73,7 +73,7 @@ public class XKTriggerStopMovePlayer : MonoBehaviour {
 		DistanceVal = 10f;
 		float minDisVal = DistanceVal + (AmmoSpeedVal * Time.deltaTime * Time.timeScale);
 		if (disAB <= minDisVal) {
-			Debug.Log("XKTriggerStopMovePlayer -> disAB "+disAB+", DistanceVal "+minDisVal);
+			Debug.Log("Unity:"+"XKTriggerStopMovePlayer -> disAB "+disAB+", DistanceVal "+minDisVal);
 			IsActiveTrigger = false; //打开主角UI,恢复世界时间.
 			XKTriggerCameraFieldOfView.Instance.ResetWorldTimeVal();
 			gameObject.SetActive(false);

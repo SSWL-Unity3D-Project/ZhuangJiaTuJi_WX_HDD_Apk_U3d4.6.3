@@ -48,7 +48,7 @@ public class AudioBeiJingCtrl : MonoBehaviour
 		if (IndexBeiJingAd >= AudioListCtrl.GetInstance().ASGuanKaBJ.Length) {
 			IndexBeiJingAd = 0;
 		}
-		//Debug.Log("DelayPlayNextBeiJingAudio -> IndexBeiJingAd "+IndexBeiJingAd);
+		//Debug.Log("Unity:"+"DelayPlayNextBeiJingAudio -> IndexBeiJingAd "+IndexBeiJingAd);
 		XKGlobalData.GetInstance().PlayGuanKaBeiJingAudio(IndexBeiJingAd);
 	}
 }

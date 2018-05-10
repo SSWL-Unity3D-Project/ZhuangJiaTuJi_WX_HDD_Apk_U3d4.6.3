@@ -145,7 +145,7 @@ public class XKPlayerMoveCarCtrl : MonoBehaviour
 					CarPiaoYiDirCom.enabled = true;
 				}
 				RealCarAngleY = CarPiaoYiDirCom.transform.localScale.y;
-				//Debug.Log("RealCarAngleY "+RealCarAngleY);
+				//Debug.Log("Unity:"+"RealCarAngleY "+RealCarAngleY);
 
 				if (Mathf.Abs(RealCarAngleY) >= PiaoYiAngleVal) {
 					RealCarAngleY = carAngleY;
@@ -293,7 +293,7 @@ public class XKPlayerMoveCarCtrl : MonoBehaviour
 		if (IsFixKaCheRotPos && FixRotPosState == state) {
 			return;
 		}
-		//Debug.Log("InitFixKaCheRotPos -> state "+(state == 1 ? "right" : "left"));
+		//Debug.Log("Unity:"+"InitFixKaCheRotPos -> state "+(state == 1 ? "right" : "left"));
 		FixRotPosState = state;
 		TimeFixRotPos = Time.realtimeSinceStartup;
 		IsFixKaCheRotPos = true;
@@ -353,15 +353,15 @@ public class XKPlayerMoveCarCtrl : MonoBehaviour
 		if (accel > 0f && QiBuJianSuState != 1) {
 			QiBuJianSuState = 1;
 			QiBuJianSuJieDuan = 1;
-//			Debug.Log("start qiBu...");
-//			Debug.Log("stop jianSu...");
+//			Debug.Log("Unity:"+"start qiBu...");
+//			Debug.Log("Unity:"+"stop jianSu...");
 		}
 
 		if (QiBuJianSuState == 1 && (accel <= 0f || handBrake > 0f)) {
 			QiBuJianSuState = -1;
 			QiBuJianSuJieDuan = 1;
-//			Debug.Log("stop qiBu...");
-//			Debug.Log("start jianSu...");
+//			Debug.Log("Unity:"+"stop qiBu...");
+//			Debug.Log("Unity:"+"start jianSu...");
 		}
 		
 		float speed = 0f;

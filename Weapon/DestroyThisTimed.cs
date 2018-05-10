@@ -6,7 +6,7 @@ public class DestroyThisTimed : MonoBehaviour {
 	// Use this for initialization
 	void Start()
 	{
-		//Debug.Log("DestroyThisTimed -> objName "+gameObject.name);
+		//Debug.Log("Unity:"+"DestroyThisTimed -> objName "+gameObject.name);
 		Destroy(gameObject, TimeRemove);
 	}
 }

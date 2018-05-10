@@ -87,7 +87,7 @@ public class WabData
     /// </summary>  
     void OnOpen(WebSocket ws)
     {
-        Debug.Log("-WebSocket Open!\n");
+        Debug.Log("Unity:"+"-WebSocket Open!\n");
     }
 
     /// <summary>
@@ -95,7 +95,7 @@ public class WabData
     /// </summary>
     void OnMessageReceived(WebSocket ws, string message)
     {
-        //Debug.Log("OnMessageReceived -> message == " + message);
+        //Debug.Log("Unity:"+"OnMessageReceived -> message == " + message);
         if (m_WebSocketSimpet != null)
         {
             m_WebSocketSimpet.OnMessageReceived(message);
@@ -107,7 +107,7 @@ public class WabData
     /// </summary>  
     void OnClosed(WebSocket ws, UInt16 code, string message)
     {
-        Debug.Log(string.Format("-WebSocket closed! Code: {0} Message: {1}\n", code, message));
+        Debug.Log("Unity:"+string.Format("-WebSocket closed! Code: {0} Message: {1}\n", code, message));
         _webSocket = null;
     }
 
@@ -120,7 +120,7 @@ public class WabData
         if (ws.InternalRequest.Response != null)
             errorMsg = string.Format("Status Code from Server: {0} and Message: {1}", ws.InternalRequest.Response.StatusCode, ws.InternalRequest.Response.Message);
 
-        Debug.Log(string.Format("-An error occured: {0}\n", ex != null ? ex.Message : "Unknown Error " + errorMsg));
+        Debug.Log("Unity:"+string.Format("-An error occured: {0}\n", ex != null ? ex.Message : "Unknown Error " + errorMsg));
         _webSocket = null;
     }
 }

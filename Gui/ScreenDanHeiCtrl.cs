@@ -122,7 +122,7 @@ public class ScreenDanHeiCtrl : MonoBehaviour {
 	void OnSreenAlphaToMax()
 	{
 //		GameMode modeVal = XkGameCtrl.GameModeVal;
-//		Debug.Log("OnSreenAlphaToMax -> GameMode "+modeVal);
+//		Debug.Log("Unity:"+"OnSreenAlphaToMax -> GameMode "+modeVal);
 
 //		bool isClearCartoonNpc = true;
 //		if (!XKTriggerOpenPlayerUI.IsActiveOpenPlayerUI) {
@@ -213,7 +213,7 @@ public class ScreenDanHeiCtrl : MonoBehaviour {
 	public void AddStartMovePlayerCount()
 	{
 		StartMovePlayerCount++;
-//		Debug.Log("AddStartMovePlayerCount -> StartMovePlayerCount "+StartMovePlayerCount
+//		Debug.Log("Unity:"+"AddStartMovePlayerCount -> StartMovePlayerCount "+StartMovePlayerCount
 //		          +", netLen"+Network.connections.Length);
 		if (Network.peerType == NetworkPeerType.Server) {
 			if (StartMovePlayerCount > Network.connections.Length) {

@@ -109,7 +109,7 @@ public class DaoJuCtrl : MonoBehaviour {
 		}
 		DaoJuMoveCtrl daoJuMove = daoJu.GetComponent<DaoJuMoveCtrl>();
 		int indexBJ = (int)buJiScript.BuJiBao - 2;
-		//Debug.Log("indexBJ *** "+indexBJ);
+		//Debug.Log("Unity:"+"indexBJ *** "+indexBJ);
 		daoJuMove.MoveDaoJuToPlayer(DaoJuTexture[indexBJ], indexVal, buJiScript.BuJiBao, path);
 	}
 

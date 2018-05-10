@@ -87,7 +87,7 @@ public class XKBossShuiJingCtrl : MonoBehaviour
 	 */
 	void OpenXiaoShuiJingXuLi(int indexVal)
 	{
-//		Debug.Log("OpenXiaoShuiJingXuLi --> indexVal "+indexVal);
+//		Debug.Log("Unity:"+"OpenXiaoShuiJingXuLi --> indexVal "+indexVal);
 		Transform xuLiTr = null;
 		GameObject obj = null;
 		switch (indexVal) {
@@ -225,7 +225,7 @@ public class XKBossShuiJingCtrl : MonoBehaviour
 			}
 		}
 
-//		Debug.Log("CheckXiaoShuiJingFireState -> BossShuiJingJieDuan "+BossShuiJingJieDuan
+//		Debug.Log("Unity:"+"CheckXiaoShuiJingFireState -> BossShuiJingJieDuan "+BossShuiJingJieDuan
 //		          +", XiaoShuiJingFireState "+XiaoShuiJingFireState);
 		switch (XiaoShuiJingFireState) {
 		case 0:
@@ -255,7 +255,7 @@ public class XKBossShuiJingCtrl : MonoBehaviour
 				timeDaShuiJing = TimeDaShuiJingFireJieDuan2 - TimeXiaoShuiJingFireDengDai;
 			}
 //			else {
-//				Debug.Log("stop fire! indexXiaoShuiJing "+indexXiaoShuiJing);
+//				Debug.Log("Unity:"+"stop fire! indexXiaoShuiJing "+indexXiaoShuiJing);
 //			}
 			break;
 		}

@@ -14,13 +14,13 @@ public class XKPlayerCheckCamera : MonoBehaviour {
 	void OnBecameVisible()
 	{
 		IsOutGameCamera = false;
-//		Debug.Log("OnBecameVisible -> PointSt Qian");
+//		Debug.Log("Unity:"+"OnBecameVisible -> PointSt Qian");
 	}
 
 	void OnBecameInvisible()
 	{
 		IsOutGameCamera = true;
-//		Debug.Log("OnBecameInvisible -> PointSt Qian");
+//		Debug.Log("Unity:"+"OnBecameInvisible -> PointSt Qian");
 	}
 	
 	public bool GetIsOutGameCamera()

@@ -400,7 +400,7 @@ public class NetworkServerNet : MonoBehaviour {
 
 	void OnApplicationQuit()
 	{
-		Debug.Log("OnApplicationQuit...NetServer");
+		Debug.Log("Unity:"+"OnApplicationQuit...NetServer");
 		XkGameCtrl.IsGameOnQuit = true;
 		if (Network.peerType == NetworkPeerType.Server) {
 			//ClearAllNetSpawnObj();
@@ -412,7 +412,7 @@ public class NetworkServerNet : MonoBehaviour {
 
 	void OnServerInitialized()
 	{
-		Debug.Log("OnServerInitialized...");
+		Debug.Log("Unity:"+"OnServerInitialized...");
 		if (!IsCheckServerPortPlayerNum) {
 			Invoke("SetIsCheckServerPortPlayerNum", 10f);
 		}
@@ -471,7 +471,7 @@ public class NetworkServerNet : MonoBehaviour {
 		}
 		//XkGameCtrl.HiddenMissionCleanup();
 
-		Debug.Log("CheckServerPortPlayerNum...");
+		Debug.Log("Unity:"+"CheckServerPortPlayerNum...");
 		NetCtrl.SelectLinkCount = 0;
 		if (!IsInvoking("DelayServerLoadingGameMovie")) {
 			Invoke("DelayServerLoadingGameMovie", 1f);
@@ -485,7 +485,7 @@ public class NetworkServerNet : MonoBehaviour {
 
 	public static void SetServerSendState(int val)
 	{
-		Debug.Log("SetServerSendState -> val "+val);
+		Debug.Log("Unity:"+"SetServerSendState -> val "+val);
 		ServerSendState = val;
 	}
 
@@ -530,7 +530,7 @@ public class NetworkServerNet : MonoBehaviour {
 
 		if (Application.loadedLevel == (int)(GameLevel.Scene_1)) {
 		//if (Application.loadedLevel == XkGameCtrl.TestGameEndLv) { //test
-			Debug.Log("TryToCloseServerPort...");
+			Debug.Log("Unity:"+"TryToCloseServerPort...");
 			SetIsCheckServerPortPlayerNum();
 			return;
 		}
@@ -577,7 +577,7 @@ public class NetworkServerNet : MonoBehaviour {
 	float TimeDisconnectedVal;
 	void OnDisconnectedFromServer(NetworkDisconnection info)
 	{
-		Debug.Log("OnDisconnectedFromServer -> info is "+info+", AppTypeStatic "+GameTypeCtrl.AppTypeStatic);
+		Debug.Log("Unity:"+"OnDisconnectedFromServer -> info is "+info+", AppTypeStatic "+GameTypeCtrl.AppTypeStatic);
 		if (GameTypeCtrl.AppTypeStatic == AppGameType.LianJiServer) {
 
 		}
@@ -632,7 +632,7 @@ public class NetworkServerNet : MonoBehaviour {
 			return;
 		}
 		IsOnDisconnectedFromServer = false;
-		Debug.Log("CheckClientPortNetState......IsLoadingLevel "+XkGameCtrl.IsLoadingLevel+", key "+key);
+		Debug.Log("Unity:"+"CheckClientPortNetState......IsLoadingLevel "+XkGameCtrl.IsLoadingLevel+", key "+key);
 		Invoke("DelayClientLoadingGameMovie", 5f);
 	}
 

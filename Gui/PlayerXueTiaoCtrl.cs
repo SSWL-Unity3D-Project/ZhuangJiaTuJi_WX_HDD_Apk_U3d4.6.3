@@ -219,16 +219,16 @@ public class PlayerXueTiaoCtrl : MonoBehaviour
 //#if UNITY_EDITOR
 //			switch (KeyHitSt) {
 //			case 0:
-//				Debug.Log("CheckPlayerHitCol -> KeyHitSt is back! player "+PlayerSt);
+//				Debug.Log("Unity:"+"CheckPlayerHitCol -> KeyHitSt is back! player "+PlayerSt);
 //				break;
 //			case 1:
-//				Debug.Log("CheckPlayerHitCol -> KeyHitSt is left! player "+PlayerSt);
+//				Debug.Log("Unity:"+"CheckPlayerHitCol -> KeyHitSt is left! player "+PlayerSt);
 //				break;
 //			case 2:
-//				Debug.Log("CheckPlayerHitCol -> KeyHitSt is right! player "+PlayerSt);
+//				Debug.Log("Unity:"+"CheckPlayerHitCol -> KeyHitSt is right! player "+PlayerSt);
 //				break;
 //			case 3:
-//				Debug.Log("CheckPlayerHitCol -> KeyHitSt is forward! player "+PlayerSt);
+//				Debug.Log("Unity:"+"CheckPlayerHitCol -> KeyHitSt is forward! player "+PlayerSt);
 //				break;
 //			}
 //#endif

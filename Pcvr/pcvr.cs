@@ -167,7 +167,7 @@ public class pcvr : MonoBehaviour {
                 WebSocketSimpet webSocketSimpet = m_SSBoxPostNet.m_WebSocketSimpet;
                 if (webSocketSimpet != null)
                 {
-                    Debug.Log("add webSocketSimpet event...");
+                    Debug.Log("Unity:"+"add webSocketSimpet event...");
                     webSocketSimpet.OnEventPlayerLoginBox += OnEventPlayerLoginBox;
                     webSocketSimpet.OnEventPlayerExitBox += OnEventPlayerExitBox;
                     webSocketSimpet.OnEventDirectionAngle += OnEventDirectionAngle;
@@ -175,7 +175,7 @@ public class pcvr : MonoBehaviour {
                 }
                 else
                 {
-                    Debug.Log("webSocketSimpet is null!");
+                    Debug.Log("Unity:"+"webSocketSimpet is null!");
                 }
             }
         }
@@ -250,13 +250,13 @@ public class pcvr : MonoBehaviour {
                 if (playerDt.IsExitWeiXin)
                 {
                     //玩家已经退出微信.
-                    Debug.Log("player have exit weiXin! clean the player data...");
+                    Debug.Log("Unity:"+"player have exit weiXin! clean the player data...");
                     m_GamePlayerData.Remove(playerDt);
                 }
                 else
                 {
                     //玩家血值耗尽应该续费了,找到玩家数据.
-                    Debug.Log("player should buy game coin!");
+                    Debug.Log("Unity:"+"player should buy game coin!");
                 }
             }
         }
@@ -285,11 +285,11 @@ public class pcvr : MonoBehaviour {
     /// </summary>
     private void OnEventActionOperation(string val, int userId)
     {
-        //Debug.Log("pcvr::OnEventActionOperation -> userId " + userId + ", val " + val);
+        //Debug.Log("Unity:"+"pcvr::OnEventActionOperation -> userId " + userId + ", val " + val);
         GamePlayerData playerDt = m_GamePlayerData.Find((dt) => { return dt.m_PlayerWeiXinData.userId.Equals(userId); });
         if (playerDt != null && playerDt.Index > -1 && playerDt.Index < 4)
         {
-            //Debug.Log("OnEventActionOperation -> playerIndex == " + playerDt.Index);
+            //Debug.Log("Unity:"+"OnEventActionOperation -> playerIndex == " + playerDt.Index);
             playerDt.IsExitWeiXin = false;
             if (m_IndexPlayerActiveGameState[playerDt.Index] == (int)PlayerActiveState.JiHuo)
             {
@@ -355,11 +355,11 @@ public class pcvr : MonoBehaviour {
 
     private void OnEventDirectionAngle(int val, int userId)
     {
-        //Debug.Log("pcvr::OnEventDirectionAngle -> userId " + userId + ", val " + val);
+        //Debug.Log("Unity:"+"pcvr::OnEventDirectionAngle -> userId " + userId + ", val " + val);
         GamePlayerData playerDt = m_GamePlayerData.Find((dt) => { return dt.m_PlayerWeiXinData.userId.Equals(userId); });
         if (playerDt != null && playerDt.Index > -1 && playerDt.Index < 4)
         {
-            //Debug.Log("OnEventDirectionAngle -> playerIndex == " + playerDt.Index);
+            //Debug.Log("Unity:"+"OnEventDirectionAngle -> playerIndex == " + playerDt.Index);
             playerDt.IsExitWeiXin = false;
             if (m_IndexPlayerActiveGameState[playerDt.Index] == (int)PlayerActiveState.JiHuo)
             {
@@ -806,7 +806,7 @@ public class pcvr : MonoBehaviour {
 
     private void OnEventPlayerExitBox(int userId)
     {
-        Debug.Log("pcvr::OnEventPlayerExitBox -> userId " + userId);
+        Debug.Log("Unity:"+"pcvr::OnEventPlayerExitBox -> userId " + userId);
         GamePlayerData playerDt = m_GamePlayerData.Find((dt) => { return dt.m_PlayerWeiXinData.userId.Equals(userId); });
         if (playerDt != null)
         {
@@ -817,7 +817,7 @@ public class pcvr : MonoBehaviour {
                 {
                     //玩家血值耗尽,清理玩家微信数据.
                     m_GamePlayerData.Remove(playerDt);
-                    Debug.Log("OnEventPlayerExitBox -> clear player weiXin data...");
+                    Debug.Log("Unity:"+"OnEventPlayerExitBox -> clear player weiXin data...");
                 }
             }
         }
@@ -825,7 +825,7 @@ public class pcvr : MonoBehaviour {
 
     private void OnEventPlayerLoginBox(WebSocketSimpet.PlayerWeiXinData val)
     {
-        Debug.Log("pcvr::OnEventPlayerLoginBox -> userName " + val.userName + ", userId " + val.userId);
+        Debug.Log("Unity:"+"pcvr::OnEventPlayerLoginBox -> userName " + val.userName + ", userId " + val.userId);
         GamePlayerData playerDt = m_GamePlayerData.Find((dt) => {
             if (dt.m_PlayerWeiXinData != null)
             {
@@ -840,7 +840,7 @@ public class pcvr : MonoBehaviour {
             indexPlayer = GetActivePlayerIndex();
             if (indexPlayer > -1 && indexPlayer < 4)
             {
-                Debug.Log("Active player, indexPlayer == " + indexPlayer);
+                Debug.Log("Unity:"+"Active player, indexPlayer == " + indexPlayer);
                 playerDt = new GamePlayerData();
                 playerDt.m_PlayerWeiXinData = val;
                 playerDt.Index = indexPlayer;
@@ -849,12 +849,12 @@ public class pcvr : MonoBehaviour {
             }
             else
             {
-                Debug.Log("have not empty player!");
+                Debug.Log("Unity:"+"have not empty player!");
             }
         }
         else
         {
-            Debug.Log("player have active game!");
+            Debug.Log("Unity:"+"player have active game!");
             playerDt.IsExitWeiXin = false;
             if (playerDt.Index > -1 && playerDt.Index < 4)
             {
@@ -1105,7 +1105,7 @@ QiNangArray[3]			QiNangArray[2]
 		int indexVal = (int)indexPlayer - 1 + 16;
 		QiNangArray[indexVal] = 1;
 		ZuoYiQNTime[indexVal-16] = Time.time;
-		//Debug.LogWarning("OpenZuoYiQiNang -> indexVal "+indexVal);
+		//Debug.LogWarning("Unity:"+"OpenZuoYiQiNang -> indexVal "+indexVal);
 	}
 
 	static float TimeZuoYiQNCheck;
@@ -1127,7 +1127,7 @@ QiNangArray[3]			QiNangArray[2]
 				continue;
 			}
 			QiNangArray[indexVal] = 0;
-//			Debug.LogWarning("UpdateZuoYiQiNangState -> indexVal "+indexVal);
+//			Debug.LogWarning("Unity:"+"UpdateZuoYiQiNangState -> indexVal "+indexVal);
 		}
 	}
 
@@ -1431,7 +1431,7 @@ QiNangArray[3]			QiNangArray[2]
 			return;
 		}
 		IsPlayerHitShake = true;
-		//Debug.Log("OnPlayerHitShake...");
+		//Debug.Log("Unity:"+"OnPlayerHitShake...");
 		StartCoroutine(PcvrQiNangHitShake(indexPlayer));
 	}
 	
@@ -1441,7 +1441,7 @@ QiNangArray[3]			QiNangArray[2]
 			return;
 		}
 		IsPlayerHitShake = false;
-		//Debug.Log("ClosePlayerHitShake...");
+		//Debug.Log("Unity:"+"ClosePlayerHitShake...");
 	}
 	
 	IEnumerator PcvrQiNangHitShake(PlayerEnum indexPlayer)
@@ -1856,7 +1856,7 @@ QiNangArray[3]			QiNangArray[2]
 			break;
 		}
 		ZuoYiDianJiSpeedVal[indexVal] = speedTmp;
-		//Debug.Log("**ZuoYiDianJiSpeedVal["+indexVal+"] "+ZuoYiDianJiSpeedVal[indexVal]+", moveState "+moveState);
+		//Debug.Log("Unity:"+"**ZuoYiDianJiSpeedVal["+indexVal+"] "+ZuoYiDianJiSpeedVal[indexVal]+", moveState "+moveState);
 	}
 	
 	/**
@@ -1894,7 +1894,7 @@ QiNangArray[3]			QiNangArray[2]
 	 */
 	void OnZuoYiDianJiMoveOver(PlayerEnum indexPlayer, int indexTrigger, ButtonState btState)
 	{
-//		Debug.Log("OnZuoYiDianJiMoveOver -> indexPlayer "+indexPlayer+", indexTrigger "+indexTrigger
+//		Debug.Log("Unity:"+"OnZuoYiDianJiMoveOver -> indexPlayer "+indexPlayer+", indexTrigger "+indexTrigger
 //		          +", btState "+btState);
 		if (indexTrigger == 0 && TKMoveSt == TKMoveState.U_FangXiangPan) {
 			float shaCheVal = btState == ButtonState.UP ? -1f : 0f; //当传感器弹起时刹车有效.
@@ -1924,7 +1924,7 @@ QiNangArray[3]			QiNangArray[2]
 			}
 			else {
 				if (indexTrigger == 0 && ZuoYiDianJiMvCenter[indexVal] == 1) {
-					Debug.Log("OnZuoYiDianJiMoveOver -> indexPlayer "+indexPlayer
+					Debug.Log("Unity:"+"OnZuoYiDianJiMoveOver -> indexPlayer "+indexPlayer
 					          +", ZuoYi back center!");
 					ZuoYiDianJiMvCenter[indexVal] = 0;
 				}
@@ -2076,7 +2076,7 @@ QiNangArray[3]			QiNangArray[2]
 		int count = 0;
 		int indexVal = (int)playerVal - 1;
 		do {
-			//Debug.Log("PlayFangXiangPanDouDong -> playerVal "+playerVal+", count "+count);
+			//Debug.Log("Unity:"+"PlayFangXiangPanDouDong -> playerVal "+playerVal+", count "+count);
 			if ((count >= 6 && FangXiangPanDouDongLPVal[indexVal] == 0)
 			    || FangXiangPanDouDongVal[indexVal] == 0x00) {
 				if (FangXiangPanDouDongVal[indexVal] != 0x00) {
@@ -2094,7 +2094,7 @@ QiNangArray[3]			QiNangArray[2]
 					}
 				}
 				isPlayDouDong = false;
-				/*Debug.Log("PlayFangXiangPanDouDong -> playerVal "+playerVal
+				/*Debug.Log("Unity:"+"PlayFangXiangPanDouDong -> playerVal "+playerVal
 				          +", FangXiangPanDouDongVal "+FangXiangPanDouDongVal[indexVal].ToString("X2"));*/
 				yield break;
 			}
@@ -2152,7 +2152,7 @@ QiNangArray[3]			QiNangArray[2]
 		}
 		
 		if (readMsg.Length < (MyCOMDevice.ComThreadClass.BufLenRead - MyCOMDevice.ComThreadClass.BufLenReadEnd)) {
-			//Debug.Log("ReadBufLen was wrong! len is "+readMsg.Length);
+			//Debug.Log("Unity:"+"ReadBufLen was wrong! len is "+readMsg.Length);
 			return;
 		}
 		
@@ -3042,11 +3042,11 @@ QiNangArray[3]			QiNangArray[2]
 		int playerNum = 0;
 		for (int i = 0; i < 4; i++) {
 			YouMenMinVal[i] += YouMenCurVal[i];
-			//Debug.Log("YouMenMinVal["+i+"] "+YouMenMinVal[i]);
+			//Debug.Log("Unity:"+"YouMenMinVal["+i+"] "+YouMenMinVal[i]);
 			if (CountYM >= 10) {
 				playerNum = i+1;
 				YouMenMinVal[i] = (uint)((float)YouMenMinVal[i] / 10f);
-				//Debug.Log("***YouMenMinVal["+i+"] "+YouMenMinVal[i]);
+				//Debug.Log("Unity:"+"***YouMenMinVal["+i+"] "+YouMenMinVal[i]);
 				HandleJsonObj.WriteToFileXml(FileName, "YouMenMinValP"+playerNum, YouMenMinVal[i].ToString());
 			}
 		}
@@ -3195,17 +3195,17 @@ QiNangArray[3]			QiNangArray[2]
 			break;
 		}
 		JiaoYanState = val;
-		//Debug.Log("*****JiaoYanState "+JiaoYanState);
+		//Debug.Log("Unity:"+"*****JiaoYanState "+JiaoYanState);
 		
 		if (JiaoYanFailedCount >= JiaoYanFailedMax || IsJiOuJiaoYanFailed) {
 			//JiaoYanFailed
 			if (IsJiOuJiaoYanFailed) {
 				//JiOuJiaoYanFailed
-				//Debug.Log("JOJYSB...");
+				//Debug.Log("Unity:"+"JOJYSB...");
 			}
 			else {
 				//JiaMiXinPianJiaoYanFailed
-				//Debug.Log("JMXPJYSB...");
+				//Debug.Log("Unity:"+"JMXPJYSB...");
 				IsJiaMiJiaoYanFailed = true;
 			}
 		}

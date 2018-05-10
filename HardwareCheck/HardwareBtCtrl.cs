@@ -28,7 +28,7 @@ public class HardwareBtCtrl : MonoBehaviour
 
 	void OnClick()
 	{
-		//Debug.Log("***************BtState "+BtState);
+		//Debug.Log("Unity:"+"***************BtState "+BtState);
 		switch (BtState) {
 		case BtType.CloseBt:
 			Application.Quit();
