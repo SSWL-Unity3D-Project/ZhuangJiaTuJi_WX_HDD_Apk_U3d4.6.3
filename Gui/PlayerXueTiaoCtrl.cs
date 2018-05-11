@@ -58,7 +58,11 @@ public class PlayerXueTiaoCtrl : MonoBehaviour
 	void Start()
 	{
 		CameraTran = Camera.main != null ? Camera.main.transform : null;
-	}
+        if (m_TouMingHead != null)
+        {
+            m_MatNum.mainTexture = m_TouMingHead;
+        }
+    }
 
 	// Update is called once per frame
 	void Update()

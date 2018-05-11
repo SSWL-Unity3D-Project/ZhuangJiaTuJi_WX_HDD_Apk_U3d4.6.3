@@ -9,6 +9,7 @@ public class XueKuangCtrl : MonoBehaviour
     /// 微信头像.
     /// </summary>
     public UITexture m_WeiXinHead;
+    public Texture m_TouMingHead;
     /// <summary>
     /// 血框数字图片的大小.
     /// XueKuangNumWH[0] - 未激活.
@@ -77,7 +78,8 @@ public class XueKuangCtrl : MonoBehaviour
 			break;
 		}
 		HandleXueKuangNum();
-	}
+        m_WeiXinHead.mainTexture = m_TouMingHead;
+    }
 	
 	public void HandlePlayerXueTiaoInfo(float playerBlood)
 	{
@@ -117,6 +119,7 @@ public class XueKuangCtrl : MonoBehaviour
                 {
                     if (m_WeiXinHead != null)
                     {
+                        m_WeiXinHead.mainTexture = m_TouMingHead;
                         m_WeiXinHead.gameObject.SetActive(true);
                         string url = pcvr.GetInstance().m_PlayerHeadUrl[indexUrl];
                         XkGameCtrl.GetInstance().m_AsyImage.LoadPlayerHeadImg(url, m_WeiXinHead);

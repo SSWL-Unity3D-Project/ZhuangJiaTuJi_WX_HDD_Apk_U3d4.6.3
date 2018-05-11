@@ -15,9 +15,9 @@ public class GameMovieCtrl : SSGameMono
     /// Websocket预制.
     /// </summary>
     public GameObject m_WebSocketBoxPrefab;
-#if UNITY_STANDALONE_WIN
-	public MovieTexture Movie;
-#endif
+//#if UNITY_STANDALONE_WIN
+//	public MovieTexture Movie;
+//#endif
 	public static bool IsTestLJGame; //测试联机小窗口游戏.
 	AudioSource AudioSourceObj;
 	bool IsStopMovie;
@@ -99,7 +99,7 @@ public class GameMovieCtrl : SSGameMono
 
 			QualitySettings.SetQualityLevel((int)QualityLevelEnum.Fast);
 			Debug.Log("Unity:!!!!!!SetQualityLevel!!!!!!");
-			AudioSourceObj = transform.GetComponent<AudioSource>();
+			//AudioSourceObj = transform.GetComponent<AudioSource>();
 			Invoke("DelayResetIsLoadingLevel", 4f);
 			if (IsOpenFXZhenDong)
 			{
@@ -109,7 +109,7 @@ public class GameMovieCtrl : SSGameMono
 			Debug.Log("Unity:!!!!!!IsOpenFXZhenDong!!!!!!");
             //PlayMovie();
             //创建Logo播放对象.
-            //CrateMovieLogoAni();
+            CrateMovieLogoAni();
         }
 		catch (System.Exception e)
 		{
@@ -170,22 +170,22 @@ public class GameMovieCtrl : SSGameMono
 	public void PlayMovie()
 	{
 #if UNITY_STANDALONE_WIN
-        if (renderer != null) {
-			renderer.enabled = true;
-			renderer.material.mainTexture = Movie;
-		}
-		Movie.loop = false;
-		Movie.Play();
+  //      if (renderer != null) {
+		//	renderer.enabled = true;
+		//	renderer.material.mainTexture = Movie;
+		//}
+		//Movie.loop = false;
+		//Movie.Play();
 		
 #if TEST_MOVIE
 		TimeMv = Time.realtimeSinceStartup;
 #endif
 		
-		if (AudioSourceObj != null) {
-			AudioSourceObj.clip = Movie.audioClip;
-			AudioSourceObj.enabled = true;
-			AudioSourceObj.Play();
-		}
+		//if (AudioSourceObj != null) {
+		//	AudioSourceObj.clip = Movie.audioClip;
+		//	AudioSourceObj.enabled = true;
+		//	AudioSourceObj.Play();
+		//}
 #endif
         RemoveMovieLogoAni();
     }
@@ -197,18 +197,19 @@ public class GameMovieCtrl : SSGameMono
 			return;
 		}
 		IsStopMovie = true;
-		Movie.Stop();
-		if (AudioSourceObj != null) {
-			AudioSourceObj.Stop();
-			AudioSourceObj.enabled = false;
-		}
+		//Movie.Stop();
+		//if (AudioSourceObj != null) {
+		//	AudioSourceObj.Stop();
+		//	AudioSourceObj.enabled = false;
+		//}
 
 		if (Network.peerType == NetworkPeerType.Server) {
 			return;
 		}
 		gameObject.SetActive(false);
 #endif
-	}
+        RemoveMovieLogoAni();
+    }
 
 	void CloseAllFangXiangPanPower()
 	{
@@ -253,20 +254,20 @@ public class GameMovieCtrl : SSGameMono
 
     void OnGUI()
     {
-#if UNITY_STANDALONE_WIN
-        if (Movie.isPlaying)
-        {
-            Rect movieRt = new Rect(0f, 0f, Screen.width, Screen.height);
-            GUI.DrawTexture(movieRt, Movie);
-        }
-        else
-        {
-            if (!IsCrateMovieLogo)
-            {
-                CrateMovieLogoAni();
-            }
-        }
-#endif
+//#if UNITY_STANDALONE_WIN
+        //if (Movie.isPlaying)
+        //{
+        //    Rect movieRt = new Rect(0f, 0f, Screen.width, Screen.height);
+        //    GUI.DrawTexture(movieRt, Movie);
+        //}
+        //else
+        //{
+        //    if (!IsCrateMovieLogo)
+        //    {
+        //        CrateMovieLogoAni();
+        //    }
+        //}
+//#endif
 
         m_ErWeiMaRect.x = (Screen.width / 2) - (m_ErWeiMaRect.width / 2);
         m_ErWeiMaRect.y = Screen.height - m_ErWeiMaRect.height - 10f;
