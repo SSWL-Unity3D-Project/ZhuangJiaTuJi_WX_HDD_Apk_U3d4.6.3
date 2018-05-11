@@ -60,6 +60,15 @@ public class InputEventCtrl : MonoBehaviour {
 
     #region Click Button Envent
     public delegate void EventHandel(ButtonState val);
+    public event EventHandel ClickTVYaoKongExitBtEvent;
+    public void ClickTVYaoKongExitBt(ButtonState val)
+    {
+        if (ClickTVYaoKongExitBtEvent != null)
+        {
+            ClickTVYaoKongExitBtEvent(val);
+        }
+    }
+
     public event EventHandel ClickTVYaoKongEnterBtEvent;
     public void ClickTVYaoKongEnterBt(ButtonState val)
     {
@@ -631,18 +640,13 @@ public class InputEventCtrl : MonoBehaviour {
             ClickTVYaoKongEnterBt(ButtonState.UP);
         }
 
-        if (pcvr.IsHongDDShouBing)
+        if (Input.GetKeyUp(KeyCode.Escape))
         {
-            if (Input.GetKeyUp(KeyCode.Escape))
-            {
-                //接收遥控器的返回键/键盘上的Esc按键信息.
-                Application.Quit();
-                Debug.Log("Unity:"+"Player exit application...");
-            }
-            return;
+            //接收遥控器的返回键/键盘上的Esc按键信息.
+            ClickTVYaoKongExitBt(ButtonState.UP);
         }
 
-		if (Input.GetKeyUp(KeyCode.T)) {
+        if (Input.GetKeyUp(KeyCode.T)) {
 			int coinVal = XKGlobalData.CoinPlayerOne + 1;
 			XKGlobalData.SetCoinPlayerOne(coinVal);
 		}

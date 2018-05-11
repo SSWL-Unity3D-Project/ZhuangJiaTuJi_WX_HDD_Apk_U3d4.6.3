@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public enum NpcJiFenEnum
@@ -27,7 +26,25 @@ public enum GameJiTaiType
 	TanKeJiTai,
 }
 
-public class XkGameCtrl : MonoBehaviour {
+public class XkGameCtrl : SSGameMono
+{
+    [System.Serializable]
+    public class GameUIData
+    {
+        /// <summary>
+        /// 动态产生的UI父级Center.
+        /// </summary>
+        public Transform UICenterTrParent;
+        /// <summary>
+        /// 确定退出游戏的UI界面预制.
+        /// </summary>
+        public GameObject ExitGameUIPrefab;
+    }
+    /// <summary>
+    /// 游戏UI界面数据.
+    /// </summary>
+    public GameUIData m_GameUIDt;
+
     /// <summary>
     /// 微信头像处理组件.
     /// </summary>
@@ -455,7 +472,8 @@ public class XkGameCtrl : MonoBehaviour {
 			IsPlayGamePFour = IsActivePlayerFour;
 			AudioBeiJingCtrl.IndexBeiJingAd = 0;
 			XKGlobalData.GetInstance().PlayGuanKaBeiJingAudio();
-		}
+            InputEventCtrl.GetInstance().ClickTVYaoKongExitBtEvent += ClickTVYaoKongExitBtEvent;
+        }
 		catch (System.Exception e)
 		{
 			Debug.Log("Unity:!!!!!!!!!!!!!XKGameCtrl!!!!!!!!!!!!!!!!!!");
@@ -464,8 +482,19 @@ public class XkGameCtrl : MonoBehaviour {
 		}
 	}
 
+    private void ClickTVYaoKongExitBtEvent(ButtonState val)
+    {
+        if (val == ButtonState.UP)
+        {
+            if (m_ExitUICom == null)
+            {
+                SpawnExitGameUI();
+            }
+        }
+    }
+
 #if UNITY_EDITOR
-	bool IsFixedAllNpcSpawnTrigger;
+    bool IsFixedAllNpcSpawnTrigger;
 	public XKTriggerSpawnNpc[] TriggerSpawnNpcList;
 	void OnDrawGizmosSelected()
 	{
@@ -2717,8 +2746,35 @@ public class XkGameCtrl : MonoBehaviour {
 		return false;
 
 	}
+    
+    /// <summary>
+    /// 退出游戏UI界面控制脚本.
+    /// </summary>
+    SSExitGameUI m_ExitUICom;
+    /// <summary>
+    /// 产生退出游戏UI界面.
+    /// </summary>
+    void SpawnExitGameUI()
+    {
+        Debug.Log("Unity: SpawnExitGameUI...");
+        if (m_ExitUICom == null)
+        {
+            GameObject obj = (GameObject)Instantiate(m_GameUIDt.ExitGameUIPrefab, m_GameUIDt.UICenterTrParent);
+            m_ExitUICom = obj.GetComponent<SSExitGameUI>();
+            m_ExitUICom.Init();
+        }
+    }
 
-	void OnGUI()
+    public void RemoveExitGameUI()
+    {
+        Debug.Log("Unity: RemoveExitGameUI...");
+        if (m_ExitUICom != null)
+        {
+            Destroy(m_ExitUICom.gameObject);
+        }
+    }
+
+    void OnGUI()
 	{
 		if (IsCartoonShootTest || !IsShowDebugInfoBox) {
 			return;
