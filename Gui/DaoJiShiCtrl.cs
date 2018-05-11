@@ -5,6 +5,10 @@ public class DaoJiShiCtrl : MonoBehaviour {
 	public PlayerEnum PlayerIndex = PlayerEnum.PlayerOne;
 	public GameObject ContinueGameObj;
 	public GameObject GameOverObj;
+    /// <summary>
+    /// 电视遥控器确认按键图片.
+    /// </summary>
+    public GameObject m_TVYaoKongEnterObj;
 	GameObject DaoJiShiObj;
 	UISprite DaoJiShiSprite;
 	bool IsPlayDaoJishi;
@@ -84,7 +88,8 @@ public class DaoJiShiCtrl : MonoBehaviour {
 		DaoJiShiSprite = GetComponent<UISprite>();
 		DaoJiShiObj.SetActive(false);
 		ContinueGameObj.SetActive(false);
-		HiddenGameOverObj();
+        m_TVYaoKongEnterObj.SetActive(false);
+        HiddenGameOverObj();
 	}
 
 	public void StartPlayDaoJiShi()
@@ -100,10 +105,11 @@ public class DaoJiShiCtrl : MonoBehaviour {
 		CountDaoJiShi++;
 		DaoJiShiCount = 9;
 		DaoJiShiSprite.spriteName = "daoJiShi9";
-		DaoJiShiObj.SetActive(true);
-		ContinueGameObj.SetActive(true);
-		ShowDaoJiShiInfo();
-		XKGlobalData.GetInstance().StopAudioRanLiaoJingGao();
+		//DaoJiShiObj.SetActive(true);
+		//ContinueGameObj.SetActive(true);
+        m_TVYaoKongEnterObj.SetActive(true);
+        //ShowDaoJiShiInfo();
+		//XKGlobalData.GetInstance().StopAudioRanLiaoJingGao();
 		pcvr.CloseAllQiNangArray(PlayerIndex, 1);
 	}
 
@@ -117,7 +123,9 @@ public class DaoJiShiCtrl : MonoBehaviour {
 		CountDaoJiShi--;
 		ContinueGameObj.SetActive(false);
 		DaoJiShiObj.SetActive(false);
-	}
+        m_TVYaoKongEnterObj.SetActive(false);
+
+    }
 
 	void ShowDaoJiShiInfo()
 	{

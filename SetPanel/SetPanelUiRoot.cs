@@ -922,8 +922,9 @@ public class SetPanelUiRoot : MonoBehaviour {
 	}
 
 	void BackMovieScene()
-	{
-		if (Application.loadedLevel != (int)GameLevel.Movie) {
+    {
+        pcvr.GetInstance().ClearGameWeiXinData();
+        if (Application.loadedLevel != (int)GameLevel.Movie) {
 			XkGameCtrl.ResetGameInfo();
 			if (!XkGameCtrl.IsGameOnQuit) {
 				System.GC.Collect();

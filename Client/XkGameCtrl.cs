@@ -1709,7 +1709,9 @@ public class XkGameCtrl : MonoBehaviour {
 		SetActivePlayerTwo(false);
 		SetActivePlayerThree(false);
 		SetActivePlayerFour(false);
-		if (!XkGameCtrl.IsGameOnQuit) {
+
+        pcvr.GetInstance().ClearGameWeiXinData();
+		if (!IsGameOnQuit) {
 			System.GC.Collect();
 			Application.LoadLevel((int)GameLevel.Movie);
 		}

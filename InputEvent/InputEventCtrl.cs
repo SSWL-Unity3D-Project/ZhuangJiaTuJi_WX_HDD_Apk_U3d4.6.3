@@ -60,7 +60,16 @@ public class InputEventCtrl : MonoBehaviour {
 
     #region Click Button Envent
     public delegate void EventHandel(ButtonState val);
-	public event EventHandel ClickStartBtOneEvent;
+    public event EventHandel ClickTVYaoKongEnterBtEvent;
+    public void ClickTVYaoKongEnterBt(ButtonState val)
+    {
+        if (ClickTVYaoKongEnterBtEvent != null)
+        {
+            ClickTVYaoKongEnterBtEvent(val);
+        }
+    }
+
+    public event EventHandel ClickStartBtOneEvent;
 	public void ClickStartBtOne(ButtonState val)
 	{
 		if(ClickStartBtOneEvent != null)
@@ -615,6 +624,12 @@ public class InputEventCtrl : MonoBehaviour {
 		if (pcvr.bIsHardWare && !TestTanKCom.IsTestTankCom && !pcvr.IsTestInput) {
 			return;
 		}
+        
+        if (Input.GetKeyUp(KeyCode.KeypadEnter) || Input.GetKeyUp(KeyCode.Return))
+        {
+            //遥控器的确定键消息.
+            ClickTVYaoKongEnterBt(ButtonState.UP);
+        }
 
         if (pcvr.IsHongDDShouBing)
         {

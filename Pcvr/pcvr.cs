@@ -9,7 +9,7 @@ public class pcvr : MonoBehaviour {
     /// <summary>
     /// 是否为红点点微信手柄操作模式.
     /// </summary>
-    public static bool IsHongDDShouBing = true;
+    public static bool IsHongDDShouBing = false;
     /// <summary>
     /// 是否为硬件版本.
     /// </summary>
@@ -100,6 +100,7 @@ public class pcvr : MonoBehaviour {
 			GameObject obj = new GameObject("_PCVR");
 			DontDestroyOnLoad(obj);
 			_Instance = obj.AddComponent<pcvr>();
+            _Instance.InitInfo();
 			if (bIsHardWare) {
 				obj.AddComponent<MyCOMDevice>();
 			}
@@ -122,6 +123,14 @@ public class pcvr : MonoBehaviour {
 		return _Instance;
 	}
 	
+    void InitInfo()
+    {
+        for (int i = 0; i < m_GmWXLoginDt.Length; i++)
+        {
+            m_GmWXLoginDt[i] = new GameWeiXinLoginData();
+        }
+    }
+
 	// Use this for initialization
 	void Awake()
 	{
@@ -176,6 +185,78 @@ public class pcvr : MonoBehaviour {
                 else
                 {
                     Debug.Log("Unity:"+"webSocketSimpet is null!");
+                }
+            }
+        }
+
+        if (!bIsHardWare)
+        {
+            InputEventCtrl.GetInstance().ClickTVYaoKongEnterBtEvent += ClickTVYaoKongEnterBtEvent;
+        }
+    }
+
+    public class GameWeiXinLoginData
+    {
+        /// <summary>
+        /// 是否登陆微信手柄.
+        /// </summary>
+        public bool IsLoginWX = false;
+        /// <summary>
+        /// 是否激活游戏.
+        /// </summary>
+        public bool IsActiveGame = false;
+    }
+    /// <summary>
+    /// 游戏微信手柄登陆信息.
+    /// </summary>
+    public GameWeiXinLoginData[] m_GmWXLoginDt = new GameWeiXinLoginData[4];
+
+    void ClickTVYaoKongEnterBtEvent(ButtonState val)
+    {
+        if (val == ButtonState.UP)
+        {
+            //Debug.Log("Unity: ClickTVYaoKongEnterBtEvent...");
+            for (int i = 0; i < 4; i++)
+            {
+                int indexPlayer = i;
+                if (indexPlayer > -1 && indexPlayer < 4)
+                {
+                    if (m_GmWXLoginDt[indexPlayer].IsLoginWX)
+                    {
+                        if (!m_GmWXLoginDt[indexPlayer].IsActiveGame)
+                        {
+                            Debug.Log("Unity: click TVYaoKong EnterBt -> active " + indexPlayer + " player!");
+                            m_GmWXLoginDt[indexPlayer].IsActiveGame = true;
+                            switch (indexPlayer)
+                            {
+                                case 0:
+                                    {
+                                        InputEventCtrl.GetInstance().ClickStartBtOne(ButtonState.DOWN);
+                                        InputEventCtrl.GetInstance().ClickStartBtOne(ButtonState.UP);
+                                        break;
+                                    }
+                                case 1:
+                                    {
+                                        InputEventCtrl.GetInstance().ClickStartBtTwo(ButtonState.DOWN);
+                                        InputEventCtrl.GetInstance().ClickStartBtTwo(ButtonState.UP);
+                                        break;
+                                    }
+                                case 2:
+                                    {
+                                        InputEventCtrl.GetInstance().ClickStartBtThree(ButtonState.DOWN);
+                                        InputEventCtrl.GetInstance().ClickStartBtThree(ButtonState.UP);
+                                        break;
+                                    }
+                                case 3:
+                                    {
+                                        InputEventCtrl.GetInstance().ClickStartBtFour(ButtonState.DOWN);
+                                        InputEventCtrl.GetInstance().ClickStartBtFour(ButtonState.UP);
+                                        break;
+                                    }
+                            }
+                            break;
+                        }
+                    }
                 }
             }
         }
@@ -259,6 +340,16 @@ public class pcvr : MonoBehaviour {
                     //玩家血值耗尽应该续费了,找到玩家数据.
                     Debug.Log("Unity:"+"player should buy game coin!");
                 }
+            }
+            m_GmWXLoginDt[index].IsActiveGame = false;
+        }
+        else
+        {
+            if (!IsHongDDShouBing)
+            {
+                //软件版本测试用,模拟微信手柄登陆.
+                m_GmWXLoginDt[index].IsLoginWX = true;
+                Debug.Log("Unity: SetIndexPlayerActiveGameState -> index == " + index);
             }
         }
     }
@@ -824,6 +915,21 @@ public class pcvr : MonoBehaviour {
         }
     }
 
+    public void ClearGameWeiXinData()
+    {
+        Debug.Log("Unity: ClearGameWeiXinData...");
+        if (m_GamePlayerData != null)
+        {
+            m_GamePlayerData.Clear();
+        }
+
+        for (int i = 0; i < m_GmWXLoginDt.Length; i++)
+        {
+            m_GmWXLoginDt[i].IsLoginWX = false;
+            m_GmWXLoginDt[i].IsActiveGame = false;
+        }
+    }
+
     private void OnEventPlayerLoginBox(WebSocketSimpet.PlayerWeiXinData val)
     {
         Debug.Log("Unity:"+"pcvr::OnEventPlayerLoginBox -> userName " + val.userName + ", userId " + val.userId);
@@ -847,6 +953,7 @@ public class pcvr : MonoBehaviour {
                 playerDt.Index = indexPlayer;
                 m_GamePlayerData.Add(playerDt);
                 isActivePlayer = true;
+                m_GmWXLoginDt[indexPlayer].IsLoginWX = true;
             }
             else
             {
@@ -866,6 +973,7 @@ public class pcvr : MonoBehaviour {
                         {
                             isActivePlayer = true;
                             indexPlayer = playerDt.Index;
+                            m_GmWXLoginDt[indexPlayer].IsLoginWX = true;
                             break;
                         }
                     case PlayerActiveState.JiHuo:
@@ -886,6 +994,7 @@ public class pcvr : MonoBehaviour {
                                 Debug.Log("Unity: player active -> indexPlayer == " + indexPlayer);
                                 isActivePlayer = true;
                                 playerDt.Index = indexPlayer;
+                                m_GmWXLoginDt[indexPlayer].IsLoginWX = true;
                             }
                             else
                             {
@@ -899,6 +1008,7 @@ public class pcvr : MonoBehaviour {
 
         if (isActivePlayer)
         {
+            m_GmWXLoginDt[indexPlayer].IsActiveGame = true;
             m_PlayerHeadUrl[indexPlayer] = playerDt.m_PlayerWeiXinData.headUrl;
             switch (indexPlayer)
             {

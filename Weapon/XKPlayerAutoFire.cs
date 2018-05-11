@@ -682,7 +682,7 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 		}
 
 		Vector3 pushDir = IsLockPaoTa == false ? -TanKeTran.forward : -PaoTaTr.forward;
-		if (IsLockPaoTa) {
+		if (IsLockPaoTa && CameraTran != null) {
 			Vector3 veA = CameraTran.forward;
 			Vector3 veB = TanKeTran.forward;
 			veA.y = veB.y = 0f;
