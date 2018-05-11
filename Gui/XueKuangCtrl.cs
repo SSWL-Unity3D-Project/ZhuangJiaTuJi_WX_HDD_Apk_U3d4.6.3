@@ -119,7 +119,6 @@ public class XueKuangCtrl : MonoBehaviour
                 {
                     if (m_WeiXinHead != null)
                     {
-                        m_WeiXinHead.mainTexture = m_TouMingHead;
                         m_WeiXinHead.gameObject.SetActive(true);
                         string url = pcvr.GetInstance().m_PlayerHeadUrl[indexUrl];
                         XkGameCtrl.GetInstance().m_AsyImage.LoadPlayerHeadImg(url, m_WeiXinHead);
@@ -129,7 +128,7 @@ public class XueKuangCtrl : MonoBehaviour
                 {
                     if (m_WeiXinHead != null)
                     {
-                        m_WeiXinHead.mainTexture = null;
+                        m_WeiXinHead.mainTexture = m_TouMingHead;
                         m_WeiXinHead.gameObject.SetActive(false);
                     }
                 }

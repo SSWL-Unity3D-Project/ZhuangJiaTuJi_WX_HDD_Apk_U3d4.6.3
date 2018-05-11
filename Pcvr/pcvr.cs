@@ -181,7 +181,8 @@ public class pcvr : MonoBehaviour {
         }
     }
 
-    class GamePlayerData
+    [System.Serializable]
+    public class GamePlayerData
     {
         /// <summary>
         /// 玩家在游戏中的索引.
@@ -196,7 +197,7 @@ public class pcvr : MonoBehaviour {
         /// </summary>
         public WebSocketSimpet.PlayerWeiXinData m_PlayerWeiXinData;
     }
-    List<GamePlayerData> m_GamePlayerData = new List<GamePlayerData>();
+    public List<GamePlayerData> m_GamePlayerData = new List<GamePlayerData>();
 
     /// <summary>
     /// 玩家激活游戏状态.
@@ -858,10 +859,40 @@ public class pcvr : MonoBehaviour {
             playerDt.IsExitWeiXin = false;
             if (playerDt.Index > -1 && playerDt.Index < 4)
             {
-                if (m_IndexPlayerActiveGameState[playerDt.Index] == (int)PlayerActiveState.WeiJiHuo)
+                PlayerActiveState playerSt = (PlayerActiveState)m_IndexPlayerActiveGameState[playerDt.Index];
+                switch (playerSt)
                 {
-                    isActivePlayer = true;
-                    indexPlayer = playerDt.Index;
+                    case PlayerActiveState.WeiJiHuo:
+                        {
+                            isActivePlayer = true;
+                            indexPlayer = playerDt.Index;
+                            break;
+                        }
+                    case PlayerActiveState.JiHuo:
+                        {
+                            GamePlayerData playerTmpDt = m_GamePlayerData.Find((dt) =>
+                            {
+                                return dt.Index.Equals(playerDt.Index);
+                            });
+                            
+                            if (playerTmpDt != null && playerTmpDt.m_PlayerWeiXinData != null)
+                            {
+                                Debug.Log("Unity: " + playerTmpDt.m_PlayerWeiXinData.userName + " have active " + " player!");
+                            }
+
+                            indexPlayer = GetActivePlayerIndex();
+                            if (indexPlayer > -1 && indexPlayer < 4)
+                            {
+                                Debug.Log("Unity: player active -> indexPlayer == " + indexPlayer);
+                                isActivePlayer = true;
+                                playerDt.Index = indexPlayer;
+                            }
+                            else
+                            {
+                                Debug.Log("Unity:" + " ---> have not empty player!");
+                            }
+                            break;
+                        }
                 }
             }
         }
