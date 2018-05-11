@@ -597,6 +597,16 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 				continue;
 			}
 			
+            if (XkGameCtrl.PlayerActiveNum <= 0)
+            {
+                //玩家激活数量小于1时，镜头停止前进.
+                if (PlayerSt == PlayerTypeEnum.FeiJi)
+                {
+                    yield return new WaitForSeconds(0.1f);
+                    continue;
+                }
+            }
+
 			if (XkGameCtrl.PlayerActiveNum <= 0
 			    && PlayerSt != PlayerTypeEnum.CartoonCamera) {
 				if (!XkGameCtrl.IsMoveOnPlayerDeath) {
