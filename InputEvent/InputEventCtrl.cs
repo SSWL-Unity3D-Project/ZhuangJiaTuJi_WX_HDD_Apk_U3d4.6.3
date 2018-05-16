@@ -633,17 +633,34 @@ public class InputEventCtrl : MonoBehaviour {
 		if (pcvr.bIsHardWare && !TestTanKCom.IsTestTankCom && !pcvr.IsTestInput) {
 			return;
 		}
-        
+
+        if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
+        {
+            //遥控器的确定键消息.
+            ClickTVYaoKongEnterBt(ButtonState.DOWN);
+        }
+
         if (Input.GetKeyUp(KeyCode.KeypadEnter) || Input.GetKeyUp(KeyCode.Return))
         {
             //遥控器的确定键消息.
             ClickTVYaoKongEnterBt(ButtonState.UP);
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            //接收遥控器的返回键/键盘上的Esc按键信息.
+            ClickTVYaoKongExitBt(ButtonState.DOWN);
+        }
+
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             //接收遥控器的返回键/键盘上的Esc按键信息.
             ClickTVYaoKongExitBt(ButtonState.UP);
+        }
+        
+        if (pcvr.IsHongDDShouBing)
+        {
+            return;
         }
 
         if (Input.GetKeyUp(KeyCode.T)) {

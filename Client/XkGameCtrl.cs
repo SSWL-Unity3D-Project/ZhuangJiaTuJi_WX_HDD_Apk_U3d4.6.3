@@ -473,6 +473,7 @@ public class XkGameCtrl : SSGameMono
 			AudioBeiJingCtrl.IndexBeiJingAd = 0;
 			XKGlobalData.GetInstance().PlayGuanKaBeiJingAudio();
             InputEventCtrl.GetInstance().ClickTVYaoKongExitBtEvent += ClickTVYaoKongExitBtEvent;
+            pcvr.GetInstance().AddTVYaoKongEnterBtEvent();
         }
 		catch (System.Exception e)
 		{
@@ -2770,7 +2771,7 @@ public class XkGameCtrl : SSGameMono
         Debug.Log("Unity: RemoveExitGameUI...");
         if (m_ExitUICom != null)
         {
-            Destroy(m_ExitUICom.gameObject);
+            m_ExitUICom.RemoveSelf();
         }
     }
 

@@ -188,7 +188,10 @@ public class pcvr : MonoBehaviour {
                 }
             }
         }
+    }
 
+    public void AddTVYaoKongEnterBtEvent()
+    {
         if (!bIsHardWare)
         {
             InputEventCtrl.GetInstance().ClickTVYaoKongEnterBtEvent += ClickTVYaoKongEnterBtEvent;
@@ -211,14 +214,35 @@ public class pcvr : MonoBehaviour {
     /// </summary>
     public GameWeiXinLoginData[] m_GmWXLoginDt = new GameWeiXinLoginData[4];
 
+    /// <summary>
+    /// 电视遥控器激活玩家时的数据信息.
+    /// </summary>
+    public class TVYaoKongPlayerData
+    {
+        /// <summary>
+        /// 最后一个血值耗尽的玩家索引信息.
+        /// </summary>
+        public int Index = -1;
+        public TVYaoKongPlayerData(int indexVal)
+        {
+            Index = indexVal;
+        }
+    }
+    List<TVYaoKongPlayerData> m_TVYaoKongPlayerDt = new List<TVYaoKongPlayerData>();
+
     void ClickTVYaoKongEnterBtEvent(ButtonState val)
     {
         if (val == ButtonState.UP)
         {
             //Debug.Log("Unity: ClickTVYaoKongEnterBtEvent...");
-            for (int i = 0; i < 4; i++)
+            int count = m_TVYaoKongPlayerDt.Count;
+            if (count > 0)
             {
-                int indexPlayer = i;
+                TVYaoKongPlayerData playerDt = m_TVYaoKongPlayerDt[count - 1];
+                int indexPlayer = playerDt.Index;
+                //清理最后一个血值耗尽的玩家信息.
+                m_TVYaoKongPlayerDt.RemoveAt(count - 1);
+
                 if (indexPlayer > -1 && indexPlayer < 4)
                 {
                     if (m_GmWXLoginDt[indexPlayer].IsLoginWX)
@@ -254,7 +278,6 @@ public class pcvr : MonoBehaviour {
                                         break;
                                     }
                             }
-                            break;
                         }
                     }
                 }
@@ -341,7 +364,12 @@ public class pcvr : MonoBehaviour {
                     Debug.Log("Unity:"+"player should buy game coin!");
                 }
             }
+
             m_GmWXLoginDt[index].IsActiveGame = false;
+            if (m_GmWXLoginDt[index].IsLoginWX)
+            {
+                m_TVYaoKongPlayerDt.Add(new TVYaoKongPlayerData(index));
+            }
         }
         else
         {
@@ -364,9 +392,12 @@ public class pcvr : MonoBehaviour {
         {
             if (m_IndexPlayerActiveGameState[i] == 0)
             {
-                //未激活玩家索引.
-                indexPlayer = i;
-                break;
+                if (!m_GmWXLoginDt[i].IsLoginWX)
+                {
+                    //未激活且未登陆过微信手柄的玩家索引.
+                    indexPlayer = i;
+                    break;
+                }
             }
         }
         return indexPlayer;
@@ -899,20 +930,20 @@ public class pcvr : MonoBehaviour {
     private void OnEventPlayerExitBox(int userId)
     {
         Debug.Log("Unity:"+"pcvr::OnEventPlayerExitBox -> userId " + userId);
-        GamePlayerData playerDt = m_GamePlayerData.Find((dt) => { return dt.m_PlayerWeiXinData.userId.Equals(userId); });
-        if (playerDt != null)
-        {
-            playerDt.IsExitWeiXin = true;
-            if (playerDt.Index > -1 && playerDt.Index < 4)
-            {
-                if (m_IndexPlayerActiveGameState[playerDt.Index] == (int)PlayerActiveState.WeiJiHuo)
-                {
-                    //玩家血值耗尽,清理玩家微信数据.
-                    m_GamePlayerData.Remove(playerDt);
-                    Debug.Log("Unity:"+"OnEventPlayerExitBox -> clear player weiXin data...");
-                }
-            }
-        }
+        //GamePlayerData playerDt = m_GamePlayerData.Find((dt) => { return dt.m_PlayerWeiXinData.userId.Equals(userId); });
+        //if (playerDt != null)
+        //{
+        //    playerDt.IsExitWeiXin = true;
+        //    if (playerDt.Index > -1 && playerDt.Index < 4)
+        //    {
+        //        if (m_IndexPlayerActiveGameState[playerDt.Index] == (int)PlayerActiveState.WeiJiHuo)
+        //        {
+        //            //玩家血值耗尽,清理玩家微信数据.
+        //            m_GamePlayerData.Remove(playerDt);
+        //            Debug.Log("Unity:"+"OnEventPlayerExitBox -> clear player weiXin data...");
+        //        }
+        //    }
+        //}
     }
 
     public void ClearGameWeiXinData()
@@ -928,6 +959,7 @@ public class pcvr : MonoBehaviour {
             m_GmWXLoginDt[i].IsLoginWX = false;
             m_GmWXLoginDt[i].IsActiveGame = false;
         }
+        m_TVYaoKongPlayerDt.Clear();
     }
 
     private void OnEventPlayerLoginBox(WebSocketSimpet.PlayerWeiXinData val)
@@ -983,22 +1015,26 @@ public class pcvr : MonoBehaviour {
                                 return dt.Index.Equals(playerDt.Index);
                             });
                             
-                            if (playerTmpDt != null && playerTmpDt.m_PlayerWeiXinData != null)
+                            if (playerTmpDt != null
+                                && playerTmpDt.m_PlayerWeiXinData != null
+                                && val.userId == playerTmpDt.m_PlayerWeiXinData.userId)
                             {
                                 Debug.Log("Unity: " + playerTmpDt.m_PlayerWeiXinData.userName + " have active " + " player!");
                             }
-
-                            indexPlayer = GetActivePlayerIndex();
-                            if (indexPlayer > -1 && indexPlayer < 4)
-                            {
-                                Debug.Log("Unity: player active -> indexPlayer == " + indexPlayer);
-                                isActivePlayer = true;
-                                playerDt.Index = indexPlayer;
-                                m_GmWXLoginDt[indexPlayer].IsLoginWX = true;
-                            }
                             else
                             {
-                                Debug.Log("Unity:" + " ---> have not empty player!");
+                                indexPlayer = GetActivePlayerIndex();
+                                if (indexPlayer > -1 && indexPlayer < 4)
+                                {
+                                    Debug.Log("Unity: player active -> indexPlayer == " + indexPlayer);
+                                    isActivePlayer = true;
+                                    playerDt.Index = indexPlayer;
+                                    m_GmWXLoginDt[indexPlayer].IsLoginWX = true;
+                                }
+                                else
+                                {
+                                    Debug.Log("Unity:" + " ---> have not empty player!");
+                                }
                             }
                             break;
                         }
