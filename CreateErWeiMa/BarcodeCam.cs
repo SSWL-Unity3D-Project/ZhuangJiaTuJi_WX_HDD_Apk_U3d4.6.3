@@ -7,6 +7,8 @@ using ZXing.QrCode;
 /// </summary>
 public class BarcodeCam : MonoBehaviour
 {
+    [HideInInspector]
+    public Texture2D m_ErWeuMaImg = null;
     //定义方法生成二维码
     private Color32[] Encode(string textForEncoding, int width, int height)
     {
