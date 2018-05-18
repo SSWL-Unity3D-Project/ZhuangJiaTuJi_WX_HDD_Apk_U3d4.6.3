@@ -164,6 +164,33 @@ public class InputEventCtrl : MonoBehaviour {
 		pcvr.SetIsPlayerActivePcvr();
 	}
 	
+    public void OnClickFireBt(int index, ButtonState val)
+    {
+        switch (index)
+        {
+            case 0:
+                {
+                    ClickFireBtOne(val);
+                    break;
+                }
+            case 1:
+                {
+                    ClickFireBtTwo(val);
+                    break;
+                }
+            case 2:
+                {
+                    ClickFireBtThree(val);
+                    break;
+                }
+            case 3:
+                {
+                    ClickFireBtFour(val);
+                    break;
+                }
+        }
+    }
+
 	public event EventHandel ClickFireBtOneEvent;
 	public void ClickFireBtOne(ButtonState val)
 	{
@@ -213,8 +240,35 @@ public class InputEventCtrl : MonoBehaviour {
 		}
 		pcvr.SetIsPlayerActivePcvr();
 	}
+    
+    public void OnClickDaoDanBt(int index, ButtonState val)
+    {
+        switch (index)
+        {
+            case 0:
+                {
+                    ClickDaoDanBtOne(val);
+                    break;
+                }
+            case 1:
+                {
+                    ClickDaoDanBtTwo(val);
+                    break;
+                }
+            case 2:
+                {
+                    ClickDaoDanBtThree(val);
+                    break;
+                }
+            case 3:
+                {
+                    ClickDaoDanBtFour(val);
+                    break;
+                }
+        }
+    }
 
-	public event EventHandel ClickDaoDanBtOneEvent;
+    public event EventHandel ClickDaoDanBtOneEvent;
 	public void ClickDaoDanBtOne(ButtonState val)
 	{
 		if (XKGlobalData.GameVersionPlayer == 0) {

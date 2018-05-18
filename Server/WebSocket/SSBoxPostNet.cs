@@ -1,13 +1,39 @@
 ﻿using LitJson;
 using System;
 using System.Collections;
+using System.Net.NetworkInformation;
 using System.Text;
 using UnityEngine;
 
 public class SSBoxPostNet : MonoBehaviour
 {
-    void Start()
+    public enum GamePadState
     {
+        Default,                //默认手柄.
+        LeiTingZhanChe,         //雷霆战车手柄.
+    }
+    /// <summary>
+    /// 游戏手柄枚举.
+    /// </summary>
+    [HideInInspector]
+    public GamePadState m_GamePadState = GamePadState.LeiTingZhanChe;
+
+    public void Init()
+    {
+        NetworkInterface[] nis = NetworkInterface.GetAllNetworkInterfaces();
+        foreach (NetworkInterface ni in nis)
+        {
+            Debug.Log("Name = " + ni.Name);
+            Debug.Log("Des = " + ni.Description);
+            Debug.Log("Type = " + ni.NetworkInterfaceType.ToString());
+            Debug.Log("Mac地址 = " + ni.GetPhysicalAddress().ToString());
+            Debug.Log("------------------------------------------------");
+            m_BoxLoginData.boxNumber = m_GamePadState.ToString() + ni.GetPhysicalAddress().ToString();
+            break;
+        }
+        //m_BoxLoginData.boxNumber = "1"; //test.
+        Debug.Log("boxNumber == " + m_BoxLoginData.boxNumber);
+
         if (m_WebSocketSimpet != null)
         {
             m_WebSocketSimpet.Init(this);
@@ -77,10 +103,30 @@ public class SSBoxPostNet : MonoBehaviour
     public class BoxLoginData
     {
         public string url = "http://game.hdiandian.com/gameBox/logon";
-        public string boxNumber = "1";              //盒子编号.
+        string _boxNumber = "1";
+        //盒子编号.
+        public string boxNumber
+        {
+            set
+            {
+                _boxNumber = value;
+                //設置紅點點遊戲手柄的url.
+                hDianDianGamePadUrl = _hDianDianGamePadUrl + value;
+            }
+            get
+            {
+                return _boxNumber;
+            }
+        }
         public string storeId = "150";              //商户id.
         public string channel = "CyberCloud";       //渠道.
         public string gameId = "16";                //游戏id.
+
+        string _hDianDianGamePadUrl = "http://game.hdiandian.com/gamepad/index.html?boxNumber=";
+        /// <summary>
+        /// 紅點點遊戲手柄的url.
+        /// </summary>
+        public string hDianDianGamePadUrl = "";
     }
     public BoxLoginData m_BoxLoginData = new BoxLoginData();
 

@@ -5,11 +5,6 @@ using UnityEngine;
 public class WebSocketSimpet : MonoBehaviour
 {
     #region Private Fields
-    /// <summary>  
-    /// The WebSocket address to connect  
-    /// </summary>  
-    string _address;
-
     private WabData _wabData;
     #endregion
 
@@ -26,7 +21,6 @@ public class WebSocketSimpet : MonoBehaviour
 
         _wabData = new WabData();
         _wabData.m_WebSocketSimpet = this;
-        _address = _wabData.Address;
 
         m_SSBoxPostNet = postNet;
         IsInit = true;
@@ -71,12 +65,18 @@ public class WebSocketSimpet : MonoBehaviour
         if (_wabData.WebSocket == null)
         {
             _wabData.Address = url;
-            _address = url;
             _wabData.OpenWebSocket();
             Debug.Log("Unity:"+"Opening Web Socket -> url == " + url);
         }
     }
 
+    bool IsCheckXinTiaoMsg = false;
+    float m_TimeLastXinTiao = 0f;
+    float m_TimeSendXinTiaoMsg = 0f;
+    /// <summary>
+    /// 心跳消息检测服务器返回的数据.
+    /// </summary>
+    string m_XinTiaoReturnMsg = "{\"data\":\"{\\\"_msg_name\\\":\\\"GameCenter_Logon\\\"}\",\"type\":\"message\"}";
     /// <summary>
     /// 发送心跳消息(建议30秒一次),用来检测服务器是否掉线.
     /// </summary>
@@ -97,7 +97,7 @@ public class WebSocketSimpet : MonoBehaviour
             m_TimeSendXinTiaoMsg = Time.time;
             string boxNumber = m_SSBoxPostNet.m_BoxLoginData.boxNumber;
             string msgToSend = boxNumber + "," + boxNumber + ",0,{\"_msg_name\":\"GameCenter_Logon\"}";
-            // Send message to the server  
+            // Send message to the server.
             _wabData.WebSocket.Send(msgToSend);
             Debug.Log("Unity:"+"NetSendWebSocketXinTiaoMsg -> msgToSend == " + msgToSend);
         }
@@ -108,13 +108,58 @@ public class WebSocketSimpet : MonoBehaviour
         }
     }
 
-    bool IsCheckXinTiaoMsg = false;
-    float m_TimeLastXinTiao = 0f;
-    float m_TimeSendXinTiaoMsg = 0f;
+    bool IsInitGameWeiXinShouBingData = false;
     /// <summary>
-    /// 心跳消息检测服务器返回的数据.
+    /// 初始化游戏微信手柄资源数据.
     /// </summary>
-    string m_XinTiaoReturnMsg = "{\"data\":\"{\\\"_msg_name\\\":\\\"GameCenter_Logon\\\"}\",\"type\":\"message\"}";
+    public void NetInitGameWeiXinShouBingData()
+    {
+        if (m_SSBoxPostNet == null)
+        {
+            return;
+        }
+
+        if (_wabData.WebSocket != null && _wabData.WebSocket.IsOpen)
+        {
+
+            if (IsInitGameWeiXinShouBingData)
+            {
+                return;
+            }
+            IsInitGameWeiXinShouBingData = true;
+
+            string boxNumber = m_SSBoxPostNet.m_BoxLoginData.boxNumber;
+            string msgToSend = boxNumber + "," + boxNumber + ",0,";
+            //m_GamePadState = GamePadState.Default; //test.
+            switch (m_SSBoxPostNet.m_GamePadState)
+            {
+                case SSBoxPostNet.GamePadState.LeiTingZhanChe:
+                    {
+                        msgToSend += "{\"_msg_name\":\"initGamepad\","
+                            + "\"_msg_object_str\":{\"backgroundImage\":\"bg_ltzj.png\","
+                            + "\"loadGroup\":\"ltzj\","
+                            + "\"buttonStyle\":["
+                            + "{\"name\":\"direction\",\"image\":\"ball_ltzj.png\"},"
+                            + "{\"name\":\"directionBg\",\"image\":\"circle_ltzj.png\"},"
+                            + "{\"name\":\"fireA\",\"image\":\"a_ltzj.png\"},"
+                            + "{\"name\":\"fireB\",\"image\":\"b_ltzj.png\"}"
+                            + "]}}";
+                        break;
+                    }
+                default:
+                    {
+                        msgToSend += "{\"_msg_name\":\"initGamepad\",\"_msg_object_str\":{\"loadGroup\":\"default\"}}";
+                        break;
+                    }
+            }
+
+            Debug.Log("InitGameWeiXinShouBingData:: m_GamePadState == " + m_SSBoxPostNet.m_GamePadState);
+            Debug.Log("InitGameWeiXinShouBingData:: msg == " + msgToSend);
+            _wabData.WebSocket.Send(msgToSend);
+        }
+    }
+
+
     /// <summary>
     /// 收到WebSocket网络消息.
     /// </summary>
@@ -155,7 +200,7 @@ public class WebSocketSimpet : MonoBehaviour
             case "directionAngle": //手柄方向消息.
                 {
                     //{"data":53,"type":"directionAngle","userId":"93124"}
-                    int dirVal = Convert.ToInt32(jd["data"].ToString());
+                    string dirVal = jd["data"].ToString();
                     int userId = Convert.ToInt32(jd["userId"].ToString());
                     OnNetReceiveDirectionAngleMsg(dirVal, userId);
                     break;
@@ -241,9 +286,9 @@ public class WebSocketSimpet : MonoBehaviour
     /// <summary>
     /// 手柄方向响应事件.
     /// </summary>
-    public delegate void EventDirectionAngle(int val, int userId);
+    public delegate void EventDirectionAngle(string val, int userId);
     public event EventDirectionAngle OnEventDirectionAngle;
-    public void OnNetReceiveDirectionAngleMsg(int val, int userId)
+    public void OnNetReceiveDirectionAngleMsg(string val, int userId)
     {
         //Debug.Log("Unity:"+"OnNetReceiveDirectionAngleMsg -> val == " + val + ", userId == " + userId);
         if (OnEventDirectionAngle != null)

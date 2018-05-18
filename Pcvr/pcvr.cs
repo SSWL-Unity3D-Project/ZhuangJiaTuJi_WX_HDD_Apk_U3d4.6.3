@@ -9,7 +9,7 @@ public class pcvr : MonoBehaviour {
     /// <summary>
     /// 是否为红点点微信手柄操作模式.
     /// </summary>
-    public static bool IsHongDDShouBing = false;
+    public static bool IsHongDDShouBing = true;
     /// <summary>
     /// 是否为硬件版本.
     /// </summary>
@@ -86,6 +86,10 @@ public class pcvr : MonoBehaviour {
 	static public bool bSetMoveKeyDown = false;
 	public static uint CoinCurPcvr12;
 	public static uint CoinCurPcvr34;
+    /// <summary>
+    /// 二维码生成脚本.
+    /// </summary>
+    public BarcodeCam m_BarcodeCam;
 
     /// <summary>
     /// BoxPostNet控制组件.
@@ -112,12 +116,14 @@ public class pcvr : MonoBehaviour {
 			if (IsTestHardWareError) {
 				TestComPort.GetInstance();
 			}
-			//NetworkServerNet.GetInstance();
-
+            //NetworkServerNet.GetInstance();
+            
             if (GameMovieCtrl.GetInstance() != null && IsHongDDShouBing)
             {
                 GameObject websocketObj = GameMovieCtrl.GetInstance().SpawnWebSocketBox(obj.transform);
                 _Instance.m_SSBoxPostNet = websocketObj.GetComponent<SSBoxPostNet>();
+                _Instance.m_SSBoxPostNet.Init();
+                _Instance.m_BarcodeCam = obj.AddComponent<BarcodeCam>();
             }
 		}
 		return _Instance;
@@ -317,10 +323,14 @@ public class pcvr : MonoBehaviour {
     /// </summary>
     enum PlayerShouBingFireBt
     {
-        fireX,
-        fireY,
-        fireA,
-        fireB,
+        fireXDown,
+        fireYDown,
+        fireADown,
+        fireBDown,
+        fireXUp,
+        fireYUp,
+        fireAUp,
+        fireBUp,
     }
 
     /// <summary>
@@ -328,15 +338,15 @@ public class pcvr : MonoBehaviour {
     /// </summary>
     enum PlayerShouBingDir
     {
-        Null = 0, //没有操作方向盘.
-        Left = 1,
-        LeftDown = 2,
-        Down = 3,
-        RightDown = 4,
-        Right = 5,
-        RightUp = 6,
-        Up = 7,
-        LeftUp = 8,
+        up = 0, //没有操作方向盘(手指离开摇杆).
+        DirLeft = 1,
+        DirLeftDown = 2,
+        DirDown = 3,
+        DirRightDown = 4,
+        DirRight = 5,
+        DirRightUp = 6,
+        DirUp = 7,
+        DirLeftUp = 8,
     }
 
     /// <summary>
@@ -417,66 +427,34 @@ public class pcvr : MonoBehaviour {
             if (m_IndexPlayerActiveGameState[playerDt.Index] == (int)PlayerActiveState.JiHuo)
             {
                 //处于激活状态的玩家才可以进行游戏操作.
-                if (val == PlayerShouBingFireBt.fireA.ToString()
-                    || val == PlayerShouBingFireBt.fireX.ToString())
+                if (val == PlayerShouBingFireBt.fireADown.ToString()
+                    || val == PlayerShouBingFireBt.fireXDown.ToString())
                 {
-                    switch(playerDt.Index)
-                    {
-                        case 0:
-                            {
-                                InputEventCtrl.GetInstance().ClickFireBtOne(ButtonState.DOWN);
-                                break;
-                            }
-                        case 1:
-                            {
-                                InputEventCtrl.GetInstance().ClickFireBtTwo(ButtonState.DOWN);
-                                break;
-                            }
-                        case 2:
-                            {
-                                InputEventCtrl.GetInstance().ClickFireBtThree(ButtonState.DOWN);
-                                break;
-                            }
-                        case 3:
-                            {
-                                InputEventCtrl.GetInstance().ClickFireBtFour(ButtonState.DOWN);
-                                break;
-                            }
-                    }
+                    InputEventCtrl.GetInstance().OnClickFireBt(playerDt.Index, ButtonState.DOWN);
                 }
 
-                if (val == PlayerShouBingFireBt.fireB.ToString()
-                    || val == PlayerShouBingFireBt.fireY.ToString())
+                if (val == PlayerShouBingFireBt.fireAUp.ToString()
+                    || val == PlayerShouBingFireBt.fireXUp.ToString())
                 {
-                    switch (playerDt.Index)
-                    {
-                        case 0:
-                            {
-                                InputEventCtrl.GetInstance().ClickDaoDanBtOne(ButtonState.DOWN);
-                                break;
-                            }
-                        case 1:
-                            {
-                                InputEventCtrl.GetInstance().ClickDaoDanBtTwo(ButtonState.DOWN);
-                                break;
-                            }
-                        case 2:
-                            {
-                                InputEventCtrl.GetInstance().ClickDaoDanBtThree(ButtonState.DOWN);
-                                break;
-                            }
-                        case 3:
-                            {
-                                InputEventCtrl.GetInstance().ClickDaoDanBtFour(ButtonState.DOWN);
-                                break;
-                            }
-                    }
+                    InputEventCtrl.GetInstance().OnClickFireBt(playerDt.Index, ButtonState.UP);
+                }
+
+                if (val == PlayerShouBingFireBt.fireBDown.ToString()
+                    || val == PlayerShouBingFireBt.fireYDown.ToString())
+                {
+                    InputEventCtrl.GetInstance().OnClickDaoDanBt(playerDt.Index, ButtonState.DOWN);
+                }
+
+                if (val == PlayerShouBingFireBt.fireBUp.ToString()
+                    || val == PlayerShouBingFireBt.fireYUp.ToString())
+                {
+                    InputEventCtrl.GetInstance().OnClickDaoDanBt(playerDt.Index, ButtonState.UP);
                 }
             }
         }
     }
 
-    private void OnEventDirectionAngle(int val, int userId)
+    private void OnEventDirectionAngle(string dirValStr, int userId)
     {
         //Debug.Log("Unity:"+"pcvr::OnEventDirectionAngle -> userId " + userId + ", val " + val);
         GamePlayerData playerDt = m_GamePlayerData.Find((dt) => { return dt.m_PlayerWeiXinData.userId.Equals(userId); });
@@ -488,50 +466,59 @@ public class pcvr : MonoBehaviour {
             {
                 //处于激活状态的玩家才可以进行游戏操作.
                 int dirVal = 0;
-                if (val >= -22.5f && val < 22.5f)
+                if (dirValStr == PlayerShouBingDir.up.ToString())
                 {
-                    dirVal = 1;
+                    //玩家手指离开摇杆(摇杆回中了).
                 }
-                else if (val >= -67.5f && val < -22.5f)
+                else
                 {
-                    dirVal = 2;
-                }
-                else if (val >= -112.5f && val < -67.5f)
-                {
-                    dirVal = 3;
-                }
-                else if (val >= -157.5f && val < -112.5f)
-                {
-                    dirVal = 4;
-                }
-                else if ((val >= -180f && val < -157.5f)
-                    || (val <= 180f && val > 157.5f))
-                {
-                    dirVal = 5;
-                }
-                else if (val > 112.5f && val <= 157.5f)
-                {
-                    dirVal = 6;
-                }
-                else if (val > 67.5f && val <= 112.5f)
-                {
-                    dirVal = 7;
-                }
-                else if (val >= 22.5f && val <= 67.5f)
-                {
-                    dirVal = 8;
+                    int val = Convert.ToInt32(dirValStr);
+                    if (val >= -22.5f && val < 22.5f)
+                    {
+                        dirVal = 1;
+                    }
+                    else if (val >= -67.5f && val < -22.5f)
+                    {
+                        dirVal = 2;
+                    }
+                    else if (val >= -112.5f && val < -67.5f)
+                    {
+                        dirVal = 3;
+                    }
+                    else if (val >= -157.5f && val < -112.5f)
+                    {
+                        dirVal = 4;
+                    }
+                    else if ((val >= -180f && val < -157.5f)
+                        || (val <= 180f && val > 157.5f))
+                    {
+                        dirVal = 5;
+                    }
+                    else if (val > 112.5f && val <= 157.5f)
+                    {
+                        dirVal = 6;
+                    }
+                    else if (val > 67.5f && val <= 112.5f)
+                    {
+                        dirVal = 7;
+                    }
+                    else if (val >= 22.5f && val <= 67.5f)
+                    {
+                        dirVal = 8;
+                    }
                 }
 
                 PlayerShouBingDir dirState = (PlayerShouBingDir)dirVal;
-                if (dirState != PlayerShouBingDir.Null)
-                {
-                    StopCoroutine(DelayResetPlayerShouBingDir(playerDt.Index));
-                    StartCoroutine(DelayResetPlayerShouBingDir(playerDt.Index));
-                }
+                //if (dirState != PlayerShouBingDir.up)
+                //{
+                //    //自动回中摇杆.
+                //    StopCoroutine(DelayResetPlayerShouBingDir(playerDt.Index));
+                //    StartCoroutine(DelayResetPlayerShouBingDir(playerDt.Index));
+                //}
 
                 switch (dirState)
                 {
-                    case PlayerShouBingDir.Left:
+                    case PlayerShouBingDir.DirLeft:
                         {
                             switch (playerDt.Index)
                             {
@@ -570,7 +557,7 @@ public class pcvr : MonoBehaviour {
                             }
                             break;
                         }
-                    case PlayerShouBingDir.LeftDown:
+                    case PlayerShouBingDir.DirLeftDown:
                         {
                             switch (playerDt.Index)
                             {
@@ -609,7 +596,7 @@ public class pcvr : MonoBehaviour {
                             }
                             break;
                         }
-                    case PlayerShouBingDir.Down:
+                    case PlayerShouBingDir.DirDown:
                         {
                             switch (playerDt.Index)
                             {
@@ -648,7 +635,7 @@ public class pcvr : MonoBehaviour {
                             }
                             break;
                         }
-                    case PlayerShouBingDir.RightDown:
+                    case PlayerShouBingDir.DirRightDown:
                         {
                             switch (playerDt.Index)
                             {
@@ -687,7 +674,7 @@ public class pcvr : MonoBehaviour {
                             }
                             break;
                         }
-                    case PlayerShouBingDir.Right:
+                    case PlayerShouBingDir.DirRight:
                         {
                             switch (playerDt.Index)
                             {
@@ -726,7 +713,7 @@ public class pcvr : MonoBehaviour {
                             }
                             break;
                         }
-                    case PlayerShouBingDir.RightUp:
+                    case PlayerShouBingDir.DirRightUp:
                         {
                             switch (playerDt.Index)
                             {
@@ -765,7 +752,7 @@ public class pcvr : MonoBehaviour {
                             }
                             break;
                         }
-                    case PlayerShouBingDir.Up:
+                    case PlayerShouBingDir.DirUp:
                         {
                             switch (playerDt.Index)
                             {
@@ -804,7 +791,7 @@ public class pcvr : MonoBehaviour {
                             }
                             break;
                         }
-                    case PlayerShouBingDir.LeftUp:
+                    case PlayerShouBingDir.DirLeftUp:
                         {
                             switch (playerDt.Index)
                             {
@@ -843,7 +830,7 @@ public class pcvr : MonoBehaviour {
                             }
                             break;
                         }
-                    case PlayerShouBingDir.Null:
+                    case PlayerShouBingDir.up:
                         {
                             switch (playerDt.Index)
                             {

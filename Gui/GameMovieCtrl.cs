@@ -41,12 +41,12 @@ public class GameMovieCtrl : SSGameMono
 	}
 	
 	// Use this for initialization
-	void Start()
+	void Awake()
 	{
 		_instance = this;
 		try
 		{
-			XKGlobalData.GetInstance();
+            XKGlobalData.GetInstance();
 			Debug.Log("Unity:!!!!!!GetInstance!!!!!!");
 			AudioListener.volume = (float)XKGlobalData.GameAudioVolume / 10f;
 			if (AudioListCtrl.GetInstance() != null)
@@ -247,13 +247,13 @@ public class GameMovieCtrl : SSGameMono
 	}
 #endif
 
-    public float m_MovieTime = 15f;
-    float m_LastMovieTime = -10000f;
-    public Rect m_ErWeiMaRect;
-    public Texture m_ErWeiMaImg;
+    //public float m_MovieTime = 15f;
+    //float m_LastMovieTime = -10000f;
+    //public Rect m_ErWeiMaRect;
+    //public Texture m_ErWeiMaImg;
 
-    void OnGUI()
-    {
+    //void OnGUI()
+    //{
 //#if UNITY_STANDALONE_WIN
         //if (Movie.isPlaying)
         //{
@@ -269,17 +269,17 @@ public class GameMovieCtrl : SSGameMono
         //}
 //#endif
 
-        m_ErWeiMaRect.x = (Screen.width / 2) - (m_ErWeiMaRect.width / 2);
-        m_ErWeiMaRect.y = Screen.height - m_ErWeiMaRect.height - 10f;
-        GUI.DrawTexture(m_ErWeiMaRect, m_ErWeiMaImg);
+        //m_ErWeiMaRect.x = (Screen.width / 2) - (m_ErWeiMaRect.width / 2);
+        //m_ErWeiMaRect.y = Screen.height - m_ErWeiMaRect.height - 10f;
+        //GUI.DrawTexture(m_ErWeiMaRect, m_ErWeiMaImg);
 
-#if UNITY_ANDROID
-        if (Time.time - m_LastMovieTime >= m_MovieTime)
-        {
-            m_LastMovieTime = m_MovieTime;
-            Handheld.PlayFullScreenMovie(m_MoviePath, Color.black, FullScreenMovieControlMode.Hidden);
-        }
-#endif
+//#if UNITY_ANDROID
+        //if (Time.time - m_LastMovieTime >= m_MovieTime)
+        //{
+        //    m_LastMovieTime = m_MovieTime;
+        //    Handheld.PlayFullScreenMovie(m_MoviePath, Color.black, FullScreenMovieControlMode.Hidden);
+        //}
+//#endif
 
         //if (GUI.Button(new Rect(20, 10, 300, 25), "PLAY ControlMode.CancelOnTouch"))
         //{
@@ -300,5 +300,5 @@ public class GameMovieCtrl : SSGameMono
         //{
         //    Handheld.PlayFullScreenMovie(m_MoviePath, Color.black, FullScreenMovieControlMode.Minimal);
         //}
-    }
+    //}
 }

@@ -1,9 +1,7 @@
 ﻿using System;
 using UnityEngine;
-using System.Collections.Generic;
 using BestHTTP;
 using BestHTTP.WebSocket;
-using LitJson;
 
 public class WabData
 {
@@ -88,6 +86,10 @@ public class WabData
     void OnOpen(WebSocket ws)
     {
         Debug.Log("Unity:"+"-WebSocket Open!\n");
+        if (m_WebSocketSimpet != null)
+        {
+            m_WebSocketSimpet.NetInitGameWeiXinShouBingData();
+        }
     }
 
     /// <summary>
