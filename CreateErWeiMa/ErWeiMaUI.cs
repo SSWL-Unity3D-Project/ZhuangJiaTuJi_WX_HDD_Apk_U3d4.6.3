@@ -9,14 +9,21 @@ public class ErWeiMaUI : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if (pcvr.GetInstance().m_SSBoxPostNet != null)
+        try
         {
-            string url = pcvr.GetInstance().m_SSBoxPostNet.m_BoxLoginData.hDianDianGamePadUrl;
-            m_ErWeiMaUI.mainTexture = pcvr.GetInstance().m_BarcodeCam.CreateErWeiMaImg(url);
+            if (pcvr.GetInstance().m_SSBoxPostNet != null)
+            {
+                string url = pcvr.GetInstance().m_SSBoxPostNet.m_BoxLoginData.hDianDianGamePadUrl;
+                m_ErWeiMaUI.mainTexture = pcvr.GetInstance().m_BarcodeCam.CreateErWeiMaImg(url);
+            }
+            else
+            {
+                Debug.LogWarning("Unity: m_SSBoxPostNet was null");
+            }
         }
-        else
+        catch (System.Exception ex)
         {
-            Debug.LogWarning("Unity: m_SSBoxPostNet was null");
+            Debug.LogWarning("ex -> " + ex);
         }
     }
 }

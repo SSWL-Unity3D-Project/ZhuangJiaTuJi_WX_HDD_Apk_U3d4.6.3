@@ -766,7 +766,8 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 				if (AiCarCom == null) {
 					AiCarCom = GetComponent<XKAiCarMoveCtrl>();
 				}
-				AiCarCom.SetAiCarTopMoveSpeed(SpawnPointScript.MvSpeed);
+                AiCarCom.SetActiveHiddenAiCarObj(true);
+                AiCarCom.SetAiCarTopMoveSpeed(SpawnPointScript.MvSpeed);
 				WaypointCom.SetCarPathInfo(NpcPathTran.GetComponent<WaypointCircuit>());
 			}
 		}
@@ -1640,7 +1641,8 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 	{
 		if (IsMoveByCar) {
 			AiCarCom.SetIsStopMoveCar(true);
-		}
+            AiCarCom.SetActiveHiddenAiCarObj(false);
+        }
 
 		if (timeVal > 0f) {
 			yield return new WaitForSeconds(timeVal);

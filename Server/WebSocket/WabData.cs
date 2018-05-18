@@ -111,6 +111,11 @@ public class WabData
     {
         Debug.Log("Unity:"+string.Format("-WebSocket closed! Code: {0} Message: {1}\n", code, message));
         _webSocket = null;
+        if (m_WebSocketSimpet != null && Application.isPlaying)
+        {
+            Debug.Log("Unity:" + "OnClosed::Restart Web Socket -> url == " + Address);
+            m_WebSocketSimpet.OpenWebSocket(Address);
+        }
     }
 
     /// <summary>  
@@ -124,5 +129,10 @@ public class WabData
 
         Debug.Log("Unity:"+string.Format("-An error occured: {0}\n", ex != null ? ex.Message : "Unknown Error " + errorMsg));
         _webSocket = null;
+        if (m_WebSocketSimpet != null && Application.isPlaying)
+        {
+            Debug.Log("Unity:" + "OnError::Restart Web Socket -> url == " + Address);
+            m_WebSocketSimpet.OpenWebSocket(Address);
+        }
     }
 }

@@ -4,6 +4,14 @@ using UnityStandardAssets.Utility;
 
 public class XKAiCarMoveCtrl : MonoBehaviour
 {
+    /// <summary>
+    /// AiCar运动控制脚本.
+    /// </summary>
+    public WaypointProgressTracker m_Waypoint;
+    /// <summary>
+    /// npc需要隐藏的对象.
+    /// </summary>
+    public GameObject[] m_HiddenObjArray;
 	public enum BrakeCondition
 	{
 		NeverBrake,                 // the car simply accelerates at full throttle all the time.
@@ -242,5 +250,14 @@ public class XKAiCarMoveCtrl : MonoBehaviour
 			return;
 		}
 		CarMoveCom.SetCarTopMoveSpeed(mvSpeed);
-	}
+    }
+
+    public void SetActiveHiddenAiCarObj(bool isActive)
+    {
+        for (int i = 0; i < m_HiddenObjArray.Length; i++)
+        {
+            m_HiddenObjArray[i].SetActive(isActive);
+        }
+        m_Waypoint.enabled = isActive;
+    }
 }

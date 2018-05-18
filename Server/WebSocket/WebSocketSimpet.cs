@@ -28,6 +28,12 @@ public class WebSocketSimpet : MonoBehaviour
 
     void Update()
     {
+        if (Application.isLoadingLevel)
+        {
+            m_TimeLastXinTiao = Time.time;
+            return;
+        }
+
         if (Time.time - m_TimeLastXinTiao >= 30f)
         {
             m_TimeLastXinTiao = Time.time;
@@ -51,7 +57,7 @@ public class WebSocketSimpet : MonoBehaviour
     void OnDestroy()
     {
         Debug.Log("Unity:"+"OnDestroy...");
-        if (_wabData.WebSocket != null)
+        if (_wabData != null && _wabData.WebSocket != null)
         {
             _wabData.WebSocket.Close();
         }
@@ -67,6 +73,11 @@ public class WebSocketSimpet : MonoBehaviour
             _wabData.Address = url;
             _wabData.OpenWebSocket();
             Debug.Log("Unity:"+"Opening Web Socket -> url == " + url);
+        }
+        else
+        {
+            Debug.Log("Unity:" + "Close Web Socket...");
+            _wabData.WebSocket.Close();
         }
     }
 

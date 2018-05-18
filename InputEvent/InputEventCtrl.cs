@@ -413,10 +413,131 @@ public class InputEventCtrl : MonoBehaviour {
 		}
 		pcvr.SetIsPlayerActivePcvr();
 	}
-	/**
+
+    /// <summary>
+    /// 向左运动.
+    /// </summary>
+    public void OnClickFangXiangLBt(int indexPlayer, ButtonState val)
+    {
+        switch (indexPlayer)
+        {
+            case 0:
+                {
+                    ClickFangXiangLBtP1(val);
+                    break;
+                }
+            case 1:
+                {
+                    ClickFangXiangLBtP2(val);
+                    break;
+                }
+            case 2:
+                {
+                    ClickFangXiangLBtP3(val);
+                    break;
+                }
+            case 3:
+                {
+                    ClickFangXiangLBtP4(val);
+                    break;
+                }
+        }
+    }
+
+    /// <summary>
+    /// 向右运动.
+    /// </summary>
+    public void OnClickFangXiangRBt(int indexPlayer, ButtonState val)
+    {
+        switch (indexPlayer)
+        {
+            case 0:
+                {
+                    ClickFangXiangRBtP1(val);
+                    break;
+                }
+            case 1:
+                {
+                    ClickFangXiangRBtP2(val);
+                    break;
+                }
+            case 2:
+                {
+                    ClickFangXiangRBtP3(val);
+                    break;
+                }
+            case 3:
+                {
+                    ClickFangXiangRBtP4(val);
+                    break;
+                }
+        }
+    }
+
+    /// <summary>
+    /// 向上运动.
+    /// </summary>
+    public void OnClickFangXiangUBt(int indexPlayer, ButtonState val)
+    {
+        switch (indexPlayer)
+        {
+            case 0:
+                {
+                    ClickFangXiangUBtP1(val);
+                    break;
+                }
+            case 1:
+                {
+                    ClickFangXiangUBtP2(val);
+                    break;
+                }
+            case 2:
+                {
+                    ClickFangXiangUBtP3(val);
+                    break;
+                }
+            case 3:
+                {
+                    ClickFangXiangUBtP4(val);
+                    break;
+                }
+        }
+    }
+
+    /// <summary>
+    /// 向下运动.
+    /// </summary>
+    public void OnClickFangXiangDBt(int indexPlayer, ButtonState val)
+    {
+        switch (indexPlayer)
+        {
+            case 0:
+                {
+                    ClickFangXiangDBtP1(val);
+                    break;
+                }
+            case 1:
+                {
+                    ClickFangXiangDBtP2(val);
+                    break;
+                }
+            case 2:
+                {
+                    ClickFangXiangDBtP3(val);
+                    break;
+                }
+            case 3:
+                {
+                    ClickFangXiangDBtP4(val);
+                    break;
+                }
+        }
+    }
+
+    /**
 	 * 方向左响应P1.
 	 */
-	public void ClickFangXiangLBtP1(ButtonState val)
+    public void ClickFangXiangLBtP1(ButtonState val)
 	{
 		switch (val) {
 		case ButtonState.DOWN:

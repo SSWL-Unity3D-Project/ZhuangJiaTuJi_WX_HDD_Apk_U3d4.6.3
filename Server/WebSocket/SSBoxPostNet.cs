@@ -28,10 +28,9 @@ public class SSBoxPostNet : MonoBehaviour
             Debug.Log("Type = " + ni.NetworkInterfaceType.ToString());
             Debug.Log("Mac地址 = " + ni.GetPhysicalAddress().ToString());
             Debug.Log("------------------------------------------------");
-            m_BoxLoginData.boxNumber = m_GamePadState.ToString() + ni.GetPhysicalAddress().ToString();
+            m_BoxLoginData.boxNumber = UnityEngine.Random.Range(10, 95) + m_GamePadState.ToString() + ni.GetPhysicalAddress().ToString();
             break;
         }
-        //m_BoxLoginData.boxNumber = "1"; //test.
         Debug.Log("boxNumber == " + m_BoxLoginData.boxNumber);
 
         if (m_WebSocketSimpet != null)
@@ -104,17 +103,21 @@ public class SSBoxPostNet : MonoBehaviour
     {
         public string url = "http://game.hdiandian.com/gameBox/logon";
         string _boxNumber = "1";
-        //盒子编号.
+        /// <summary>
+        /// 盒子编号(必须全是小写字母加数字).
+        /// </summary>
         public string boxNumber
         {
             set
             {
-                _boxNumber = value;
+                _boxNumber = value.ToLower();
                 //設置紅點點遊戲手柄的url.
-                hDianDianGamePadUrl = _hDianDianGamePadUrl + value;
+                string url = _hDianDianGamePadUrl + _boxNumber;
+                hDianDianGamePadUrl = url;
             }
             get
             {
+                //Debug.LogWarning("_boxNumber == " + _boxNumber);
                 return _boxNumber;
             }
         }
@@ -126,7 +129,7 @@ public class SSBoxPostNet : MonoBehaviour
         /// <summary>
         /// 紅點點遊戲手柄的url.
         /// </summary>
-        public string hDianDianGamePadUrl = "";
+        public string hDianDianGamePadUrl = "http://game.hdiandian.com/gamepad/index.html?boxNumber=1";
     }
     public BoxLoginData m_BoxLoginData = new BoxLoginData();
 
