@@ -524,41 +524,6 @@ public class pcvr : MonoBehaviour {
                             InputEventCtrl.GetInstance().OnClickFangXiangDBt(playerDt.Index, ButtonState.UP);
                             InputEventCtrl.GetInstance().OnClickFangXiangLBt(playerDt.Index, ButtonState.DOWN);
                             InputEventCtrl.GetInstance().OnClickFangXiangRBt(playerDt.Index, ButtonState.UP);
-                            //switch (playerDt.Index)
-                            //{
-                            //    case 0:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP1(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP1(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP1(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP1(ButtonState.UP);
-                            //            break;
-                            //        }
-                            //    case 1:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP2(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP2(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP2(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP2(ButtonState.UP);
-                            //            break;
-                            //        }
-                            //    case 2:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP3(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP3(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP3(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP3(ButtonState.UP);
-                            //            break;
-                            //        }
-                            //    case 3:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP4(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP4(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP4(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP4(ButtonState.UP);
-                            //            break;
-                            //        }
-                            //}
                             break;
                         }
                     case PlayerShouBingDir.DirLeftDown:
@@ -567,41 +532,6 @@ public class pcvr : MonoBehaviour {
                             InputEventCtrl.GetInstance().OnClickFangXiangDBt(playerDt.Index, ButtonState.DOWN);
                             InputEventCtrl.GetInstance().OnClickFangXiangLBt(playerDt.Index, ButtonState.DOWN);
                             InputEventCtrl.GetInstance().OnClickFangXiangRBt(playerDt.Index, ButtonState.UP);
-                            //switch (playerDt.Index)
-                            //{
-                            //    case 0:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP1(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP1(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP1(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP1(ButtonState.UP);
-                            //            break;
-                            //        }
-                            //    case 1:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP2(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP2(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP2(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP2(ButtonState.UP);
-                            //            break;
-                            //        }
-                            //    case 2:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP3(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP3(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP3(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP3(ButtonState.UP);
-                            //            break;
-                            //        }
-                            //    case 3:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP4(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP4(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP4(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP4(ButtonState.UP);
-                            //            break;
-                            //        }
-                            //}
                             break;
                         }
                     case PlayerShouBingDir.DirDown:
@@ -610,41 +540,6 @@ public class pcvr : MonoBehaviour {
                             InputEventCtrl.GetInstance().OnClickFangXiangDBt(playerDt.Index, ButtonState.DOWN);
                             InputEventCtrl.GetInstance().OnClickFangXiangLBt(playerDt.Index, ButtonState.UP);
                             InputEventCtrl.GetInstance().OnClickFangXiangRBt(playerDt.Index, ButtonState.UP);
-                            //switch (playerDt.Index)
-                            //{
-                            //    case 0:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP1(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP1(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP1(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP1(ButtonState.UP);
-                            //            break;
-                            //        }
-                            //    case 1:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP2(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP2(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP2(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP2(ButtonState.UP);
-                            //            break;
-                            //        }
-                            //    case 2:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP3(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP3(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP3(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP3(ButtonState.UP);
-                            //            break;
-                            //        }
-                            //    case 3:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP4(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP4(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP4(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP4(ButtonState.UP);
-                            //            break;
-                            //        }
-                            //}
                             break;
                         }
                     case PlayerShouBingDir.DirRightDown:
@@ -653,41 +548,6 @@ public class pcvr : MonoBehaviour {
                             InputEventCtrl.GetInstance().OnClickFangXiangDBt(playerDt.Index, ButtonState.DOWN);
                             InputEventCtrl.GetInstance().OnClickFangXiangLBt(playerDt.Index, ButtonState.UP);
                             InputEventCtrl.GetInstance().OnClickFangXiangRBt(playerDt.Index, ButtonState.DOWN);
-                            //switch (playerDt.Index)
-                            //{
-                            //    case 0:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP1(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP1(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP1(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP1(ButtonState.DOWN);
-                            //            break;
-                            //        }
-                            //    case 1:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP2(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP2(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP2(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP2(ButtonState.DOWN);
-                            //            break;
-                            //        }
-                            //    case 2:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP3(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP3(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP3(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP3(ButtonState.DOWN);
-                            //            break;
-                            //        }
-                            //    case 3:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP4(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP4(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP4(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP4(ButtonState.DOWN);
-                            //            break;
-                            //        }
-                            //}
                             break;
                         }
                     case PlayerShouBingDir.DirRight:
@@ -696,41 +556,6 @@ public class pcvr : MonoBehaviour {
                             InputEventCtrl.GetInstance().OnClickFangXiangDBt(playerDt.Index, ButtonState.UP);
                             InputEventCtrl.GetInstance().OnClickFangXiangLBt(playerDt.Index, ButtonState.UP);
                             InputEventCtrl.GetInstance().OnClickFangXiangRBt(playerDt.Index, ButtonState.DOWN);
-                            //switch (playerDt.Index)
-                            //{
-                            //    case 0:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP1(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP1(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP1(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP1(ButtonState.DOWN);
-                            //            break;
-                            //        }
-                            //    case 1:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP2(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP2(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP2(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP2(ButtonState.DOWN);
-                            //            break;
-                            //        }
-                            //    case 2:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP3(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP3(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP3(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP3(ButtonState.DOWN);
-                            //            break;
-                            //        }
-                            //    case 3:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP4(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP4(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP4(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP4(ButtonState.DOWN);
-                            //            break;
-                            //        }
-                            //}
                             break;
                         }
                     case PlayerShouBingDir.DirRightUp:
@@ -739,41 +564,6 @@ public class pcvr : MonoBehaviour {
                             InputEventCtrl.GetInstance().OnClickFangXiangDBt(playerDt.Index, ButtonState.UP);
                             InputEventCtrl.GetInstance().OnClickFangXiangLBt(playerDt.Index, ButtonState.UP);
                             InputEventCtrl.GetInstance().OnClickFangXiangRBt(playerDt.Index, ButtonState.DOWN);
-                            //switch (playerDt.Index)
-                            //{
-                            //    case 0:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP1(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP1(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP1(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP1(ButtonState.DOWN);
-                            //            break;
-                            //        }
-                            //    case 1:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP2(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP2(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP2(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP2(ButtonState.DOWN);
-                            //            break;
-                            //        }
-                            //    case 2:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP3(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP3(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP3(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP3(ButtonState.DOWN);
-                            //            break;
-                            //        }
-                            //    case 3:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP4(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP4(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP4(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP4(ButtonState.DOWN);
-                            //            break;
-                            //        }
-                            //}
                             break;
                         }
                     case PlayerShouBingDir.DirUp:
@@ -782,41 +572,6 @@ public class pcvr : MonoBehaviour {
                             InputEventCtrl.GetInstance().OnClickFangXiangDBt(playerDt.Index, ButtonState.UP);
                             InputEventCtrl.GetInstance().OnClickFangXiangLBt(playerDt.Index, ButtonState.UP);
                             InputEventCtrl.GetInstance().OnClickFangXiangRBt(playerDt.Index, ButtonState.UP);
-                            //switch (playerDt.Index)
-                            //{
-                            //    case 0:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP1(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP1(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP1(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP1(ButtonState.UP);
-                            //            break;
-                            //        }
-                            //    case 1:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP2(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP2(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP2(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP2(ButtonState.UP);
-                            //            break;
-                            //        }
-                            //    case 2:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP3(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP3(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP3(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP3(ButtonState.UP);
-                            //            break;
-                            //        }
-                            //    case 3:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP4(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP4(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP4(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP4(ButtonState.UP);
-                            //            break;
-                            //        }
-                            //}
                             break;
                         }
                     case PlayerShouBingDir.DirLeftUp:
@@ -825,41 +580,6 @@ public class pcvr : MonoBehaviour {
                             InputEventCtrl.GetInstance().OnClickFangXiangDBt(playerDt.Index, ButtonState.UP);
                             InputEventCtrl.GetInstance().OnClickFangXiangLBt(playerDt.Index, ButtonState.DOWN);
                             InputEventCtrl.GetInstance().OnClickFangXiangRBt(playerDt.Index, ButtonState.UP);
-                            //switch (playerDt.Index)
-                            //{
-                            //    case 0:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP1(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP1(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP1(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP1(ButtonState.UP);
-                            //            break;
-                            //        }
-                            //    case 1:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP2(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP2(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP2(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP2(ButtonState.UP);
-                            //            break;
-                            //        }
-                            //    case 2:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP3(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP3(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP3(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP3(ButtonState.UP);
-                            //            break;
-                            //        }
-                            //    case 3:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP4(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP4(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP4(ButtonState.DOWN);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP4(ButtonState.UP);
-                            //            break;
-                            //        }
-                            //}
                             break;
                         }
                     case PlayerShouBingDir.up:
@@ -868,41 +588,6 @@ public class pcvr : MonoBehaviour {
                             InputEventCtrl.GetInstance().OnClickFangXiangDBt(playerDt.Index, ButtonState.UP);
                             InputEventCtrl.GetInstance().OnClickFangXiangLBt(playerDt.Index, ButtonState.UP);
                             InputEventCtrl.GetInstance().OnClickFangXiangRBt(playerDt.Index, ButtonState.UP);
-                            //switch (playerDt.Index)
-                            //{
-                            //    case 0:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP1(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP1(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP1(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP1(ButtonState.UP);
-                            //            break;
-                            //        }
-                            //    case 1:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP2(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP2(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP2(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP2(ButtonState.UP);
-                            //            break;
-                            //        }
-                            //    case 2:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP3(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP3(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP3(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP3(ButtonState.UP);
-                            //            break;
-                            //        }
-                            //    case 3:
-                            //        {
-                            //            InputEventCtrl.GetInstance().ClickFangXiangUBtP4(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangDBtP4(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangLBtP4(ButtonState.UP);
-                            //            InputEventCtrl.GetInstance().ClickFangXiangRBtP4(ButtonState.UP);
-                            //            break;
-                            //        }
-                            //}
                             break;
                         }
                 }
@@ -917,41 +602,6 @@ public class pcvr : MonoBehaviour {
         InputEventCtrl.GetInstance().OnClickFangXiangDBt(index, ButtonState.UP);
         InputEventCtrl.GetInstance().OnClickFangXiangLBt(index, ButtonState.UP);
         InputEventCtrl.GetInstance().OnClickFangXiangRBt(index, ButtonState.UP);
-        //switch (index)
-        //{
-        //    case 0:
-        //        {
-        //            InputEventCtrl.GetInstance().ClickFangXiangUBtP1(ButtonState.UP);
-        //            InputEventCtrl.GetInstance().ClickFangXiangDBtP1(ButtonState.UP);
-        //            InputEventCtrl.GetInstance().ClickFangXiangLBtP1(ButtonState.UP);
-        //            InputEventCtrl.GetInstance().ClickFangXiangRBtP1(ButtonState.UP);
-        //            break;
-        //        }
-        //    case 1:
-        //        {
-        //            InputEventCtrl.GetInstance().ClickFangXiangUBtP2(ButtonState.UP);
-        //            InputEventCtrl.GetInstance().ClickFangXiangDBtP2(ButtonState.UP);
-        //            InputEventCtrl.GetInstance().ClickFangXiangLBtP2(ButtonState.UP);
-        //            InputEventCtrl.GetInstance().ClickFangXiangRBtP2(ButtonState.UP);
-        //            break;
-        //        }
-        //    case 2:
-        //        {
-        //            InputEventCtrl.GetInstance().ClickFangXiangUBtP3(ButtonState.UP);
-        //            InputEventCtrl.GetInstance().ClickFangXiangDBtP3(ButtonState.UP);
-        //            InputEventCtrl.GetInstance().ClickFangXiangLBtP3(ButtonState.UP);
-        //            InputEventCtrl.GetInstance().ClickFangXiangRBtP3(ButtonState.UP);
-        //            break;
-        //        }
-        //    case 3:
-        //        {
-        //            InputEventCtrl.GetInstance().ClickFangXiangUBtP4(ButtonState.UP);
-        //            InputEventCtrl.GetInstance().ClickFangXiangDBtP4(ButtonState.UP);
-        //            InputEventCtrl.GetInstance().ClickFangXiangLBtP4(ButtonState.UP);
-        //            InputEventCtrl.GetInstance().ClickFangXiangRBtP4(ButtonState.UP);
-        //            break;
-        //        }
-        //}
     }
 
     private void OnEventPlayerExitBox(int userId)
