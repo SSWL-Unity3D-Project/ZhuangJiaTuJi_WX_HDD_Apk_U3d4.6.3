@@ -134,8 +134,16 @@ public class SSBoxPostNet : MonoBehaviour
         /// </summary>
         //public string hDianDianGamePadUrl = "http://game.hdiandian.com/gamepad/index.html?boxNumber=1";
         public string hDianDianGamePadUrl = "http://h5.hdiandian.com/gamepad/index.html?boxNumber=1";
+        public BoxLoginData(string address, string idGame)
+        {
+            gameId = idGame;
+            url = address + "/gameBox/logon";
+            _hDianDianGamePadUrl = address + "/gamepad/index.html?boxNumber=";
+            hDianDianGamePadUrl = address + "/gamepad/index.html?boxNumber=1";
+        }
     }
-    public BoxLoginData m_BoxLoginData = new BoxLoginData();
+    //public BoxLoginData m_BoxLoginData = new BoxLoginData("http://game.hdiandian.com", "16"); //测试号.
+    public BoxLoginData m_BoxLoginData = new BoxLoginData("http://h5.hdiandian.com", "17"); //雷霆战车游戏正式号.
 
     /// <summary>
     /// 盒子登陆成功后返回的数据信息.
