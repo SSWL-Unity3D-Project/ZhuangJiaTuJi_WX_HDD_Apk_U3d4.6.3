@@ -101,7 +101,8 @@ public class SSBoxPostNet : MonoBehaviour
     /// </summary>
     public class BoxLoginData
     {
-        public string url = "http://game.hdiandian.com/gameBox/logon";
+        //public string url = "http://game.hdiandian.com/gameBox/logon";
+        public string url = "http://h5.hdiandian.com/gameBox/logon";
         string _boxNumber = "1";
         /// <summary>
         /// 盒子编号(必须全是小写字母加数字).
@@ -123,13 +124,16 @@ public class SSBoxPostNet : MonoBehaviour
         }
         public string storeId = "150";              //商户id.
         public string channel = "CyberCloud";       //渠道.
-        public string gameId = "16";                //游戏id.
+        //public string gameId = "16";                //游戏id.
+        public string gameId = "17";                //游戏id.
 
-        string _hDianDianGamePadUrl = "http://game.hdiandian.com/gamepad/index.html?boxNumber=";
+        //string _hDianDianGamePadUrl = "http://game.hdiandian.com/gamepad/index.html?boxNumber=";
+        string _hDianDianGamePadUrl = "http://h5.hdiandian.com/gamepad/index.html?boxNumber=";
         /// <summary>
         /// 紅點點遊戲手柄的url.
         /// </summary>
-        public string hDianDianGamePadUrl = "http://game.hdiandian.com/gamepad/index.html?boxNumber=1";
+        //public string hDianDianGamePadUrl = "http://game.hdiandian.com/gamepad/index.html?boxNumber=1";
+        public string hDianDianGamePadUrl = "http://h5.hdiandian.com/gamepad/index.html?boxNumber=1";
     }
     public BoxLoginData m_BoxLoginData = new BoxLoginData();
 
