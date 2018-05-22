@@ -41,7 +41,15 @@ public class SSExitGameUI : MonoBehaviour
                 {
                     QueDingUI.mainTexture = QueDingImg[0];
                     Debug.Log("Unity:" + "Player exit application...");
-                    XkGameCtrl.GetInstance().RemoveExitGameUI();
+                    if (XkGameCtrl.GetInstance() != null)
+                    {
+                        XkGameCtrl.GetInstance().RemoveExitGameUI();
+                    }
+
+                    if (GameMovieCtrl.GetInstance() != null)
+                    {
+                        GameMovieCtrl.GetInstance().RemoveExitGameUI();
+                    }
                     Application.Quit();
                     break;
                 }
@@ -61,7 +69,15 @@ public class SSExitGameUI : MonoBehaviour
                 {
                     QuXiaoUI.mainTexture = QuXiaoImg[0];
                     Debug.Log("Unity:" + "Player close exit game ui...");
-                    XkGameCtrl.GetInstance().RemoveExitGameUI();
+                    if (XkGameCtrl.GetInstance() != null)
+                    {
+                        XkGameCtrl.GetInstance().RemoveExitGameUI();
+                    }
+
+                    if (GameMovieCtrl.GetInstance() != null)
+                    {
+                        GameMovieCtrl.GetInstance().RemoveExitGameUI();
+                    }
                     break;
                 }
         }

@@ -110,6 +110,7 @@ public class GameMovieCtrl : SSGameMono
             //PlayMovie();
             //创建Logo播放对象.
             CrateMovieLogoAni();
+            InputEventCtrl.GetInstance().ClickTVYaoKongExitBtEvent += ClickTVYaoKongExitBtEvent;
         }
 		catch (System.Exception e)
 		{
@@ -228,6 +229,53 @@ public class GameMovieCtrl : SSGameMono
         return obj;
     }
 
+    private void ClickTVYaoKongExitBtEvent(ButtonState val)
+    {
+        if (val == ButtonState.UP)
+        {
+            if (m_ExitUICom == null)
+            {
+                SpawnExitGameUI();
+            }
+        }
+    }
+
+    /// <summary>
+    /// 动态产生的UI父级Center.
+    /// </summary>
+    public Transform UICenterTrParent;
+    /// <summary>
+    /// 确定退出游戏的UI界面预制.
+    /// </summary>
+    public GameObject ExitGameUIPrefab;
+
+    /// <summary>
+    /// 退出游戏UI界面控制脚本.
+    /// </summary>
+    SSExitGameUI m_ExitUICom;
+    /// <summary>
+    /// 产生退出游戏UI界面.
+    /// </summary>
+    void SpawnExitGameUI()
+    {
+        Debug.Log("Unity: SpawnExitGameUI...");
+        if (m_ExitUICom == null)
+        {
+            GameObject obj = (GameObject)Instantiate(ExitGameUIPrefab, UICenterTrParent);
+            m_ExitUICom = obj.GetComponent<SSExitGameUI>();
+            m_ExitUICom.Init();
+        }
+    }
+
+    public void RemoveExitGameUI()
+    {
+        Debug.Log("Unity: RemoveExitGameUI...");
+        if (m_ExitUICom != null)
+        {
+            m_ExitUICom.RemoveSelf();
+        }
+    }
+
 #if TEST_MOVIE
 	int CountMv = 0;
 	float TimeMv = 0f;
@@ -254,51 +302,51 @@ public class GameMovieCtrl : SSGameMono
 
     //void OnGUI()
     //{
-//#if UNITY_STANDALONE_WIN
-        //if (Movie.isPlaying)
-        //{
-        //    Rect movieRt = new Rect(0f, 0f, Screen.width, Screen.height);
-        //    GUI.DrawTexture(movieRt, Movie);
-        //}
-        //else
-        //{
-        //    if (!IsCrateMovieLogo)
-        //    {
-        //        CrateMovieLogoAni();
-        //    }
-        //}
-//#endif
+    //#if UNITY_STANDALONE_WIN
+    //if (Movie.isPlaying)
+    //{
+    //    Rect movieRt = new Rect(0f, 0f, Screen.width, Screen.height);
+    //    GUI.DrawTexture(movieRt, Movie);
+    //}
+    //else
+    //{
+    //    if (!IsCrateMovieLogo)
+    //    {
+    //        CrateMovieLogoAni();
+    //    }
+    //}
+    //#endif
 
-        //m_ErWeiMaRect.x = (Screen.width / 2) - (m_ErWeiMaRect.width / 2);
-        //m_ErWeiMaRect.y = Screen.height - m_ErWeiMaRect.height - 10f;
-        //GUI.DrawTexture(m_ErWeiMaRect, m_ErWeiMaImg);
+    //m_ErWeiMaRect.x = (Screen.width / 2) - (m_ErWeiMaRect.width / 2);
+    //m_ErWeiMaRect.y = Screen.height - m_ErWeiMaRect.height - 10f;
+    //GUI.DrawTexture(m_ErWeiMaRect, m_ErWeiMaImg);
 
-//#if UNITY_ANDROID
-        //if (Time.time - m_LastMovieTime >= m_MovieTime)
-        //{
-        //    m_LastMovieTime = m_MovieTime;
-        //    Handheld.PlayFullScreenMovie(m_MoviePath, Color.black, FullScreenMovieControlMode.Hidden);
-        //}
-//#endif
+    //#if UNITY_ANDROID
+    //if (Time.time - m_LastMovieTime >= m_MovieTime)
+    //{
+    //    m_LastMovieTime = m_MovieTime;
+    //    Handheld.PlayFullScreenMovie(m_MoviePath, Color.black, FullScreenMovieControlMode.Hidden);
+    //}
+    //#endif
 
-        //if (GUI.Button(new Rect(20, 10, 300, 25), "PLAY ControlMode.CancelOnTouch"))
-        //{
-        //    Handheld.PlayFullScreenMovie(m_MoviePath, Color.black, FullScreenMovieControlMode.CancelOnInput);
-        //}
+    //if (GUI.Button(new Rect(20, 10, 300, 25), "PLAY ControlMode.CancelOnTouch"))
+    //{
+    //    Handheld.PlayFullScreenMovie(m_MoviePath, Color.black, FullScreenMovieControlMode.CancelOnInput);
+    //}
 
-        //if (GUI.Button(new Rect(20, 90, 300, 25), "PLAY ControlMode.Full"))
-        //{
-        //    Handheld.PlayFullScreenMovie(m_MoviePath, Color.black, FullScreenMovieControlMode.Full);
-        //}
+    //if (GUI.Button(new Rect(20, 90, 300, 25), "PLAY ControlMode.Full"))
+    //{
+    //    Handheld.PlayFullScreenMovie(m_MoviePath, Color.black, FullScreenMovieControlMode.Full);
+    //}
 
-        //if (GUI.Button(new Rect(20, 170, 300, 25), "PLAY ControlMode.Hidden"))
-        //{
-        //    Handheld.PlayFullScreenMovie(m_MoviePath, Color.black, FullScreenMovieControlMode.Hidden);
-        //}
+    //if (GUI.Button(new Rect(20, 170, 300, 25), "PLAY ControlMode.Hidden"))
+    //{
+    //    Handheld.PlayFullScreenMovie(m_MoviePath, Color.black, FullScreenMovieControlMode.Hidden);
+    //}
 
-        //if (GUI.Button(new Rect(20, 250, 300, 25), "PLAY ControlMode.Minimal"))
-        //{
-        //    Handheld.PlayFullScreenMovie(m_MoviePath, Color.black, FullScreenMovieControlMode.Minimal);
-        //}
+    //if (GUI.Button(new Rect(20, 250, 300, 25), "PLAY ControlMode.Minimal"))
+    //{
+    //    Handheld.PlayFullScreenMovie(m_MoviePath, Color.black, FullScreenMovieControlMode.Minimal);
+    //}
     //}
 }
