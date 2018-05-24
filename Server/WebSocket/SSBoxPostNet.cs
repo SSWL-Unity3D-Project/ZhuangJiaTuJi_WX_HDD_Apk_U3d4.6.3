@@ -20,17 +20,25 @@ public class SSBoxPostNet : MonoBehaviour
 
     public void Init()
     {
-        NetworkInterface[] nis = NetworkInterface.GetAllNetworkInterfaces();
-        foreach (NetworkInterface ni in nis)
-        {
-            Debug.Log("Name = " + ni.Name);
-            Debug.Log("Des = " + ni.Description);
-            Debug.Log("Type = " + ni.NetworkInterfaceType.ToString());
-            Debug.Log("Mac地址 = " + ni.GetPhysicalAddress().ToString());
-            Debug.Log("------------------------------------------------");
-            m_BoxLoginData.boxNumber = UnityEngine.Random.Range(10, 95) + m_GamePadState.ToString() + ni.GetPhysicalAddress().ToString();
-            break;
-        }
+        //NetworkInterface[] nis = NetworkInterface.GetAllNetworkInterfaces();
+        //foreach (NetworkInterface ni in nis)
+        //{
+        //    Debug.Log("Name = " + ni.Name);
+        //    Debug.Log("Des = " + ni.Description);
+        //    Debug.Log("Type = " + ni.NetworkInterfaceType.ToString());
+        //    Debug.Log("Mac地址 = " + ni.GetPhysicalAddress().ToString());
+        //    Debug.Log("------------------------------------------------");
+        //    m_BoxLoginData.boxNumber = UnityEngine.Random.Range(10, 95) + m_GamePadState.ToString() + ni.GetPhysicalAddress().ToString();
+        //    break;
+        //}
+        
+        string ip = Network.player.ipAddress;
+        ip = ip.Replace('.', (char)UnityEngine.Random.Range(97, 122));
+        string key = ip + (char)UnityEngine.Random.Range(97, 122)
+            + (DateTime.Now.Ticks % 999999).ToString()
+            + (char)UnityEngine.Random.Range(97, 122)
+            + UnityEngine.Random.Range(100, 999);
+        m_BoxLoginData.boxNumber = UnityEngine.Random.Range(10, 95) + m_GamePadState.ToString() + key;
         Debug.Log("boxNumber == " + m_BoxLoginData.boxNumber);
 
         if (m_WebSocketSimpet != null)

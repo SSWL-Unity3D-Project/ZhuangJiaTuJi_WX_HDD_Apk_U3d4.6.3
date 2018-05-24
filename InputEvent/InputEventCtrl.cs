@@ -78,6 +78,24 @@ public class InputEventCtrl : MonoBehaviour {
         }
     }
 
+    public event EventHandel ClickTVYaoKongLeftBtEvent;
+    public void ClickTVYaoKongLeftBt(ButtonState val)
+    {
+        if (ClickTVYaoKongLeftBtEvent != null)
+        {
+            ClickTVYaoKongLeftBtEvent(val);
+        }
+    }
+
+    public event EventHandel ClickTVYaoKongRightBtEvent;
+    public void ClickTVYaoKongRightBt(ButtonState val)
+    {
+        if (ClickTVYaoKongRightBtEvent != null)
+        {
+            ClickTVYaoKongRightBtEvent(val);
+        }
+    }
+    
     public event EventHandel ClickStartBtOneEvent;
 	public void ClickStartBtOne(ButtonState val)
 	{
@@ -832,7 +850,31 @@ public class InputEventCtrl : MonoBehaviour {
             //接收遥控器的返回键/键盘上的Esc按键信息.
             ClickTVYaoKongExitBt(ButtonState.UP);
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            //接收遥控器/键盘上的向左按键信息.
+            ClickTVYaoKongLeftBt(ButtonState.DOWN);
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftArrow))
+        {
+            //接收遥控器/键盘上的向左按键信息.
+            ClickTVYaoKongLeftBt(ButtonState.UP);
+        }
         
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            //接收遥控器/键盘上的向右按键信息.
+            ClickTVYaoKongRightBt(ButtonState.DOWN);
+        }
+
+        if (Input.GetKeyUp(KeyCode.RightArrow))
+        {
+            //接收遥控器/键盘上的向右按键信息.
+            ClickTVYaoKongRightBt(ButtonState.UP);
+        }
+
         if (pcvr.IsHongDDShouBing)
         {
             return;
