@@ -4,12 +4,20 @@ public class SSExitGameUI : MonoBehaviour
 {
     public Vector3 m_BigScale = new Vector3(1.2f, 1.2f, 1f);
     public Vector3 m_SmallScale = Vector3.one;
+    /// <summary>
+    /// 确定按键的闪烁UI.
+    /// </summary>
+    public GameObject m_QueDingFlashObj;
     public UITexture QueDingUI;
     /// <summary>
     /// QueDingImg[0] 确定弹起.
     /// QueDingImg[1] 确定按下.
     /// </summary>
     public Texture[] QueDingImg;
+    /// <summary>
+    /// 返回按键的闪烁UI.
+    /// </summary>
+    public GameObject m_QuXiaoFlashObj;
     public UITexture QuXiaoUI;
     /// <summary>
     /// QuXiaoImg[0] 取消弹起.
@@ -25,6 +33,7 @@ public class SSExitGameUI : MonoBehaviour
 
     public void Init ()
     {
+        SetAcitveBtFlash();
         QueDingUI.transform.localScale = m_BigScale;
         QuXiaoUI.transform.localScale = m_SmallScale;
         InputEventCtrl.GetInstance().ClickTVYaoKongEnterBtEvent += ClickTVYaoKongEnterBtEvent;
@@ -44,16 +53,50 @@ public class SSExitGameUI : MonoBehaviour
     
     private void ClickTVYaoKongLeftBtEvent(ButtonState val)
     {
+        if (val == ButtonState.UP)
+        {
+            return;
+        }
         m_ExitType = ExitEnum.QuXiao;
         QueDingUI.transform.localScale = m_SmallScale;
         QuXiaoUI.transform.localScale = m_BigScale;
+        SetAcitveBtFlash();
     }
 
     private void ClickTVYaoKongRightBtEvent(ButtonState val)
     {
+        if (val == ButtonState.UP)
+        {
+            return;
+        }
         m_ExitType = ExitEnum.QueDing;
         QueDingUI.transform.localScale = m_BigScale;
         QuXiaoUI.transform.localScale = m_SmallScale;
+        SetAcitveBtFlash();
+    }
+
+    void SetAcitveBtFlash()
+    {
+        if (m_QueDingFlashObj == null || m_QuXiaoFlashObj == null)
+        {
+            return;
+        }
+
+        switch (m_ExitType)
+        {
+            case ExitEnum.QueDing:
+                {
+                    m_QueDingFlashObj.SetActive(true);
+                    m_QuXiaoFlashObj.SetActive(false);
+                    break;
+                }
+            case ExitEnum.QuXiao:
+                {
+                    m_QueDingFlashObj.SetActive(false);
+                    m_QuXiaoFlashObj.SetActive(true);
+                    break;
+                }
+        }
     }
 
     private void ClickTVYaoKongEnterBtEvent(ButtonState val)
@@ -121,6 +164,7 @@ public class SSExitGameUI : MonoBehaviour
         {
             case ButtonState.DOWN:
                 {
+                    ClickTVYaoKongLeftBtEvent(val);
                     QuXiaoUI.mainTexture = QuXiaoImg[1];
                     break;
                 }
