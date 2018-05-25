@@ -33,6 +33,8 @@ public class SSExitGameUI : MonoBehaviour
 
     public void Init ()
     {
+        QueDingUI.mainTexture = QueDingImg[1];
+        QuXiaoUI.mainTexture = QuXiaoImg[0];
         SetAcitveBtFlash();
         QueDingUI.transform.localScale = m_BigScale;
         QuXiaoUI.transform.localScale = m_SmallScale;
@@ -58,6 +60,8 @@ public class SSExitGameUI : MonoBehaviour
             return;
         }
         m_ExitType = ExitEnum.QuXiao;
+        QueDingUI.mainTexture = QueDingImg[0];
+        QuXiaoUI.mainTexture = QuXiaoImg[1];
         QueDingUI.transform.localScale = m_SmallScale;
         QuXiaoUI.transform.localScale = m_BigScale;
         SetAcitveBtFlash();
@@ -70,6 +74,8 @@ public class SSExitGameUI : MonoBehaviour
             return;
         }
         m_ExitType = ExitEnum.QueDing;
+        QueDingUI.mainTexture = QueDingImg[1];
+        QuXiaoUI.mainTexture = QuXiaoImg[0];
         QueDingUI.transform.localScale = m_BigScale;
         QuXiaoUI.transform.localScale = m_SmallScale;
         SetAcitveBtFlash();
