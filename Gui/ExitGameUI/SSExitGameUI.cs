@@ -2,7 +2,7 @@
 
 public class SSExitGameUI : MonoBehaviour
 {
-    public Vector3 m_BigScale = Vector3.one;
+    public Vector3 m_BigScale = new Vector3(1.2f, 1.2f, 1f);
     public Vector3 m_SmallScale = Vector3.one;
     public UITexture QueDingUI;
     /// <summary>
