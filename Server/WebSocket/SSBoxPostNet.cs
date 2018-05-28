@@ -31,14 +31,19 @@ public class SSBoxPostNet : MonoBehaviour
         //    m_BoxLoginData.boxNumber = UnityEngine.Random.Range(10, 95) + m_GamePadState.ToString() + ni.GetPhysicalAddress().ToString();
         //    break;
         //}
-        
+
         string ip = Network.player.ipAddress;
         ip = ip.Replace('.', (char)UnityEngine.Random.Range(97, 122));
+        int indexStart = UnityEngine.Random.Range(0, 5);
+        int strLen = ip.Length - indexStart;
+        strLen = strLen > 8 ? 8 : strLen;
+        ip = ip.Substring(indexStart, strLen);
+
         string key = ip + (char)UnityEngine.Random.Range(97, 122)
-            + (DateTime.Now.Ticks % 999999).ToString()
-            + (char)UnityEngine.Random.Range(97, 122)
-            + UnityEngine.Random.Range(100, 999);
-        m_BoxLoginData.boxNumber = UnityEngine.Random.Range(10, 95) + m_GamePadState.ToString() + key;
+            + (DateTime.Now.Ticks % 999999).ToString();
+        string boxNum = UnityEngine.Random.Range(10, 95) + m_GamePadState.ToString() + key;
+        boxNum = boxNum.Length > 40 ? boxNum.Substring(0, 39) : boxNum;
+        m_BoxLoginData.boxNumber = boxNum;
         Debug.Log("boxNumber == " + m_BoxLoginData.boxNumber);
 
         if (m_WebSocketSimpet != null)
