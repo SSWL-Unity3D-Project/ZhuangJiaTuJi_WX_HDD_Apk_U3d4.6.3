@@ -833,6 +833,14 @@ public class InputEventCtrl : MonoBehaviour {
             ClickTVYaoKongEnterBt(ButtonState.DOWN);
         }
 
+#if UNITY_ANDROID
+        if (Input.GetKeyDown(KeyCode.G) || Input.GetKeyDown(KeyCode.K))
+        {
+            //遥控器的确定键消息.
+            ClickTVYaoKongEnterBt(ButtonState.DOWN);
+        }
+#endif
+
         if (Input.GetKeyUp(KeyCode.KeypadEnter) || Input.GetKeyUp(KeyCode.Return))
         {
             //遥控器的确定键消息.
