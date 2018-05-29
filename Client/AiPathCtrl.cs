@@ -283,7 +283,13 @@ public class AiPathCtrl : MonoBehaviour
 			}
 		}
 		this.enabled = false;
-	}
+
+        MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
+        if (mesh != null)
+        {
+            mesh.enabled = false;
+        }
+    }
 
 	public iTween.LoopType GetPathLoopType()
 	{

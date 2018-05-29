@@ -4,7 +4,16 @@ using System.Collections;
 public class XKTriggerOpenStage : MonoBehaviour
 {
 	public AiPathCtrl TestPlayerPath;
-	void OnDrawGizmosSelected()
+    void Start()
+    {
+        MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
+        if (mesh != null)
+        {
+            mesh.enabled = false;
+        }
+    }
+
+    void OnDrawGizmosSelected()
 	{
 		if (!XkGameCtrl.IsDrawGizmosObj) {
 			return;

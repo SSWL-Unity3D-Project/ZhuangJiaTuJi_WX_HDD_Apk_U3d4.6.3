@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class NpcPathCtrl : MonoBehaviour {
@@ -17,6 +16,7 @@ public class NpcPathCtrl : MonoBehaviour {
 			GameObject obj = null;
 			obj.name = "null";
 		}
+        gameObject.SetActive(false);
 	}
 
 	void OnDrawGizmosSelected()

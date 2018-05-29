@@ -54,10 +54,49 @@ public class XKNpcHealthCtrl : MonoBehaviour {
 		if (NpcScript != null && NpcJiFen == NpcJiFenEnum.Boss) {
 			NpcScript.SetIsBossNpc(true);
 		}
-	}
 
-	void Update()
+        m_FanWeiHou = XKPlayerMvFanWei.GetInstanceHou();
+    }
+    XKPlayerMvFanWei m_FanWeiHou;
+    bool IsHitFanWeiHou = false;
+
+    void Update()
 	{
+        if (Time.frameCount % 15 == 0 && !IsDeathNpc)
+        {
+            if (m_FanWeiHou != null)
+            {
+                if (!IsHitFanWeiHou)
+                {
+                    Vector3 posTA = m_FanWeiHou.transform.position;
+                    Vector3 posTB = transform.position;
+                    posTA.y = posTB.y = 0f;
+                    if (Vector3.Distance(posTA, posTB) < 30f)
+                    {
+                        IsHitFanWeiHou = true;
+                    }
+                }
+                else
+                {
+                    Vector3 posTA = m_FanWeiHou.transform.position;
+                    Vector3 posTB = transform.position;
+                    posTA.y = posTB.y = 0f;
+                    if (Vector3.Distance(posTA, posTB) > 60f)
+                    {
+                        if (NpcScript != null)
+                        {
+                        }
+                        else if (CannonScript != null)
+                        {
+                            IsDeathNpc = true;
+                            CannonScript.OnRemoveCannon(PlayerEnum.Null, 1);
+                        }
+                        return;
+                    }
+                }
+            }
+        }
+
 		if (Time.realtimeSinceStartup - TimeLastVal < 10f) {
 			return;
 		}
@@ -100,7 +139,7 @@ public class XKNpcHealthCtrl : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision)
 	{
-		//Debug.Log("Unity:"+"**********OnCollisionEnter-> collision "+collision.gameObject.name);
+        //Debug.Log("Unity:"+"**********OnCollisionEnter-> collision "+collision.gameObject.name);
 		XKPlayerMoveCtrl playerScript = collision.gameObject.GetComponent<XKPlayerMoveCtrl>();
 		if (playerScript == null) {
 			return;

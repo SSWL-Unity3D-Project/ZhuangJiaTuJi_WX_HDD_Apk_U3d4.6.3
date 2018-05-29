@@ -3,6 +3,15 @@ using System.Collections;
 
 public class XKTriggerBossLaiXi : MonoBehaviour
 {
+    void Start()
+    {
+        MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
+        if (mesh != null)
+        {
+            mesh.enabled = false;
+        }
+    }
+
 	public AiPathCtrl TestPlayerPath;
 	void OnTriggerEnter(Collider other)
 	{	

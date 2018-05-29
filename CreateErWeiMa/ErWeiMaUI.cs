@@ -24,22 +24,25 @@ public class ErWeiMaUI : MonoBehaviour
     {
         try
         {
-            if (pcvr.GetInstance().m_SSBoxPostNet != null)
+            if (pcvr.IsHongDDShouBing)
             {
-                if (pcvr.GetInstance().m_BarcodeCam.m_ErWeuMaImg == null)
+                if (pcvr.GetInstance().m_SSBoxPostNet != null)
                 {
-                    string url = pcvr.GetInstance().m_SSBoxPostNet.m_BoxLoginData.hDianDianGamePadUrl;
-                    m_ErWeiMaUI.mainTexture = pcvr.GetInstance().m_BarcodeCam.CreateErWeiMaImg(url);
-                    StartCoroutine(CaptureScreenshot2());
+                    if (pcvr.GetInstance().m_BarcodeCam.m_ErWeuMaImg == null)
+                    {
+                        string url = pcvr.GetInstance().m_SSBoxPostNet.m_BoxLoginData.hDianDianGamePadUrl;
+                        m_ErWeiMaUI.mainTexture = pcvr.GetInstance().m_BarcodeCam.CreateErWeiMaImg(url);
+                        StartCoroutine(CaptureScreenshot2());
+                    }
+                    else
+                    {
+                        m_ErWeiMaUI.mainTexture = pcvr.GetInstance().m_BarcodeCam.m_ErWeuMaImg;
+                    }
                 }
                 else
                 {
-                    m_ErWeiMaUI.mainTexture = pcvr.GetInstance().m_BarcodeCam.m_ErWeuMaImg;
+                    Debug.LogWarning("Unity: m_SSBoxPostNet was null");
                 }
-            }
-            else
-            {
-                Debug.LogWarning("Unity: m_SSBoxPostNet was null");
             }
         }
         catch (System.Exception ex)

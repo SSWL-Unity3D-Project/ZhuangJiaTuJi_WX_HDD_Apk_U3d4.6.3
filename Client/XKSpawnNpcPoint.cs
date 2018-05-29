@@ -10,7 +10,8 @@ public enum NpcSpawnType
 	PlayerNum_4,
 }
 
-public class XKSpawnNpcPoint : MonoBehaviour {
+public class XKSpawnNpcPoint : MonoBehaviour
+{
 	public NpcSpawnType PlayerNumSt = NpcSpawnType.PlayerNum_1; //激活几个主角时产生npc.
 //	public SpawnPointType PointType = SpawnPointType.KongZhong;
 	/// <summary>
@@ -207,8 +208,14 @@ public class XKSpawnNpcPoint : MonoBehaviour {
 			GameObject obj = null;
 			obj.name = "null";
 		}
-		//Invoke("CheckIsRemoveTrigger", 1f);
-	}
+        //Invoke("CheckIsRemoveTrigger", 1f);
+
+        MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
+        if (mesh != null)
+        {
+            mesh.enabled = false;
+        }
+    }
 
 	int IndexFeiJiPoint;
 	public int GetIndexFeiJiPoint()

@@ -550,7 +550,8 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 			NpcObj = null;
 			IsDeathNPC = false;
 			RealNpcTran.gameObject.SetActive(true);
-		}
+            NpcTran.SetParent(XkGameCtrl.NpcObjArray);
+        }
 
 		if (NpcObj != null) {
 			return;
@@ -1963,8 +1964,9 @@ public class XKNpcMoveCtrl : MonoBehaviour {
 			Destroy(rigCom);
 		}
 		NpcTran.position = new Vector3(-18000f, -18000f, 0f);
+        NpcTran.SetParent(XkGameCtrl.GetInstance().NpcObjHiddenArray);
 
-		if (Network.peerType == NetworkPeerType.Server) {
+        if (Network.peerType == NetworkPeerType.Server) {
 			NetViewCom.RPC("NpcSendResetNpcTransformInfo", RPCMode.OthersBuffered);
 		}
 	}

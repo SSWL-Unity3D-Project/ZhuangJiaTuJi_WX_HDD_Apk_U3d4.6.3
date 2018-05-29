@@ -200,8 +200,9 @@ public class XKNpcFangZhenCtrl : MonoBehaviour {
 	}
 
 	public void SetSpawnNpcInfo(XKSpawnNpcPoint spawnScript)
-	{
-		NetViewCom = GetComponent<NetworkView>();
+    {
+        transform.SetParent(XkGameCtrl.NpcObjArray);
+        NetViewCom = GetComponent<NetworkView>();
 		SpawnPointScript = spawnScript;
 //		SetAimState();
 		TestSpawnPoint = spawnScript.gameObject;
@@ -446,7 +447,8 @@ public class XKNpcFangZhenCtrl : MonoBehaviour {
 			}
 			//Debug.Log("Unity:"+"****max "+max+", fangZhenObj "+NpcObj.name);
 			NpcTran.position = new Vector3(-18000f, -18000f, 0f);
-			ResetFangZhenObjInfo();
+            NpcTran.SetParent(XkGameCtrl.GetInstance().NpcObjHiddenArray);
+            ResetFangZhenObjInfo();
 			IsHiddenNpcObj = true;
 			IsActiveFangZhen = false;
 		}

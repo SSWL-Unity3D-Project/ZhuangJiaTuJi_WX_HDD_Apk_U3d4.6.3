@@ -89,8 +89,12 @@ public class XkGameCtrl : SSGameMono
 	public LayerMask PlayerAmmoHitLayer;
 	public LayerMask NpcCollisionLayer;
 	public static Transform MissionCleanup;
-	public static Transform NpcObjArray;
-	public static Transform NpcAmmoArray;
+    [HideInInspector]
+    public Transform DaoJuArray;
+    public static Transform NpcObjArray;
+    [HideInInspector]
+    public Transform NpcObjHiddenArray;
+    public static Transform NpcAmmoArray;
 	public static Transform PlayerAmmoArray;
 	List<Transform> NpcTranList = new List<Transform>(20);
 	static List<YouLiangDianMoveCtrl> YLDLvA = new List<YouLiangDianMoveCtrl>(20);
@@ -436,7 +440,12 @@ public class XkGameCtrl : SSGameMono
 			objMiss.transform.parent = transform;
 			MissionCleanup = objMiss.transform;
 
-			objMiss = new GameObject();
+            objMiss = new GameObject();
+            objMiss.name = "DaoJuArray";
+            objMiss.transform.parent = MissionCleanup;
+            DaoJuArray = objMiss.transform;
+
+            objMiss = new GameObject();
 			objMiss.name = "NpcAmmoArray";
 			objMiss.transform.parent = MissionCleanup;
 			NpcAmmoArray = objMiss.transform;
@@ -446,7 +455,13 @@ public class XkGameCtrl : SSGameMono
 			objMiss.transform.parent = MissionCleanup;
 			NpcObjArray = objMiss.transform;
 
-			objMiss = new GameObject();
+            objMiss = new GameObject();
+            objMiss.name = "NpcObjHiddenArray";
+            objMiss.transform.parent = MissionCleanup;
+            NpcObjHiddenArray = objMiss.transform;
+            objMiss.SetActive(false);
+
+            objMiss = new GameObject();
 			objMiss.name = "PlayerAmmoArray";
 			objMiss.transform.parent = MissionCleanup;
 			PlayerAmmoArray = objMiss.transform;

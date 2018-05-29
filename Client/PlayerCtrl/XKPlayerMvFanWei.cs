@@ -39,5 +39,11 @@ public class XKPlayerMvFanWei : MonoBehaviour {
 			_InstanceYou = this;
 			break;
 		}
+
+        MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
+        if (mesh != null)
+        {
+            mesh.enabled = false;
+        }
 	}
 }

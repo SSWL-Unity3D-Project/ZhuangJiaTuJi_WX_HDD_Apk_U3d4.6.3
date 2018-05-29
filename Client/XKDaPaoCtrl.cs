@@ -72,8 +72,9 @@ public class XKDaPaoCtrl : MonoBehaviour {
 				CannonScript[i].SetSpawnPointScript(this);
 			}
 			SetCannonAimPlayerState();
-		}
-		SendNpcTransformInfo();
+        }
+        transform.SetParent(XkGameCtrl.NpcObjArray);
+        SendNpcTransformInfo();
 	}
 	
 	void SetCannonAimPlayerState()
@@ -135,13 +136,20 @@ public class XKDaPaoCtrl : MonoBehaviour {
 			return;
 		}
 		IsDeathNpc = true;
-		
+        
+        StartCoroutine(DelayRemoveDaPao(timeVal));
 		//XkGameCtrl.ClearNpcSpawnAllAmmo(gameObject);
 		XkGameCtrl.GetInstance().RemoveNpcTranFromList(transform);
 		if (Network.peerType != NetworkPeerType.Disconnected) {
 			HandleNetDaoPaoRemove(key);
 		}
 	}
+
+    IEnumerator DelayRemoveDaPao(float time)
+    {
+        yield return new WaitForSeconds(time);
+        Destroy(gameObject);
+    }
 
 	void HandleNetDaoPaoRemove(int key)
 	{
@@ -161,7 +169,8 @@ public class XKDaPaoCtrl : MonoBehaviour {
 		if (NpcMoveScript == null) {
 			transform.position = new Vector3(-18000f, -18000f, 0f);
 			transform.eulerAngles = Vector3.zero;
-		}
+            transform.SetParent(XkGameCtrl.GetInstance().NpcObjHiddenArray);
+        }
 
 		if (NetViewCom != null) {
 			NetViewCom.RPC("XKDaPaoSendRemoveObj", RPCMode.OthersBuffered, key);

@@ -39,7 +39,13 @@ public class XKTriggerSpawnNpc : MonoBehaviour
 			SpawnPointArray[i].ClearSpawnPointCheckList();
 		}
 		Invoke("DelayChangeBoxColliderSize", 0.2f);
-	}
+
+        MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
+        if (mesh != null)
+        {
+            mesh.enabled = false;
+        }
+    }
 
 	void DelayChangeBoxColliderSize()
 	{

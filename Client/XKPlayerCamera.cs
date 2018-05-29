@@ -48,7 +48,8 @@ public class XKPlayerCamera : MonoBehaviour {
 		List<Transform> daoJuList = new List<Transform>(DaoJuSpawnPointArray.GetComponentsInChildren<Transform>());
 		daoJuList.RemoveAt(0);
 		DaoJuSpawnPoint = daoJuList.ToArray();
-	}
+        DaoJuSpawnPointArray.gameObject.SetActive(false);
+    }
 
 	// Use this for initialization
 	void Start()
@@ -94,6 +95,10 @@ public class XKPlayerCamera : MonoBehaviour {
 		CameraTran.parent = null;
 		CameraTran.rotation = CameraParent.localRotation;
 		SetEnableCamera(false);
+        for (int i = 0; i < PlayerSpawnPoint.Length; i++)
+        {
+            PlayerSpawnPoint[i].gameObject.SetActive(false);
+        }
 	}
 
 	public void SetActiveCamera(bool isActive)

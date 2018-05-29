@@ -5,7 +5,16 @@ public class XKTriggerBossUIOpen : MonoBehaviour
 {
 	[Range(1f, 999f)]public int TimeBoss = 90;
 	public AiPathCtrl TestPlayerPath;
-	void OnTriggerEnter(Collider other)
+    void Start()
+    {
+        MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
+        if (mesh != null)
+        {
+            mesh.enabled = false;
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
 	{	
 		if (other.GetComponent<XkPlayerCtrl>() == null) {
 			return;

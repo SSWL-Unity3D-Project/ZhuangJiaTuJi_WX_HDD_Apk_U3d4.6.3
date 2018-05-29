@@ -14,6 +14,11 @@ public class FirePoint : MonoBehaviour {
 	void Start()
 	{
 		enabled = false;
+        MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
+        if (mesh != null)
+        {
+            mesh.enabled = false;
+        }
 	}
 	
 	void OnDrawGizmosSelected()

@@ -60,9 +60,10 @@ public class BuJiBaoCtrl : MonoBehaviour {
 	void Start()
 	{
 //		NetworkViewCom = GetComponent<NetworkView>();
-		if (transform.parent != XkGameCtrl.MissionCleanup) {
-			transform.parent = XkGameCtrl.MissionCleanup;
-		}
+		//if (transform.parent != XkGameCtrl.MissionCleanup) {
+		//	transform.parent = XkGameCtrl.MissionCleanup;
+		//}
+        transform.SetParent(XkGameCtrl.GetInstance().DaoJuArray);
 		DaoJuTr = transform;
 		BoxCol = GetComponent<BoxCollider>();
 	}

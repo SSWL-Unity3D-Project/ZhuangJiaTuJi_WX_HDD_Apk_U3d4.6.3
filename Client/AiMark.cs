@@ -47,7 +47,13 @@ public class AiMark : MonoBehaviour
 		}
 		IsInitMarkInfo = true;
 		IsTestDrawPath = false;
-	}
+
+        MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
+        if (mesh != null)
+        {
+            mesh.enabled = false;
+        }
+    }
 	
 	public void setMarkCount( int count )
 	{
