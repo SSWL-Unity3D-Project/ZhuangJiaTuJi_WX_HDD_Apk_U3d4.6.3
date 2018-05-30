@@ -24,12 +24,13 @@ public class XKGameFPSCtrl : MonoBehaviour
 	/// The timeleft.
 	/// </summary>
 	private float timeleft; // Left time for current interval
-	static bool IsShowGameFPS;
+	public static bool IsShowGameFPS;
 	static float FPSVal = 60f;
 	static Color FPSColorVal = Color.green;
 	public void Start()
-	{
-		this.timeleft = this.UpdateInterval;
+    {
+        Application.targetFrameRate = 100;
+        this.timeleft = this.UpdateInterval;
 		gameObject.SetActive(IsShowGameFPS);
 		InputEventCtrl.GetInstance().ClickSetMoveBtEvent += ClickSetMoveBtEvent;
 	}
@@ -43,44 +44,93 @@ public class XKGameFPSCtrl : MonoBehaviour
 		gameObject.SetActive(IsShowGameFPS);
 	}
 
+    void Update()
+    {
+        this.timeleft -= Time.deltaTime;
+        this.accum += Time.timeScale / Time.deltaTime;
+        ++this.frames;
+
+        // Interval ended - update GUI text and start new interval
+        if (this.timeleft <= 0.0)
+        {
+            // display two fractional digits (f2 format)
+            float fps = this.accum / this.frames;
+            if (pcvr.bIsHardWare)
+            {
+                //if (fps < 30f) {
+                //	fps = UnityEngine.Random.Range(0, 100) % 6 + 30f;
+                //}
+            }
+            else
+            {
+                if (fps < 10f)
+                {
+                    if (FPSColorVal != Color.red)
+                    {
+                        FPSColorVal = Color.red;
+                    }
+                }
+                else if (fps < 30f)
+                {
+                    if (FPSColorVal != Color.yellow)
+                    {
+                        FPSColorVal = Color.yellow;
+                    }
+                }
+                else
+                {
+                    if (FPSColorVal != Color.green)
+                    {
+                        FPSColorVal = Color.green;
+                    }
+                }
+            }
+
+            FPSVal = fps;
+            this.timeleft = this.UpdateInterval;
+            this.accum = 0.0f;
+            this.frames = 0;
+        }
+    }
+
 	void OnGUI()
 	{
-		this.timeleft -= Time.deltaTime;
-		this.accum += Time.timeScale / Time.deltaTime;
-		++this.frames;
+		//this.timeleft -= Time.deltaTime;
+		//this.accum += Time.timeScale / Time.deltaTime;
+		//++this.frames;
 		
-		// Interval ended - update GUI text and start new interval
-		if (this.timeleft <= 0.0) {
-			// display two fractional digits (f2 format)
-			float fps = this.accum / this.frames;
-			if (pcvr.bIsHardWare) {
-				if (fps < 30f) {
-					fps = UnityEngine.Random.Range(0, 100) % 6 + 30f;
-				}
-			}
-			else {
-				if (fps < 10f) {
-					if (FPSColorVal != Color.red) {
-						FPSColorVal = Color.red;
-					}
-				}
-				else if (fps < 30f) {
-					if (FPSColorVal != Color.yellow) {
-						FPSColorVal = Color.yellow;
-					}
-				}
-				else {
-					if (FPSColorVal != Color.green) {
-						FPSColorVal = Color.green;
-					}
-				}
-			}
+		//// Interval ended - update GUI text and start new interval
+		//if (this.timeleft <= 0.0) {
+		//	// display two fractional digits (f2 format)
+		//	float fps = this.accum / this.frames;
+		//	if (pcvr.bIsHardWare) {
+		//		//if (fps < 30f) {
+		//		//	fps = UnityEngine.Random.Range(0, 100) % 6 + 30f;
+		//		//}
+		//	}
+		//	else {
+		//		if (fps < 10f) {
+		//			if (FPSColorVal != Color.red) {
+		//				FPSColorVal = Color.red;
+		//			}
+		//		}
+		//		else if (fps < 30f) {
+		//			if (FPSColorVal != Color.yellow) {
+		//				FPSColorVal = Color.yellow;
+		//			}
+		//		}
+		//		else {
+		//			if (FPSColorVal != Color.green) {
+		//				FPSColorVal = Color.green;
+		//			}
+		//		}
+		//	}
 			
-			FPSVal = fps;
-			this.timeleft = this.UpdateInterval;
-			this.accum = 0.0f;
-			this.frames = 0;
-		}
+		//	FPSVal = fps;
+		//	this.timeleft = this.UpdateInterval;
+		//	this.accum = 0.0f;
+		//	this.frames = 0;
+		//}
 		DrawGameFPS();
 	}
 	

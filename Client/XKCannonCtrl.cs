@@ -116,7 +116,8 @@ public class XKCannonCtrl : MonoBehaviour {
 	float CosAngleUp = 0f;
 	float CosAngleDown = 0f;
 	Transform NpcFirePlayer;
-	XKDaPaoCtrl DaPaoCtrlScript;
+    [HideInInspector]
+    public XKDaPaoCtrl DaPaoCtrlScript;
 	void MakePaoGuanAimPlayer(Vector3 playerPos)
 	{
 		Vector3 posA = playerPos;

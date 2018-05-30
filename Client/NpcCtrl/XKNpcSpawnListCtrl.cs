@@ -12,13 +12,16 @@ public class XKNpcSpawnListCtrl : MonoBehaviour {
 			_Instance = obj.AddComponent<XKNpcSpawnListCtrl>();
 			Transform tran = obj.transform;
 			tran.parent = XkGameCtrl.MissionCleanup;
-		}
+            obj.SetActive(false);
+
+        }
 		return _Instance;
 	}
 
-	public GameObject GetNpcObjFromNpcDtList(GameObject npcPrefab, Vector3 pos, Quaternion rot)
+	public GameObject GetNpcObjFromNpcDtList(XKSpawnNpcPoint spawnCom, GameObject npcPrefab, Vector3 pos, Quaternion rot)
 	{
-		if (npcPrefab == null) {
+		if (npcPrefab == null)
+        {
 			return null;
 		}
 
@@ -27,7 +30,7 @@ public class XKNpcSpawnListCtrl : MonoBehaviour {
 		if (max > 0) {
 			for (int i = 0; i < max; i++) {
 				if (NpcDtList[i] != null && NpcDtList[i].NpcPrefabName == npcPrefab.name) {
-					npcObj = NpcDtList[i].FindNpcObjFromNpcList(npcPrefab);
+					npcObj = NpcDtList[i].FindNpcObjFromNpcList(spawnCom, npcPrefab);
 					break;
 				}
 			}
@@ -40,7 +43,7 @@ public class XKNpcSpawnListCtrl : MonoBehaviour {
 			HandleNpcDtList(npcSpawnList);
 			Transform tran = objNpcSpawnList.transform;
 			tran.parent = transform;
-			npcObj = npcSpawnList.FindNpcObjFromNpcList(npcPrefab);
+			npcObj = npcSpawnList.FindNpcObjFromNpcList(spawnCom, npcPrefab);
 			if (npcObj == null) {
 				HandleRemoveNpcDtList(npcSpawnList);
 			}

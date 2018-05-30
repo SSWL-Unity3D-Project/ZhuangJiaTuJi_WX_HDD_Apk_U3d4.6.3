@@ -58,6 +58,20 @@ public class InputEventCtrl : MonoBehaviour {
 		return Instance;
 	}
 
+    void Start()
+    {
+        Invoke("DelayClickSetMoveBt", 3f);
+    }
+
+    void DelayClickSetMoveBt()
+    {
+        if (!XKGameFPSCtrl.IsShowGameFPS)
+        {
+            ClickSetMoveBt(ButtonState.DOWN); //test
+            ClickSetMoveBt(ButtonState.UP); //test
+        }
+    }
+
     #region Click Button Envent
     public delegate void EventHandel(ButtonState val);
     public event EventHandel ClickTVYaoKongExitBtEvent;
@@ -300,11 +314,11 @@ public class InputEventCtrl : MonoBehaviour {
 				pcvr.OpenZuoYiQiNang(PlayerEnum.PlayerOne);
 			}
 
-			if (SetPanelUiRoot.GetInstance() == null
-			    && !HardwareCheckCtrl.IsTestHardWare
-			    && ClickStartBtOneEvent != null) {
-				ClickStartBtOneEvent( val );
-			}
+			//if (SetPanelUiRoot.GetInstance() == null
+			//    && !HardwareCheckCtrl.IsTestHardWare
+			//    && ClickStartBtOneEvent != null) {
+			//	ClickStartBtOneEvent( val );
+			//}
 		}
 		else {
 			ClickDaoDanBtThree(val);
@@ -325,11 +339,11 @@ public class InputEventCtrl : MonoBehaviour {
 				pcvr.OpenZuoYiQiNang(PlayerEnum.PlayerTwo);
 			}
 			
-			if (SetPanelUiRoot.GetInstance() == null
-			    && !HardwareCheckCtrl.IsTestHardWare
-			    && ClickStartBtTwoEvent != null) {
-				ClickStartBtTwoEvent( val );
-			}
+			//if (SetPanelUiRoot.GetInstance() == null
+			//    && !HardwareCheckCtrl.IsTestHardWare
+			//    && ClickStartBtTwoEvent != null) {
+			//	ClickStartBtTwoEvent( val );
+			//}
 		}
 		else {
 			ClickDaoDanBtFour(val);
@@ -349,11 +363,11 @@ public class InputEventCtrl : MonoBehaviour {
 			pcvr.OpenZuoYiQiNang(PlayerEnum.PlayerThree);
 		}
 		
-		if (SetPanelUiRoot.GetInstance() == null
-		    && !HardwareCheckCtrl.IsTestHardWare
-		    && ClickStartBtThreeEvent != null) {
-			ClickStartBtThreeEvent( val );
-		}
+		//if (SetPanelUiRoot.GetInstance() == null
+		//    && !HardwareCheckCtrl.IsTestHardWare
+		//    && ClickStartBtThreeEvent != null) {
+		//	ClickStartBtThreeEvent( val );
+		//}
 	}
 	
 	public event EventHandel ClickDaoDanBtFourEvent;
@@ -369,11 +383,11 @@ public class InputEventCtrl : MonoBehaviour {
 			pcvr.OpenZuoYiQiNang(PlayerEnum.PlayerFour);
 		}
 		
-		if (SetPanelUiRoot.GetInstance() == null
-		    && !HardwareCheckCtrl.IsTestHardWare
-		    && ClickStartBtFourEvent != null) {
-			ClickStartBtFourEvent( val );
-		}
+		//if (SetPanelUiRoot.GetInstance() == null
+		//    && !HardwareCheckCtrl.IsTestHardWare
+		//    && ClickStartBtFourEvent != null) {
+		//	ClickStartBtFourEvent( val );
+		//}
 	}
 
 	public event EventHandel ClickStopDongGanBtOneEvent;
@@ -827,19 +841,28 @@ public class InputEventCtrl : MonoBehaviour {
 			return;
 		}
 
-        if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
-        {
-            //遥控器的确定键消息.
-            ClickTVYaoKongEnterBt(ButtonState.DOWN);
-        }
 
 #if UNITY_ANDROID
         if (Input.GetKeyDown(KeyCode.G) || Input.GetKeyDown(KeyCode.K))
         {
             //遥控器的确定键消息.
             ClickTVYaoKongEnterBt(ButtonState.DOWN);
+            ClickSetMoveBt(ButtonState.DOWN); //test
+        }
+
+        if (Input.GetKeyUp(KeyCode.G) || Input.GetKeyUp(KeyCode.K))
+        {
+            //遥控器的确定键消息.
+            ClickTVYaoKongEnterBt(ButtonState.UP);
+            ClickSetMoveBt(ButtonState.UP); //test
         }
 #endif
+
+        if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
+        {
+            //遥控器的确定键消息.
+            ClickTVYaoKongEnterBt(ButtonState.DOWN);
+        }
 
         if (Input.GetKeyUp(KeyCode.KeypadEnter) || Input.GetKeyUp(KeyCode.Return))
         {

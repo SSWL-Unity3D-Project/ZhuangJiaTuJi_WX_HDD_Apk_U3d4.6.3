@@ -28,7 +28,7 @@ public class XKNpcHealthCtrl : MonoBehaviour {
 	Transform GameCameraTr;
 	public int PuTongAmmoCount;
 	public bool IsOpenCameraShake;
-	bool IsDeathNpc;
+    public bool IsDeathNpc;
 	XKNpcMoveCtrl NpcScript;
 	XKCannonCtrl CannonScript;
 //	XKDaPaoCtrl DaPoaScript;
@@ -58,40 +58,80 @@ public class XKNpcHealthCtrl : MonoBehaviour {
         m_FanWeiHou = XKPlayerMvFanWei.GetInstanceHou();
     }
     XKPlayerMvFanWei m_FanWeiHou;
-    bool IsHitFanWeiHou = false;
+    public bool IsHitFanWeiHou = false;
+    //public static int TestNum = 0;
+    //int TestNumRecord = 0;
 
     void Update()
 	{
-        if (Time.frameCount % 15 == 0 && !IsDeathNpc)
+        if (NpcScript == null && CannonScript != null)
         {
-            if (m_FanWeiHou != null)
+            if (Time.frameCount % 15 == 0 && !IsDeathNpc)
             {
-                if (!IsHitFanWeiHou)
+                if (m_FanWeiHou != null && !IsHitFanWeiHou)
                 {
+                    //if (!IsHitFanWeiHou)
+                    //{
+                    //    Vector3 posTA = m_FanWeiHou.transform.position;
+                    //    Vector3 posTB = transform.position;
+                    //    if (Mathf.Abs(posTA.y - posTB.y) < 300f)
+                    //    {
+                    //        posTA.y = posTB.y = 0f;
+                    //        Vector3 vecForward = -m_FanWeiHou.transform.forward;
+                    //        Vector3 vecAB = posTB - posTA;
+                    //        vecForward.y = vecAB.y = 0f;
+                    //        if (Vector3.Dot(vecForward, vecAB) > 0f)
+                    //        {
+                    //            if (Vector3.Distance(posTA, posTB) < 20f)
+                    //            {
+                    //                //TestNum++;
+                    //                //TestNumRecord = TestNum;
+                    //                //CannonScript.DaPaoCtrlScript.name = "DaPao_" + TestNum.ToString();
+                    //                //Debug.LogWarning("test name =============== " + CannonScript.DaPaoCtrlScript.name
+                    //                //    + ", TestNum == " + TestNum);
+                    //                IsHitFanWeiHou = true;
+                    //            }
+                    //        }
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    Vector3 posTA = m_FanWeiHou.transform.position;
+                    //    Vector3 posTB = transform.position;
+                    //    posTA.y = posTB.y = 0f;
+                    //    Vector3 vecForward = -m_FanWeiHou.transform.forward;
+                    //    Vector3 vecAB = posTB - posTA;
+                    //    vecForward.y = vecAB.y = 0f;
+                    //    if (Vector3.Dot(vecForward, vecAB) < 0f)
+                    //    {
+                    //        if (Vector3.Distance(posTA, posTB) > 15f)
+                    //        {
+                    //            //Debug.LogError("remove test name =============== " + CannonScript.DaPaoCtrlScript.name
+                    //            //        + ", TestNumRecord == " + TestNumRecord);
+                    //            IsHitFanWeiHou = false;
+                    //            CannonScript.OnRemoveCannon(PlayerEnum.Null, 1);
+                    //            return;
+                    //        }
+                    //    }
+                    //}
+
+
                     Vector3 posTA = m_FanWeiHou.transform.position;
                     Vector3 posTB = transform.position;
                     posTA.y = posTB.y = 0f;
-                    if (Vector3.Distance(posTA, posTB) < 30f)
+                    Vector3 vecForward = -m_FanWeiHou.transform.forward;
+                    Vector3 vecAB = posTB - posTA;
+                    vecForward.y = vecAB.y = 0f;
+                    if (Vector3.Dot(vecForward, vecAB) < 0f)
                     {
-                        IsHitFanWeiHou = true;
-                    }
-                }
-                else
-                {
-                    Vector3 posTA = m_FanWeiHou.transform.position;
-                    Vector3 posTB = transform.position;
-                    posTA.y = posTB.y = 0f;
-                    if (Vector3.Distance(posTA, posTB) > 60f)
-                    {
-                        if (NpcScript != null)
+                        if (Vector3.Distance(posTA, posTB) > 15f)
                         {
-                        }
-                        else if (CannonScript != null)
-                        {
-                            IsDeathNpc = true;
+                            //Debug.LogError("remove test name =============== " + CannonScript.DaPaoCtrlScript.name
+                            //        + ", TestNumRecord == " + TestNumRecord);
+                            IsHitFanWeiHou = true;
                             CannonScript.OnRemoveCannon(PlayerEnum.Null, 1);
+                            return;
                         }
-                        return;
                     }
                 }
             }
@@ -241,7 +281,7 @@ public class XKNpcHealthCtrl : MonoBehaviour {
 			NpcScript.TriggerRemovePointNpc(0, CannonScript);
 		}
 		else if (CannonScript != null) {
-			CannonScript.OnRemoveCannon(PlayerEnum.Null, 0);
+			CannonScript.OnRemoveCannon(PlayerEnum.Null, 1);
 		}
 	}
 	
@@ -459,7 +499,8 @@ public class XKNpcHealthCtrl : MonoBehaviour {
 
 	void ResetNpcHealthInfo()
 	{
-		CheckNpcRigidbody();
+        IsHitFanWeiHou = false;
+        CheckNpcRigidbody();
 		XkGameCtrl.GetInstance().AddNpcTranToList(transform);
 		if (BoxColCom != null) {
 			BoxColCom.enabled = true;

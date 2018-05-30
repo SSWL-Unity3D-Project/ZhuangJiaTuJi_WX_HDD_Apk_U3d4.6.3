@@ -321,6 +321,18 @@ public class XKSpawnNpcPoint : MonoBehaviour
 			return;
 		}
 
+        //test
+        XKNpcMoveCtrl npc = NpcObj.GetComponent<XKNpcMoveCtrl>();
+        if (npc != null)
+        {
+            if (npc.NpcMoveType == NpcJiFenEnum.ShiBing)
+            {
+                return;
+            }
+        }
+        //test
+
+
 //		if (IsSpawnPointNpc) {
 //			return;
 //		}
@@ -529,7 +541,7 @@ public class XKSpawnNpcPoint : MonoBehaviour
 
 	GameObject SpawnPointNpc(GameObject objPrefab, Vector3 pos, Quaternion rot)
 	{
-		GameObject obj = XKNpcSpawnListCtrl.GetInstance().GetNpcObjFromNpcDtList(objPrefab, pos, rot);
+		GameObject obj = XKNpcSpawnListCtrl.GetInstance().GetNpcObjFromNpcDtList(this, objPrefab, pos, rot);
 //		Debug.Log("Unity:"+"SpawnPointNpc -> objPrefab "+objPrefab.name);
 //		if (obj == null) {
 //			Debug.Log("Unity:"+"SpawnPointNpc -> obj is null");

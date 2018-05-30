@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 /**
@@ -29,9 +28,18 @@ public class XKBossXieZiShouBiCtrl : MonoBehaviour
 	void DelayMoveXieZiShouBi()
 	{
 		transform.parent = null;
+        if (!NpcPathTr.gameObject.activeInHierarchy)
+        {
+            NpcPathTr.gameObject.SetActive(true);
+        }
+
 		List<Transform> markList = new List<Transform>(NpcPathTr.GetComponentsInChildren<Transform>());
 		markList.RemoveAt(0);
-		Transform[] tranArray = markList.ToArray();
+        if (NpcPathTr.gameObject.activeInHierarchy)
+        {
+            NpcPathTr.gameObject.SetActive(false);
+        }
+        Transform[] tranArray = markList.ToArray();
 		NpcMark markScript = tranArray[0].GetComponent<NpcMark>();
 		float mvSpeed = markScript.MvSpeed;
 		iTween.MoveTo(NpcObj, iTween.Hash("path", tranArray,

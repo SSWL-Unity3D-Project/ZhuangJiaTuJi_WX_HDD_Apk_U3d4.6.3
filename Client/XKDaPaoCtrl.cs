@@ -7,7 +7,7 @@ public class XKDaPaoCtrl : MonoBehaviour {
 	XKSpawnNpcPoint SpawnPointScript;
 	XKNpcMoveCtrl NpcMoveScript;
 	XKCannonCtrl[] CannonScript;
-	bool IsDeathNpc;
+	public bool IsDeathNpc;
 	bool IsHuoCheNpc;
 	bool IsHandleRpc;
 	void Awake()
@@ -27,7 +27,7 @@ public class XKDaPaoCtrl : MonoBehaviour {
 
 	void Start()
 	{
-		if (CannonScript == null || CannonScript.Length < 1) {
+        if (CannonScript == null || CannonScript.Length < 1) {
 			CannonScript = gameObject.GetComponentsInChildren<XKCannonCtrl>();
 		}
 
@@ -148,7 +148,17 @@ public class XKDaPaoCtrl : MonoBehaviour {
     IEnumerator DelayRemoveDaPao(float time)
     {
         yield return new WaitForSeconds(time);
-        Destroy(gameObject);
+        //if (IsDeathNpc)
+        //{
+        //    XKNpcSpawnListCtrl.GetInstance().CheckNpcObjByNpcSpawnListDt(gameObject);
+        //    Destroy(gameObject);
+        //}
+        if (IsDeathNpc && NpcMoveScript == null)
+        {
+            transform.position = new Vector3(-18000f, -18000f, 0f);
+            transform.eulerAngles = Vector3.zero;
+            transform.SetParent(XkGameCtrl.GetInstance().NpcObjHiddenArray);
+        }
     }
 
 	void HandleNetDaoPaoRemove(int key)
@@ -283,7 +293,7 @@ public class XKDaPaoCtrl : MonoBehaviour {
 
 	public void ResetNpcDaPaoInfo()
 	{
-		//Debug.Log("Unity:"+"ResetNpcDaPaoInfo -> npcObj "+gameObject.name+", npcId "+NpcId);
+		//Debug.LogWarning("Unity:" + "ResetNpcDaPaoInfo -> npcObj " + gameObject.name);
 		IsDeathNpc = false;
 	}
 }

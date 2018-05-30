@@ -15,7 +15,7 @@ public class XKNpcSpawnListDt : MonoBehaviour {
 	public string NpcPrefabName;
 	public NpcScriptState NpcScriptSt = NpcScriptState.Null;
 	public List<GameObject> NpcList = new List<GameObject>(10);
-	public GameObject FindNpcObjFromNpcList(GameObject npcPrefab)
+	public GameObject FindNpcObjFromNpcList(XKSpawnNpcPoint spawnCom, GameObject npcPrefab)
 	{
 		if (npcPrefab == null) {
 			return null;
@@ -46,7 +46,8 @@ public class XKNpcSpawnListDt : MonoBehaviour {
 						npcDaPaoScript = NpcList[i].GetComponent<XKDaPaoCtrl>();
 						if (npcDaPaoScript != null
 						    && npcDaPaoScript.GetIsDeathNpc()) {
-							npcDaPaoScript.ResetNpcDaPaoInfo();
+                            npcDaPaoScript.SetSpawnPointScript(spawnCom);
+                            npcDaPaoScript.ResetNpcDaPaoInfo();
 							npcObj = NpcList[i];
 						}
 						break;
