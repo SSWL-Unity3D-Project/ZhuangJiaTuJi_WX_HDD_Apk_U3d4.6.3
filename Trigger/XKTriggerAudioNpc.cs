@@ -11,7 +11,13 @@ public class XKTriggerAudioNpc : MonoBehaviour
 		gameObject.layer = LayerMask.NameToLayer("NGUI");
 		AudioSourceCom = GetComponent<AudioSource>();
 		AudioSourceCom.Stop();
-	}
+
+        MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
+        if (mesh != null)
+        {
+            mesh.enabled = false;
+        }
+    }
 	
 	void OnTriggerEnter(Collider other)
 	{

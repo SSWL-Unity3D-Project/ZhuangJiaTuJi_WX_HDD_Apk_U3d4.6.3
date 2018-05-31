@@ -60,7 +60,9 @@ public class InputEventCtrl : MonoBehaviour {
 
     void Start()
     {
+#if UNITY_ANDROID
         Invoke("DelayClickSetMoveBt", 3f);
+#endif
     }
 
     void DelayClickSetMoveBt()
@@ -72,7 +74,7 @@ public class InputEventCtrl : MonoBehaviour {
         }
     }
 
-    #region Click Button Envent
+#region Click Button Envent
     public delegate void EventHandel(ButtonState val);
     public event EventHandel ClickTVYaoKongExitBtEvent;
     public void ClickTVYaoKongExitBt(ButtonState val)
@@ -214,9 +216,9 @@ public class InputEventCtrl : MonoBehaviour {
 	public event EventHandel ClickSetEnterBtEvent;
 	public void ClickSetEnterBt(ButtonState val)
 	{
-		#if !UNITY_EDITOR
+#if !UNITY_EDITOR
 		SetEnterBtSt = val;
-		#endif
+#endif
 		if(ClickSetEnterBtEvent != null)
 		{
 			ClickSetEnterBtEvent( val );
@@ -224,9 +226,9 @@ public class InputEventCtrl : MonoBehaviour {
 
 		if (val == ButtonState.DOWN) {
 			XKGlobalData.PlayAudioSetEnter();
-			#if !UNITY_EDITOR
+#if !UNITY_EDITOR
 			TimeSetEnterMoveBt = Time.time;
-			#endif
+#endif
 		}
 		pcvr.SetIsPlayerActivePcvr();
 	}
@@ -871,12 +873,12 @@ public class InputEventCtrl : MonoBehaviour {
 			break;
 		}
 	}
-	#endregion
+#endregion
 	
-	#if !UNITY_EDITOR
+#if !UNITY_EDITOR
 	float TimeSetEnterMoveBt;
 	ButtonState SetEnterBtSt = ButtonState.UP;
-	#endif
+#endif
 
 	void Update()
 	{
@@ -889,8 +891,7 @@ public class InputEventCtrl : MonoBehaviour {
 		if (pcvr.bIsHardWare && !TestTanKCom.IsTestTankCom && !pcvr.IsTestInput) {
 			return;
 		}
-
-
+        
 #if UNITY_ANDROID
         if (Input.GetKeyDown(KeyCode.G) || Input.GetKeyDown(KeyCode.K))
         {
