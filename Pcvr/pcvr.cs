@@ -9,7 +9,7 @@ public class pcvr : MonoBehaviour {
     /// <summary>
     /// 是否为红点点微信手柄操作模式.
     /// </summary>
-    public static bool IsHongDDShouBing = false;
+    public static bool IsHongDDShouBing = true;
     /// <summary>
     /// 是否为硬件版本.
     /// </summary>
@@ -196,11 +196,78 @@ public class pcvr : MonoBehaviour {
         }
     }
 
-    public void AddTVYaoKongEnterBtEvent()
+    /// <summary>
+    /// 添加遥控器按键信息响应事件.
+    /// </summary>
+    public void AddTVYaoKongBtEvent()
     {
         if (!bIsHardWare)
         {
             InputEventCtrl.GetInstance().ClickTVYaoKongEnterBtEvent += ClickTVYaoKongEnterBtEvent;
+            InputEventCtrl.GetInstance().ClickTVYaoKongUpBtEvent += ClickTVYaoKongUpBtEvent;
+            InputEventCtrl.GetInstance().ClickTVYaoKongDownBtEvent += ClickTVYaoKongDownBtEvent;
+            InputEventCtrl.GetInstance().ClickTVYaoKongLeftBtEvent += ClickTVYaoKongLeftBtEvent;
+            InputEventCtrl.GetInstance().ClickTVYaoKongRightBtEvent += ClickTVYaoKongRightBtEvent;
+        }
+    }
+
+    private void ClickTVYaoKongUpBtEvent(ButtonState val)
+    {
+        if (m_GmTVLoginDt != null)
+        {
+            int index = m_GmTVLoginDt.Index;
+            InputEventCtrl.GetInstance().OnClickFangXiangUBt(index, val);
+
+            if (val == ButtonState.DOWN)
+            {
+                InputEventCtrl.GetInstance().OnClickFireBt(index, ButtonState.DOWN);
+                InputEventCtrl.GetInstance().OnClickDaoDanBt(index, ButtonState.DOWN);
+            }
+        }
+    }
+
+    private void ClickTVYaoKongDownBtEvent(ButtonState val)
+    {
+        if (m_GmTVLoginDt != null)
+        {
+            int index = m_GmTVLoginDt.Index;
+            InputEventCtrl.GetInstance().OnClickFangXiangDBt(index, val);
+
+            if (val == ButtonState.DOWN)
+            {
+                InputEventCtrl.GetInstance().OnClickFireBt(index, ButtonState.DOWN);
+                InputEventCtrl.GetInstance().OnClickDaoDanBt(index, ButtonState.DOWN);
+            }
+        }
+    }
+
+    private void ClickTVYaoKongLeftBtEvent(ButtonState val)
+    {
+        if (m_GmTVLoginDt != null)
+        {
+            int index = m_GmTVLoginDt.Index;
+            InputEventCtrl.GetInstance().OnClickFangXiangLBt(index, val);
+
+            if (val == ButtonState.DOWN)
+            {
+                InputEventCtrl.GetInstance().OnClickFireBt(index, ButtonState.DOWN);
+                InputEventCtrl.GetInstance().OnClickDaoDanBt(index, ButtonState.DOWN);
+            }
+        }
+    }
+
+    private void ClickTVYaoKongRightBtEvent(ButtonState val)
+    {
+        if (m_GmTVLoginDt != null)
+        {
+            int index = m_GmTVLoginDt.Index;
+            InputEventCtrl.GetInstance().OnClickFangXiangRBt(index, val);
+
+            if (val == ButtonState.DOWN)
+            {
+                InputEventCtrl.GetInstance().OnClickFireBt(index, ButtonState.DOWN);
+                InputEventCtrl.GetInstance().OnClickDaoDanBt(index, ButtonState.DOWN);
+            }
         }
     }
 
@@ -214,11 +281,28 @@ public class pcvr : MonoBehaviour {
         /// 是否激活游戏.
         /// </summary>
         public bool IsActiveGame = false;
+        /// <summary>
+        /// 游戏外设操作设备.
+        /// </summary>
+        public GamePadType m_GamePadType = GamePadType.Null;
     }
     /// <summary>
     /// 游戏微信手柄登陆信息.
     /// </summary>
     public GameWeiXinLoginData[] m_GmWXLoginDt = new GameWeiXinLoginData[4];
+
+    public enum GamePadType
+    {
+        Null,
+        /// <summary>
+        /// 电视遥控器.
+        /// </summary>
+        TV_YaoKongQi,
+        /// <summary>
+        /// 微信虚拟手柄.
+        /// </summary>
+        WeiXin_ShouBing,
+    }
 
     /// <summary>
     /// 电视遥控器激活玩家时的数据信息.
@@ -229,18 +313,37 @@ public class pcvr : MonoBehaviour {
         /// 最后一个血值耗尽的玩家索引信息.
         /// </summary>
         public int Index = -1;
-        public TVYaoKongPlayerData(int indexVal)
+        /// <summary>
+        /// 游戏外设操作设备.
+        /// </summary>
+        public GamePadType m_GamePadType = GamePadType.Null;
+        public TVYaoKongPlayerData(int indexVal, GamePadType pad)
         {
             Index = indexVal;
+            m_GamePadType = pad;
+        }
+
+        public void Reset()
+        {
+            Index = -1;
+            m_GamePadType = GamePadType.Null;
         }
     }
+    /// <summary>
+    /// 遥控器确定键激活玩家数据列表.
+    /// 按照谁最后挂掉优先激活谁的顺序排列.
+    /// </summary>
     List<TVYaoKongPlayerData> m_TVYaoKongPlayerDt = new List<TVYaoKongPlayerData>();
+    /// <summary>
+    /// 游戏电视遥控器登陆的玩家信息.
+    /// </summary>
+    public TVYaoKongPlayerData m_GmTVLoginDt;
 
     void ClickTVYaoKongEnterBtEvent(ButtonState val)
     {
         if (val == ButtonState.UP)
         {
-            //Debug.Log("Unity: ClickTVYaoKongEnterBtEvent...");
+            Debug.Log("Unity: pcvr -> ClickTVYaoKongEnterBtEvent...");
             int count = m_TVYaoKongPlayerDt.Count;
             if (count > 0)
             {
@@ -251,40 +354,52 @@ public class pcvr : MonoBehaviour {
 
                 if (indexPlayer > -1 && indexPlayer < 4)
                 {
-                    if (m_GmWXLoginDt[indexPlayer].IsLoginWX)
+                    switch (playerDt.m_GamePadType)
                     {
-                        if (!m_GmWXLoginDt[indexPlayer].IsActiveGame)
-                        {
-                            Debug.Log("Unity: click TVYaoKong EnterBt -> active " + indexPlayer + " player!");
-                            m_GmWXLoginDt[indexPlayer].IsActiveGame = true;
-                            switch (indexPlayer)
+                        case GamePadType.TV_YaoKongQi:
                             {
-                                case 0:
+                                if (m_GmWXLoginDt[indexPlayer].IsLoginWX)
+                                {
+                                    if (!m_GmWXLoginDt[indexPlayer].IsActiveGame)
                                     {
-                                        InputEventCtrl.GetInstance().ClickStartBtOne(ButtonState.DOWN);
-                                        InputEventCtrl.GetInstance().ClickStartBtOne(ButtonState.UP);
-                                        break;
+                                        Debug.Log("Unity: click TVYaoKong EnterBt -> active TV_YaoKongQi " + indexPlayer + " player!");
+                                        m_GmWXLoginDt[indexPlayer].IsActiveGame = true;
+                                        InputEventCtrl.GetInstance().OnClickGameStartBt(indexPlayer);
                                     }
-                                case 1:
-                                    {
-                                        InputEventCtrl.GetInstance().ClickStartBtTwo(ButtonState.DOWN);
-                                        InputEventCtrl.GetInstance().ClickStartBtTwo(ButtonState.UP);
-                                        break;
-                                    }
-                                case 2:
-                                    {
-                                        InputEventCtrl.GetInstance().ClickStartBtThree(ButtonState.DOWN);
-                                        InputEventCtrl.GetInstance().ClickStartBtThree(ButtonState.UP);
-                                        break;
-                                    }
-                                case 3:
-                                    {
-                                        InputEventCtrl.GetInstance().ClickStartBtFour(ButtonState.DOWN);
-                                        InputEventCtrl.GetInstance().ClickStartBtFour(ButtonState.UP);
-                                        break;
-                                    }
+                                }
+                                break;
                             }
-                        }
+                        case GamePadType.WeiXin_ShouBing:
+                            {
+                                if (m_GmWXLoginDt[indexPlayer].IsLoginWX)
+                                {
+                                    if (!m_GmWXLoginDt[indexPlayer].IsActiveGame)
+                                    {
+                                        Debug.Log("Unity: click TVYaoKong EnterBt -> active " + indexPlayer + " player!");
+                                        m_GmWXLoginDt[indexPlayer].IsActiveGame = true;
+                                        InputEventCtrl.GetInstance().OnClickGameStartBt(indexPlayer);
+                                    }
+                                }
+                                break;
+                            }
+                    }
+                }
+            }
+            else
+            {
+                if (m_GmTVLoginDt == null)
+                {
+                    //遥控器激活玩家.
+                    int index = GetActivePlayerIndex();
+                    if (index < 4 && index > -1)
+                    {
+                        Debug.Log("Unity: click TVYaoKong EnterBt -> --> active TV_YaoKongQi " + index + " player!");
+                        m_GmWXLoginDt[index].IsLoginWX = true;
+                        m_GmWXLoginDt[index].IsActiveGame = true;
+                        m_GmWXLoginDt[index].m_GamePadType = GamePadType.TV_YaoKongQi;
+                        m_PlayerHeadUrl[index] = "";
+                        m_GmTVLoginDt = new TVYaoKongPlayerData(index, GamePadType.TV_YaoKongQi);
+                        InputEventCtrl.GetInstance().OnClickGameStartBt(index);
                     }
                 }
             }
@@ -378,7 +493,29 @@ public class pcvr : MonoBehaviour {
             m_GmWXLoginDt[index].IsActiveGame = false;
             if (m_GmWXLoginDt[index].IsLoginWX)
             {
-                m_TVYaoKongPlayerDt.Add(new TVYaoKongPlayerData(index));
+                Debug.Log("Unity:" + "player m_GamePadType ==  " + m_GmWXLoginDt[index].m_GamePadType);
+                switch (m_GmWXLoginDt[index].m_GamePadType)
+                {
+                    case GamePadType.WeiXin_ShouBing:
+                        {
+                            //微信手柄玩家血值耗尽了.
+                            m_TVYaoKongPlayerDt.Add(new TVYaoKongPlayerData(index, GamePadType.WeiXin_ShouBing));
+                            break;
+                        }
+                    case GamePadType.TV_YaoKongQi:
+                        {
+                            //电视遥控器玩家血值耗尽了.
+                            m_TVYaoKongPlayerDt.Add(new TVYaoKongPlayerData(index, GamePadType.TV_YaoKongQi));
+                            if (m_GmTVLoginDt != null)
+                            {
+                                //关闭玩家发射子弹的按键消息.
+                                int indexVal = m_GmTVLoginDt.Index;
+                                InputEventCtrl.GetInstance().OnClickDaoDanBt(indexVal, ButtonState.UP);
+                                InputEventCtrl.GetInstance().OnClickFireBt(indexVal, ButtonState.UP);
+                            }
+                            break;
+                        }
+                }
             }
         }
         else
@@ -387,6 +524,7 @@ public class pcvr : MonoBehaviour {
             {
                 //软件版本测试用,模拟微信手柄登陆.
                 m_GmWXLoginDt[index].IsLoginWX = true;
+                m_GmWXLoginDt[index].m_GamePadType = GamePadType.Null;
                 Debug.Log("Unity: SetIndexPlayerActiveGameState -> index == " + index);
             }
         }
@@ -635,8 +773,12 @@ public class pcvr : MonoBehaviour {
         {
             m_GmWXLoginDt[i].IsLoginWX = false;
             m_GmWXLoginDt[i].IsActiveGame = false;
+            m_GmWXLoginDt[i].m_GamePadType = GamePadType.Null;
         }
         m_TVYaoKongPlayerDt.Clear();
+
+        m_GmTVLoginDt.Reset();
+        m_GmTVLoginDt = null;
     }
 
     private void OnEventPlayerLoginBox(WebSocketSimpet.PlayerWeiXinData val)
@@ -663,6 +805,7 @@ public class pcvr : MonoBehaviour {
                 m_GamePlayerData.Add(playerDt);
                 isActivePlayer = true;
                 m_GmWXLoginDt[indexPlayer].IsLoginWX = true;
+                m_GmWXLoginDt[indexPlayer].m_GamePadType = GamePadType.WeiXin_ShouBing;
             }
             else
             {
@@ -683,6 +826,7 @@ public class pcvr : MonoBehaviour {
                             isActivePlayer = true;
                             indexPlayer = playerDt.Index;
                             m_GmWXLoginDt[indexPlayer].IsLoginWX = true;
+                            m_GmWXLoginDt[indexPlayer].m_GamePadType = GamePadType.WeiXin_ShouBing;
                             break;
                         }
                     case PlayerActiveState.JiHuo:
@@ -707,6 +851,7 @@ public class pcvr : MonoBehaviour {
                                     isActivePlayer = true;
                                     playerDt.Index = indexPlayer;
                                     m_GmWXLoginDt[indexPlayer].IsLoginWX = true;
+                                    m_GmWXLoginDt[indexPlayer].m_GamePadType = GamePadType.WeiXin_ShouBing;
                                 }
                                 else
                                 {
@@ -723,33 +868,7 @@ public class pcvr : MonoBehaviour {
         {
             m_GmWXLoginDt[indexPlayer].IsActiveGame = true;
             m_PlayerHeadUrl[indexPlayer] = playerDt.m_PlayerWeiXinData.headUrl;
-            switch (indexPlayer)
-            {
-                case 0:
-                    {
-                        InputEventCtrl.GetInstance().ClickStartBtOne(ButtonState.DOWN);
-                        InputEventCtrl.GetInstance().ClickStartBtOne(ButtonState.UP);
-                        break;
-                    }
-                case 1:
-                    {
-                        InputEventCtrl.GetInstance().ClickStartBtTwo(ButtonState.DOWN);
-                        InputEventCtrl.GetInstance().ClickStartBtTwo(ButtonState.UP);
-                        break;
-                    }
-                case 2:
-                    {
-                        InputEventCtrl.GetInstance().ClickStartBtThree(ButtonState.DOWN);
-                        InputEventCtrl.GetInstance().ClickStartBtThree(ButtonState.UP);
-                        break;
-                    }
-                case 3:
-                    {
-                        InputEventCtrl.GetInstance().ClickStartBtFour(ButtonState.DOWN);
-                        InputEventCtrl.GetInstance().ClickStartBtFour(ButtonState.UP);
-                        break;
-                    }
-            }
+            InputEventCtrl.GetInstance().OnClickGameStartBt(indexPlayer);
         }
     }
 

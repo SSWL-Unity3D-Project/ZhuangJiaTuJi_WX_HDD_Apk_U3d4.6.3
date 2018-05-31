@@ -488,7 +488,7 @@ public class XkGameCtrl : SSGameMono
 			AudioBeiJingCtrl.IndexBeiJingAd = 0;
 			XKGlobalData.GetInstance().PlayGuanKaBeiJingAudio();
             InputEventCtrl.GetInstance().ClickTVYaoKongExitBtEvent += ClickTVYaoKongExitBtEvent;
-            pcvr.GetInstance().AddTVYaoKongEnterBtEvent();
+            pcvr.GetInstance().AddTVYaoKongBtEvent();
         }
 		catch (System.Exception e)
 		{

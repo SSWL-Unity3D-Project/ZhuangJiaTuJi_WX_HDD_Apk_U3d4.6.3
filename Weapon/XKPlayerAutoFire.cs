@@ -1060,12 +1060,10 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 			SetIsActiveFireBtJQ(true);
 			LastFireTimeJiQiang = -100f;
 			CheckPlayerJiQiangFireBt();
-            if (pcvr.IsHongDDShouBing)
-            {
-                ClickFireDaoDanBtEvent(ButtonState.UP);
-                //StopCoroutine(DelayResetFire());
-                //StartCoroutine(DelayResetFire());
-            }
+            //if (pcvr.IsHongDDShouBing)
+            //{
+            //    ClickFireDaoDanBtEvent(ButtonState.UP);
+            //}
         }
 		else
         {
@@ -1087,12 +1085,10 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 		if (state == ButtonState.DOWN)
         {
             IsActiveFireBtZP = true;
-            if (pcvr.IsHongDDShouBing)
-            {
-                ClickFireBtEvent(ButtonState.UP);
-                //StopCoroutine(DelayResetFireDaoDan());
-                //StartCoroutine(DelayResetFireDaoDan());
-            }
+            //if (pcvr.IsHongDDShouBing)
+            //{
+            //    ClickFireBtEvent(ButtonState.UP);
+            //}
         }
 		else
         {

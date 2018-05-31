@@ -109,7 +109,56 @@ public class InputEventCtrl : MonoBehaviour {
             ClickTVYaoKongRightBtEvent(val);
         }
     }
-    
+    public event EventHandel ClickTVYaoKongUpBtEvent;
+
+    public void ClickTVYaoKongUpBt(ButtonState val)
+    {
+        if (ClickTVYaoKongUpBtEvent != null)
+        {
+            ClickTVYaoKongUpBtEvent(val);
+        }
+    }
+
+    public event EventHandel ClickTVYaoKongDownBtEvent;
+    public void ClickTVYaoKongDownBt(ButtonState val)
+    {
+        if (ClickTVYaoKongDownBtEvent != null)
+        {
+            ClickTVYaoKongDownBtEvent(val);
+        }
+    }
+
+    public void OnClickGameStartBt(int indexPlayer)
+    {
+        switch (indexPlayer)
+        {
+            case 0:
+                {
+                    ClickStartBtOne(ButtonState.DOWN);
+                    ClickStartBtOne(ButtonState.UP);
+                    break;
+                }
+            case 1:
+                {
+                    ClickStartBtTwo(ButtonState.DOWN);
+                    ClickStartBtTwo(ButtonState.UP);
+                    break;
+                }
+            case 2:
+                {
+                    ClickStartBtThree(ButtonState.DOWN);
+                    ClickStartBtThree(ButtonState.UP);
+                    break;
+                }
+            case 3:
+                {
+                    ClickStartBtFour(ButtonState.DOWN);
+                    ClickStartBtFour(ButtonState.UP);
+                    break;
+                }
+        }
+    }
+
     public event EventHandel ClickStartBtOneEvent;
 	public void ClickStartBtOne(ButtonState val)
 	{
@@ -904,6 +953,30 @@ public class InputEventCtrl : MonoBehaviour {
         {
             //接收遥控器/键盘上的向右按键信息.
             ClickTVYaoKongRightBt(ButtonState.UP);
+        }
+        
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            //接收遥控器/键盘上的向上按键信息.
+            ClickTVYaoKongUpBt(ButtonState.DOWN);
+        }
+
+        if (Input.GetKeyUp(KeyCode.UpArrow))
+        {
+            //接收遥控器/键盘上的向上按键信息.
+            ClickTVYaoKongUpBt(ButtonState.UP);
+        }
+
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            //接收遥控器/键盘上的向下按键信息.
+            ClickTVYaoKongDownBt(ButtonState.DOWN);
+        }
+
+        if (Input.GetKeyUp(KeyCode.DownArrow))
+        {
+            //接收遥控器/键盘上的向下按键信息.
+            ClickTVYaoKongDownBt(ButtonState.UP);
         }
 
         if (pcvr.IsHongDDShouBing)
