@@ -30,9 +30,15 @@ public class SSExitGameUI : MonoBehaviour
         QuXiao,
     }
     ExitEnum m_ExitType = ExitEnum.QueDing;
+    static SSExitGameUI _Instance;
+    public static SSExitGameUI GetInstance()
+    {
+        return _Instance;
+    }
 
     public void Init ()
     {
+        SSUIRoot.GetInstance().m_ExitUICom = this;
         QueDingUI.mainTexture = QueDingImg[1];
         QuXiaoUI.mainTexture = QuXiaoImg[0];
         SetAcitveBtFlash();
@@ -46,6 +52,7 @@ public class SSExitGameUI : MonoBehaviour
 
     public void RemoveSelf()
     {
+        SSUIRoot.GetInstance().m_ExitUICom = null;
         InputEventCtrl.GetInstance().ClickTVYaoKongEnterBtEvent -= ClickTVYaoKongEnterBtEvent;
         InputEventCtrl.GetInstance().ClickTVYaoKongExitBtEvent -= ClickTVYaoKongExitBtEvent;
         InputEventCtrl.GetInstance().ClickTVYaoKongLeftBtEvent -= ClickTVYaoKongLeftBtEvent;

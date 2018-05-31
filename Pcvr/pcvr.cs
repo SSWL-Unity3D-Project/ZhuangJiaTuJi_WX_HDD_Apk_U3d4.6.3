@@ -387,19 +387,23 @@ public class pcvr : MonoBehaviour {
             }
             else
             {
-                if (m_GmTVLoginDt == null)
+                if (SSUIRoot.GetInstance().m_ExitUICom == null)
                 {
-                    //遥控器激活玩家.
-                    int index = GetActivePlayerIndex();
-                    if (index < 4 && index > -1)
+                    //没有退出游戏界面出现时,可以用遥控器进入游戏.
+                    if (m_GmTVLoginDt == null)
                     {
-                        Debug.Log("Unity: click TVYaoKong EnterBt -> --> active TV_YaoKongQi " + index + " player!");
-                        m_GmWXLoginDt[index].IsLoginWX = true;
-                        m_GmWXLoginDt[index].IsActiveGame = true;
-                        m_GmWXLoginDt[index].m_GamePadType = GamePadType.TV_YaoKongQi;
-                        m_PlayerHeadUrl[index] = "";
-                        m_GmTVLoginDt = new TVYaoKongPlayerData(index, GamePadType.TV_YaoKongQi);
-                        InputEventCtrl.GetInstance().OnClickGameStartBt(index);
+                        //遥控器激活玩家.
+                        int index = GetActivePlayerIndex();
+                        if (index < 4 && index > -1)
+                        {
+                            Debug.Log("Unity: click TVYaoKong EnterBt -> --> active TV_YaoKongQi " + index + " player!");
+                            m_GmWXLoginDt[index].IsLoginWX = true;
+                            m_GmWXLoginDt[index].IsActiveGame = true;
+                            m_GmWXLoginDt[index].m_GamePadType = GamePadType.TV_YaoKongQi;
+                            m_PlayerHeadUrl[index] = "";
+                            m_GmTVLoginDt = new TVYaoKongPlayerData(index, GamePadType.TV_YaoKongQi);
+                            InputEventCtrl.GetInstance().OnClickGameStartBt(index);
+                        }
                     }
                 }
             }
