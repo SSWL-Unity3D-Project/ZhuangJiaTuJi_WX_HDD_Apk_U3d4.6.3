@@ -4,6 +4,15 @@ using System.Collections;
 public class XKTriggerAudioBeiJing : MonoBehaviour
 {
 	public AiPathCtrl TestPlayerPath;
+    void Start()
+    {
+        MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
+        if (mesh != null)
+        {
+            mesh.enabled = false;
+        }
+    }
+
 	void OnTriggerEnter(Collider other)
 	{	
 		if (other.GetComponent<XkPlayerCtrl>() == null) {

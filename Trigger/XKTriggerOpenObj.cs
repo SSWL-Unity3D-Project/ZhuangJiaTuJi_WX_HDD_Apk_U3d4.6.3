@@ -26,7 +26,13 @@ public class XKTriggerOpenObj : MonoBehaviour
 	void Start()
 	{
 		ObjOpen.SetActive(false);
-	}
+
+        MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
+        if (mesh != null)
+        {
+            mesh.enabled = false;
+        }
+    }
 
 	void Update()
 	{

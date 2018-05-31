@@ -5,7 +5,16 @@ public class XKTriggerXuanYa : MonoBehaviour
 {
 	[Range(0f, 10000f)]public float PlayerDamage = 50f;
 	[Range(0f, 100f)]public float TimeResetPlayer = 2f;
-	void OnTriggerEnter(Collider other)
+    void Start()
+    {
+        MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
+        if (mesh != null)
+        {
+            mesh.enabled = false;
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
 	{
 		XKPlayerMoveCtrl playerMoveScript = other.GetComponent<XKPlayerMoveCtrl>();
 		if (playerMoveScript == null) {

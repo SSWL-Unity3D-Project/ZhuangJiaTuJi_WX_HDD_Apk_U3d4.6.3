@@ -19,7 +19,16 @@ public class XKTriggerYuLeCtrl : MonoBehaviour
 	[Range(0f, 500f)]public float HorizontalSpeedYGBL = 0.5f;
 	public static bool IsActiveYuLeTrigger;
 	public AiPathCtrl TestPlayerPath;
-	void OnDrawGizmosSelected()
+    void Start()
+    {
+        MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
+        if (mesh != null)
+        {
+            mesh.enabled = false;
+        }
+    }
+
+    void OnDrawGizmosSelected()
 	{
 		if (!XkGameCtrl.IsDrawGizmosObj) {
 			return;
