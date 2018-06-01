@@ -112,7 +112,6 @@ public class GameMovieCtrl : SSGameMono
             CrateMovieLogoAni();
             InputEventCtrl.GetInstance().ClickTVYaoKongExitBtEvent += ClickTVYaoKongExitBtEvent;
             pcvr.GetInstance().AddTVYaoKongBtEvent();
-            SpawnStartGameUI();
         }
 		catch (System.Exception e)
 		{
@@ -123,7 +122,7 @@ public class GameMovieCtrl : SSGameMono
     }
 
     bool IsCrateMovieLogo = false;
-    Object m_MovieAniObj;
+    MovieLogoAni m_MovieLogoAni;
     /// <summary>
     /// 创建Logo播放对象.
     /// </summary>
@@ -138,7 +137,8 @@ public class GameMovieCtrl : SSGameMono
 
         if (m_MovieAniPrefab != null && m_UITrParent != null)
         {
-            m_MovieAniObj = Instantiate(m_MovieAniPrefab, m_UITrParent);
+            GameObject obj = (GameObject)Instantiate(m_MovieAniPrefab, m_UITrParent);
+            m_MovieLogoAni = obj.GetComponent<MovieLogoAni>();
         }
         else
         {
@@ -152,7 +152,7 @@ public class GameMovieCtrl : SSGameMono
         if (IsCrateMovieLogo)
         {
             IsCrateMovieLogo = false;
-            Destroy(m_MovieAniObj);
+            Destroy(m_MovieLogoAni.gameObject);
         }
     }
 
@@ -213,7 +213,6 @@ public class GameMovieCtrl : SSGameMono
 #endif
         RemoveMovieLogoAni();
         RemoveExitGameUI();
-        RemoveStartGameUI();
     }
 
 	void CloseAllFangXiangPanPower()
@@ -264,6 +263,7 @@ public class GameMovieCtrl : SSGameMono
         Debug.Log("Unity: SpawnExitGameUI...");
         if (m_ExitUICom == null)
         {
+            m_MovieLogoAni.SetActiveHiddenObj(false);
             GameObject obj = (GameObject)Instantiate(ExitGameUIPrefab, UICenterTrParent);
             m_ExitUICom = obj.GetComponent<SSExitGameUI>();
             m_ExitUICom.Init();
@@ -276,35 +276,7 @@ public class GameMovieCtrl : SSGameMono
         if (m_ExitUICom != null)
         {
             m_ExitUICom.RemoveSelf();
-        }
-    }
-    
-    /// <summary>
-    /// 确定键开始游戏的UI界面预制.
-    /// </summary>
-    public GameObject StartGameUIPrefab;
-    /// <summary>
-    /// 退出游戏UI界面控制脚本.
-    /// </summary>
-    GameObject m_StartGameUI;
-    /// <summary>
-    /// 产生退出游戏UI界面.
-    /// </summary>
-    void SpawnStartGameUI()
-    {
-        Debug.Log("Unity: SpawnStartGameUI...");
-        if (m_StartGameUI == null && StartGameUIPrefab != null)
-        {
-            m_StartGameUI = (GameObject)Instantiate(StartGameUIPrefab, UICenterTrParent);
-        }
-    }
-
-    public void RemoveStartGameUI()
-    {
-        Debug.Log("Unity: RemoveStartGameUI...");
-        if (m_StartGameUI != null)
-        {
-            Destroy(m_StartGameUI);
+            m_MovieLogoAni.SetActiveHiddenObj(true);
         }
     }
 
