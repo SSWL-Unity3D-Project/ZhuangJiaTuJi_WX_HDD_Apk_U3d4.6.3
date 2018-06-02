@@ -1,6 +1,5 @@
 ﻿#define HIDDEN_GAME_TIME
 using UnityEngine;
-using System.Collections;
 
 public class GameTimeCtrl : MonoBehaviour {
 	public UISprite[] TimeSprite;

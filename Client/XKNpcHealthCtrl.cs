@@ -31,7 +31,6 @@ public class XKNpcHealthCtrl : MonoBehaviour {
     public bool IsDeathNpc;
 	XKNpcMoveCtrl NpcScript;
 	XKCannonCtrl CannonScript;
-//	XKDaPaoCtrl DaPoaScript;
 	float TimeHitBoss;
 	BoxCollider BoxColCom;
 	bool IsSpawnObj;
@@ -54,8 +53,6 @@ public class XKNpcHealthCtrl : MonoBehaviour {
 		if (NpcScript != null && NpcJiFen == NpcJiFenEnum.Boss) {
 			NpcScript.SetIsBossNpc(true);
 		}
-
-        m_FanWeiHou = XKPlayerMvFanWei.GetInstanceHou();
     }
     XKPlayerMvFanWei m_FanWeiHou;
     public bool IsHitFanWeiHou = false;
@@ -64,58 +61,39 @@ public class XKNpcHealthCtrl : MonoBehaviour {
 
     void Update()
 	{
+        if (m_XKDaPaoCom != null && m_XKDaPaoCom.SpawnPointScript == null)
+        {
+            if (Time.frameCount % 15 == 0 && !IsDeathNpc)
+            {
+                if (m_FanWeiHou != null && !IsHitFanWeiHou)
+                {
+                    Vector3 posTA = m_FanWeiHou.transform.position;
+                    Vector3 posTB = transform.position;
+                    posTA.y = posTB.y = 0f;
+                    Vector3 vecForward = -m_FanWeiHou.transform.forward;
+                    Vector3 vecAB = posTB - posTA;
+                    vecForward.y = vecAB.y = 0f;
+                    if (Vector3.Dot(vecForward, vecAB) < 0f)
+                    {
+                        float dis = Vector3.Distance(posTA, posTB);
+                        if (dis > 15f && dis < 40f)
+                        {
+                            //Debug.LogError("======== remove test name =============== " + m_XKDaPaoCom.name);
+                            IsHitFanWeiHou = true;
+                            m_XKDaPaoCom.OnRemoveCannon(PlayerEnum.Null, 0, 1f);
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
         if (NpcScript == null && CannonScript != null)
         {
             if (Time.frameCount % 15 == 0 && !IsDeathNpc)
             {
                 if (m_FanWeiHou != null && !IsHitFanWeiHou)
                 {
-                    //if (!IsHitFanWeiHou)
-                    //{
-                    //    Vector3 posTA = m_FanWeiHou.transform.position;
-                    //    Vector3 posTB = transform.position;
-                    //    if (Mathf.Abs(posTA.y - posTB.y) < 300f)
-                    //    {
-                    //        posTA.y = posTB.y = 0f;
-                    //        Vector3 vecForward = -m_FanWeiHou.transform.forward;
-                    //        Vector3 vecAB = posTB - posTA;
-                    //        vecForward.y = vecAB.y = 0f;
-                    //        if (Vector3.Dot(vecForward, vecAB) > 0f)
-                    //        {
-                    //            if (Vector3.Distance(posTA, posTB) < 20f)
-                    //            {
-                    //                //TestNum++;
-                    //                //TestNumRecord = TestNum;
-                    //                //CannonScript.DaPaoCtrlScript.name = "DaPao_" + TestNum.ToString();
-                    //                //Debug.LogWarning("test name =============== " + CannonScript.DaPaoCtrlScript.name
-                    //                //    + ", TestNum == " + TestNum);
-                    //                IsHitFanWeiHou = true;
-                    //            }
-                    //        }
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    Vector3 posTA = m_FanWeiHou.transform.position;
-                    //    Vector3 posTB = transform.position;
-                    //    posTA.y = posTB.y = 0f;
-                    //    Vector3 vecForward = -m_FanWeiHou.transform.forward;
-                    //    Vector3 vecAB = posTB - posTA;
-                    //    vecForward.y = vecAB.y = 0f;
-                    //    if (Vector3.Dot(vecForward, vecAB) < 0f)
-                    //    {
-                    //        if (Vector3.Distance(posTA, posTB) > 15f)
-                    //        {
-                    //            //Debug.LogError("remove test name =============== " + CannonScript.DaPaoCtrlScript.name
-                    //            //        + ", TestNumRecord == " + TestNumRecord);
-                    //            IsHitFanWeiHou = false;
-                    //            CannonScript.OnRemoveCannon(PlayerEnum.Null, 1);
-                    //            return;
-                    //        }
-                    //    }
-                    //}
-
-
                     Vector3 posTA = m_FanWeiHou.transform.position;
                     Vector3 posTB = transform.position;
                     posTA.y = posTB.y = 0f;
@@ -242,8 +220,13 @@ public class XKNpcHealthCtrl : MonoBehaviour {
 				}
 				HiddenNpcObjArray[i].SetActive(false);
 			}
-		}
-	}
+        }
+
+        if (m_XKDaPaoCom != null && m_XKDaPaoCom.SpawnPointScript == null)
+        {
+            m_XKDaPaoCom.OnRemoveCannon(PlayerEnum.Null, 0, 1f);
+        }
+    }
 
 	public XKNpcMoveCtrl GetNpcMoveScript()
 	{
@@ -286,19 +269,28 @@ public class XKNpcHealthCtrl : MonoBehaviour {
 	}
 	
 	void CheckDisGameCamera()
-	{
-		if (DeathExplodePoint == null) {
+    {
+        if (m_FanWeiHou == null)
+        {
+            m_FanWeiHou = XKPlayerMvFanWei.GetInstanceHou();
+        }
+
+        if (DeathExplodePoint == null)
+        {
 			DeathExplodePoint = transform;
 		}
 
-		if (XkPlayerCtrl.GetInstanceFeiJi() != null) {
+		if (XkPlayerCtrl.GetInstanceFeiJi() != null)
+        {
 			GameCameraTr = XkPlayerCtrl.GetInstanceFeiJi().transform;
 		}
 
-		if (GameCameraTr == null) {
+		if (GameCameraTr == null)
+        {
 			Debug.LogWarning("Unity:"+"CheckDisGameCamera -> GameCameraTr is null");
 			return;
 		}
+
 		Vector3 vecA = GameCameraTr.forward;
 		Vector3 vecB = Vector3.zero;
 		Vector3 posA = DeathExplodePoint.position;
@@ -306,7 +298,8 @@ public class XKNpcHealthCtrl : MonoBehaviour {
 		posA.y = posB.y = 0f;
 		vecB = posA - posB;
 		vecA.y = vecB.y = 0f;
-		if (Vector3.Dot(vecA, vecB) <= 0f) {
+		if (Vector3.Dot(vecA, vecB) <= 0f)
+        {
 			return;
 		}
 		DisCamera = MinDisCamera;
@@ -476,11 +469,12 @@ public class XKNpcHealthCtrl : MonoBehaviour {
 			}
 		}
 	}
-	
-	public void SetXKDaPaoScript(XKDaPaoCtrl script)
+
+    XKDaPaoCtrl m_XKDaPaoCom;
+    public void SetXKDaPaoScript(XKDaPaoCtrl script)
 	{
-//		DaPoaScript = script;
-		NpcNameInfo = script.name;
+        m_XKDaPaoCom = script;
+        NpcNameInfo = script.name;
 	}
 
 	public void SetCannonScript(XKCannonCtrl script, bool isSpawn = true)

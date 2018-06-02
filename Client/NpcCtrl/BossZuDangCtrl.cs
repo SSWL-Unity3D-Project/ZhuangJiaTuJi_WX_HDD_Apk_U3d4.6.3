@@ -9,7 +9,7 @@ public class BossZuDangCtrl : MonoBehaviour
 		return _Instance;
 	}
 	// Use this for initialization
-	void Start()
+	void Awake()
 	{
 		_Instance = this;
 		BoxCollider[] boxColArray = gameObject.GetComponentsInChildren<BoxCollider>();

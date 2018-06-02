@@ -89,6 +89,7 @@ public class XKCannonCtrl : MonoBehaviour {
 		if (HealthScript == null) {
 			HealthScript = GetComponent<XKNpcHealthCtrl>();
 		}
+
 		if (HealthScript != null) {
 			HealthScript.SetCannonScript(this, false);
 			IsYouTongNpc = HealthScript.IsYouTongNpc;

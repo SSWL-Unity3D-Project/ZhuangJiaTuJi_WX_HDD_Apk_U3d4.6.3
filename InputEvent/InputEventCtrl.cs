@@ -449,9 +449,9 @@ public class InputEventCtrl : MonoBehaviour {
 			ClickStopDongGanBtOneEvent( val );
 		}
 
-		if (val == ButtonState.DOWN) {
-			DongGanUICtrl.ShowDongGanInfo(PlayerEnum.PlayerOne);
-		}
+		//if (val == ButtonState.DOWN) {
+		//	DongGanUICtrl.ShowDongGanInfo(PlayerEnum.PlayerOne);
+		//}
 		pcvr.SetIsPlayerActivePcvr();
 	}
 	
@@ -463,9 +463,9 @@ public class InputEventCtrl : MonoBehaviour {
 			ClickStopDongGanBtTwoEvent( val );
 		}
 		
-		if (val == ButtonState.DOWN) {
-			DongGanUICtrl.ShowDongGanInfo(PlayerEnum.PlayerTwo);
-		}
+		//if (val == ButtonState.DOWN) {
+		//	DongGanUICtrl.ShowDongGanInfo(PlayerEnum.PlayerTwo);
+		//}
 		pcvr.SetIsPlayerActivePcvr();
 	}
 	
@@ -477,9 +477,9 @@ public class InputEventCtrl : MonoBehaviour {
 			ClickStopDongGanBtThreeEvent( val );
 		}
 		
-		if (val == ButtonState.DOWN) {
-			DongGanUICtrl.ShowDongGanInfo(PlayerEnum.PlayerThree);
-		}
+		//if (val == ButtonState.DOWN) {
+		//	DongGanUICtrl.ShowDongGanInfo(PlayerEnum.PlayerThree);
+		//}
 		pcvr.SetIsPlayerActivePcvr();
 	}
 	
@@ -491,9 +491,9 @@ public class InputEventCtrl : MonoBehaviour {
 			ClickStopDongGanBtFourEvent( val );
 		}
 		
-		if (val == ButtonState.DOWN) {
-			DongGanUICtrl.ShowDongGanInfo(PlayerEnum.PlayerFour);
-		}
+		//if (val == ButtonState.DOWN) {
+		//	DongGanUICtrl.ShowDongGanInfo(PlayerEnum.PlayerFour);
+		//}
 		pcvr.SetIsPlayerActivePcvr();
 	}
 

@@ -84,10 +84,10 @@ public class JiFenJieMianCtrl : MonoBehaviour {
 			CoinPlayerCtrl.GetInstanceFour().HiddenPlayerCoin();
 			GameTimeCtrl.GetInstance().HiddenGameTime();
 			DaoJuCtrl.GetInstance().HiddenAllPlayerDaoJu();
-			DongGanUICtrl.InstanceOne.HiddenDongGanUI();
-			DongGanUICtrl.InstanceTwo.HiddenDongGanUI();
-			DongGanUICtrl.InstanceThree.HiddenDongGanUI();
-			DongGanUICtrl.InstanceFour.HiddenDongGanUI();
+			//DongGanUICtrl.InstanceOne.HiddenDongGanUI();
+			//DongGanUICtrl.InstanceTwo.HiddenDongGanUI();
+			//DongGanUICtrl.InstanceThree.HiddenDongGanUI();
+			//DongGanUICtrl.InstanceFour.HiddenDongGanUI();
 			JiFenZongJieMianObj.SetActive(true);
 		}
 		PaiMingCtrl.GetInstance().ShowGamePaiMing();

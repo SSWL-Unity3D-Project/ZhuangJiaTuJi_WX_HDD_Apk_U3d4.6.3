@@ -689,6 +689,20 @@ public class XKSpawnNpcPoint : MonoBehaviour
 		obj.name = "null";
 	}
 
+    void Start()
+    {
+        Invoke("CheckIsSpawnTrigger", 1.5f);
+    }
+    
+    void CheckIsSpawnTrigger()
+    {
+        if (!IsSpawnTrigger)
+        {
+            //没有使用该产生点.
+            Destroy(gameObject);
+        }
+    }
+
 	public void SetIsPlayerAimTrigger()
 	{
 		IsPlayerAimTrigger = true;

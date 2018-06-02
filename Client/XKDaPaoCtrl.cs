@@ -4,7 +4,8 @@ using System.Collections;
 public class XKDaPaoCtrl : MonoBehaviour {
 	public GameObject TestSpawnPoint;
 	NetworkView NetViewCom;
-	XKSpawnNpcPoint SpawnPointScript;
+    [HideInInspector]
+    public XKSpawnNpcPoint SpawnPointScript;
 	XKNpcMoveCtrl NpcMoveScript;
 	XKCannonCtrl[] CannonScript;
 	public bool IsDeathNpc;
@@ -148,16 +149,16 @@ public class XKDaPaoCtrl : MonoBehaviour {
     IEnumerator DelayRemoveDaPao(float time)
     {
         yield return new WaitForSeconds(time);
-        //if (IsDeathNpc)
-        //{
-        //    XKNpcSpawnListCtrl.GetInstance().CheckNpcObjByNpcSpawnListDt(gameObject);
-        //    Destroy(gameObject);
-        //}
         if (IsDeathNpc && NpcMoveScript == null)
         {
             transform.position = new Vector3(-18000f, -18000f, 0f);
             transform.eulerAngles = Vector3.zero;
             transform.SetParent(XkGameCtrl.GetInstance().NpcObjHiddenArray);
+        }
+
+        if (SpawnPointScript == null)
+        {
+            Destroy(gameObject);
         }
     }
 
