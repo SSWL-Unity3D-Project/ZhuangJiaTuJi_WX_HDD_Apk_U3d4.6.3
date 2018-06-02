@@ -44,7 +44,7 @@ public class XKGameFPSCtrl : MonoBehaviour
 		gameObject.SetActive(IsShowGameFPS);
 	}
 
-    void FixedUpdate()
+    void Update()
     {
         this.timeleft -= Time.deltaTime;
         this.accum += Time.timeScale / Time.deltaTime;
