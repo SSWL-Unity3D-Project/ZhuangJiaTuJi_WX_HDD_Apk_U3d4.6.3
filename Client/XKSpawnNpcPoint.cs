@@ -322,14 +322,14 @@ public class XKSpawnNpcPoint : MonoBehaviour
 		}
 
         //test
-        XKNpcMoveCtrl npc = NpcObj.GetComponent<XKNpcMoveCtrl>();
-        if (npc != null)
-        {
-            if (npc.NpcMoveType == NpcJiFenEnum.ShiBing)
-            {
-                return;
-            }
-        }
+        //XKNpcMoveCtrl npc = NpcObj.GetComponent<XKNpcMoveCtrl>();
+        //if (npc != null)
+        //{
+        //    if (npc.NpcMoveType == NpcJiFenEnum.ShiBing)
+        //    {
+        //        return;
+        //    }
+        //}
         //test
 
 
