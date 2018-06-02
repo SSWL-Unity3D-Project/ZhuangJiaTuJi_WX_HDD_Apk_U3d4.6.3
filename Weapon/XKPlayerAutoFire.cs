@@ -291,7 +291,7 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 	}
 
 	// Update is called once per frame
-	void Update()
+	void FixedUpdate()
 	{
 		if (IsLockPaoTa) {
 			UpdatePaoTaRot();

@@ -60,6 +60,7 @@ public class InputEventCtrl : MonoBehaviour {
 
     void Start()
     {
+        Invoke("DelayClickSetMoveBt", 3f);
 #if UNITY_ANDROID
         Invoke("DelayClickSetMoveBt", 3f);
 #endif

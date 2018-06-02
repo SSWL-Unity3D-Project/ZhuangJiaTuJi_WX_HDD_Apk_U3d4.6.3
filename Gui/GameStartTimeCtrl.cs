@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameStartTimeCtrl : MonoBehaviour {
+public class GameStartTimeCtrl : MonoBehaviour
+{
+    public GameObject m_TiShiUI;
 	public Texture[] TimeTexture;
 	UITexture StartTimeTexture;
 	int TimeCount;
@@ -18,7 +20,8 @@ public class GameStartTimeCtrl : MonoBehaviour {
 		_Instance = this;
 		StartTimeTexture = GetComponent<UITexture>();
 		gameObject.SetActive(false);
-	}
+        m_TiShiUI.SetActive(false);
+    }
 
 	public void InitPlayStartTimeUI()
 	{
@@ -27,7 +30,8 @@ public class GameStartTimeCtrl : MonoBehaviour {
 		}
 		IsInitPlay = true;
 		gameObject.SetActive(true);
-		PlayStartTimeUI();
+        m_TiShiUI.SetActive(true);
+        PlayStartTimeUI();
 	}
 
 	void PlayStartTimeUI()
@@ -54,6 +58,7 @@ public class GameStartTimeCtrl : MonoBehaviour {
 		TimeCount++;
 		if (TimeCount >= TimeTexture.Length) {
 			Debug.Log("Unity:"+"ChangeStartTimeUI -> change over!");
+            Destroy(m_TiShiUI);
 			gameObject.SetActive(false);
 			ScreenDanHeiCtrl.GetInstance().ActiveGameUiCamera();
 			XkPlayerCtrl.GetInstanceFeiJi().RestartMovePlayer();
