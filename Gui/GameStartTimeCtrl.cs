@@ -20,7 +20,10 @@ public class GameStartTimeCtrl : MonoBehaviour
 		_Instance = this;
 		StartTimeTexture = GetComponent<UITexture>();
 		gameObject.SetActive(false);
-        m_TiShiUI.SetActive(false);
+        if (m_TiShiUI != null)
+        {
+            m_TiShiUI.SetActive(false);
+        }
     }
 
 	public void InitPlayStartTimeUI()
@@ -30,7 +33,10 @@ public class GameStartTimeCtrl : MonoBehaviour
 		}
 		IsInitPlay = true;
 		gameObject.SetActive(true);
-        m_TiShiUI.SetActive(true);
+        if (m_TiShiUI != null)
+        {
+            m_TiShiUI.SetActive(true);
+        }
         PlayStartTimeUI();
 	}
 
@@ -58,7 +64,10 @@ public class GameStartTimeCtrl : MonoBehaviour
 		TimeCount++;
 		if (TimeCount >= TimeTexture.Length) {
 			Debug.Log("Unity:"+"ChangeStartTimeUI -> change over!");
-            Destroy(m_TiShiUI);
+            if (m_TiShiUI != null)
+            {
+                Destroy(m_TiShiUI);
+            }
 			gameObject.SetActive(false);
 			ScreenDanHeiCtrl.GetInstance().ActiveGameUiCamera();
 			XkPlayerCtrl.GetInstanceFeiJi().RestartMovePlayer();

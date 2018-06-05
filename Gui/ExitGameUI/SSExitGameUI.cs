@@ -38,12 +38,13 @@ public class SSExitGameUI : MonoBehaviour
 
     public void Init ()
     {
+        m_ExitType = ExitEnum.QuXiao;
         SSUIRoot.GetInstance().m_ExitUICom = this;
-        QueDingUI.mainTexture = QueDingImg[1];
-        QuXiaoUI.mainTexture = QuXiaoImg[0];
+        QueDingUI.mainTexture = QueDingImg[0];
+        QuXiaoUI.mainTexture = QuXiaoImg[1];
         SetAcitveBtFlash();
-        QueDingUI.transform.localScale = m_BigScale;
-        QuXiaoUI.transform.localScale = m_SmallScale;
+        QueDingUI.transform.localScale = m_SmallScale;
+        QuXiaoUI.transform.localScale = m_BigScale;
         InputEventCtrl.GetInstance().ClickTVYaoKongEnterBtEvent += ClickTVYaoKongEnterBtEvent;
         InputEventCtrl.GetInstance().ClickTVYaoKongExitBtEvent += ClickTVYaoKongExitBtEvent;
         InputEventCtrl.GetInstance().ClickTVYaoKongLeftBtEvent += ClickTVYaoKongLeftBtEvent;

@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class GameMovieCtrl : SSGameMono
 {
+    /// <summary>
+    /// 二维码对象.
+    /// </summary>
+    public GameObject m_ErWeiMaObj;
     public Transform m_UITrParent;
     /// <summary>
     /// 循环动画logo的动画.
@@ -213,6 +217,11 @@ public class GameMovieCtrl : SSGameMono
 #endif
         RemoveMovieLogoAni();
         RemoveExitGameUI();
+        
+        if (m_ErWeiMaObj != null)
+        {
+            Destroy(m_ErWeiMaObj);
+        }
     }
 
 	void CloseAllFangXiangPanPower()
