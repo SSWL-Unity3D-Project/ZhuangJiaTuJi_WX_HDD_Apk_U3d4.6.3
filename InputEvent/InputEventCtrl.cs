@@ -873,14 +873,19 @@ public class InputEventCtrl : MonoBehaviour {
 			break;
 		}
 	}
-#endregion
-	
+    #endregion
+
 #if !UNITY_EDITOR
 	float TimeSetEnterMoveBt;
 	ButtonState SetEnterBtSt = ButtonState.UP;
 #endif
 
-	void Update()
+    /// <summary>
+    /// 遥控器确定键的键值.
+    /// </summary>
+    KeyCode PadEnter01 = (KeyCode)10;
+    KeyCode PadEnter02 = (KeyCode)66;
+    void Update()
 	{
 //		#if !UNITY_EDITOR
 //		if (SetEnterBtSt == ButtonState.DOWN && Time.time - TimeSetEnterMoveBt > 2f) {
@@ -908,13 +913,22 @@ public class InputEventCtrl : MonoBehaviour {
         }
 #endif
 
-        if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
+        //(KeyCode)10 -> acbox虚拟机的遥控器确定键消息.
+        if (Input.GetKeyDown(KeyCode.KeypadEnter)
+            || Input.GetKeyDown(KeyCode.Return)
+            || Input.GetKeyDown(PadEnter01)
+            || Input.GetKeyDown(PadEnter02)
+            || Input.GetKeyDown(KeyCode.JoystickButton0))
         {
             //遥控器的确定键消息.
             ClickTVYaoKongEnterBt(ButtonState.DOWN);
         }
 
-        if (Input.GetKeyUp(KeyCode.KeypadEnter) || Input.GetKeyUp(KeyCode.Return))
+        if (Input.GetKeyUp(KeyCode.KeypadEnter)
+            || Input.GetKeyUp(KeyCode.Return)
+            || Input.GetKeyUp(PadEnter01)
+            || Input.GetKeyUp(PadEnter02)
+            || Input.GetKeyUp(KeyCode.JoystickButton0))
         {
             //遥控器的确定键消息.
             ClickTVYaoKongEnterBt(ButtonState.UP);
