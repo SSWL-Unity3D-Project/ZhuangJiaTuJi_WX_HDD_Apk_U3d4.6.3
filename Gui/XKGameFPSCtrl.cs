@@ -29,7 +29,13 @@ public class XKGameFPSCtrl : MonoBehaviour
 	static Color FPSColorVal = Color.green;
 	public void Start()
     {
+#if UNITY_STANDALONE_WIN
         Application.targetFrameRate = 100;
+#endif
+
+#if UNITY_ANDROID
+        Application.targetFrameRate = 60;
+#endif
         this.timeleft = this.UpdateInterval;
 		gameObject.SetActive(IsShowGameFPS);
 		InputEventCtrl.GetInstance().ClickSetMoveBtEvent += ClickSetMoveBtEvent;

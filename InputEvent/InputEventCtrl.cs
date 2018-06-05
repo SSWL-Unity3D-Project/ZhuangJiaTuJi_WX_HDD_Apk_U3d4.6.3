@@ -932,49 +932,49 @@ public class InputEventCtrl : MonoBehaviour {
             ClickTVYaoKongExitBt(ButtonState.UP);
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.Keypad4))
         {
             //接收遥控器/键盘上的向左按键信息.
             ClickTVYaoKongLeftBt(ButtonState.DOWN);
         }
 
-        if (Input.GetKeyUp(KeyCode.LeftArrow))
+        if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.Keypad4))
         {
             //接收遥控器/键盘上的向左按键信息.
             ClickTVYaoKongLeftBt(ButtonState.UP);
         }
         
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Keypad6))
         {
             //接收遥控器/键盘上的向右按键信息.
             ClickTVYaoKongRightBt(ButtonState.DOWN);
         }
 
-        if (Input.GetKeyUp(KeyCode.RightArrow))
+        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.Keypad6))
         {
             //接收遥控器/键盘上的向右按键信息.
             ClickTVYaoKongRightBt(ButtonState.UP);
         }
         
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Keypad2))
         {
             //接收遥控器/键盘上的向上按键信息.
             ClickTVYaoKongUpBt(ButtonState.DOWN);
         }
 
-        if (Input.GetKeyUp(KeyCode.UpArrow))
+        if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.Keypad2))
         {
             //接收遥控器/键盘上的向上按键信息.
             ClickTVYaoKongUpBt(ButtonState.UP);
         }
 
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.Keypad8))
         {
             //接收遥控器/键盘上的向下按键信息.
             ClickTVYaoKongDownBt(ButtonState.DOWN);
         }
 
-        if (Input.GetKeyUp(KeyCode.DownArrow))
+        if (Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.Keypad8))
         {
             //接收遥控器/键盘上的向下按键信息.
             ClickTVYaoKongDownBt(ButtonState.UP);
