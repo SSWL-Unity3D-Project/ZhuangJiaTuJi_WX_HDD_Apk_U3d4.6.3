@@ -473,6 +473,7 @@ public class pcvr : MonoBehaviour {
     /// </summary>
     [HideInInspector]
     public byte[] m_IndexPlayerActiveGameState = new byte[4];
+    public string[] m_PlayerHeadUrl = new string[4];
     public void SetIndexPlayerActiveGameState(int index, byte activeState)
     {
         m_IndexPlayerActiveGameState[index] = activeState;
@@ -875,8 +876,6 @@ public class pcvr : MonoBehaviour {
             InputEventCtrl.GetInstance().OnClickGameStartBt(indexPlayer);
         }
     }
-
-    public string[] m_PlayerHeadUrl = new string[4];
 
     // Update is called once per frame
     void Update()
