@@ -10,7 +10,13 @@ public class XKTriggerXuanYa : MonoBehaviour
         MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
         if (mesh != null)
         {
-            mesh.enabled = false;
+            Destroy(mesh);
+        }
+
+        MeshFilter meshFt = gameObject.GetComponent<MeshFilter>();
+        if (meshFt != null)
+        {
+            Destroy(meshFt);
         }
     }
 

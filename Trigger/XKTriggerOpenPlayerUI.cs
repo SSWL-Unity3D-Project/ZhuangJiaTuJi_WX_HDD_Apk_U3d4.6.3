@@ -11,10 +11,17 @@ public class XKTriggerOpenPlayerUI : MonoBehaviour
 	{
 		IsActiveOpenPlayerUI = false;
 		AiMarkComStatic = AiMarkCom;
+
         MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
         if (mesh != null)
         {
-            mesh.enabled = false;
+            Destroy(mesh);
+        }
+
+        MeshFilter meshFt = gameObject.GetComponent<MeshFilter>();
+        if (meshFt != null)
+        {
+            Destroy(meshFt);
         }
     }
 
