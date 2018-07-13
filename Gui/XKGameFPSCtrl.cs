@@ -30,11 +30,11 @@ public class XKGameFPSCtrl : MonoBehaviour
 	public void Start()
     {
 #if UNITY_STANDALONE_WIN
-        Application.targetFrameRate = 100;
+        //Application.targetFrameRate = 100;
 #endif
 
 #if UNITY_ANDROID
-        Application.targetFrameRate = 60;
+        //Application.targetFrameRate = 60;
 #endif
         this.timeleft = this.UpdateInterval;
 		gameObject.SetActive(IsShowGameFPS);

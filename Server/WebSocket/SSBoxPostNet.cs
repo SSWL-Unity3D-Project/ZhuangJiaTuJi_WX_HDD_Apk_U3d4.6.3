@@ -9,8 +9,8 @@ public class SSBoxPostNet : MonoBehaviour
 {
     public enum GamePadState
     {
-        Default,                //默认手柄.
-        LeiTingZhanChe,         //雷霆战车手柄.
+        Default = 0,                //默认手柄.
+        LeiTingZhanChe = 1,         //雷霆战车手柄.
     }
     /// <summary>
     /// 游戏手柄枚举.
@@ -126,7 +126,7 @@ public class SSBoxPostNet : MonoBehaviour
             {
                 _boxNumber = value.ToLower();
                 //設置紅點點遊戲手柄的url.
-                string url = _hDianDianGamePadUrl + _boxNumber;
+                string url = _hDianDianGamePadUrl + _boxNumber + "&gameId=1";
                 hDianDianGamePadUrl = url;
             }
             get

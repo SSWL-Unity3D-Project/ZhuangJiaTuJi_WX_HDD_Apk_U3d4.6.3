@@ -5,7 +5,8 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 
-public class pcvr : MonoBehaviour {
+public class pcvr : MonoBehaviour
+{
     /// <summary>
     /// 是否为红点点微信手柄操作模式.
     /// </summary>
@@ -125,9 +126,34 @@ public class pcvr : MonoBehaviour {
                 _Instance.m_SSBoxPostNet.Init();
                 _Instance.m_BarcodeCam = obj.AddComponent<BarcodeCam>();
             }
+
+            //创建咪咕Tv支付组件.
+            //_Instance.CreatMiGuTvPayObject();
 		}
 		return _Instance;
 	}
+
+    /// <summary>
+    /// 咪咕Tv支付组件.
+    /// </summary>
+    [HideInInspector]
+    public MiGuTv_InterFace m_MiGuTv_InterFace;
+    /// <summary>
+    /// 咪咕Tv支付检测组件.
+    /// </summary>
+    [HideInInspector]
+    public SSMiGuTvCheck m_SSMiGuTvCheck;
+    /// <summary>
+    /// 创建咪咕Tv支付组件.
+    /// </summary>
+    void CreatMiGuTvPayObject()
+    {
+        GameObject obj = new GameObject("_MiGuTvPay");
+        obj.transform.SetParent(transform);
+        m_MiGuTv_InterFace = obj.AddComponent<MiGuTv_InterFace>();
+        m_SSMiGuTvCheck = obj.AddComponent<SSMiGuTvCheck>();
+        m_SSMiGuTvCheck.Init();
+    }
 	
     void InitInfo()
     {
