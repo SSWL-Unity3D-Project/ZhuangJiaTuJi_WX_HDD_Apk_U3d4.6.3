@@ -741,7 +741,7 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 		CheckFireAudioPlayerZhuPao();
 		pcvr.OpenZuoYiQiNang(PlayerIndex);
 		pcvr.GetInstance().ActiveFangXiangDouDong(PlayerIndex, false);
-
+        
 		obj = SpawnPlayerAmmoByAmmoType(ZHU_PAO_INDEX, ammoSpawnPos, ammoSpawnRot);
 		if (obj == null) {
 			return;
@@ -1308,7 +1308,7 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 		obj.transform.parent = XkGameCtrl.PlayerAmmoArray;
 		XkGameCtrl.CheckObjDestroyThisTimed(obj);
 	}
-
+    
 	/**
 	 * ammoType == 0 -> 主角机枪.
 	 * ammoType == 1 -> 主炮炮管.
@@ -1381,7 +1381,11 @@ PlayerFireAudio[9] -> 主角主炮火力全开音效.
 			ammoParticle = DaoDanAmmoParticle[ammoIndex];
 			break;
 		}
-		SpawnPlayerAmmoParticle(ammoParticle, ammoSpawnPos, ammoSpawnRot);
+
+        if (!XkGameCtrl.IsNoFireLiZi)
+        {
+            SpawnPlayerAmmoParticle(ammoParticle, ammoSpawnPos, ammoSpawnRot);
+        }
 		obj = GetPlayerAmmo(ammoType, ammoSpawnPos, ammoSpawnRot, ammoIndex);
 		return obj;
 	}

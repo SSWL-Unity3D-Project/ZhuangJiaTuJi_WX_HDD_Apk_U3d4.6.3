@@ -237,6 +237,11 @@ public class NpcAmmoCtrl : MonoBehaviour {
 
 	void SpawnAmmoParticleObj()
 	{
+        if (XkGameCtrl.IsNoAmmoBaoZhaLiZi)
+        {
+            return;
+        }
+
 		#if USE_SPHERE_HIT
 		GameObject objParticle = null;
 		GameObject hitObj = CheckPlayerAmmoOverlapSphereHit();
@@ -480,12 +485,17 @@ public class NpcAmmoCtrl : MonoBehaviour {
 		if (AmmoType == PlayerAmmoType.GenZongAmmo) {
 			AmmoHealth -= 1f;
 			if (AmmoHealth <= 0f) {
-				if (AmmoExplode != null) {
-					GameObject expObj = (GameObject)Instantiate(AmmoExplode, AmmoTran.position, AmmoTran.rotation);
-					if (XkGameCtrl.NpcAmmoArray != null) {
-						expObj.transform.parent = XkGameCtrl.NpcAmmoArray;
-					}
-				}
+                if (!XkGameCtrl.IsNoAmmoBaoZhaLiZi)
+                {
+                    if (AmmoExplode != null)
+                    {
+                        GameObject expObj = (GameObject)Instantiate(AmmoExplode, AmmoTran.position, AmmoTran.rotation);
+                        if (XkGameCtrl.NpcAmmoArray != null)
+                        {
+                            expObj.transform.parent = XkGameCtrl.NpcAmmoArray;
+                        }
+                    }
+                }
 				DestroyNpcAmmo(ObjAmmo);
 			}
 			return;
@@ -514,12 +524,17 @@ public class NpcAmmoCtrl : MonoBehaviour {
 			if (AmmoType == PlayerAmmoType.GenZongAmmo) {
 				AmmoHealth -= 1f;
 				if (AmmoHealth <= 0f) {
-					if (AmmoExplode != null) {
-						GameObject expObj = (GameObject)Instantiate(AmmoExplode, AmmoTran.position, AmmoTran.rotation);
-						if (XkGameCtrl.NpcAmmoArray != null) {
-							expObj.transform.parent = XkGameCtrl.NpcAmmoArray;
-						}
-					}
+                    if (!XkGameCtrl.IsNoAmmoBaoZhaLiZi)
+                    {
+                        if (AmmoExplode != null)
+                        {
+                            GameObject expObj = (GameObject)Instantiate(AmmoExplode, AmmoTran.position, AmmoTran.rotation);
+                            if (XkGameCtrl.NpcAmmoArray != null)
+                            {
+                                expObj.transform.parent = XkGameCtrl.NpcAmmoArray;
+                            }
+                        }
+                    }
 					DestroyNpcAmmo(ObjAmmo);
 				}
 				return;
@@ -716,12 +731,17 @@ public class NpcAmmoCtrl : MonoBehaviour {
 		}
 		
 		if (collided) {
-			if (AmmoExplode != null) {
-				GameObject expObj = (GameObject)Instantiate(AmmoExplode, AmmoTran.position, AmmoTran.rotation);
-				if (XkGameCtrl.NpcAmmoArray != null) {
-					expObj.transform.parent = XkGameCtrl.NpcAmmoArray;
-				}
-			}
+            if (!XkGameCtrl.IsNoAmmoBaoZhaLiZi)
+            {
+                if (AmmoExplode != null)
+                {
+                    GameObject expObj = (GameObject)Instantiate(AmmoExplode, AmmoTran.position, AmmoTran.rotation);
+                    if (XkGameCtrl.NpcAmmoArray != null)
+                    {
+                        expObj.transform.parent = XkGameCtrl.NpcAmmoArray;
+                    }
+                }
+            }
 			DestroyNpcAmmo(ObjAmmo);
 		}
 	}
@@ -802,13 +822,19 @@ public class NpcAmmoCtrl : MonoBehaviour {
 			AmmoSiSanScript.SpawnNpcAmmo();
 		}
 
-		if (AmmoExplode != null) {
-			GameObject expObj = (GameObject)Instantiate(AmmoExplode, AmmoTran.position, AmmoTran.rotation);
-			if (XkGameCtrl.NpcAmmoArray != null) {
-				expObj.transform.parent = XkGameCtrl.NpcAmmoArray;
-			}
-			XkGameCtrl.CheckObjDestroyThisTimed(expObj);
-		}
+
+        if (!XkGameCtrl.IsNoAmmoBaoZhaLiZi)
+        {
+            if (AmmoExplode != null)
+            {
+                GameObject expObj = (GameObject)Instantiate(AmmoExplode, AmmoTran.position, AmmoTran.rotation);
+                if (XkGameCtrl.NpcAmmoArray != null)
+                {
+                    expObj.transform.parent = XkGameCtrl.NpcAmmoArray;
+                }
+                XkGameCtrl.CheckObjDestroyThisTimed(expObj);
+            }
+        }
 		DestroyNpcAmmo(ObjAmmo);
 	}
 

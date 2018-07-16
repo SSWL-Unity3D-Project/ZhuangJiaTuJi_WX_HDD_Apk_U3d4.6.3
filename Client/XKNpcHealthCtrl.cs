@@ -518,10 +518,13 @@ public class XKNpcHealthCtrl : MonoBehaviour {
 			return;
 		}
 
-		GameObject objExplode = null;
-		objExplode = (GameObject)Instantiate(DeathExplode, DeathExplodePoint.position, DeathExplodePoint.rotation);
-		objExplode.transform.parent = XkGameCtrl.NpcAmmoArray;
-		XkGameCtrl.CheckObjDestroyThisTimed(objExplode);
+        if (!XkGameCtrl.IsNoNpcBaoZhaLiZi)
+        {
+            GameObject objExplode = null;
+            objExplode = (GameObject)Instantiate(DeathExplode, DeathExplodePoint.position, DeathExplodePoint.rotation);
+            objExplode.transform.parent = XkGameCtrl.NpcAmmoArray;
+            XkGameCtrl.CheckObjDestroyThisTimed(objExplode);
+        }
 	}
 
 	public string GetNpcName()

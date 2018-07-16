@@ -441,10 +441,13 @@ public class XKCannonCtrl : MonoBehaviour {
 						}
 					}
 
-					obj = (GameObject)Instantiate(DaPaoAmmoLiZi, SpawnAmmoPoint[0].position, SpawnAmmoPoint[0].rotation);
-					tran = obj.transform;
-					XkGameCtrl.CheckObjDestroyThisTimed(obj);
-					tran.parent = SpawnAmmoPoint[0];
+                    if (!XkGameCtrl.IsNoFireLiZi)
+                    {
+                        obj = (GameObject)Instantiate(DaPaoAmmoLiZi, SpawnAmmoPoint[0].position, SpawnAmmoPoint[0].rotation);
+                        tran = obj.transform;
+                        XkGameCtrl.CheckObjDestroyThisTimed(obj);
+                        tran.parent = SpawnAmmoPoint[0];
+                    }
 				}
 			}
 			else {
@@ -510,9 +513,12 @@ public class XKCannonCtrl : MonoBehaviour {
 			AmmoScript.SetIsAimFeiJiPlayer(false);
 			obj.transform.parent = XkGameCtrl.NpcAmmoArray;
 
-			obj = (GameObject)Instantiate(DaPaoAmmoLiZi, SpawnAmmoPoint[count].position, SpawnAmmoPoint[count].rotation);
-			XkGameCtrl.CheckObjDestroyThisTimed(obj);
-			obj.transform.parent = SpawnAmmoPoint[count];
+            if (!XkGameCtrl.IsNoFireLiZi)
+            {
+                obj = (GameObject)Instantiate(DaPaoAmmoLiZi, SpawnAmmoPoint[count].position, SpawnAmmoPoint[count].rotation);
+                XkGameCtrl.CheckObjDestroyThisTimed(obj);
+                obj.transform.parent = SpawnAmmoPoint[count];
+            }
 
 			yield return new WaitForSeconds(TimeAmmoUnit);
 			if (count <= 0) {

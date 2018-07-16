@@ -88,6 +88,11 @@ public class XKNpcAnimatorCtrl : MonoBehaviour {
 			ResetNpcAnimation();
 //			AnimationNameCur = aniName;
 		}
+
+        if (0f == AnimatorCom.speed)
+        {
+            AnimatorCom.speed = SpeedActionCur;
+        }
 		AnimatorCom.SetBool(aniName, true);
 	}
 
@@ -234,13 +239,17 @@ public class XKNpcAnimatorCtrl : MonoBehaviour {
 
 		GameObject obj = null;
 		Transform tran = null;
-		if (AmmoLiZiPrefab != null && AmmoLiZiObj == null) {
-			obj = (GameObject)Instantiate(AmmoLiZiPrefab, AmmoSpawnTran.position, AmmoSpawnTran.rotation);
-			tran = obj.transform;
-			tran.parent = XkGameCtrl.NpcAmmoArray;
-			AmmoLiZiObj = obj;
-			XkGameCtrl.CheckObjDestroyThisTimed(obj);
-		}
+        if (!XkGameCtrl.IsNoFireLiZi)
+        {
+            if (AmmoLiZiPrefab != null && AmmoLiZiObj == null)
+            {
+                obj = (GameObject)Instantiate(AmmoLiZiPrefab, AmmoSpawnTran.position, AmmoSpawnTran.rotation);
+                tran = obj.transform;
+                tran.parent = XkGameCtrl.NpcAmmoArray;
+                AmmoLiZiObj = obj;
+                XkGameCtrl.CheckObjDestroyThisTimed(obj);
+            }
+        }
 
 		if (AmmoPrefab == null) {
 			return;		

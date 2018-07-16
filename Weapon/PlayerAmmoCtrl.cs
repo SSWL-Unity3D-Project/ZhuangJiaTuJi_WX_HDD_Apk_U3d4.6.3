@@ -271,6 +271,11 @@ public class PlayerAmmoCtrl : MonoBehaviour {
 
 	void SpawnAmmoParticleObj()
 	{
+        if (XkGameCtrl.IsNoAmmoBaoZhaLiZi)
+        {
+            return;
+        }
+
 		#if USE_SPHERE_HIT
 		GameObject objParticle = null;
 		GameObject hitObj = CheckPlayerAmmoOverlapSphereHit(1);

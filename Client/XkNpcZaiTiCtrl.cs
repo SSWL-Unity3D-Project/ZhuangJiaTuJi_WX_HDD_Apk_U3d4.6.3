@@ -271,16 +271,20 @@ public class XkNpcZaiTiCtrl : MonoBehaviour {
 					AudioTeShuNpcFire[i].Play();
 				}
 
-				//if (AmmoLZPrefabTeShu != null && AmmoLZPrefabTeShu[i] != null && AmmoLZObjTeShu[i] == null) {
-				if (AmmoLZPrefabTeShu != null && AmmoLZPrefabTeShu[i] != null) {
-					obj = (GameObject)Instantiate(AmmoLZPrefabTeShu[i],
-					                              AmmoSpawnTranTeShu[i].position, AmmoSpawnTranTeShu[i].rotation);
-					
-					tran = obj.transform;
-					//AmmoLZObjTeShu[i] = obj;
-					XkGameCtrl.CheckObjDestroyThisTimed(obj);
-					tran.parent = AmmoSpawnTranTeShu[i];
-				}
+                if (!XkGameCtrl.IsNoFireLiZi)
+                {
+                    //if (AmmoLZPrefabTeShu != null && AmmoLZPrefabTeShu[i] != null && AmmoLZObjTeShu[i] == null) {
+                    if (AmmoLZPrefabTeShu != null && AmmoLZPrefabTeShu[i] != null)
+                    {
+                        obj = (GameObject)Instantiate(AmmoLZPrefabTeShu[i],
+                                                      AmmoSpawnTranTeShu[i].position, AmmoSpawnTranTeShu[i].rotation);
+
+                        tran = obj.transform;
+                        //AmmoLZObjTeShu[i] = obj;
+                        XkGameCtrl.CheckObjDestroyThisTimed(obj);
+                        tran.parent = AmmoSpawnTranTeShu[i];
+                    }
+                }
 				
 				PlayerAmmoCtrl ammoPlayerScript = AmmoPrefabTeShu[i].GetComponent<PlayerAmmoCtrl>();
 				if (ammoPlayerScript != null && !XkGameCtrl.GetInstance().IsCartoonShootTest) {

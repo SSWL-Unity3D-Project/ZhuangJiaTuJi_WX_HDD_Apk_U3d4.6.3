@@ -471,16 +471,16 @@ public class XkGameCtrl : SSGameMono
 			Invoke("DelayResetIsLoadingLevel", 2f);
 			Invoke("TestInitCameraRender", 0.5f);
 
-			if (!GameMovieCtrl.IsActivePlayer)
-			{
-				if (XKGlobalData.GameVersionPlayer == 0)
-				{
-					SetActivePlayerOne(true);
-				}
-				else {
-					SetActivePlayerThree(true);
-				}
-			}
+			//if (!GameMovieCtrl.IsActivePlayer)
+			//{
+			//	if (XKGlobalData.GameVersionPlayer == 0)
+			//	{
+			//		SetActivePlayerOne(true);
+			//	}
+			//	else {
+			//		SetActivePlayerThree(true);
+			//	}
+			//}
 			IsPlayGamePOne = IsActivePlayerOne;
 			IsPlayGamePTwo = IsActivePlayerTwo;
 			IsPlayGamePThree = IsActivePlayerThree;
@@ -529,7 +529,10 @@ public class XkGameCtrl : SSGameMono
 	}
 #endif
 
-	public static void TestDelayActivePlayerOne()
+    public static bool IsNoFireLiZi = true;
+    public static bool IsNoAmmoBaoZhaLiZi = true;
+    public static bool IsNoNpcBaoZhaLiZi = true;
+    public static void TestDelayActivePlayerOne()
 	{
 		if (GameMovieCtrl.IsActivePlayer) {
 			return;
