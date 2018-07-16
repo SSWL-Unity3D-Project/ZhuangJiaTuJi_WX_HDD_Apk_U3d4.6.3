@@ -512,13 +512,14 @@ public class XKNpcHealthCtrl : MonoBehaviour {
 		CheckDisGameCamera();
 	}
 
+	bool IsUseDeathExp = true;
 	void CheckNpcDeathExplode()
 	{
 		if (DeathExplode == null) {
 			return;
 		}
 
-        if (!XkGameCtrl.IsNoNpcBaoZhaLiZi)
+		if (!XkGameCtrl.IsNoNpcBaoZhaLiZi || IsUseDeathExp)
         {
             GameObject objExplode = null;
             objExplode = (GameObject)Instantiate(DeathExplode, DeathExplodePoint.position, DeathExplodePoint.rotation);
