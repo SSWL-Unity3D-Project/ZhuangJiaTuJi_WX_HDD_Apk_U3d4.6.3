@@ -66,7 +66,7 @@ public class XKCannonCtrl : MonoBehaviour {
 			item.gameObject.SetActive(true);
 		}
 
-		if (AudioCannonFire != null) {
+		if (AudioCannonFire != null && AudioCannonFire.clip != null) {
 			AudioCannonFire.Stop();
 		}
 
@@ -333,7 +333,7 @@ public class XKCannonCtrl : MonoBehaviour {
 
 	void PlayAudioCannonFire()
 	{
-		if (AudioCannonFire == null) {
+		if (AudioCannonFire == null || AudioCannonFire.clip == null) {
 			return;
 		}
 
@@ -353,7 +353,7 @@ public class XKCannonCtrl : MonoBehaviour {
 
 	void StopAudioCannonFire()
 	{
-		if (AudioCannonFire == null) {
+		if (AudioCannonFire == null || AudioCannonFire.clip == null) {
 			return;
 		}
 		AudioCannonFire.Stop();
@@ -664,7 +664,7 @@ public class XKCannonCtrl : MonoBehaviour {
 			HealthScript.SetCannonScript(this);
 		}
 
-		if (AudioCannonFire != null) {
+		if (AudioCannonFire != null && AudioCannonFire.clip != null) {
 			AudioCannonFire.Stop();
 		}
 		InitNpcAmmoList();
