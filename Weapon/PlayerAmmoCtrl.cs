@@ -271,9 +271,13 @@ public class PlayerAmmoCtrl : MonoBehaviour {
 
 	void SpawnAmmoParticleObj()
 	{
-        if (XkGameCtrl.IsNoAmmoBaoZhaLiZi)
+        if (AmmoType != PlayerAmmoType.PaiJiPaoAmmo)
         {
-            return;
+            //处理迫击炮子弹外,其它子弹均需检测是否产生爆炸粒子.
+            if (XkGameCtrl.IsNoAmmoBaoZhaLiZi)
+            {
+                return;
+            }
         }
 
 		#if USE_SPHERE_HIT
