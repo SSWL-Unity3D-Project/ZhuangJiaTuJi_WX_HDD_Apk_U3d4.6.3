@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
-public class XKNpcSpawnListCtrl : MonoBehaviour {
+public class XKNpcSpawnListCtrl : MonoBehaviour
+{
 	public List<XKNpcSpawnListDt> NpcDtList = new List<XKNpcSpawnListDt>(10);
 	static XKNpcSpawnListCtrl _Instance;
 	public static XKNpcSpawnListCtrl GetInstance()
@@ -96,4 +96,19 @@ public class XKNpcSpawnListCtrl : MonoBehaviour {
 			}
 		}
 	}
+
+    /// <summary>
+    /// 清理暂时不用的npc数据.
+    /// </summary>
+    public void CleanGameNoUsedNpcData()
+    {
+        int max = NpcDtList.Count;
+        for (int i = 0; i < max; i++)
+        {
+            if (NpcDtList[i] != null)
+            {
+                NpcDtList[i].ClearNpcObj();
+            }
+        }
+    }
 }

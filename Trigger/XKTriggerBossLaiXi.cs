@@ -25,6 +25,11 @@ public class XKTriggerBossLaiXi : MonoBehaviour
 			return;
 		}
 		XKBossLXCtrl.GetInstance().StartPlayBossLaiXi();
+
+        if (XKNpcSpawnListCtrl.GetInstance() != null)
+        {
+            XKNpcSpawnListCtrl.GetInstance().CleanGameNoUsedNpcData();
+        }
 	}
 
 	void OnDrawGizmosSelected()

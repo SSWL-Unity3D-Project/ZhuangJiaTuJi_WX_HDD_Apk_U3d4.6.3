@@ -597,7 +597,12 @@ public class XkGameCtrl : SSGameMono
 
 			if (Input.GetKeyUp(KeyCode.X)) {
 				IsShowDebugInfoBox = !IsShowDebugInfoBox; //test
-			}
+
+                //if (XKNpcSpawnListCtrl.GetInstance() != null)
+                //{
+                //    XKNpcSpawnListCtrl.GetInstance().CleanGameNoUsedNpcData(); //test
+                //}
+            }
 
 //			if (Input.GetKeyUp(KeyCode.P)) {
 //				float bloodVal = 5000f;

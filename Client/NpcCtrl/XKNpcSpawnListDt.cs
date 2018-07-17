@@ -169,4 +169,81 @@ public class XKNpcSpawnListDt : MonoBehaviour {
 			}
 		}
 	}
+
+    /// <summary>
+    /// 清理暂时不用的npc数据.
+    /// </summary>
+    public void ClearNpcObj()
+    {
+        int max = NpcList.Count;
+        int indexNpc = 0;
+        GameObject[] npcArray = new GameObject[max];
+        XKNpcMoveCtrl npcMoveScript = null;
+        XKDaPaoCtrl npcDaPaoScript = null;
+        string npcName = "noRemovedNpc";
+
+        if (max > 0)
+        {
+            for (int i = 0; i < max; i++)
+            {
+                //统计暂时不用的npc.
+                if (NpcList[i] != null)
+                {
+                    switch (NpcScriptSt)
+                    {
+                        case NpcScriptState.XKNpcMove:
+                            npcMoveScript = NpcList[i].GetComponent<XKNpcMoveCtrl>();
+                            if (npcMoveScript != null
+                                && npcMoveScript.GetIsDeathNPC())
+                            {
+                                if (indexNpc == 0)
+                                {
+                                    npcName = NpcList[i].name;
+                                }
+                                npcArray[indexNpc] = NpcList[i];
+                                indexNpc++;
+                            }
+                            break;
+
+                        case NpcScriptState.XKDaPao:
+                            npcDaPaoScript = NpcList[i].GetComponent<XKDaPaoCtrl>();
+                            if (npcDaPaoScript != null
+                                && npcDaPaoScript.GetIsDeathNpc())
+                            {
+                                if (indexNpc == 0)
+                                {
+                                    npcName = NpcList[i].name;
+                                }
+                                npcArray[indexNpc] = NpcList[i];
+                                indexNpc++;
+                            }
+                            break;
+                    }
+                }
+            }
+            
+            for (int i = 0; i < indexNpc; i++)
+            {
+                if (npcArray[i] != null)
+                {
+                    if (NpcList.Contains(npcArray[i]))
+                    {
+                        //清理列表.
+                        NpcList.Remove(npcArray[i]);
+                    }
+                }
+            }
+
+            for (int i = 0; i < indexNpc; i++)
+            {
+                if (npcArray[i] != null)
+                {
+                    //删除暂时不用的npc.
+                    Destroy(npcArray[i]);
+                }
+            }
+            Debug.Log("Unity: ClearNpcObj -> max == " + max + ", NpcScriptSt == " + NpcScriptSt + ", npcName == " + npcName
+                + ", cleanCount == " + indexNpc);
+        }
+    }
 }

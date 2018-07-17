@@ -18,7 +18,6 @@ public class SSTriggerSceneManage : MonoBehaviour
         {
             return;
         }
-        enabled = false;
 
         if (m_OpenObjArray.Length > 0)
         {
