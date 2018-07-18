@@ -185,14 +185,23 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
-		if (IsMoveToTiaoYueDian) {
+		if (IsMoveToTiaoYueDian)
+        {
 			//PlayerTran.position = TiaoBanObjAy[1].transform.position;
 			return;
 		}
 
-		if (!XkGameCtrl.GetInstance().IsCartoonShootTest) {
+        if (IsActiveZhuiYa)
+        {
+            //玩家坠崖后禁止操作坦克的移动.
+            return;
+        }
+
+		if (!XkGameCtrl.GetInstance().IsCartoonShootTest)
+        {
 			CheckPlayerIsResetPosition();
 		}
+
 		UpdateJiSuTuoWeiTX();
 		switch (TKMoveSt) {
 		case TKMoveState.U_FangXiangPan:
