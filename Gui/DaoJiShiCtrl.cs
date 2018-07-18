@@ -90,7 +90,20 @@ public class DaoJiShiCtrl : MonoBehaviour
         HiddenGameOverObj();
 	}
 
-	public void StartPlayDaoJiShi()
+    void HiddenAllTVYaoKongEnterUI()
+    {
+        InstanceOne.HiddenTVYaoKongEnterObj();
+        InstanceTwo.HiddenTVYaoKongEnterObj();
+        InstanceThree.HiddenTVYaoKongEnterObj();
+        InstanceFour.HiddenTVYaoKongEnterObj();
+    }
+
+    void HiddenTVYaoKongEnterObj()
+    {
+        m_TVYaoKongEnterObj.SetActive(false);
+    }
+
+    public void StartPlayDaoJiShi()
 	{
         if (XkGameCtrl.GetInstance() != null && XkGameCtrl.GetInstance().m_GameUICom != null)
         {
@@ -98,6 +111,7 @@ public class DaoJiShiCtrl : MonoBehaviour
             if (!isFuHuoPlayer)
             {
                 Debug.LogWarning("Player cannot fuHuo...");
+                HiddenAllTVYaoKongEnterUI();
                 if (XkGameCtrl.PlayerActiveNum <= 0)
                 {
                     //没有激活的玩家,显示游戏结束界面.

@@ -932,8 +932,8 @@ public class InputEventCtrl : MonoBehaviour
         public static KeyCode PadEnter02 = (KeyCode)66;
     }
 
-    byte[] TestYKQDirState = new byte[4];
-    byte[] TestYKQDirCount = new byte[4];
+    //byte[] TestYKQDirState = new byte[4];
+    //byte[] TestYKQDirCount = new byte[4];
     void Update()
     {
 //#if !UNITY_EDITOR
@@ -1000,64 +1000,64 @@ public class InputEventCtrl : MonoBehaviour
         {
             //接收遥控器/键盘上的向左按键信息.
             ClickTVYaoKongLeftBt(ButtonState.DOWN);
-            TestYKQDirState[0] = 1;
-            TestYKQDirCount[0]++;
+            //TestYKQDirState[0] = 1;
+            //TestYKQDirCount[0]++;
         }
 
         if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.Keypad4))
         {
             //接收遥控器/键盘上的向左按键信息.
             ClickTVYaoKongLeftBt(ButtonState.UP);
-            TestYKQDirState[0] = 0;
-            TestYKQDirCount[0]++;
+            //TestYKQDirState[0] = 0;
+            //TestYKQDirCount[0]++;
         }
 
         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Keypad6))
         {
             //接收遥控器/键盘上的向右按键信息.
             ClickTVYaoKongRightBt(ButtonState.DOWN);
-            TestYKQDirState[1] = 1;
-            TestYKQDirCount[1]++;
+            //TestYKQDirState[1] = 1;
+            //TestYKQDirCount[1]++;
         }
 
         if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.Keypad6))
         {
             //接收遥控器/键盘上的向右按键信息.
             ClickTVYaoKongRightBt(ButtonState.UP);
-            TestYKQDirState[1] = 0;
-            TestYKQDirCount[1]++;
+            //TestYKQDirState[1] = 0;
+            //TestYKQDirCount[1]++;
         }
 
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Keypad2))
         {
             //接收遥控器/键盘上的向上按键信息.
             ClickTVYaoKongUpBt(ButtonState.DOWN);
-            TestYKQDirState[2] = 1;
-            TestYKQDirCount[2]++;
+            //TestYKQDirState[2] = 1;
+            //TestYKQDirCount[2]++;
         }
 
         if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.Keypad2))
         {
             //接收遥控器/键盘上的向上按键信息.
             ClickTVYaoKongUpBt(ButtonState.UP);
-            TestYKQDirState[2] = 0;
-            TestYKQDirCount[2]++;
+            //TestYKQDirState[2] = 0;
+            //TestYKQDirCount[2]++;
         }
 
         if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.Keypad8))
         {
             //接收遥控器/键盘上的向下按键信息.
             ClickTVYaoKongDownBt(ButtonState.DOWN);
-            TestYKQDirState[3] = 1;
-            TestYKQDirCount[3]++;
+            //TestYKQDirState[3] = 1;
+            //TestYKQDirCount[3]++;
         }
 
         if (Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.Keypad8))
         {
             //接收遥控器/键盘上的向下按键信息.
             ClickTVYaoKongDownBt(ButtonState.UP);
-            TestYKQDirState[3] = 0;
-            TestYKQDirCount[3]++;
+            //TestYKQDirState[3] = 0;
+            //TestYKQDirCount[3]++;
         }
 
         if (pcvr.IsHongDDShouBing)
@@ -1410,16 +1410,16 @@ public class InputEventCtrl : MonoBehaviour
             ClickStopDongGanBtFour(ButtonState.UP);
         }
     }
-    float m_Hor = 0f;
+    //float m_Hor = 0f;
 
-    public void OnGUI()
-    {
-        string test = "L " + TestYKQDirState[0] + " " + TestYKQDirCount[0]
-            + ", R " + TestYKQDirState[1] + " " + TestYKQDirCount[1]
-            + ", U " + TestYKQDirState[2] + " " + TestYKQDirCount[2]
-            + ", D " + TestYKQDirState[3] + " " + TestYKQDirCount[3] + ", Hor " + m_Hor.ToString("f2");
-        GUI.Box(new Rect(0f, 25f, Screen.width, 30f), test);
-    }
+    //public void OnGUI()
+    //{
+    //    string test = "L " + TestYKQDirState[0] + " " + TestYKQDirCount[0]
+    //        + ", R " + TestYKQDirState[1] + " " + TestYKQDirCount[1]
+    //        + ", U " + TestYKQDirState[2] + " " + TestYKQDirCount[2]
+    //        + ", D " + TestYKQDirState[3] + " " + TestYKQDirCount[3] + ", Hor " + m_Hor.ToString("f2");
+    //    GUI.Box(new Rect(0f, 25f, Screen.width, 30f), test);
+    //}
 }
 
 public enum ButtonState : int
