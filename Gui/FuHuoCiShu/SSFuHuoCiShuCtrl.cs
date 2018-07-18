@@ -26,10 +26,9 @@ public class SSFuHuoCiShuCtrl : MonoBehaviour
         {
             powVal = (int)Mathf.Pow(10, max - i - 1);
             valTmp = numVal / powVal;
-            Debug.Log("Unity: valTmp ====== "+valTmp);
+            //Debug.Log("Unity: valTmp ====== "+valTmp);
             if (m_FuHuoCiShuSprite[i] != null)
 			{
-				Debug.Log("Unity: valTmp *****====== "+valTmp);
                 m_FuHuoCiShuSprite[i].spriteName = valTmp.ToString();
             }
             numVal -= valTmp * powVal;
