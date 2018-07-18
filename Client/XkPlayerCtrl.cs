@@ -349,6 +349,10 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 
 		if (PlayerSt == PlayerTypeEnum.FeiJi) {
 			Debug.Log("Unity:"+"RestartMovePlayer -> player "+PlayerSt);
+			if (XkGameCtrl.GetInstance() != null && XkGameCtrl.GetInstance().m_GameUICom != null)
+			{
+				XkGameCtrl.GetInstance().m_GameUICom.ShowGameFuHuoCiShiInfo();
+			}
 		}
 
 		if (ITweenScript != null) {

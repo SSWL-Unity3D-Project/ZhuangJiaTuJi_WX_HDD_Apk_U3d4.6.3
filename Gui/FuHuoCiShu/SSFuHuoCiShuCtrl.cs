@@ -7,10 +7,6 @@ public class SSFuHuoCiShuCtrl : MonoBehaviour
     /// </summary>
     public int m_FuHuoCiShu = 5;
     public UISprite[] m_FuHuoCiShuSprite = new UISprite[1];
-    public void Init(int numVal)
-    {
-        ShowPlayerFuHuoCiShu(numVal);
-    }
 
     /// <summary>
     /// 显示游戏中玩家的复活次数UI.
@@ -32,7 +28,8 @@ public class SSFuHuoCiShuCtrl : MonoBehaviour
             valTmp = numVal / powVal;
             Debug.Log("Unity: valTmp ====== "+valTmp);
             if (m_FuHuoCiShuSprite[i] != null)
-            {
+			{
+				Debug.Log("Unity: valTmp *****====== "+valTmp);
                 m_FuHuoCiShuSprite[i].spriteName = valTmp.ToString();
             }
             numVal -= valTmp * powVal;

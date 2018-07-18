@@ -43,7 +43,7 @@ public class SSGameUICtrl : SSGameMono
         int fuHuoCiShu = m_FuHuoCiShuCom.m_FuHuoCiShu - jiHuoCiShu;
         if (fuHuoCiShu > -1)
         {
-            m_FuHuoCiShuCom.Init(fuHuoCiShu);
+			m_FuHuoCiShuCom.ShowPlayerFuHuoCiShu(fuHuoCiShu);
         }
 
         if (fuHuoCiShu <= 0)

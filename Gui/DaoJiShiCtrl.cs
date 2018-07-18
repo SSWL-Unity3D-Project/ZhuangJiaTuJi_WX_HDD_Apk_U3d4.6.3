@@ -95,7 +95,7 @@ public class DaoJiShiCtrl : MonoBehaviour
         if (XkGameCtrl.GetInstance() != null && XkGameCtrl.GetInstance().m_GameUICom != null)
         {
             bool isFuHuoPlayer = XkGameCtrl.GetInstance().m_GameUICom.GetIsFuHuoPlayer();
-            if (isFuHuoPlayer)
+            if (!isFuHuoPlayer)
             {
                 Debug.LogWarning("Player cannot fuHuo...");
                 if (XkGameCtrl.PlayerActiveNum <= 0)
