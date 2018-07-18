@@ -98,6 +98,11 @@ public class DaoJiShiCtrl : MonoBehaviour
             if (isFuHuoPlayer)
             {
                 Debug.LogWarning("Player cannot fuHuo...");
+                if (XkGameCtrl.PlayerActiveNum <= 0)
+                {
+                    //没有激活的玩家,显示游戏结束界面.
+                    GameOverCtrl.GetInstance().ShowGameOver();
+                }
                 return;
             }
         }
