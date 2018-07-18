@@ -49,6 +49,7 @@ public class SSGameUICtrl : SSGameMono
         if (fuHuoCiShu <= 0)
         {
             RemoveErWeiMaUI();
+            DaoJiShiCtrl.HiddenAllTVYaoKongEnterUI();
         }
     }
 

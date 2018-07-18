@@ -90,7 +90,7 @@ public class DaoJiShiCtrl : MonoBehaviour
         HiddenGameOverObj();
 	}
 
-    void HiddenAllTVYaoKongEnterUI()
+    public static void HiddenAllTVYaoKongEnterUI()
     {
         InstanceOne.HiddenTVYaoKongEnterObj();
         InstanceTwo.HiddenTVYaoKongEnterObj();
