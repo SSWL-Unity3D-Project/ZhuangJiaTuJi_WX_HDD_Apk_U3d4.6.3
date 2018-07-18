@@ -567,6 +567,16 @@ public class pcvr : MonoBehaviour
     int GetActivePlayerIndex()
     {
         int indexPlayer = -1;
+        if (XkGameCtrl.GetInstance() != null && XkGameCtrl.GetInstance().m_GameUICom != null)
+        {
+            bool isFuHuoPlayer = XkGameCtrl.GetInstance().m_GameUICom.GetIsFuHuoPlayer();
+            if (isFuHuoPlayer)
+            {
+                Debug.LogWarning("Player cannot fuHuo...");
+                return indexPlayer;
+            }
+        }
+
         for (int i = 0; i < m_IndexPlayerActiveGameState.Length; i++)
         {
             if (m_IndexPlayerActiveGameState[i] == 0)

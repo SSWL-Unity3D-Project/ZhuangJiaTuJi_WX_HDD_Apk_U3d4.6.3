@@ -28,6 +28,10 @@ public enum GameJiTaiType
 
 public class XkGameCtrl : SSGameMono
 {
+    /// <summary>
+    /// 游戏UI管理.
+    /// </summary>
+    public SSGameUICtrl m_GameUICom;
     [System.Serializable]
     public class GameUIData
     {
@@ -489,6 +493,11 @@ public class XkGameCtrl : SSGameMono
 			XKGlobalData.GetInstance().PlayGuanKaBeiJingAudio();
             InputEventCtrl.GetInstance().ClickTVYaoKongExitBtEvent += ClickTVYaoKongExitBtEvent;
             pcvr.GetInstance().AddTVYaoKongBtEvent();
+
+            if (m_GameUICom != null)
+            {
+                m_GameUICom.CreatFuHuoCiShuPanel();
+            }
         }
 		catch (System.Exception e)
 		{
@@ -1605,6 +1614,7 @@ public class XkGameCtrl : SSGameMono
 		if (isActive) {
 			IsPlayGamePOne = true;
 			XKPlayerScoreCtrl.ShowPlayerScore(PlayerEnum.PlayerOne);
+            XKGlobalData.GetInstance().AddJiHuoCiShu();
 		}
 		else {
 			XKPlayerScoreCtrl.HiddenPlayerScore(PlayerEnum.PlayerOne);
@@ -1631,7 +1641,8 @@ public class XkGameCtrl : SSGameMono
 		if (isActive) {
 			IsPlayGamePTwo = true;
 			XKPlayerScoreCtrl.ShowPlayerScore(PlayerEnum.PlayerTwo);
-		}
+            XKGlobalData.GetInstance().AddJiHuoCiShu();
+        }
 		else {
 			XKPlayerScoreCtrl.HiddenPlayerScore(PlayerEnum.PlayerTwo);
 		}
@@ -1657,7 +1668,8 @@ public class XkGameCtrl : SSGameMono
 		if (isActive) {
 			IsPlayGamePThree = true;
 			XKPlayerScoreCtrl.ShowPlayerScore(PlayerEnum.PlayerThree);
-		}
+            XKGlobalData.GetInstance().AddJiHuoCiShu();
+        }
 		else {
 			XKPlayerScoreCtrl.HiddenPlayerScore(PlayerEnum.PlayerThree);
 		}
@@ -1683,7 +1695,8 @@ public class XkGameCtrl : SSGameMono
 		if (isActive) {
 			IsPlayGamePFour = true;
 			XKPlayerScoreCtrl.ShowPlayerScore(PlayerEnum.PlayerFour);
-		}
+            XKGlobalData.GetInstance().AddJiHuoCiShu();
+        }
 		else {
 			XKPlayerScoreCtrl.HiddenPlayerScore(PlayerEnum.PlayerFour);
 		}
@@ -1762,10 +1775,11 @@ public class XkGameCtrl : SSGameMono
 		SetActivePlayerTwo(false);
 		SetActivePlayerThree(false);
 		SetActivePlayerFour(false);
-
+        
         pcvr.GetInstance().ClearGameWeiXinData();
 		if (!IsGameOnQuit) {
-			System.GC.Collect();
+            XKGlobalData.GetInstance().ResetJiHuoCiShu();
+            System.GC.Collect();
 			Application.LoadLevel((int)GameLevel.Movie);
 		}
 	}

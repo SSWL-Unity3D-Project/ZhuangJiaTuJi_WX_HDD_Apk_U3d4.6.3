@@ -81,6 +81,16 @@ public class ErWeiMaUI : MonoBehaviour
         pcvr.GetInstance().m_BarcodeCam.m_ErWeuMaImg = screenShot;
     }
 
+    bool IsRemoveSelf = false;
+    public void RemoveSelf()
+    {
+        if (!IsRemoveSelf)
+        {
+            IsRemoveSelf = true;
+            Destroy(gameObject);
+        }
+    }
+
 //#if UNITY_EDITOR
 //    void OnGUI()
 //    {

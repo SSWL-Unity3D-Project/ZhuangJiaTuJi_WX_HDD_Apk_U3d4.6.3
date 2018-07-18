@@ -369,4 +369,40 @@ public class XKGlobalData {
 	{
 		AudioListCtrl.PlayAudioSource(AudioListCtrl.GetInstance().ASZhunXingTX);
 	}
+
+    int _JiHuoCiShu = 0;
+    /// <summary>
+    /// 游戏激活次数.
+    /// </summary>
+    public int m_JiHuoCiShu
+    {
+        set
+        {
+            _JiHuoCiShu = value;
+        }
+        get
+        {
+            return _JiHuoCiShu;
+        }
+    }
+
+    /// <summary>
+    /// 增加激活次数.
+    /// </summary>
+    public void AddJiHuoCiShu()
+    {
+        m_JiHuoCiShu += 1;
+        if (XkGameCtrl.GetInstance() != null && XkGameCtrl.GetInstance().m_GameUICom != null)
+        {
+            XkGameCtrl.GetInstance().m_GameUICom.ShowGameFuHuoCiShiInfo();
+        }
+    }
+
+    /// <summary>
+    /// 重置激活次数.
+    /// </summary>
+    public void ResetJiHuoCiShu()
+    {
+        m_JiHuoCiShu = 0;
+    }
 }
