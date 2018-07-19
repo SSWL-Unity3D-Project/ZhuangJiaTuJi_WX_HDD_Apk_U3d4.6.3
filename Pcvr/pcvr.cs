@@ -7,10 +7,15 @@ using System.Collections.Generic;
 
 public class pcvr : MonoBehaviour
 {
+    SSGamePayUICtrl.TVGamePayState _TVGamePayType = SSGamePayUICtrl.TVGamePayState.MiGuApk;
     /// <summary>
     /// 电视游戏支付平台.
     /// </summary>
-    public SSGamePayUICtrl.TVGamePayState m_TVGamePayType = SSGamePayUICtrl.TVGamePayState.ShiBoYunApk;
+    public SSGamePayUICtrl.TVGamePayState m_TVGamePayType
+    {
+        set { _TVGamePayType = value; }
+        get { return _TVGamePayType; }
+    }
     /// <summary>
     /// 是否为红点点微信手柄操作模式.
     /// </summary>
@@ -132,7 +137,7 @@ public class pcvr : MonoBehaviour
             }
 
             //创建咪咕Tv支付组件.
-            //_Instance.CreatMiGuTvPayObject();
+            _Instance.CreatMiGuTvPayObject();
 		}
 		return _Instance;
 	}
@@ -152,6 +157,11 @@ public class pcvr : MonoBehaviour
     /// </summary>
     void CreatMiGuTvPayObject()
     {
+        if (m_TVGamePayType != SSGamePayUICtrl.TVGamePayState.MiGuApk)
+        {
+            //游戏支付平台不是移动咪咕游戏支付时,不进行咪咕支付组件的创建.
+            return;
+        }
         GameObject obj = new GameObject("_MiGuTvPay");
         obj.transform.SetParent(transform);
         m_MiGuTv_InterFace = obj.AddComponent<MiGuTv_InterFace>();
