@@ -92,10 +92,25 @@ public class DaoJiShiCtrl : MonoBehaviour
 
     public static void HiddenAllTVYaoKongEnterUI()
     {
-        InstanceOne.HiddenTVYaoKongEnterObj();
-        InstanceTwo.HiddenTVYaoKongEnterObj();
-        InstanceThree.HiddenTVYaoKongEnterObj();
-        InstanceFour.HiddenTVYaoKongEnterObj();
+        if (InstanceOne != null)
+        {
+            InstanceOne.HiddenTVYaoKongEnterObj();
+        }
+
+        if (InstanceTwo != null)
+        {
+            InstanceTwo.HiddenTVYaoKongEnterObj();
+        }
+
+        if (InstanceThree != null)
+        {
+            InstanceThree.HiddenTVYaoKongEnterObj();
+        }
+
+        if (InstanceFour != null)
+        {
+            InstanceFour.HiddenTVYaoKongEnterObj();
+        }
     }
 
     void HiddenTVYaoKongEnterObj()

@@ -7,7 +7,11 @@ using System.Collections.Generic;
 
 public class pcvr : MonoBehaviour
 {
-    SSGamePayUICtrl.TVGamePayState _TVGamePayType = SSGamePayUICtrl.TVGamePayState.MiGuApk;
+    /// <summary>
+    /// 视博云平台 ShiBoYunApk.
+    /// 咪咕平台   MiGuApk.
+    /// </summary>
+    SSGamePayUICtrl.TVGamePayState _TVGamePayType = SSGamePayUICtrl.TVGamePayState.ShiBoYunApk;
     /// <summary>
     /// 电视游戏支付平台.
     /// </summary>
@@ -830,14 +834,24 @@ public class pcvr : MonoBehaviour
 
         for (int i = 0; i < m_GmWXLoginDt.Length; i++)
         {
-            m_GmWXLoginDt[i].IsLoginWX = false;
-            m_GmWXLoginDt[i].IsActiveGame = false;
-            m_GmWXLoginDt[i].m_GamePadType = GamePadType.Null;
+            if (m_GmWXLoginDt[i] != null)
+            {
+                m_GmWXLoginDt[i].IsLoginWX = false;
+                m_GmWXLoginDt[i].IsActiveGame = false;
+                m_GmWXLoginDt[i].m_GamePadType = GamePadType.Null;
+            }
         }
-        m_TVYaoKongPlayerDt.Clear();
 
-        m_GmTVLoginDt.Reset();
-        m_GmTVLoginDt = null;
+        if (m_TVYaoKongPlayerDt != null)
+        {
+            m_TVYaoKongPlayerDt.Clear();
+        }
+
+        if (m_GmTVLoginDt != null)
+        {
+            m_GmTVLoginDt.Reset();
+            m_GmTVLoginDt = null;
+        }
     }
 
     private void OnEventPlayerLoginBox(WebSocketSimpet.PlayerWeiXinData val)
