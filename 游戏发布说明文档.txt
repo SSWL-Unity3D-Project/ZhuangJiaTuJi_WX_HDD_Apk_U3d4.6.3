@@ -2,3 +2,19 @@
 渠道下的支付类型。
     Assets\XKGame\Script\pcvr\pcvr.cs脚本的m_TVGamePayType接口管理了游戏在不同支付渠道
 下的UI界面类型。
+
+**************************************************************************************
+2.该游戏工程目前控制了多个支付平台下的安卓游戏版本：
+<1>视博云支付平台游戏。
+PlayerSettings配置信息如下：
+Company Name：      SSWL
+Product Name：      装甲突击
+Default Icon:       Assets\XKGame\GUI\Movie\icon.png
+Other Settings.Bundle Identifier： com.SSWL.ZhuangJiaTuJi
+
+<2>咪咕支付平台游戏。
+PlayerSettings配置信息如下：
+Company Name：      SSWL
+Product Name：      雷霆战车TV版
+Default Icon:       Assets\XKGame\GUI\Movie\icon_MiGu.png
+Other Settings.Bundle Identifier： com.SSWL.BlazeTanks
