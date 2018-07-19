@@ -385,6 +385,16 @@ public class pcvr : MonoBehaviour
 
     void ClickTVYaoKongEnterBtEvent(ButtonState val)
     {
+        if (XkGameCtrl.GetInstance() != null && XkGameCtrl.GetInstance().m_GameUICom != null)
+        {
+            bool isFuHuoPlayer = XkGameCtrl.GetInstance().m_GameUICom.GetIsFuHuoPlayer();
+            if (!isFuHuoPlayer)
+            {
+                Debug.LogWarning("Player cannot fuHuo...");
+                return;
+            }
+        }
+
         if (val == ButtonState.UP)
         {
             Debug.Log("Unity: pcvr -> ClickTVYaoKongEnterBtEvent...");
