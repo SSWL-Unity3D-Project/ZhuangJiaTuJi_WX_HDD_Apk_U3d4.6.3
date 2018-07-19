@@ -18,3 +18,8 @@ Company Name：      SSWL
 Product Name：      雷霆战车TV版
 Default Icon:       Assets\XKGame\GUI\Movie\icon_MiGu.png
 Other Settings.Bundle Identifier： com.SSWL.BlazeTanks
+
+**************************************************************************************
+3.游戏接入不同支付渠道时的安卓包引入方式：
+<1>移动咪咕支付平台安卓包路径在“红点点手柄接入文档\移动咪咕支付文档\Unity3d咪咕支付安卓包”，
+将该路径下Android.rar解压后的Android文件夹整个放入u3d工程的"Assets\Plugins"路径下。

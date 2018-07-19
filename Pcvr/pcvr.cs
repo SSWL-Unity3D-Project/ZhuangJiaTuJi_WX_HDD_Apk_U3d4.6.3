@@ -614,23 +614,27 @@ public class pcvr : MonoBehaviour
                     || val == PlayerShouBingFireBt.fireXDown.ToString())
                 {
                     InputEventCtrl.GetInstance().OnClickFireBt(playerDt.Index, ButtonState.DOWN);
+                    InputEventCtrl.GetInstance().OnClickDaoDanBt(playerDt.Index, ButtonState.DOWN);
                 }
 
                 if (val == PlayerShouBingFireBt.fireAUp.ToString()
                     || val == PlayerShouBingFireBt.fireXUp.ToString())
                 {
                     InputEventCtrl.GetInstance().OnClickFireBt(playerDt.Index, ButtonState.UP);
+                    InputEventCtrl.GetInstance().OnClickDaoDanBt(playerDt.Index, ButtonState.UP);
                 }
 
                 if (val == PlayerShouBingFireBt.fireBDown.ToString()
                     || val == PlayerShouBingFireBt.fireYDown.ToString())
                 {
+                    InputEventCtrl.GetInstance().OnClickFireBt(playerDt.Index, ButtonState.DOWN);
                     InputEventCtrl.GetInstance().OnClickDaoDanBt(playerDt.Index, ButtonState.DOWN);
                 }
 
                 if (val == PlayerShouBingFireBt.fireBUp.ToString()
                     || val == PlayerShouBingFireBt.fireYUp.ToString())
                 {
+                    InputEventCtrl.GetInstance().OnClickFireBt(playerDt.Index, ButtonState.UP);
                     InputEventCtrl.GetInstance().OnClickDaoDanBt(playerDt.Index, ButtonState.UP);
                 }
             }
