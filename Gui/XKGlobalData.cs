@@ -5,10 +5,6 @@ using System.IO;
 
 public class XKGlobalData
 {
-    /// <summary>
-    /// 电视游戏支付平台.
-    /// </summary>
-    public SSGamePayUICtrl.TVGamePayState m_TVGamePayType = SSGamePayUICtrl.TVGamePayState.ShiBoYunApk;
     public static int CoinPlayerOne = 0;
 	public static int CoinPlayerTwo = 0;
 	public static int CoinPlayerThree = 0;

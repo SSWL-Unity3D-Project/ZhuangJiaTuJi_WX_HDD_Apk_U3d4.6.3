@@ -33,7 +33,7 @@ public class SSGamePayUICtrl : MonoBehaviour
 
     void Start()
     {
-        TVGamePayState type = XKGlobalData.GetInstance().m_TVGamePayType;
+        TVGamePayState type = pcvr.GetInstance().m_TVGamePayType;
         UIData data = m_UIData.Find((dt) => { return dt.Type.Equals(type); });
         if (data != null)
         {

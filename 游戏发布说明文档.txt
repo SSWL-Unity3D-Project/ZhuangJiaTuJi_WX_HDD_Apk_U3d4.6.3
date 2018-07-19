@@ -1,0 +1,4 @@
+1.游戏代码控制了多个支付渠道下游戏界面UI的管理逻辑，所以发布游戏前一定要配置好不同支付
+渠道下的支付类型。
+    Assets\XKGame\Script\pcvr\pcvr.cs脚本的m_TVGamePayType接口管理了游戏在不同支付渠道
+下的UI界面类型。

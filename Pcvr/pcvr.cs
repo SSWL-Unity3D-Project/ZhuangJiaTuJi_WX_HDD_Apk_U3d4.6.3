@@ -8,6 +8,10 @@ using System.Collections.Generic;
 public class pcvr : MonoBehaviour
 {
     /// <summary>
+    /// 电视游戏支付平台.
+    /// </summary>
+    public SSGamePayUICtrl.TVGamePayState m_TVGamePayType = SSGamePayUICtrl.TVGamePayState.ShiBoYunApk;
+    /// <summary>
     /// 是否为红点点微信手柄操作模式.
     /// </summary>
     public static bool IsHongDDShouBing = true;
