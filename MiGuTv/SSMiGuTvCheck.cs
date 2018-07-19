@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-﻿using UnityEngine;
-using System.Collections;
-=======
+
 ﻿#define SHOW_MIGU_MSG
 using UnityEngine;
->>>>>>> f6bfdc6b3365e6c36abe2c3306cbac02ebec4c5c
 
 public class SSMiGuTvCheck : MonoBehaviour
 {
@@ -63,11 +59,6 @@ public class SSMiGuTvCheck : MonoBehaviour
     public void OnMonthPayFinish(string s)
     {
         Debug.Log("Unity:" + "OnMonthPayFinish:" + s);
-<<<<<<< HEAD
-        TestCount++;
-        TestMsg = "count == " + TestCount + ", msg == " + s;
-=======
->>>>>>> f6bfdc6b3365e6c36abe2c3306cbac02ebec4c5c
     }
 
     /// <summary>
@@ -88,15 +79,7 @@ public class SSMiGuTvCheck : MonoBehaviour
             }
         }
     }
-
-<<<<<<< HEAD
-    string TestMsg = "";
-    int TestCount = 0;
-    void OnGUI()
-    {
-        GUI.Box(new Rect(5f, 5f, Screen.width - 10f, 35f), TestMsg);
-    }
-=======
+    
     /// <summary>
     /// 收到咪咕支付的返回消息.
     /// </summary>
@@ -118,5 +101,4 @@ public class SSMiGuTvCheck : MonoBehaviour
         GUI.Box(new Rect(5f, 5f, Screen.width - 10f, 350f), TestMsg);
     }
 #endif
->>>>>>> f6bfdc6b3365e6c36abe2c3306cbac02ebec4c5c
 }

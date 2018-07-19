@@ -108,15 +108,11 @@ public class MiGuTv_InterFace : MonoBehaviour
 	public void MiGuTv_OnPayFinishFun(string s)
 	{
 		Debug.Log("Unity:"+ "MiGuTv_OnPayFinishFun:"+s);
-<<<<<<< HEAD
-	}
-=======
         if (pcvr.GetInstance().m_SSMiGuTvCheck != null)
         {
             pcvr.GetInstance().m_SSMiGuTvCheck.OnReceivedPayMsg("点播支付:" + s);
         }
     }
->>>>>>> f6bfdc6b3365e6c36abe2c3306cbac02ebec4c5c
 	/// <summary>
 	/// 包月支付返回
 	/// </summary>
@@ -127,10 +123,7 @@ public class MiGuTv_InterFace : MonoBehaviour
         if (pcvr.GetInstance().m_SSMiGuTvCheck != null)
         {
             pcvr.GetInstance().m_SSMiGuTvCheck.OnMonthPayFinish(s);
-<<<<<<< HEAD
-=======
             pcvr.GetInstance().m_SSMiGuTvCheck.OnReceivedPayMsg("包月支付:" + s);
->>>>>>> f6bfdc6b3365e6c36abe2c3306cbac02ebec4c5c
         }
 	}
 }
