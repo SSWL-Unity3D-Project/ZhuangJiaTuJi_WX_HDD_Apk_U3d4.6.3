@@ -11,7 +11,7 @@ public class pcvr : MonoBehaviour
     /// 视博云平台 ShiBoYunApk.
     /// 咪咕平台   MiGuApk.
     /// </summary>
-    SSGamePayUICtrl.TVGamePayState _TVGamePayType = SSGamePayUICtrl.TVGamePayState.ShiBoYunApk;
+    SSGamePayUICtrl.TVGamePayState _TVGamePayType = SSGamePayUICtrl.TVGamePayState.MiGuApk;
     /// <summary>
     /// 电视游戏支付平台.
     /// </summary>
@@ -166,13 +166,47 @@ public class pcvr : MonoBehaviour
             //游戏支付平台不是移动咪咕游戏支付时,不进行咪咕支付组件的创建.
             return;
         }
-        GameObject obj = new GameObject("_MiGuTvPay");
+        GameObject obj = new GameObject("MiGuTv_InterFace");
         obj.transform.SetParent(transform);
         m_MiGuTv_InterFace = obj.AddComponent<MiGuTv_InterFace>();
         m_SSMiGuTvCheck = obj.AddComponent<SSMiGuTvCheck>();
         m_SSMiGuTvCheck.Init();
     }
-	
+
+    /// <summary>
+    /// 延时查询咪咕电视游戏包月状态.
+    /// </summary>
+    public void DelayQueryMiGuTVGameBaoYueStata()
+    {
+        if (m_TVGamePayType != SSGamePayUICtrl.TVGamePayState.MiGuApk)
+        {
+            //游戏支付平台不是移动咪咕游戏支付时,不进行咪咕支付组件的创建.
+            return;
+        }
+
+        if (m_SSMiGuTvCheck != null)
+        {
+            m_SSMiGuTvCheck.DelayQueryGameBaoYueState();
+        }
+    }
+
+    /// <summary>
+    /// 关闭延时查询咪咕电视游戏包月状态的事件.
+    /// </summary>
+    public void CloseDelayQueryMiGuTVGameBaoYueStata()
+    {
+        if (m_TVGamePayType != SSGamePayUICtrl.TVGamePayState.MiGuApk)
+        {
+            //游戏支付平台不是移动咪咕游戏支付时,不进行咪咕支付组件的创建.
+            return;
+        }
+
+        if (m_SSMiGuTvCheck != null)
+        {
+            m_SSMiGuTvCheck.CloseQueryGameBaoYueState();
+        }
+    }
+
     void InitInfo()
     {
         for (int i = 0; i < m_GmWXLoginDt.Length; i++)
@@ -212,7 +246,7 @@ public class pcvr : MonoBehaviour
 
 	void Start()
 	{
-		HID_BUF_LEN_WRITE = MyCOMDevice.ComThreadClass.BufLenWrite;
+        HID_BUF_LEN_WRITE = MyCOMDevice.ComThreadClass.BufLenWrite;
 		lastUpTime = Time.realtimeSinceStartup;
 		InitHandleJsonInfo();
 		InitJiaoYanMiMa();
@@ -958,6 +992,22 @@ public class pcvr : MonoBehaviour
     // Update is called once per frame
     void Update()
 	{
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (m_SSMiGuTvCheck != null)
+            {
+                m_SSMiGuTvCheck.QueryGameBaoYueState(); //test.
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            if (m_SSMiGuTvCheck != null)
+            {
+                m_SSMiGuTvCheck.OnMonthPayFinish("test"); //test.
+            }
+        }
+        
 		UpdateZuoYiQiNangState();
 		if (!bIsHardWare || XkGameCtrl.IsLoadingLevel) {
 			return;

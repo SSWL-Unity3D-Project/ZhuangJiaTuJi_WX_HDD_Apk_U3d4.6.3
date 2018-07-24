@@ -9,8 +9,8 @@ public enum PlayerTypeEnum
 	CartoonCamera,
 }
 
-public class XkPlayerCtrl : MonoBehaviour {
-
+public class XkPlayerCtrl : MonoBehaviour
+{
 	AiPathCtrl AiPathScript;
 	public PlayerTypeEnum PlayerSt = PlayerTypeEnum.FeiJi;
 	//public Transform KaQiuShaAimPoint;
@@ -217,7 +217,7 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 //			UpdatePlayerTransform();
 //		}
 
-		SmothMovePlayerCamera();
+        SmothMovePlayerCamera();
 		CheckIsDelayMovePlayer();
 //		if (PlayerSt == PlayerTypeEnum.FeiJi
 //		         || PlayerSt == PlayerTypeEnum.CartoonCamera) {
@@ -600,6 +600,14 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
 				yield return new WaitForSeconds(0.1f);
 				continue;
 			}
+
+            if (pcvr.GetInstance().m_SSMiGuTvCheck != null
+                && pcvr.GetInstance().m_SSMiGuTvCheck.IsDisplayMiGuPayUI)
+            {
+                //咪咕电视游戏支付界面显示时,停止镜头的运动.
+                yield return new WaitForSeconds(0.1f);
+                continue;
+            }
 			
             if (XkGameCtrl.PlayerActiveNum <= 0)
             {

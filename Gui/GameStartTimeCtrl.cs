@@ -72,7 +72,9 @@ public class GameStartTimeCtrl : MonoBehaviour
 			ScreenDanHeiCtrl.GetInstance().ActiveGameUiCamera();
 			XkPlayerCtrl.GetInstanceFeiJi().RestartMovePlayer();
 			GameTimeCtrl.GetInstance().ActiveIsCheckTimeSprite();
-			return;
+            //添加咪咕电视游戏包月检测事件.
+            pcvr.GetInstance().DelayQueryMiGuTVGameBaoYueStata();
+            return;
 		}
 
 		//Debug.Log("Unity:"+"ChangeStartTimeUI -> TimeCount "+TimeCount);

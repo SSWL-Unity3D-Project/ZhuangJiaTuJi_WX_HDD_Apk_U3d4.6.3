@@ -131,6 +131,8 @@ public class DaoJiShiCtrl : MonoBehaviour
                 {
                     //没有激活的玩家,显示游戏结束界面.
                     GameOverCtrl.GetInstance().ShowGameOver();
+                    //关闭咪咕电视游戏包月查询事件.
+                    pcvr.GetInstance().CloseDelayQueryMiGuTVGameBaoYueStata();
                 }
                 return;
             }

@@ -110,7 +110,7 @@ public class MiGuTv_InterFace : MonoBehaviour
 		Debug.Log("Unity:"+ "MiGuTv_OnPayFinishFun:"+s);
         if (pcvr.GetInstance().m_SSMiGuTvCheck != null)
         {
-            pcvr.GetInstance().m_SSMiGuTvCheck.OnReceivedPayMsg("点播支付:" + s);
+            pcvr.GetInstance().m_SSMiGuTvCheck.OnPayFinish(s);
         }
     }
 	/// <summary>
@@ -123,7 +123,19 @@ public class MiGuTv_InterFace : MonoBehaviour
         if (pcvr.GetInstance().m_SSMiGuTvCheck != null)
         {
             pcvr.GetInstance().m_SSMiGuTvCheck.OnMonthPayFinish(s);
-            pcvr.GetInstance().m_SSMiGuTvCheck.OnReceivedPayMsg("包月支付:" + s);
         }
 	}
+
+    /// <summary>
+    /// 退出返回
+    /// </summary>
+    /// <param name="s">#号隔开 返回结果#userexit;usercancelexit</param>
+    public void MiGuTv_UserExitFun(string s)
+    {
+        Debug.Log("Unity:" + "MiGuTv_UserExitFun:" + s);
+        if (pcvr.GetInstance().m_SSMiGuTvCheck != null)
+        {
+            pcvr.GetInstance().m_SSMiGuTvCheck.OnExitMiGuPaySDK(s);
+        }
+    }
 }

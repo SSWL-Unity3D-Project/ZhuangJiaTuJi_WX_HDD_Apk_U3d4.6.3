@@ -9,7 +9,8 @@ public enum TKMoveState
 	YaoGanBan,			//摇杆版.
 }
 
-public class XKPlayerMoveCtrl : MonoBehaviour {
+public class XKPlayerMoveCtrl : MonoBehaviour
+{
 	public PlayerEnum PlayerIndex = PlayerEnum.PlayerOne;
 	TKMoveState TKMoveSt = TKMoveState.YaoGanBan;
 	public UVA LvDaiUVCom;
@@ -176,8 +177,16 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 			}
 			return;
 		}
-		//PlayerTran.position = TiaoBanObjAy[1].transform.position;
-		PlayerTran.position = Vector3.Lerp(PlayerTran.position,
+
+        if (pcvr.GetInstance().m_SSMiGuTvCheck != null
+            && pcvr.GetInstance().m_SSMiGuTvCheck.IsDisplayMiGuPayUI)
+        {
+            //咪咕电视游戏支付界面显示时,不允許玩家移動主角坦克.
+            return;
+        }
+
+        //PlayerTran.position = TiaoBanObjAy[1].transform.position;
+        PlayerTran.position = Vector3.Lerp(PlayerTran.position,
 		                                   TiaoBanObjAy[1].transform.position,
 		                                   Time.deltaTime * 20f);
 	}
@@ -1148,6 +1157,11 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 			return;
 		}
 
+        if (IsWuDiState)
+        {
+            return;
+        }
+
 		if (HuDunCtrl.GetInstance(PlayerIndex) != null) {
 			HuDunCtrl.GetInstance(PlayerIndex).ShowHuDunUI(XkGameCtrl.GetInstance().WuDiTime);
 		}
@@ -1157,6 +1171,62 @@ public class XKPlayerMoveCtrl : MonoBehaviour {
 		//gameObject.layer = LayerMask.NameToLayer("UI");
 		//Debug.Log("Unity:"+"active player wuDiState -> playerIndex "+PlayerIndex);
 	}
+
+    public static void OpenAllPlayerWuDiTeXiao()
+    {
+        if (GetInstancePOne() != null)
+        {
+            GetInstancePOne().OpenPlayerWuDiTeXiao();
+        }
+
+        if (GetInstancePTwo() != null)
+        {
+            GetInstancePTwo().OpenPlayerWuDiTeXiao();
+        }
+
+        if (GetInstancePThree() != null)
+        {
+            GetInstancePThree().OpenPlayerWuDiTeXiao();
+        }
+
+        if (GetInstancePFour() != null)
+        {
+            GetInstancePFour().OpenPlayerWuDiTeXiao();
+        }
+    }
+
+    public static void CloseAllPlayerWuDiTeXiao()
+    {
+        if (GetInstancePOne() != null)
+        {
+            GetInstancePOne().ResetIsWuDiState();
+        }
+
+        if (GetInstancePTwo() != null)
+        {
+            GetInstancePTwo().ResetIsWuDiState();
+        }
+
+        if (GetInstancePThree() != null)
+        {
+            GetInstancePThree().ResetIsWuDiState();
+        }
+
+        if (GetInstancePFour() != null)
+        {
+            GetInstancePFour().ResetIsWuDiState();
+        }
+    }
+
+    void OpenPlayerWuDiTeXiao()
+    {
+        if (IsDeathPlayer)
+        {
+            return;
+        }
+        IsWuDiState = true;
+        WuDiTXObj.SetActive(true);
+    }
 
 	public void ResetIsWuDiState()
 	{

@@ -1760,7 +1760,7 @@ public class XkGameCtrl : SSGameMono
 
 	public static void LoadingGameMovie(int key = 0)
 	{
-		if (XkGameCtrl.IsLoadingLevel) {
+		if (IsLoadingLevel) {
 			return;
 		}
 
@@ -2281,15 +2281,22 @@ public class XkGameCtrl : SSGameMono
 		if (XKBossXueTiaoCtrl.IsWuDiPlayer) {
 			return;
 		}
+        
+        if (pcvr.GetInstance().m_SSMiGuTvCheck != null
+            && pcvr.GetInstance().m_SSMiGuTvCheck.IsDisplayMiGuPayUI)
+        {
+            //咪咕电视游戏支付界面显示时,玩家不受npc子弹的伤害.
+            return;
+        }
 
-		/*if (indexVal != PlayerEnum.Null) {
+        /*if (indexVal != PlayerEnum.Null) {
 			int indexTmp = (int)indexVal - 1;
 			if (isCheckHealth && PlayerHealthArray[indexTmp] - valSub <= 0f) {
 				return;
 			}
 		}*/
 
-		XKPlayerMoveCtrl playerMoveCtrl = XKPlayerMoveCtrl.GetXKPlayerMoveCtrl(indexVal);
+        XKPlayerMoveCtrl playerMoveCtrl = XKPlayerMoveCtrl.GetXKPlayerMoveCtrl(indexVal);
 		if (playerMoveCtrl != null) {
 			if (playerMoveCtrl.GetIsMoveToTiaoYueDian()) {
 				return;

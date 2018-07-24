@@ -30,14 +30,10 @@ public class SSExitGameUI : MonoBehaviour
         QuXiao,
     }
     ExitEnum m_ExitType = ExitEnum.QueDing;
-    static SSExitGameUI _Instance;
-    public static SSExitGameUI GetInstance()
-    {
-        return _Instance;
-    }
 
     public void Init ()
     {
+        Debug.Log("SSExitGameUI::Init...");
         m_ExitType = ExitEnum.QuXiao;
         SSUIRoot.GetInstance().m_ExitUICom = this;
         QueDingUI.mainTexture = QueDingImg[0];
@@ -53,6 +49,7 @@ public class SSExitGameUI : MonoBehaviour
 
     public void RemoveSelf()
     {
+        Debug.Log("SSExitGameUI::RemoveSelf...");
         SSUIRoot.GetInstance().m_ExitUICom = null;
         InputEventCtrl.GetInstance().ClickTVYaoKongEnterBtEvent -= ClickTVYaoKongEnterBtEvent;
         InputEventCtrl.GetInstance().ClickTVYaoKongExitBtEvent -= ClickTVYaoKongExitBtEvent;
@@ -165,7 +162,17 @@ public class SSExitGameUI : MonoBehaviour
                         {
                             GameMovieCtrl.GetInstance().RemoveExitGameUI();
                         }
-                        Application.Quit();
+
+                        if (pcvr.GetInstance().m_SSMiGuTvCheck != null)
+                        {
+                            //退出咪咕支付程序.
+                            pcvr.GetInstance().m_SSMiGuTvCheck.MakeGameExitMiGuTvPay();
+                        }
+                        else
+                        {
+                            //退出游戏.
+                            Application.Quit();
+                        }
                         break;
                     }
             }
