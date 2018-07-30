@@ -1,6 +1,5 @@
 
-#define SHOW_MIGU_MSG
-using System;
+//#define SHOW_MIGU_MSG
 using UnityEngine;
 
 public class SSMiGuTvCheck : MonoBehaviour
@@ -103,8 +102,8 @@ public class SSMiGuTvCheck : MonoBehaviour
 
         m_TimeUpQueryGameBaoYueStateCom = gameObject.AddComponent<SSTimeUpCtrl>();
         //60秒后开始查询游戏是否进行了包月.
-        //m_TimeUpQueryGameBaoYueStateCom.Init(60f);
-        m_TimeUpQueryGameBaoYueStateCom.Init(10f); //test.
+        m_TimeUpQueryGameBaoYueStateCom.Init(60f);
+        //m_TimeUpQueryGameBaoYueStateCom.Init(10f); //test.
         m_TimeUpQueryGameBaoYueStateCom.OnTimeUpOverEvent += OnTimeUpQueryGameBaoYueStateEvent;
     }
 
@@ -115,6 +114,13 @@ public class SSMiGuTvCheck : MonoBehaviour
     {
         //查询游戏包月状态.
         QueryGameBaoYueState();
+
+        //创建是否选择游戏包月界面.
+        if (XkGameCtrl.GetInstance() != null
+            && XkGameCtrl.GetInstance().m_GameUICom != null)
+        {
+            //XkGameCtrl.GetInstance().m_GameUICom.CreatGameBaoYuePanel();
+        }
     }
 
     /// <summary>
@@ -154,6 +160,55 @@ public class SSMiGuTvCheck : MonoBehaviour
     {
         Debug.Log("Unity: OnPayFinish:" + s);
         OnReceivedMiGuPayMsg("点播支付返回消息:" + s);
+
+        //包月支付界面已经关闭.
+        IsDisplayMiGuPayUI = false;
+        //咪咕电视游戏包月查询完毕.
+        IsQueryGameBaoYueState = false;
+
+        string[] msgArray = s.Split('#');
+        MonthPayState type = MonthPayState.Failed;
+        if (msgArray[0] == "1")
+        {
+            //咪咕电视游戏包月支付订购成功.
+            type = MonthPayState.Succeess;
+        }
+
+        switch (type)
+        {
+            case MonthPayState.Succeess:
+                {
+                    //游戏包月成功或游戏已经进行过包月.
+                    IsHaveBaoYueGame = true;
+                    break;
+                }
+            case MonthPayState.Failed:
+                {
+                    //游戏包月失败.
+                    //使游戏返回循环动画入口界面.
+                    XkGameCtrl.IsLoadingLevel = false;
+                    XkGameCtrl.LoadingGameMovie();
+
+                    //包月支付失败,创建是否继续包月.
+                    if (XkGameCtrl.GetInstance() != null
+                        && XkGameCtrl.GetInstance().m_GameUICom != null)
+                    {
+                        if (XkGameCtrl.GetInstance().m_GameUICom.m_CountJiXuBaoYue == 0)
+                        {
+                            //XkGameCtrl.GetInstance().m_GameUICom.CreatGameJiXuBaoYuePanel();
+                        }
+                        else
+                        {
+                            //使游戏返回循环动画入口界面.
+                            XkGameCtrl.IsLoadingLevel = false;
+                            XkGameCtrl.LoadingGameMovie();
+                        }
+                    }
+                    break;
+                }
+        }
+
+        OnReceivedMiGuPayMsg("CountPayState == " + type);
     }
 
     /// <summary>

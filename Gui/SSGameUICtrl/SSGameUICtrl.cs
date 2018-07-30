@@ -92,4 +92,89 @@ public class SSGameUICtrl : SSGameMono
             m_ErWeiMaUICom.RemoveSelf();
         }
     }
+
+    /// <summary>
+    /// 是否继续包月支付.
+    /// </summary>
+    [HideInInspector]
+    public SSGameBaoYueDlg m_GameBaoYueCom;
+    /// <summary>
+    /// 创建是否包月支付UI界面.
+    /// </summary>
+    public void CreatGameBaoYuePanel()
+    {
+        GameObject gmDataPrefab = (GameObject)Resources.Load("Prefabs/GUI/GameBaoYue/GameBaoYueUI");
+        if (gmDataPrefab != null)
+        {
+            UnityLog("CreatGameBaoYuePanel...");
+            GameObject obj = (GameObject)Instantiate(gmDataPrefab, m_UICenterTr);
+            m_GameBaoYueCom = obj.GetComponent<SSGameBaoYueDlg>();
+            m_GameBaoYueCom.Init();
+        }
+        else
+        {
+            UnityLogWarning("CreatGameBaoYuePanel -> gmDataPrefab was null");
+        }
+    }
+
+    /// <summary>
+    /// 删除是否包月支付UI界面.
+    /// </summary>
+    public void RemoveGameBaoYuePanel()
+    {
+        if (m_GameBaoYueCom != null)
+        {
+            UnityLog("RemoveGameBaoYuePanel...");
+            m_GameBaoYueCom.RemoveSelf();
+        }
+        else
+        {
+            UnityLogWarning("RemoveGameBaoYuePanel -> m_GameBaoYueCom was null");
+        }
+    }
+
+    /// <summary>
+    /// 是否继续包月支付.
+    /// </summary>
+    [HideInInspector]
+    public SSGameJiXuBaoYueDlg m_GameJiXuBaoYueCom;
+    /// <summary>
+    /// 继续包月界面创建次数.
+    /// </summary>
+    internal int m_CountJiXuBaoYue = 0;
+    /// <summary>
+    /// 创建是否继续包月支付UI界面.
+    /// </summary>
+    public void CreatGameJiXuBaoYuePanel()
+    {
+        GameObject gmDataPrefab = (GameObject)Resources.Load("Prefabs/GUI/GameJiXuBaoYue/GameJiXuBaoYueUI");
+        if (gmDataPrefab != null)
+        {
+            UnityLog("CreatGameJiXuBaoYuePanel...");
+            GameObject obj = (GameObject)Instantiate(gmDataPrefab, m_UICenterTr);
+            m_GameJiXuBaoYueCom = obj.GetComponent<SSGameJiXuBaoYueDlg>();
+            m_GameJiXuBaoYueCom.Init();
+            m_CountJiXuBaoYue++;
+        }
+        else
+        {
+            UnityLogWarning("CreatGameJiXuBaoYuePanel -> gmDataPrefab was null");
+        }
+    }
+
+    /// <summary>
+    /// 删除是否继续包月支付UI界面.
+    /// </summary>
+    public void RemoveGameJiXuBaoYuePanel()
+    {
+        if (m_GameJiXuBaoYueCom != null)
+        {
+            UnityLog("RemoveGameJiXuBaoYuePanel...");
+            m_GameJiXuBaoYueCom.RemoveSelf();
+        }
+        else
+        {
+            UnityLogWarning("RemoveGameJiXuBaoYuePanel -> m_GameJiXuBaoYueCom was null");
+        }
+    }
 }

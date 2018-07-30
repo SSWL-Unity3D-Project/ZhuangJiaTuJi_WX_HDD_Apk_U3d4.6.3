@@ -1,7 +1,6 @@
 ﻿using LitJson;
 using System;
 using System.Collections;
-using System.Net.NetworkInformation;
 using System.Text;
 using UnityEngine;
 
@@ -94,7 +93,10 @@ public class SSBoxPostNet : MonoBehaviour
     /// </summary>
     enum PostCmd
     {
-        BoxLogin, //盒子登录.
+        /// <summary>
+        /// 盒子登录.
+        /// </summary>
+        BoxLogin = 0,
     }
 
     /// <summary>
@@ -241,6 +243,11 @@ public class SSBoxPostNet : MonoBehaviour
         form.AddField("storeId", m_BoxLoginData.storeId);
         form.AddField("channel", m_BoxLoginData.channel);
         form.AddField("gameId", m_BoxLoginData.gameId);
+        /*Debug.Log("boxNumber == " + m_BoxLoginData.boxNumber
+            + ", storeId == " + m_BoxLoginData.storeId
+            + ", channel == " + m_BoxLoginData.channel
+            + ", gameId == " + m_BoxLoginData.gameId);
+        Debug.Log("url ==== " + m_BoxLoginData.url);*/
         StartCoroutine(SendPost(m_BoxLoginData.url, form, PostCmd.BoxLogin));
     }
 }

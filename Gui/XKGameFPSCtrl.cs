@@ -1,4 +1,4 @@
-#define DRAW_FPS
+//#define DRAW_FPS
 
 using UnityEngine;
 using System;

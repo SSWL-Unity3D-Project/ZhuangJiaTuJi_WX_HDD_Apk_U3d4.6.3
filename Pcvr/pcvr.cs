@@ -1,4 +1,5 @@
-﻿//#define USE_CENTER_ZUOYI
+﻿#define SHOW_DEBUG_MSG
+//#define USE_CENTER_ZUOYI
 //#define COM_TANK_TEST
 using UnityEngine;
 using System.Collections;
@@ -142,9 +143,80 @@ public class pcvr : MonoBehaviour
 
             //创建咪咕Tv支付组件.
             _Instance.CreatMiGuTvPayObject();
-		}
+
+            //创建游戏Debug信息展示组件.
+            _Instance.CreatGameDebugMsgCom();
+
+            //创建游戏咪咕包月支付信息记录和查询组件.
+            _Instance.CreatGameMiGuBaoYuePostNet();
+        }
 		return _Instance;
 	}
+
+    /// <summary>
+    /// 游戏咪咕包月支付信息记录和查询组件.
+    /// </summary>
+    [HideInInspector]
+    public SSGameMiGuBaoYuePostNet m_GameMiGuBaoYuePostNet;
+    /// <summary>
+    /// 创建游戏咪咕包月支付信息记录和查询组件.
+    /// </summary>
+    void CreatGameMiGuBaoYuePostNet()
+    {
+        if (m_TVGamePayType != SSGamePayUICtrl.TVGamePayState.MiGuApk)
+        {
+            //游戏支付平台不是移动咪咕游戏支付时,不进行咪咕包月支付信息记录和查询组件的创建.
+            return;
+        }
+
+        if (m_GameMiGuBaoYuePostNet == null)
+        {
+            m_GameMiGuBaoYuePostNet = gameObject.AddComponent<SSGameMiGuBaoYuePostNet>();
+            m_GameMiGuBaoYuePostNet.Init();
+        }
+    }
+
+    /// <summary>
+    /// 获取咪咕游戏玩家是否对游戏进行了包月.
+    /// </summary>
+    internal bool GetMiGuPlayerIsBaoYueGame()
+    {
+        bool isBaoYueGame = false;
+        if (m_GameMiGuBaoYuePostNet != null)
+        {
+            isBaoYueGame = m_GameMiGuBaoYuePostNet.GetPlayerIsBaoYueGame();
+        }
+        return isBaoYueGame;
+    }
+
+    /// <summary>
+    /// 游戏Debug信息展示组件.
+    /// </summary>
+    [HideInInspector]
+    public SSGameDebugMsg m_GameDebugMsgCom;
+    /// <summary>
+    /// 创建游戏Debug信息展示组件.
+    /// </summary>
+    void CreatGameDebugMsgCom()
+    {
+#if SHOW_DEBUG_MSG
+        if (m_GameDebugMsgCom == null)
+        {
+            m_GameDebugMsgCom = gameObject.AddComponent<SSGameDebugMsg>();
+        }
+#endif
+    }
+
+    /// <summary>
+    /// 添加Debug消息.
+    /// </summary>
+    public void AddDebugMsg(string msg)
+    {
+        if (m_GameDebugMsgCom != null)
+        {
+            m_GameDebugMsgCom.AddMsg(msg);
+        }
+    }
 
     /// <summary>
     /// 咪咕Tv支付组件.
@@ -184,6 +256,13 @@ public class pcvr : MonoBehaviour
             return;
         }
 
+        bool isBaoYueGame = GetMiGuPlayerIsBaoYueGame();
+        if (isBaoYueGame)
+        {
+            //玩家已经对游戏进行了包月.
+            return;
+        }
+
         if (m_SSMiGuTvCheck != null)
         {
             m_SSMiGuTvCheck.DelayQueryGameBaoYueState();
@@ -207,6 +286,26 @@ public class pcvr : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 打开安卓端咪咕包月支付界面.
+    /// </summary>
+    public void OpenMiGuBaoYueZhiFuPanel()
+    {
+        if (m_TVGamePayType != SSGamePayUICtrl.TVGamePayState.MiGuApk)
+        {
+            //游戏支付平台不是移动咪咕游戏支付时,不进行咪咕支付组件的创建.
+            return;
+        }
+
+        if (m_SSMiGuTvCheck != null)
+        {
+            m_SSMiGuTvCheck.QueryGameBaoYueState();
+        }
+    }
+
+    /// <summary>
+    /// 初始化信息.
+    /// </summary>
     void InitInfo()
     {
         for (int i = 0; i < m_GmWXLoginDt.Length; i++)
