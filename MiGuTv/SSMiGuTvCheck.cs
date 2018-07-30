@@ -72,7 +72,8 @@ public class SSMiGuTvCheck : MonoBehaviour
         if (miGuTvInterFace != null)
         {
             //待查包月信息.
-            miGuTvInterFace.MiGuTv_OnMonthPay("001");
+            //miGuTvInterFace.MiGuTv_OnMonthPay("001");
+            miGuTvInterFace.MiGuTv_OnCountPay("001", "1234567890123456");
             OnReceivedMiGuPayMsg("待查包月信息");
             IsDisplayMiGuPayUI = true;
         }
