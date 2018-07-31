@@ -524,7 +524,13 @@ public class pcvr : MonoBehaviour
             bool isFuHuoPlayer = XkGameCtrl.GetInstance().m_GameUICom.GetIsFuHuoPlayer();
             if (!isFuHuoPlayer)
             {
-                Debug.LogWarning("Player cannot fuHuo...");
+                Debug.LogWarning("Unity: pcvr -> Player cannot fuHuo...");
+                return;
+            }
+            
+            if (XkGameCtrl.GetInstance().m_GameUICom.IsShowGameBaoYueUI)
+            {
+                Debug.LogWarning("Unity: pcvr -> player baoYueZhong...");
                 return;
             }
         }

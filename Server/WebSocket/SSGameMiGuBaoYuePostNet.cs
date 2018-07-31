@@ -140,8 +140,8 @@ payUserId:用户标识，可以为null
                 if (pcvr.GetInstance() != null
                     && pcvr.GetInstance().m_MiGuTv_InterFace != null)
                 {
-                    //belongMark = mac = pcvr.GetInstance().m_MiGuTv_InterFace.MiGuTv_GetLocalMacAddress();
-                    belongMark = mac = "12:34:56:78:90:12"; //test
+                    belongMark = mac = pcvr.GetInstance().m_MiGuTv_InterFace.MiGuTv_GetNetMACInfo();
+                    //belongMark = mac = "12:34:56:78:90:12"; //test
                 }
                 else
                 {
@@ -211,7 +211,7 @@ payUserId:用户标识，可以为null
     /// <summary>
     /// 包月订单数据信息.
     /// </summary>
-    class BaoYueDingDanData
+    public class BaoYueDingDanData
     {
         /// <summary>
         /// 0：正常，其他表示异常.
@@ -230,7 +230,7 @@ payUserId:用户标识，可以为null
         /// </summary>
         public string orderId = "";
     }
-    BaoYueDingDanData m_BaoYueDingDanData;
+    internal BaoYueDingDanData m_BaoYueDingDanData;
 
     /// <summary>
     /// 初始化.
@@ -253,7 +253,7 @@ payUserId:用户标识，可以为null
             //玩家是否包月的信息查询.
             HttpSendPostGameBaoYueChaXun();
             //包月订单信息查询.
-            //HttpSendPostGetDingDanIDGameBaoYue();
+            //HttpSendPostGetDingDanIDGameBaoYue(); //test
         }
     }
 
@@ -286,6 +286,11 @@ payUserId:用户标识，可以为null
         else
         {
             Debug.Log("Unity:" + cmd + " -> PostData: " + postData.text);
+            if (pcvr.GetInstance() != null)
+            {
+                pcvr.GetInstance().AddDebugMsg(cmd + " -> PostData: " + postData.text);
+            }
+
             switch (cmd)
             {
                 case PostCmd.BaoYueChaXun:
@@ -360,9 +365,15 @@ payUserId:用户标识，可以为null
         data["channel"] = m_GameBaoYueData.channel;
         data["itemId"] = m_GameBaoYueData.itemId;
         data["belongMark"] = m_GameBaoYueData.belongMark;
-        Debug.Log("channel == " + m_GameBaoYueData.channel
+        string info = "channel == " + m_GameBaoYueData.channel
             + ", itemId == " + m_GameBaoYueData.itemId
-            + ", belongMark == " + m_GameBaoYueData.belongMark);
+            + ", belongMark == " + m_GameBaoYueData.belongMark;
+        Debug.Log(info);
+
+        if (pcvr.GetInstance() != null)
+        {
+            pcvr.GetInstance().AddDebugMsg(info);
+        }
         StartCoroutine(SendPost(m_GameBaoYueData.urlBaoYueChaXun, data, PostCmd.BaoYueChaXun));
     }
 

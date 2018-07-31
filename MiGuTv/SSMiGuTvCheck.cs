@@ -31,7 +31,8 @@ public class SSMiGuTvCheck : MonoBehaviour
         if (miGuTvInterFace != null)
         {
             //初始化咪咕支付.
-            miGuTvInterFace.MiGuTv_Initial();
+            //miGuTvInterFace.MiGuTv_Initial();
+            miGuTvInterFace.MiGuTv_Initial("");
             OnReceivedMiGuPayMsg("初始化咪咕支付");
         }
     }
@@ -73,7 +74,15 @@ public class SSMiGuTvCheck : MonoBehaviour
         {
             //待查包月信息.
             //miGuTvInterFace.MiGuTv_OnMonthPay("001");
-            miGuTvInterFace.MiGuTv_OnCountPay("001", "1234567890123456");
+            string dingDanId = "1234567890123456";
+            if (pcvr.GetInstance() != null
+                && pcvr.GetInstance().m_GameMiGuBaoYuePostNet != null)
+            {
+                //包月订单信息查询.
+                dingDanId = pcvr.GetInstance().m_GameMiGuBaoYuePostNet.m_BaoYueDingDanData.orderId;
+            }
+            pcvr.GetInstance().AddDebugMsg("dingDanId == " + dingDanId);
+            miGuTvInterFace.MiGuTv_OnCountPay("001", dingDanId);
             OnReceivedMiGuPayMsg("待查包月信息");
             IsDisplayMiGuPayUI = true;
         }

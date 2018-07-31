@@ -2801,6 +2801,18 @@ public class XkGameCtrl : SSGameMono
     /// </summary>
     void SpawnExitGameUI()
     {
+        if (m_GameUICom != null && m_GameUICom.IsShowGameBaoYueUI)
+        {
+            //玩家正在进行包月付费阶段,不允许弹出退出游戏界面.
+            return;
+        }
+
+        if (pcvr.GetInstance().m_SSMiGuTvCheck != null && pcvr.GetInstance().m_SSMiGuTvCheck.IsDisplayMiGuPayUI)
+        {
+            //玩家正在进行包月付费阶段,不允许弹出退出游戏界面.
+            return;
+        }
+
         Debug.Log("Unity: SpawnExitGameUI...");
         if (m_ExitUICom == null)
         {

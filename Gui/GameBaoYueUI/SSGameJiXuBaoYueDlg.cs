@@ -161,6 +161,12 @@ public class SSGameJiXuBaoYueDlg : MonoBehaviour
                         {
                             XkGameCtrl.GetInstance().m_GameUICom.RemoveGameJiXuBaoYuePanel();
                         }
+                        
+                        if (pcvr.GetInstance().m_SSMiGuTvCheck != null)
+                        {
+                            //关闭游戏包月检测.
+                            pcvr.GetInstance().m_SSMiGuTvCheck.CloseQueryGameBaoYueState();
+                        }
 
                         //使游戏返回循环动画入口界面.
                         XkGameCtrl.IsLoadingLevel = false;

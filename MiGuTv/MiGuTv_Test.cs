@@ -9,7 +9,7 @@ public class MiGuTv_Test : MonoBehaviour {
 		temp = GetComponent<MiGuTv_InterFace>();
 		if (temp!=null)
 		{
-			temp.MiGuTv_Initial();
+			temp.MiGuTv_Initial("");
 			//temp.MiGuTv_OnMonthPay("001");
             temp.MiGuTv_OnCountPay("001", "1234567890123456");
         }

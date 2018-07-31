@@ -98,8 +98,12 @@ public class MiGuTv_InterFace : MonoBehaviour
 #endif
 	}
 
-    public string MiGuTv_GetLocalMacAddress()
-    {
+	/// <summary>
+	/// 获取网卡MAC地址信息
+	/// </summary>
+	/// <returns>返回"null"表示获取失败，否则为MAC信息</returns>
+	public string MiGuTv_GetNetMACInfo()
+	{
         string mac = "12:34:56:78:90:12";
         try
         {
@@ -121,7 +125,8 @@ public class MiGuTv_InterFace : MonoBehaviour
             }
         }
         return mac;
-    }
+	}
+
 	/*
 	==================接收支付反馈的函数=======================
 	*/

@@ -7,7 +7,7 @@ public class SSGameDebugMsg : MonoBehaviour
 {
     public void AddMsg(string msg)
     {
-        DebugMsg += " # " + msg + " #";
+        DebugMsg += " * " + msg + " *";
     }
 
     string DebugMsg = "DebugMsg:";

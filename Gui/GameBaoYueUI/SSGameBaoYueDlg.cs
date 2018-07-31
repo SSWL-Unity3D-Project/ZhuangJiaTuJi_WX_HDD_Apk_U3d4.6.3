@@ -56,6 +56,13 @@ public class SSGameBaoYueDlg : MonoBehaviour
                     break;
                 }
         }
+
+        if (pcvr.GetInstance() != null
+            && pcvr.GetInstance().m_GameMiGuBaoYuePostNet != null)
+        {
+            //包月订单信息查询.
+            pcvr.GetInstance().m_GameMiGuBaoYuePostNet.HttpSendPostGetDingDanIDGameBaoYue();
+        }
         InputEventCtrl.GetInstance().ClickTVYaoKongEnterBtEvent += ClickTVYaoKongEnterBtEvent;
         InputEventCtrl.GetInstance().ClickTVYaoKongLeftBtEvent += ClickTVYaoKongLeftBtEvent;
         InputEventCtrl.GetInstance().ClickTVYaoKongRightBtEvent += ClickTVYaoKongRightBtEvent;
@@ -160,6 +167,12 @@ public class SSGameBaoYueDlg : MonoBehaviour
                             && XkGameCtrl.GetInstance().m_GameUICom != null)
                         {
                             XkGameCtrl.GetInstance().m_GameUICom.RemoveGameBaoYuePanel();
+                        }
+
+                        if (pcvr.GetInstance().m_SSMiGuTvCheck != null)
+                        {
+                            //关闭游戏包月检测.
+                            pcvr.GetInstance().m_SSMiGuTvCheck.CloseQueryGameBaoYueState();
                         }
 
                         //使游戏返回循环动画入口界面.
