@@ -382,6 +382,15 @@ payUserId:用户标识，可以为null
     /// </summary>
     public void HttpSendPostGetDingDanIDGameBaoYue()
     {
+        if (m_BaoYueDingDanData != null
+            && m_BaoYueDingDanData.code != ""
+            && Convert.ToInt32(m_BaoYueDingDanData.code) == (int)BaoYueState.Success
+            && m_BaoYueDingDanData.orderId != "")
+        {
+            //包月订单信息已经获取过,无需再次请求信息.
+            return;
+        }
+
         Debug.Log("Unity:" + "HttpSendPostGetDingDanGameBaoYue...");
         //POST方法.
         JsonData data = new JsonData();

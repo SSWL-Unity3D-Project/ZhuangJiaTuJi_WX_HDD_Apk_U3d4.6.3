@@ -1,4 +1,4 @@
-﻿#define DELAY_START_GAME
+﻿//#define DELAY_START_GAME
 //#define TEST_MOVIE
 using UnityEngine;
 
