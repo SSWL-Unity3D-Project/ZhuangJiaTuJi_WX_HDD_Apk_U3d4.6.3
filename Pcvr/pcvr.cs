@@ -119,6 +119,10 @@ public class pcvr : MonoBehaviour
 			GameObject obj = new GameObject("_PCVR");
 			DontDestroyOnLoad(obj);
 			_Instance = obj.AddComponent<pcvr>();
+
+            //创建游戏Debug信息展示组件.
+            _Instance.CreatGameDebugMsgCom();
+            //初始化pcvr.
             _Instance.InitInfo();
 			if (bIsHardWare) {
 				obj.AddComponent<MyCOMDevice>();
@@ -143,9 +147,6 @@ public class pcvr : MonoBehaviour
 
             //创建咪咕Tv支付组件.
             _Instance.CreatMiGuTvPayObject();
-
-            //创建游戏Debug信息展示组件.
-            _Instance.CreatGameDebugMsgCom();
 
             //创建游戏咪咕包月支付信息记录和查询组件.
             _Instance.CreatGameMiGuBaoYuePostNet();

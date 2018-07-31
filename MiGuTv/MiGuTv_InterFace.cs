@@ -98,6 +98,30 @@ public class MiGuTv_InterFace : MonoBehaviour
 #endif
 	}
 
+    public string MiGuTv_GetLocalMacAddress()
+    {
+        string mac = "12:34:56:78:90:12";
+        try
+        {
+#if UNITY_ANDROID && !UNITY_EDITOR
+            using (AndroidJavaClass jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+            {
+                using (AndroidJavaObject jo = jc.GetStatic<AndroidJavaObject>("currentActivity"))
+                {
+                    mac = jo.Call<string>("GetLocalMacAddress");
+                }
+            }
+#endif
+        }
+        catch (System.Exception ex)
+        {
+            if (pcvr.GetInstance() != null)
+            {
+                pcvr.GetInstance().AddDebugMsg(ex.ToString());
+            }
+        }
+        return mac;
+    }
 	/*
 	==================接收支付反馈的函数=======================
 	*/

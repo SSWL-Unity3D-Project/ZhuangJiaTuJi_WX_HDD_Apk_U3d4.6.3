@@ -1,4 +1,5 @@
-﻿//#define TEST_MOVIE
+﻿#define DELAY_START_GAME
+//#define TEST_MOVIE
 using UnityEngine;
 
 public class GameMovieCtrl : SSGameMono
@@ -103,9 +104,12 @@ public class GameMovieCtrl : SSGameMono
 
 			QualitySettings.SetQualityLevel((int)QualityLevelEnum.Fast);
 			Debug.Log("Unity:!!!!!!SetQualityLevel!!!!!!");
-			//AudioSourceObj = transform.GetComponent<AudioSource>();
-			Invoke("DelayResetIsLoadingLevel", 4f);
-			if (IsOpenFXZhenDong)
+            //AudioSourceObj = transform.GetComponent<AudioSource>();
+
+#if DELAY_START_GAME
+            Invoke("DelayResetIsLoadingLevel", 4f);
+#endif
+            if (IsOpenFXZhenDong)
 			{
 				IsOpenFXZhenDong = false;
 				Invoke("CloseAllFangXiangPanPower", 10f);
@@ -164,13 +168,14 @@ public class GameMovieCtrl : SSGameMono
 	{
 		Debug.Log("Unity:!!!!!!DelayResetIsLoadingLevel2!!!!!!");
 		XkGameCtrl.ResetIsLoadingLevel();
-		if (NetworkServerNet.GetInstance() != null) {
-			NetworkServerNet.GetInstance().TryToCreateServer();
-        }
-		Debug.Log("Unity:!!!!!!DelayResetIsLoadingLevel3!!!!!!");
+        //if (NetworkServerNet.GetInstance() != null)
+        //{
+        //    NetworkServerNet.GetInstance().TryToCreateServer();
+        //}
+        Debug.Log("Unity:!!!!!!DelayResetIsLoadingLevel3!!!!!!");
 
-		//InputEventCtrl.GetInstance().ClickStartBtOne(ButtonState.DOWN); //test.
-        //InputEventCtrl.GetInstance().ClickStartBtOne(ButtonState.UP);
+		InputEventCtrl.GetInstance().ClickStartBtOne(ButtonState.DOWN); //test.
+        InputEventCtrl.GetInstance().ClickStartBtOne(ButtonState.UP); //test.
 		//Debug.Log("Unity:!!!!!!DelayResetIsLoadingLevel4!!!!!!");
 	}
 

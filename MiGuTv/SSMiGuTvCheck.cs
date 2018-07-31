@@ -103,8 +103,8 @@ public class SSMiGuTvCheck : MonoBehaviour
 
         m_TimeUpQueryGameBaoYueStateCom = gameObject.AddComponent<SSTimeUpCtrl>();
         //60秒后开始查询游戏是否进行了包月.
-        m_TimeUpQueryGameBaoYueStateCom.Init(60f);
-        //m_TimeUpQueryGameBaoYueStateCom.Init(10f); //test.
+        //m_TimeUpQueryGameBaoYueStateCom.Init(60f);
+        m_TimeUpQueryGameBaoYueStateCom.Init(10f); //test.
         m_TimeUpQueryGameBaoYueStateCom.OnTimeUpOverEvent += OnTimeUpQueryGameBaoYueStateEvent;
     }
 
@@ -114,13 +114,13 @@ public class SSMiGuTvCheck : MonoBehaviour
     private void OnTimeUpQueryGameBaoYueStateEvent()
     {
         //查询游戏包月状态.
-        QueryGameBaoYueState();
+        //QueryGameBaoYueState();
 
         //创建是否选择游戏包月界面.
         if (XkGameCtrl.GetInstance() != null
             && XkGameCtrl.GetInstance().m_GameUICom != null)
         {
-            //XkGameCtrl.GetInstance().m_GameUICom.CreatGameBaoYuePanel();
+            XkGameCtrl.GetInstance().m_GameUICom.CreatGameBaoYuePanel();
         }
     }
 
@@ -187,8 +187,8 @@ public class SSMiGuTvCheck : MonoBehaviour
                 {
                     //游戏包月失败.
                     //使游戏返回循环动画入口界面.
-                    XkGameCtrl.IsLoadingLevel = false;
-                    XkGameCtrl.LoadingGameMovie();
+                    //XkGameCtrl.IsLoadingLevel = false;
+                    //XkGameCtrl.LoadingGameMovie();
 
                     //包月支付失败,创建是否继续包月.
                     if (XkGameCtrl.GetInstance() != null
@@ -196,7 +196,7 @@ public class SSMiGuTvCheck : MonoBehaviour
                     {
                         if (XkGameCtrl.GetInstance().m_GameUICom.m_CountJiXuBaoYue == 0)
                         {
-                            //XkGameCtrl.GetInstance().m_GameUICom.CreatGameJiXuBaoYuePanel();
+                            XkGameCtrl.GetInstance().m_GameUICom.CreatGameJiXuBaoYuePanel();
                         }
                         else
                         {
@@ -333,6 +333,10 @@ public class SSMiGuTvCheck : MonoBehaviour
     /// <param name="s">#号隔开 返回结果码#结果</param>
     void OnReceivedMiGuPayMsg(string s)
     {
+        if (pcvr.GetInstance() != null)
+        {
+            pcvr.GetInstance().AddDebugMsg(s);
+        }
 #if SHOW_MIGU_MSG
         Debug.Log("Unity:" + "OnReceivedPayMsg:" + s);
         TestCount++;

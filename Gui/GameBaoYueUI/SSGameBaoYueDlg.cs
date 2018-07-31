@@ -127,6 +127,10 @@ public class SSGameBaoYueDlg : MonoBehaviour
                         {
                             XkGameCtrl.GetInstance().m_GameUICom.RemoveGameBaoYuePanel();
                         }
+
+                        //使游戏返回循环动画入口界面.
+                        XkGameCtrl.IsLoadingLevel = false;
+                        XkGameCtrl.LoadingGameMovie();
                         break;
                     }
             }

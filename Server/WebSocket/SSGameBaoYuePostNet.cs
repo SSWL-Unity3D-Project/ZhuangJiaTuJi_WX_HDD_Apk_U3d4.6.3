@@ -137,8 +137,16 @@ payUserId:用户标识，可以为null
                 //    info = "当前网络：3G/4G";
                 //else if (Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork)
                 //    info = "当前网络 : WIFI";
-
-                belongMark = mac = "123456789";
+                if (pcvr.GetInstance() != null
+                    && pcvr.GetInstance().m_MiGuTv_InterFace != null)
+                {
+                    //belongMark = mac = pcvr.GetInstance().m_MiGuTv_InterFace.MiGuTv_GetLocalMacAddress();
+                    belongMark = mac = "12:34:56:78:90:12"; //test
+                }
+                else
+                {
+                    belongMark = mac = "12:34:56:78:90:12";
+                }
             }
             catch (Exception ex)
             {

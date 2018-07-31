@@ -633,7 +633,7 @@ public class XkGameCtrl : SSGameMono
 
 	void DelayResetIsLoadingLevel()
 	{
-		XkGameCtrl.ResetIsLoadingLevel();
+		ResetIsLoadingLevel();
 		Debug.Log("Unity:!!!!!!DelayResetIsLoadingLevel!!!!!!");
 
 	}
