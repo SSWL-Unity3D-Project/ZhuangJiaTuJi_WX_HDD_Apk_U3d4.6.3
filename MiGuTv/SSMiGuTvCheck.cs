@@ -194,16 +194,7 @@ public class SSMiGuTvCheck : MonoBehaviour
                     if (XkGameCtrl.GetInstance() != null
                         && XkGameCtrl.GetInstance().m_GameUICom != null)
                     {
-                        if (XkGameCtrl.GetInstance().m_GameUICom.m_CountJiXuBaoYue == 0)
-                        {
-                            XkGameCtrl.GetInstance().m_GameUICom.CreatGameJiXuBaoYuePanel();
-                        }
-                        else
-                        {
-                            //使游戏返回循环动画入口界面.
-                            XkGameCtrl.IsLoadingLevel = false;
-                            XkGameCtrl.LoadingGameMovie();
-                        }
+                        XkGameCtrl.GetInstance().m_GameUICom.CreatGameJiXuBaoYuePanel();
                     }
                     break;
                 }

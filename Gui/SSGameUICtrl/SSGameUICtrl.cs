@@ -145,10 +145,6 @@ public class SSGameUICtrl : SSGameMono
     [HideInInspector]
     public SSGameJiXuBaoYueDlg m_GameJiXuBaoYueCom;
     /// <summary>
-    /// 继续包月界面创建次数.
-    /// </summary>
-    internal int m_CountJiXuBaoYue = 0;
-    /// <summary>
     /// 创建是否继续包月支付UI界面.
     /// </summary>
     public void CreatGameJiXuBaoYuePanel()
@@ -160,7 +156,6 @@ public class SSGameUICtrl : SSGameMono
             GameObject obj = (GameObject)Instantiate(gmDataPrefab, m_UICenterTr);
             m_GameJiXuBaoYueCom = obj.GetComponent<SSGameJiXuBaoYueDlg>();
             m_GameJiXuBaoYueCom.Init();
-            m_CountJiXuBaoYue++;
             IsShowGameBaoYueUI = true;
         }
         else
