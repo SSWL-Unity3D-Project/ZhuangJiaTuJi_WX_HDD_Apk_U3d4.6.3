@@ -35,14 +35,48 @@ public class SSGameJiXuBaoYueDlg : MonoBehaviour
     {
         Debug.Log("SSGameJiXuBaoYueDlg::Init...");
         m_ExitType = DlgEnum.QueDing;
-        QueDingUI.mainTexture = QueDingImg[0];
-        QuXiaoUI.mainTexture = QuXiaoImg[1];
-        SetAcitveBtFlash();
-        QueDingUI.transform.localScale = m_SmallScale;
-        QuXiaoUI.transform.localScale = m_BigScale;
+        switch (m_ExitType)
+        {
+            case DlgEnum.QueDing:
+                {
+                    SetQueDingUITexture(1);
+                    SetQuXiaoUITexture(0);
+                    SetAcitveBtFlash();
+                    QueDingUI.transform.localScale = m_BigScale;
+                    QuXiaoUI.transform.localScale = m_SmallScale;
+                    break;
+                }
+            case DlgEnum.QuXiao:
+                {
+                    SetQueDingUITexture(0);
+                    SetQuXiaoUITexture(1);
+                    SetAcitveBtFlash();
+                    QueDingUI.transform.localScale = m_SmallScale;
+                    QuXiaoUI.transform.localScale = m_BigScale;
+                    break;
+                }
+        }
         InputEventCtrl.GetInstance().ClickTVYaoKongEnterBtEvent += ClickTVYaoKongEnterBtEvent;
         InputEventCtrl.GetInstance().ClickTVYaoKongLeftBtEvent += ClickTVYaoKongLeftBtEvent;
         InputEventCtrl.GetInstance().ClickTVYaoKongRightBtEvent += ClickTVYaoKongRightBtEvent;
+    }
+
+    void SetQueDingUITexture(int index)
+    {
+        if (QueDingImg.Length > index
+            && QueDingImg[index] != null)
+        {
+            QueDingUI.mainTexture = QueDingImg[index];
+        }
+    }
+
+    void SetQuXiaoUITexture(int index)
+    {
+        if (QuXiaoImg.Length > index
+            && QuXiaoImg[index] != null)
+        {
+            QuXiaoUI.mainTexture = QuXiaoImg[index];
+        }
     }
 
     public void RemoveSelf()
@@ -62,8 +96,8 @@ public class SSGameJiXuBaoYueDlg : MonoBehaviour
             return;
         }
         m_ExitType = DlgEnum.QuXiao;
-        QueDingUI.mainTexture = QueDingImg[0];
-        QuXiaoUI.mainTexture = QuXiaoImg[1];
+        SetQueDingUITexture(0);
+        SetQuXiaoUITexture(1);
         QueDingUI.transform.localScale = m_SmallScale;
         QuXiaoUI.transform.localScale = m_BigScale;
         SetAcitveBtFlash();
@@ -76,8 +110,8 @@ public class SSGameJiXuBaoYueDlg : MonoBehaviour
             return;
         }
         m_ExitType = DlgEnum.QueDing;
-        QueDingUI.mainTexture = QueDingImg[1];
-        QuXiaoUI.mainTexture = QuXiaoImg[0];
+        SetQueDingUITexture(1);
+        SetQuXiaoUITexture(0);
         QueDingUI.transform.localScale = m_BigScale;
         QuXiaoUI.transform.localScale = m_SmallScale;
         SetAcitveBtFlash();
@@ -115,12 +149,12 @@ public class SSGameJiXuBaoYueDlg : MonoBehaviour
             {
                 case ButtonState.DOWN:
                     {
-                        QuXiaoUI.mainTexture = QuXiaoImg[1];
+                        SetQuXiaoUITexture(1);
                         break;
                     }
                 case ButtonState.UP:
                     {
-                        QuXiaoUI.mainTexture = QuXiaoImg[0];
+                        SetQuXiaoUITexture(0);
                         Debug.Log("Unity:" + "Player close GameJiXuBaoYueDlg ui...");
                         if (XkGameCtrl.GetInstance() != null
                             && XkGameCtrl.GetInstance().m_GameUICom != null)
@@ -138,12 +172,12 @@ public class SSGameJiXuBaoYueDlg : MonoBehaviour
             {
                 case ButtonState.DOWN:
                     {
-                        QueDingUI.mainTexture = QueDingImg[1];
+                        SetQueDingUITexture(1);
                         break;
                     }
                 case ButtonState.UP:
                     {
-                        QueDingUI.mainTexture = QueDingImg[0];
+                        SetQueDingUITexture(0);
                         Debug.Log("Unity:" + "Player select baoYue zhiFu...");
                         if (XkGameCtrl.GetInstance() != null
                             && XkGameCtrl.GetInstance().m_GameUICom != null)

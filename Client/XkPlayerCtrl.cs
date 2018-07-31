@@ -608,7 +608,15 @@ PlayerAudio[6] -> 主角飞机/坦克行驶音效.
                 yield return new WaitForSeconds(0.1f);
                 continue;
             }
-			
+
+            if (XkGameCtrl.GetInstance().m_GameUICom != null
+                && XkGameCtrl.GetInstance().m_GameUICom.IsShowGameBaoYueUI)
+            {
+                //游戏包月UI界面显示时,停止镜头的运动.
+                yield return new WaitForSeconds(0.1f);
+                continue;
+            }
+
             if (XkGameCtrl.PlayerActiveNum <= 0)
             {
                 //玩家激活数量小于1时，镜头停止前进.

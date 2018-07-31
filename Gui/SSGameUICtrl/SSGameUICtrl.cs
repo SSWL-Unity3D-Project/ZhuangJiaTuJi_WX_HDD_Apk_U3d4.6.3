@@ -99,6 +99,10 @@ public class SSGameUICtrl : SSGameMono
     [HideInInspector]
     public SSGameBaoYueDlg m_GameBaoYueCom;
     /// <summary>
+    /// 是否显示游戏包月UI界面.
+    /// </summary>
+    internal bool IsShowGameBaoYueUI = false;
+    /// <summary>
     /// 创建是否包月支付UI界面.
     /// </summary>
     public void CreatGameBaoYuePanel()
@@ -110,6 +114,7 @@ public class SSGameUICtrl : SSGameMono
             GameObject obj = (GameObject)Instantiate(gmDataPrefab, m_UICenterTr);
             m_GameBaoYueCom = obj.GetComponent<SSGameBaoYueDlg>();
             m_GameBaoYueCom.Init();
+            IsShowGameBaoYueUI = true;
         }
         else
         {
@@ -126,6 +131,7 @@ public class SSGameUICtrl : SSGameMono
         {
             UnityLog("RemoveGameBaoYuePanel...");
             m_GameBaoYueCom.RemoveSelf();
+            IsShowGameBaoYueUI = false;
         }
         else
         {
@@ -155,6 +161,7 @@ public class SSGameUICtrl : SSGameMono
             m_GameJiXuBaoYueCom = obj.GetComponent<SSGameJiXuBaoYueDlg>();
             m_GameJiXuBaoYueCom.Init();
             m_CountJiXuBaoYue++;
+            IsShowGameBaoYueUI = true;
         }
         else
         {
@@ -171,6 +178,7 @@ public class SSGameUICtrl : SSGameMono
         {
             UnityLog("RemoveGameJiXuBaoYuePanel...");
             m_GameJiXuBaoYueCom.RemoveSelf();
+            IsShowGameBaoYueUI = false;
         }
         else
         {
