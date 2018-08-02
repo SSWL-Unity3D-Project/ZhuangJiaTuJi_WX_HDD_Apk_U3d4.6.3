@@ -1,4 +1,4 @@
-﻿#define SHOW_DEBUG_MSG
+﻿//#define SHOW_DEBUG_MSG
 //#define USE_CENTER_ZUOYI
 //#define COM_TANK_TEST
 using UnityEngine;

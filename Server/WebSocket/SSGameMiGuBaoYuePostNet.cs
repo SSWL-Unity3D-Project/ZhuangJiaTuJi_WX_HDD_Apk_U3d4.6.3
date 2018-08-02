@@ -1,4 +1,4 @@
-﻿#define USE_BAO_YUE_TEST_ADD
+﻿//#define USE_BAO_YUE_TEST_ADD
 using LitJson;
 using System;
 using System.Collections;
@@ -186,12 +186,7 @@ payUserId:用户标识，可以为null
         /// 包月支付成功.
         /// </summary>
         Success = 0,
-        /// <summary>
-        /// 包月支付失败.
-        /// </summary>
-        Failed = 1,
     }
-    BaoYueState m_BaoYueState;
 
     /// <summary>
     /// 包月查询得到的数据.
@@ -306,8 +301,6 @@ payUserId:用户标识，可以为null
                         ******************************************************************/
                         //PostData: {"code":3,"msg":"未支付","data":{"validTime":2592000,"parameters":"{\"experienceTime\":0}"}}
                         JsonData jd = JsonMapper.ToObject(postData.text);
-                        m_BaoYueState = (BaoYueState)Convert.ToInt32(jd["code"].ToString());
-
                         if (m_BaoYueChaXunData != null)
                         {
                             m_BaoYueChaXunData.code = jd["code"].ToString();

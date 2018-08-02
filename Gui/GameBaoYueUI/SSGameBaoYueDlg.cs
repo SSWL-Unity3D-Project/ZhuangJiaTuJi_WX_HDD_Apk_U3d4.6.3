@@ -63,6 +63,7 @@ public class SSGameBaoYueDlg : MonoBehaviour
             //包月订单信息查询.
             pcvr.GetInstance().m_GameMiGuBaoYuePostNet.HttpSendPostGetDingDanIDGameBaoYue();
         }
+        XKPlayerMoveCtrl.OpenAllPlayerWuDiTeXiao();
         InputEventCtrl.GetInstance().ClickTVYaoKongEnterBtEvent += ClickTVYaoKongEnterBtEvent;
         InputEventCtrl.GetInstance().ClickTVYaoKongLeftBtEvent += ClickTVYaoKongLeftBtEvent;
         InputEventCtrl.GetInstance().ClickTVYaoKongRightBtEvent += ClickTVYaoKongRightBtEvent;

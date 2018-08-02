@@ -1,4 +1,3 @@
-
 //#define SHOW_MIGU_MSG
 using UnityEngine;
 
@@ -111,9 +110,9 @@ public class SSMiGuTvCheck : MonoBehaviour
         IsQueryGameBaoYueState = true;
 
         m_TimeUpQueryGameBaoYueStateCom = gameObject.AddComponent<SSTimeUpCtrl>();
-        //60秒后开始查询游戏是否进行了包月.
-        //m_TimeUpQueryGameBaoYueStateCom.Init(60f);
-        m_TimeUpQueryGameBaoYueStateCom.Init(10f); //test.
+        //x秒后开始查询游戏是否进行了包月.
+        m_TimeUpQueryGameBaoYueStateCom.Init(60f * 5f);
+        //m_TimeUpQueryGameBaoYueStateCom.Init(10f); //test.
         m_TimeUpQueryGameBaoYueStateCom.OnTimeUpOverEvent += OnTimeUpQueryGameBaoYueStateEvent;
     }
 

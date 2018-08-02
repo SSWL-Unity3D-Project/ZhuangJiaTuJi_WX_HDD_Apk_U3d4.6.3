@@ -56,6 +56,7 @@ public class SSGameJiXuBaoYueDlg : MonoBehaviour
                     break;
                 }
         }
+        XKPlayerMoveCtrl.OpenAllPlayerWuDiTeXiao();
         InputEventCtrl.GetInstance().ClickTVYaoKongEnterBtEvent += ClickTVYaoKongEnterBtEvent;
         InputEventCtrl.GetInstance().ClickTVYaoKongLeftBtEvent += ClickTVYaoKongLeftBtEvent;
         InputEventCtrl.GetInstance().ClickTVYaoKongRightBtEvent += ClickTVYaoKongRightBtEvent;
