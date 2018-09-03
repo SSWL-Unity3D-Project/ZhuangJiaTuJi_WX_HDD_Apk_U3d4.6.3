@@ -12,7 +12,7 @@ public class pcvr : MonoBehaviour
     /// 视博云平台 ShiBoYunApk.
     /// 咪咕平台   MiGuApk.
     /// </summary>
-    SSGamePayUICtrl.TVGamePayState _TVGamePayType = SSGamePayUICtrl.TVGamePayState.MiGuApk;
+    SSGamePayUICtrl.TVGamePayState _TVGamePayType = SSGamePayUICtrl.TVGamePayState.DianXinApk;
     /// <summary>
     /// 电视游戏支付平台.
     /// </summary>
@@ -21,6 +21,22 @@ public class pcvr : MonoBehaviour
         set { _TVGamePayType = value; }
         get { return _TVGamePayType; }
     }
+    /// <summary>
+    /// 微信小程序虚拟手柄.
+    /// </summary>
+    public SSBoxPostNet.WeiXinShouBingEnum m_WXShouBingType
+    {
+        get
+        {
+            SSBoxPostNet.WeiXinShouBingEnum type = SSBoxPostNet.WeiXinShouBingEnum.H5;
+            if (m_TVGamePayType == SSGamePayUICtrl.TVGamePayState.DianXinApk)
+            {
+                type = SSBoxPostNet.WeiXinShouBingEnum.XiaoChengXu;
+            }
+            return type;
+        }
+    }
+
     /// <summary>
     /// 是否为红点点微信手柄操作模式.
     /// </summary>

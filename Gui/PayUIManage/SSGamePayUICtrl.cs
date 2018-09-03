@@ -17,6 +17,10 @@ public class SSGamePayUICtrl : MonoBehaviour
         /// 咪咕电视安卓游戏支付平台.
         /// </summary>
         MiGuApk = 1,
+        /// <summary>
+        /// 电信运营商安卓游戏平台.
+        /// </summary>
+        DianXinApk = 2,
     }
 
     /// <summary>

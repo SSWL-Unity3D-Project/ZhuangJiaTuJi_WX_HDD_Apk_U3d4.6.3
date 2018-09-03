@@ -58,6 +58,16 @@ public class SSGameUICtrl : SSGameMono
     /// </summary>
     public bool GetIsFuHuoPlayer()
     {
+        //if (pcvr.GetInstance().m_TVGamePayType == SSGamePayUICtrl.TVGamePayState.MiGuApk)
+        //{
+        //    //移动咪咕平台.
+        //}
+        //else
+        //{
+        //    //其它平台.
+        //    return true;
+        //}
+
         if (m_FuHuoCiShuCom == null)
         {
             UnityLogWarning("ShowGameFuHuoCiShiInfo -> m_FuHuoCiShuCom was null");
